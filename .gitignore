@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# macOS
+.DS_Store
+
+# Data
+data/mhist/images/
+data/mhist/*.zip
+data/mhist/*.csv
+
+# Results
+results/
+
+# Jupyter
+.ipynb_checkpoints/
