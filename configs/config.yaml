@@ -4,11 +4,25 @@ paths:
   data_root: "./data/mhist"
   images: "./data/mhist/images"
   annotations: "./data/mhist/annotations.csv"
+  results: "./results"
+  figures: "./figures"
 
 dataset:
   image_size: 224
   num_classes: 2
+  class_names:
+    - HP
+    - SSA
 
 training:
   batch_size: 32
   num_workers: 4
+  epochs: 10
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+
+baselines:
+  resnet18:
+    mode: "fine_tune"
+  vit_b_16:
+    mode: "linear_probe"
