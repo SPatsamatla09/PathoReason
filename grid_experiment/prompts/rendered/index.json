@@ -1,0 +1,110 @@
+[
+  {
+    "prompt_id": "co_p1",
+    "condition": "classify_only",
+    "voice": "terse imperative",
+    "key_order": [
+      "label",
+      "confidence",
+      "evidence"
+    ],
+    "chars": 1595,
+    "file": "prompts/rendered/co_p1.txt"
+  },
+  {
+    "prompt_id": "co_p2",
+    "condition": "classify_only",
+    "voice": "clinical reporting",
+    "key_order": [
+      "label",
+      "confidence",
+      "evidence"
+    ],
+    "chars": 1576,
+    "file": "prompts/rendered/co_p2.txt"
+  },
+  {
+    "prompt_id": "co_p3",
+    "condition": "classify_only",
+    "voice": "numbered procedure",
+    "key_order": [
+      "label",
+      "confidence",
+      "evidence"
+    ],
+    "chars": 1575,
+    "file": "prompts/rendered/co_p3.txt"
+  },
+  {
+    "prompt_id": "cte_p1",
+    "condition": "classify_then_explain",
+    "voice": "terse imperative",
+    "key_order": [
+      "label",
+      "confidence",
+      "evidence"
+    ],
+    "chars": 2046,
+    "file": "prompts/rendered/cte_p1.txt"
+  },
+  {
+    "prompt_id": "cte_p2",
+    "condition": "classify_then_explain",
+    "voice": "clinical reporting",
+    "key_order": [
+      "label",
+      "confidence",
+      "evidence"
+    ],
+    "chars": 2085,
+    "file": "prompts/rendered/cte_p2.txt"
+  },
+  {
+    "prompt_id": "cte_p3",
+    "condition": "classify_then_explain",
+    "voice": "numbered procedure",
+    "key_order": [
+      "label",
+      "confidence",
+      "evidence"
+    ],
+    "chars": 2057,
+    "file": "prompts/rendered/cte_p3.txt"
+  },
+  {
+    "prompt_id": "etc_p1",
+    "condition": "explain_then_classify",
+    "voice": "terse imperative",
+    "key_order": [
+      "evidence",
+      "label",
+      "confidence"
+    ],
+    "chars": 2067,
+    "file": "prompts/rendered/etc_p1.txt"
+  },
+  {
+    "prompt_id": "etc_p2",
+    "condition": "explain_then_classify",
+    "voice": "clinical reporting",
+    "key_order": [
+      "evidence",
+      "label",
+      "confidence"
+    ],
+    "chars": 2076,
+    "file": "prompts/rendered/etc_p2.txt"
+  },
+  {
+    "prompt_id": "etc_p3",
+    "condition": "explain_then_classify",
+    "voice": "numbered procedure",
+    "key_order": [
+      "evidence",
+      "label",
+      "confidence"
+    ],
+    "chars": 2072,
+    "file": "prompts/rendered/etc_p3.txt"
+  }
+]

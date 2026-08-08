@@ -1,0 +1,432 @@
+{
+  "seed": 20260806,
+  "partition": "test",
+  "n_tiles": 20,
+  "allocation": [
+    {
+      "band": "unanimous",
+      "label": "HP",
+      "n": 3,
+      "n_rich": 2
+    },
+    {
+      "band": "unanimous",
+      "label": "SSA",
+      "n": 3,
+      "n_rich": 2
+    },
+    {
+      "band": "strong",
+      "label": "HP",
+      "n": 4,
+      "n_rich": 2
+    },
+    {
+      "band": "strong",
+      "label": "SSA",
+      "n": 3,
+      "n_rich": 2
+    },
+    {
+      "band": "borderline",
+      "label": "HP",
+      "n": 3,
+      "n_rich": 2
+    },
+    {
+      "band": "borderline",
+      "label": "SSA",
+      "n": 4,
+      "n_rich": 2
+    }
+  ],
+  "grid": {
+    "rows": 4,
+    "cols": 4,
+    "cell_px": 56,
+    "tile_px": 224,
+    "naming": "row letter A-D top to bottom, column number 1-4 left to right; A1 = top-left"
+  },
+  "tissue_rule": {
+    "primary": "HSV: saturation > 0.08 OR value < 0.80",
+    "sat_thresh": 0.08,
+    "val_thresh": 0.8,
+    "secondary": "grayscale < 220",
+    "gray_thresh": 220,
+    "empty_cell_pct": 5.0
+  },
+  "tiles": [
+    {
+      "image": "MHIST_dbe.png",
+      "gridded": "gridded/MHIST_dbe_grid.png",
+      "clean": "clean/MHIST_dbe.png",
+      "coverage_json": "coverage/MHIST_dbe.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 3,
+      "agreement_band": "borderline",
+      "stratum": "borderline/HP",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 48.42,
+      "n_empty_cells": 4,
+      "empty_cells": [
+        "A2",
+        "A3",
+        "A4",
+        "B4"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 8.23
+    },
+    {
+      "image": "MHIST_cve.png",
+      "gridded": "gridded/MHIST_cve_grid.png",
+      "clean": "clean/MHIST_cve.png",
+      "coverage_json": "coverage/MHIST_cve.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 3,
+      "agreement_band": "borderline",
+      "stratum": "borderline/HP",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 62.9,
+      "n_empty_cells": 2,
+      "empty_cells": [
+        "A1",
+        "B1"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 6.96
+    },
+    {
+      "image": "MHIST_ddn.png",
+      "gridded": "gridded/MHIST_ddn_grid.png",
+      "clean": "clean/MHIST_ddn.png",
+      "coverage_json": "coverage/MHIST_ddn.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 3,
+      "agreement_band": "borderline",
+      "stratum": "borderline/HP",
+      "control_class": "dense",
+      "tile_tissue_pct": 92.3,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.29
+    },
+    {
+      "image": "MHIST_ekm.png",
+      "gridded": "gridded/MHIST_ekm_grid.png",
+      "clean": "clean/MHIST_ekm.png",
+      "coverage_json": "coverage/MHIST_ekm.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 4,
+      "agreement_band": "borderline",
+      "stratum": "borderline/SSA",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 56.82,
+      "n_empty_cells": 4,
+      "empty_cells": [
+        "A1",
+        "A2",
+        "A3",
+        "B1"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 6.59
+    },
+    {
+      "image": "MHIST_cmt.png",
+      "gridded": "gridded/MHIST_cmt_grid.png",
+      "clean": "clean/MHIST_cmt.png",
+      "coverage_json": "coverage/MHIST_cmt.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 4,
+      "agreement_band": "borderline",
+      "stratum": "borderline/SSA",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 61.49,
+      "n_empty_cells": 2,
+      "empty_cells": [
+        "A3",
+        "A4"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 8.34
+    },
+    {
+      "image": "MHIST_apc.png",
+      "gridded": "gridded/MHIST_apc_grid.png",
+      "clean": "clean/MHIST_apc.png",
+      "coverage_json": "coverage/MHIST_apc.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 4,
+      "agreement_band": "borderline",
+      "stratum": "borderline/SSA",
+      "control_class": "dense",
+      "tile_tissue_pct": 77.74,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 6.94
+    },
+    {
+      "image": "MHIST_bmy.png",
+      "gridded": "gridded/MHIST_bmy_grid.png",
+      "clean": "clean/MHIST_bmy.png",
+      "coverage_json": "coverage/MHIST_bmy.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 4,
+      "agreement_band": "borderline",
+      "stratum": "borderline/SSA",
+      "control_class": "dense",
+      "tile_tissue_pct": 92.91,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.52
+    },
+    {
+      "image": "MHIST_epo.png",
+      "gridded": "gridded/MHIST_epo_grid.png",
+      "clean": "clean/MHIST_epo.png",
+      "coverage_json": "coverage/MHIST_epo.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 2,
+      "agreement_band": "strong",
+      "stratum": "strong/HP",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 55.76,
+      "n_empty_cells": 4,
+      "empty_cells": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 6.86
+    },
+    {
+      "image": "MHIST_ajp.png",
+      "gridded": "gridded/MHIST_ajp_grid.png",
+      "clean": "clean/MHIST_ajp.png",
+      "coverage_json": "coverage/MHIST_ajp.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 2,
+      "agreement_band": "strong",
+      "stratum": "strong/HP",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 54.33,
+      "n_empty_cells": 3,
+      "empty_cells": [
+        "A1",
+        "A2",
+        "B1"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 6.64
+    },
+    {
+      "image": "MHIST_dey.png",
+      "gridded": "gridded/MHIST_dey_grid.png",
+      "clean": "clean/MHIST_dey.png",
+      "coverage_json": "coverage/MHIST_dey.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 2,
+      "agreement_band": "strong",
+      "stratum": "strong/HP",
+      "control_class": "dense",
+      "tile_tissue_pct": 65.06,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 6.98
+    },
+    {
+      "image": "MHIST_epj.png",
+      "gridded": "gridded/MHIST_epj_grid.png",
+      "clean": "clean/MHIST_epj.png",
+      "coverage_json": "coverage/MHIST_epj.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 1,
+      "agreement_band": "strong",
+      "stratum": "strong/HP",
+      "control_class": "dense",
+      "tile_tissue_pct": 97.69,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.72
+    },
+    {
+      "image": "MHIST_elb.png",
+      "gridded": "gridded/MHIST_elb_grid.png",
+      "clean": "clean/MHIST_elb.png",
+      "coverage_json": "coverage/MHIST_elb.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 6,
+      "agreement_band": "strong",
+      "stratum": "strong/SSA",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 44.68,
+      "n_empty_cells": 4,
+      "empty_cells": [
+        "A1",
+        "A2",
+        "B1",
+        "C1"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.62
+    },
+    {
+      "image": "MHIST_ekh.png",
+      "gridded": "gridded/MHIST_ekh_grid.png",
+      "clean": "clean/MHIST_ekh.png",
+      "coverage_json": "coverage/MHIST_ekh.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 6,
+      "agreement_band": "strong",
+      "stratum": "strong/SSA",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 54.81,
+      "n_empty_cells": 3,
+      "empty_cells": [
+        "A1",
+        "B1",
+        "C1"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.46
+    },
+    {
+      "image": "MHIST_bqc.png",
+      "gridded": "gridded/MHIST_bqc_grid.png",
+      "clean": "clean/MHIST_bqc.png",
+      "coverage_json": "coverage/MHIST_bqc.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 6,
+      "agreement_band": "strong",
+      "stratum": "strong/SSA",
+      "control_class": "dense",
+      "tile_tissue_pct": 65.32,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.15
+    },
+    {
+      "image": "MHIST_ccn.png",
+      "gridded": "gridded/MHIST_ccn_grid.png",
+      "clean": "clean/MHIST_ccn.png",
+      "coverage_json": "coverage/MHIST_ccn.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 0,
+      "agreement_band": "unanimous",
+      "stratum": "unanimous/HP",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 41.52,
+      "n_empty_cells": 4,
+      "empty_cells": [
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 5.77
+    },
+    {
+      "image": "MHIST_bxx.png",
+      "gridded": "gridded/MHIST_bxx_grid.png",
+      "clean": "clean/MHIST_bxx.png",
+      "coverage_json": "coverage/MHIST_bxx.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 0,
+      "agreement_band": "unanimous",
+      "stratum": "unanimous/HP",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 59.83,
+      "n_empty_cells": 3,
+      "empty_cells": [
+        "A3",
+        "A4",
+        "B4"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 8.21
+    },
+    {
+      "image": "MHIST_cdr.png",
+      "gridded": "gridded/MHIST_cdr_grid.png",
+      "clean": "clean/MHIST_cdr.png",
+      "coverage_json": "coverage/MHIST_cdr.json",
+      "label": "HP",
+      "ssa_votes_out_of_7": 0,
+      "agreement_band": "unanimous",
+      "stratum": "unanimous/HP",
+      "control_class": "dense",
+      "tile_tissue_pct": 92.92,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.97
+    },
+    {
+      "image": "MHIST_cxx.png",
+      "gridded": "gridded/MHIST_cxx_grid.png",
+      "clean": "clean/MHIST_cxx.png",
+      "coverage_json": "coverage/MHIST_cxx.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 7,
+      "agreement_band": "unanimous",
+      "stratum": "unanimous/SSA",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 59.03,
+      "n_empty_cells": 4,
+      "empty_cells": [
+        "A4",
+        "C1",
+        "D1",
+        "D2"
+      ],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.7
+    },
+    {
+      "image": "MHIST_abb.png",
+      "gridded": "gridded/MHIST_abb_grid.png",
+      "clean": "clean/MHIST_abb.png",
+      "coverage_json": "coverage/MHIST_abb.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 7,
+      "agreement_band": "unanimous",
+      "stratum": "unanimous/SSA",
+      "control_class": "negative-control-rich",
+      "tile_tissue_pct": 43.69,
+      "n_empty_cells": 3,
+      "empty_cells": [
+        "A4",
+        "B4",
+        "D1"
+      ],
+      "overlay_pct_of_tile": 7.59,
+      "overlay_pct_of_tissue_occluded": 8.33
+    },
+    {
+      "image": "MHIST_dtq.png",
+      "gridded": "gridded/MHIST_dtq_grid.png",
+      "clean": "clean/MHIST_dtq.png",
+      "coverage_json": "coverage/MHIST_dtq.json",
+      "label": "SSA",
+      "ssa_votes_out_of_7": 7,
+      "agreement_band": "unanimous",
+      "stratum": "unanimous/SSA",
+      "control_class": "dense",
+      "tile_tissue_pct": 83.82,
+      "n_empty_cells": 0,
+      "empty_cells": [],
+      "overlay_pct_of_tile": 7.6,
+      "overlay_pct_of_tissue_occluded": 7.34
+    }
+  ]
+}

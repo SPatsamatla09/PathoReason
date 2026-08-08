@@ -1,0 +1,95 @@
+{
+  "image": "MHIST_dtq.png",
+  "source": "clean/MHIST_dtq.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "A1",
+    "A2",
+    "B2",
+    "B4",
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.35,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 21.24,
+    "usable": true
+  },
+  "tile_tissue_px": 42058,
+  "tissue_px_per_cell": {
+    "A1": 2795,
+    "A2": 2336,
+    "A3": 2566,
+    "A4": 2097,
+    "B1": 2160,
+    "B2": 2779,
+    "B3": 1992,
+    "B4": 2513,
+    "C1": 2672,
+    "C2": 2792,
+    "C3": 3071,
+    "C4": 3067,
+    "D1": 2714,
+    "D2": 2925,
+    "D3": 3068,
+    "D4": 2511
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "A1",
+        "C3",
+        "C4"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 21.24
+    },
+    "random": {
+      "cells": [
+        "B4",
+        "C1",
+        "C2"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 18.97
+    },
+    "tissue_matched": {
+      "cells": [
+        "C2",
+        "D2",
+        "D3"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 148,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 20.89
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/cte_p1_k3/MHIST_dtq/cited__mean.png",
+    "masked/cte_p1_k3/MHIST_dtq/cited__blur.png",
+    "masked/cte_p1_k3/MHIST_dtq/cited__black.png",
+    "masked/cte_p1_k3/MHIST_dtq/random__mean.png",
+    "masked/cte_p1_k3/MHIST_dtq/random__blur.png",
+    "masked/cte_p1_k3/MHIST_dtq/random__black.png",
+    "masked/cte_p1_k3/MHIST_dtq/tissue_matched__mean.png",
+    "masked/cte_p1_k3/MHIST_dtq/tissue_matched__blur.png",
+    "masked/cte_p1_k3/MHIST_dtq/tissue_matched__black.png"
+  ]
+}

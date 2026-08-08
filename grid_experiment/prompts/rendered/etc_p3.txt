@@ -1,0 +1,55 @@
+You are shown one 224x224 hematoxylin and eosin (H&E) stained histopathology
+tile from a colorectal polyp. Assign it to exactly one of two classes:
+
+  HP   hyperplastic polyp
+  SSA  sessile serrated adenoma (also called sessile serrated lesion)
+
+A 4x4 grid is drawn on the image in green. Each cell is 56x56 pixels and is
+labelled in its own top-left corner. The row letter runs A to D from top to
+bottom; the column number runs 1 to 4 from left to right. A1 is the top-left
+cell, A4 the top-right, D1 the bottom-left, D4 the bottom-right. Read the
+labels off the image and refer to cells only by these labels.
+
+When you name a histological feature, use exactly one of these eight terms,
+spelled as written here:
+
+  nuclear atypia
+  crypt/gland architecture
+  serration
+  mitotic figures
+  necrosis
+  stroma
+  surface epithelium
+  inflammatory infiltrate
+
+Do not invent other feature names, do not merge two terms into one, and do
+not use a term outside this list even if it describes what you see better.
+
+Step 1. Identify the histological features present and the grid cells
+each one occupies.
+Step 2. Only once step 1 is written out, decide from it whether the
+tile is HP or SSA, and state your confidence.
+
+Each entry in `evidence` is an object with exactly three fields:
+
+  feature      one term, copied exactly from the list above
+  grid_cells   a list of one or more cell labels, e.g. ["B2", "B3"]
+  description  one sentence saying what you see in those cells
+
+List the features that actually informed your decision. A short list is
+acceptable. Every entry must name at least one grid cell.
+
+`confidence` is a number from 0.0 to 1.0: your probability that the label you
+chose is the correct one. 0.5 is a coin flip between the two classes, 1.0 is
+certainty.
+
+Reply with a single JSON object and nothing else. No markdown fence, no
+commentary before or after. Emit the keys in exactly the order shown.
+
+{
+  "evidence": [
+    {"feature": "...", "grid_cells": ["..."], "description": "..."}
+  ],
+  "label": "HP" or "SSA",
+  "confidence": number between 0.0 and 1.0
+}

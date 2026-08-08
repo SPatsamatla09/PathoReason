@@ -1,0 +1,861 @@
+{
+  "run": "runs/etc_p1.jsonl",
+  "model": "gemma-4-31b",
+  "prompt_id": "etc_p1",
+  "temperature": 1.0,
+  "q1_cell_validity": {
+    "responses": 26,
+    "parsed_ok": 26,
+    "parse_failures": 0,
+    "citations_valid": 392,
+    "citations_invalid": 0,
+    "invalid_rate": 0.0,
+    "responses_with_invalid_cell": 0,
+    "invalid_cell_examples": [],
+    "violation_kinds": []
+  },
+  "q2_cross_image_variation": {
+    "n_images": 20,
+    "mean_pairwise_jaccard_between_images": 0.479,
+    "null_uniform_random_jaccard": 0.4212,
+    "p_observed_ge_null": 0.0,
+    "cells_never_cited": [],
+    "cell_frequency": {
+      "A1": 7,
+      "A2": 11,
+      "A3": 7,
+      "A4": 6,
+      "B1": 9,
+      "B2": 14,
+      "B3": 15,
+      "B4": 8,
+      "C1": 10,
+      "C2": 19,
+      "C3": 19,
+      "C4": 14,
+      "D1": 10,
+      "D2": 16,
+      "D3": 13,
+      "D4": 12
+    },
+    "mean_cells_cited_per_response": 9.5
+  },
+  "q3_within_tile_stability": {
+    "per_image": {
+      "MHIST_ccn.png": {
+        "n_reps": 3,
+        "labels": [
+          "SSA",
+          "SSA",
+          "SSA"
+        ],
+        "confidences": [
+          0.9,
+          0.9,
+          0.9
+        ],
+        "cited_per_rep": [
+          [
+            "A1",
+            "A4",
+            "B3",
+            "B4",
+            "C3",
+            "C4",
+            "D1",
+            "D2",
+            "D3"
+          ],
+          [
+            "A1",
+            "A4",
+            "B3",
+            "B4",
+            "C3",
+            "C4",
+            "D1",
+            "D2",
+            "D3"
+          ],
+          [
+            "A1",
+            "A4",
+            "B3",
+            "B4",
+            "C3",
+            "C4",
+            "D1",
+            "D2",
+            "D3"
+          ]
+        ],
+        "mean_pairwise_jaccard": 1.0,
+        "cells_in_every_rep": [
+          "A1",
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        "cells_in_only_one_rep": []
+      },
+      "MHIST_cxx.png": {
+        "n_reps": 3,
+        "labels": [
+          "SSA",
+          "SSA",
+          "SSA"
+        ],
+        "confidences": [
+          0.85,
+          0.9,
+          0.85
+        ],
+        "cited_per_rep": [
+          [
+            "A2",
+            "A3",
+            "B2",
+            "B3",
+            "C2",
+            "C3",
+            "C4",
+            "D3",
+            "D4"
+          ],
+          [
+            "A2",
+            "A3",
+            "B2",
+            "B3",
+            "C2",
+            "C3",
+            "C4",
+            "D3",
+            "D4"
+          ],
+          [
+            "A2",
+            "A3",
+            "B2",
+            "B3",
+            "C3",
+            "C4",
+            "D3",
+            "D4"
+          ]
+        ],
+        "mean_pairwise_jaccard": 0.9259,
+        "cells_in_every_rep": [
+          "A2",
+          "A3",
+          "B2",
+          "B3",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ],
+        "cells_in_only_one_rep": []
+      },
+      "MHIST_ddn.png": {
+        "n_reps": 3,
+        "labels": [
+          "SSA",
+          "SSA",
+          "SSA"
+        ],
+        "confidences": [
+          0.85,
+          0.9,
+          0.85
+        ],
+        "cited_per_rep": [
+          [
+            "A1",
+            "A2",
+            "A4",
+            "B1",
+            "B2",
+            "B3",
+            "C1",
+            "C2",
+            "C3",
+            "D2",
+            "D4"
+          ],
+          [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "B1",
+            "B2",
+            "B3",
+            "B4",
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "D1",
+            "D2",
+            "D3",
+            "D4"
+          ],
+          [
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "B1",
+            "B2",
+            "B3",
+            "B4",
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "D2",
+            "D3",
+            "D4"
+          ]
+        ],
+        "mean_pairwise_jaccard": 0.7861,
+        "cells_in_every_rep": [
+          "A1",
+          "A2",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "C1",
+          "C2",
+          "C3",
+          "D2",
+          "D4"
+        ],
+        "cells_in_only_one_rep": [
+          "D1"
+        ]
+      }
+    },
+    "mean_within_image_jaccard": 0.904
+  },
+  "q4_empty_cell_control": {
+    "responses_scored": 26,
+    "total_cells_cited": 256,
+    "cells_cited_that_are_empty": 0,
+    "empty_citation_rate": 0.0,
+    "null_uniform_random_expected": 31.54,
+    "null_uniform_rate": 0.1232,
+    "p_observed_le_uniform_null": 0.0,
+    "null_shuffled_image_expected": 28.05,
+    "null_shuffled_rate": 0.1096,
+    "p_observed_le_shuffled_null": 0.0,
+    "empty_citations_by_feature": [],
+    "per_response": [
+      {
+        "image": "MHIST_dbe.png",
+        "replicate": 1,
+        "cells": [
+          "B1",
+          "B2",
+          "C1",
+          "C2",
+          "C3",
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 32.97,
+        "mean_tissue_pct_cited": 77.76
+      },
+      {
+        "image": "MHIST_cve.png",
+        "replicate": 1,
+        "cells": [
+          "A2",
+          "A3",
+          "A4",
+          "B2",
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D2",
+          "D3"
+        ],
+        "n_cited": 11,
+        "n_empty_available": 2,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 25.35,
+        "mean_tissue_pct_cited": 75.55
+      },
+      {
+        "image": "MHIST_ddn.png",
+        "replicate": 1,
+        "cells": [
+          "A1",
+          "A2",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "C1",
+          "C2",
+          "C3",
+          "D2",
+          "D4"
+        ],
+        "n_cited": 11,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 85.2,
+        "mean_tissue_pct_cited": 92.04
+      },
+      {
+        "image": "MHIST_ekm.png",
+        "replicate": 1,
+        "cells": [
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 69.99,
+        "mean_tissue_pct_cited": 91.23
+      },
+      {
+        "image": "MHIST_cmt.png",
+        "replicate": 1,
+        "cells": [
+          "A2",
+          "B1",
+          "B2",
+          "B3",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D2"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 2,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 28.48,
+        "mean_tissue_pct_cited": 71.29
+      },
+      {
+        "image": "MHIST_apc.png",
+        "replicate": 1,
+        "cells": [
+          "A1",
+          "A3",
+          "B1",
+          "B2",
+          "C1",
+          "C2",
+          "D1",
+          "D2",
+          "D4"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 52.39,
+        "mean_tissue_pct_cited": 86.71
+      },
+      {
+        "image": "MHIST_bmy.png",
+        "replicate": 1,
+        "cells": [
+          "A1",
+          "A3",
+          "A4",
+          "B1",
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 73.05,
+        "mean_tissue_pct_cited": 91.27
+      },
+      {
+        "image": "MHIST_epo.png",
+        "replicate": 1,
+        "cells": [
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 12,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 7.88,
+        "mean_tissue_pct_cited": 74.35
+      },
+      {
+        "image": "MHIST_ajp.png",
+        "replicate": 1,
+        "cells": [
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 8,
+        "n_empty_available": 3,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 67.06,
+        "mean_tissue_pct_cited": 88.48
+      },
+      {
+        "image": "MHIST_dey.png",
+        "replicate": 1,
+        "cells": [
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 7,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 49.39,
+        "mean_tissue_pct_cited": 83.93
+      },
+      {
+        "image": "MHIST_epj.png",
+        "replicate": 1,
+        "cells": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 15,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 90.18,
+        "mean_tissue_pct_cited": 97.68
+      },
+      {
+        "image": "MHIST_elb.png",
+        "replicate": 1,
+        "cells": [
+          "A4",
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 26.21,
+        "mean_tissue_pct_cited": 73.37
+      },
+      {
+        "image": "MHIST_ekh.png",
+        "replicate": 1,
+        "cells": [
+          "A2",
+          "A3",
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "D2",
+          "D3"
+        ],
+        "n_cited": 8,
+        "n_empty_available": 3,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 47.61,
+        "mean_tissue_pct_cited": 72.5
+      },
+      {
+        "image": "MHIST_bqc.png",
+        "replicate": 1,
+        "cells": [
+          "A2",
+          "B2",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 32.84,
+        "mean_tissue_pct_cited": 76.19
+      },
+      {
+        "image": "MHIST_ccn.png",
+        "replicate": 1,
+        "cells": [
+          "A1",
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 26.85,
+        "mean_tissue_pct_cited": 66.57
+      },
+      {
+        "image": "MHIST_bxx.png",
+        "replicate": 1,
+        "cells": [
+          "A2",
+          "B1",
+          "B2",
+          "B3",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D4"
+        ],
+        "n_cited": 11,
+        "n_empty_available": 3,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 10.3,
+        "mean_tissue_pct_cited": 71.25
+      },
+      {
+        "image": "MHIST_cdr.png",
+        "replicate": 1,
+        "cells": [
+          "A1",
+          "A2",
+          "A3",
+          "B1",
+          "B2",
+          "B3",
+          "C1",
+          "C2",
+          "C3",
+          "D1",
+          "D2",
+          "D4"
+        ],
+        "n_cited": 12,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 93.14,
+        "mean_tissue_pct_cited": 96.07
+      },
+      {
+        "image": "MHIST_cxx.png",
+        "replicate": 1,
+        "cells": [
+          "A2",
+          "A3",
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 61.19,
+        "mean_tissue_pct_cited": 91.16
+      },
+      {
+        "image": "MHIST_abb.png",
+        "replicate": 1,
+        "cells": [
+          "A2",
+          "B2",
+          "C2",
+          "C3",
+          "D3"
+        ],
+        "n_cited": 5,
+        "n_empty_available": 3,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 79.91,
+        "mean_tissue_pct_cited": 86.91
+      },
+      {
+        "image": "MHIST_dtq.png",
+        "replicate": 1,
+        "cells": [
+          "A1",
+          "A2",
+          "B2",
+          "B3",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D1"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 63.52,
+        "mean_tissue_pct_cited": 85.81
+      },
+      {
+        "image": "MHIST_ccn.png",
+        "replicate": 2,
+        "cells": [
+          "A1",
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 26.85,
+        "mean_tissue_pct_cited": 66.57
+      },
+      {
+        "image": "MHIST_ccn.png",
+        "replicate": 3,
+        "cells": [
+          "A1",
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 26.85,
+        "mean_tissue_pct_cited": 66.57
+      },
+      {
+        "image": "MHIST_ddn.png",
+        "replicate": 2,
+        "cells": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 16,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 85.2,
+        "mean_tissue_pct_cited": 92.29
+      },
+      {
+        "image": "MHIST_ddn.png",
+        "replicate": 3,
+        "cells": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 15,
+        "n_empty_available": 0,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 85.2,
+        "mean_tissue_pct_cited": 92.03
+      },
+      {
+        "image": "MHIST_cxx.png",
+        "replicate": 2,
+        "cells": [
+          "A2",
+          "A3",
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 9,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 61.19,
+        "mean_tissue_pct_cited": 91.16
+      },
+      {
+        "image": "MHIST_cxx.png",
+        "replicate": 3,
+        "cells": [
+          "A2",
+          "A3",
+          "B2",
+          "B3",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ],
+        "n_cited": 8,
+        "n_empty_available": 4,
+        "n_cited_empty": 0,
+        "cited_empty": [],
+        "min_tissue_pct_cited": 82.94,
+        "mean_tissue_pct_cited": 94.91
+      }
+    ]
+  },
+  "q5_transposition": {
+    "citations_examined": 256,
+    "on_diagonal_transpose_is_identity": 70,
+    "off_diagonal": 186,
+    "as_is_has_more_tissue": 111,
+    "transposed_has_more_tissue": 75,
+    "mean_tissue_pct_as_cited": 83.53,
+    "mean_tissue_pct_if_transposed": 74.43,
+    "empty_citations_off_diagonal": 0,
+    "empty_citations_whose_transpose_is_non_empty": 0,
+    "rescue_rate": 0.0
+  },
+  "classification": {
+    "n": 20,
+    "accuracy": 0.5,
+    "predicted_distribution": {
+      "SSA": 18,
+      "HP": 2
+    },
+    "true_distribution": {
+      "HP": 10,
+      "SSA": 10
+    },
+    "accuracy_by_band": {
+      "borderline": "3/7",
+      "strong": "3/7",
+      "unanimous": "4/6"
+    },
+    "mean_confidence": 0.86
+  }
+}

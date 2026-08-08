@@ -1,0 +1,859 @@
+{
+  "condition_a": "cte_p1.jsonl",
+  "condition_b": "etc_p1.jsonl",
+  "manipulation_delivered": {
+    "a_raw_key_orders": {
+      "label|confidence|evidence": 26
+    },
+    "b_raw_key_orders": {
+      "evidence|label|confidence": 26
+    },
+    "co_raw_key_orders": {
+      "label|confidence|evidence": 26
+    }
+  },
+  "cited_cells": {
+    "cross_condition_jaccard": 0.7104,
+    "ceiling_within_condition_replicates": 0.7999,
+    "floor_between_images": 0.4358,
+    "position_floor0_ceiling1": 0.7542,
+    "permutation_p_within_gt_cross": 0.0679,
+    "n_within_pairs": 18,
+    "n_cross_pairs": 20
+  },
+  "features": {
+    "cross_condition_jaccard": 0.8167,
+    "ceiling_within_condition": 0.7778,
+    "floor_between_images": 0.7289,
+    "usage_a": [
+      [
+        "crypt/gland architecture",
+        20
+      ],
+      [
+        "serration",
+        20
+      ],
+      [
+        "inflammatory infiltrate",
+        7
+      ],
+      [
+        "surface epithelium",
+        4
+      ],
+      [
+        "stroma",
+        1
+      ]
+    ],
+    "usage_b": [
+      [
+        "crypt/gland architecture",
+        20
+      ],
+      [
+        "serration",
+        20
+      ],
+      [
+        "inflammatory infiltrate",
+        11
+      ],
+      [
+        "surface epithelium",
+        6
+      ],
+      [
+        "stroma",
+        3
+      ]
+    ]
+  },
+  "descriptions": {
+    "cross_condition_token_jaccard": 0.2285
+  },
+  "verbosity": {
+    "mean_evidence_items_a": 2.6,
+    "mean_evidence_items_b": 3.0,
+    "mean_cells_cited_a": 7.6,
+    "mean_cells_cited_b": 9.5
+  },
+  "labels": {
+    "agreement_rate": 0.7,
+    "accuracy_a": {
+      "n": 20,
+      "correct": 10,
+      "accuracy": 0.5,
+      "mean_confidence": 0.802,
+      "predicted": {
+        "SSA": 12,
+        "HP": 8
+      }
+    },
+    "accuracy_b": {
+      "n": 20,
+      "correct": 10,
+      "accuracy": 0.5,
+      "mean_confidence": 0.86,
+      "predicted": {
+        "SSA": 18,
+        "HP": 2
+      }
+    },
+    "accuracy_classify_only": {
+      "n": 20,
+      "correct": 10,
+      "accuracy": 0.5,
+      "mean_confidence": 0.825,
+      "predicted": {
+        "SSA": 14,
+        "HP": 6
+      }
+    }
+  },
+  "per_tile": [
+    {
+      "image": "MHIST_abb.png",
+      "label_true": "SSA",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 6,
+      "n_cells_b": 5,
+      "cells_a": [
+        "A2",
+        "B2",
+        "B3",
+        "C2",
+        "C3",
+        "D3"
+      ],
+      "cells_b": [
+        "A2",
+        "B2",
+        "C2",
+        "C3",
+        "D3"
+      ],
+      "cell_jaccard": 0.8333,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.1818
+    },
+    {
+      "image": "MHIST_ajp.png",
+      "label_true": "HP",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 9,
+      "n_cells_b": 8,
+      "cells_a": [
+        "A4",
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cells_b": [
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 0.8889,
+      "feature_jaccard": 0.5,
+      "description_token_jaccard": 0.3214
+    },
+    {
+      "image": "MHIST_apc.png",
+      "label_true": "SSA",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.85,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 8,
+      "n_cells_b": 9,
+      "cells_a": [
+        "A1",
+        "A3",
+        "B1",
+        "B2",
+        "C1",
+        "C2",
+        "D1",
+        "D2"
+      ],
+      "cells_b": [
+        "A1",
+        "A3",
+        "B1",
+        "B2",
+        "C1",
+        "C2",
+        "D1",
+        "D2",
+        "D4"
+      ],
+      "cell_jaccard": 0.8889,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.4138
+    },
+    {
+      "image": "MHIST_bmy.png",
+      "label_true": "SSA",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.85,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 6,
+      "n_cells_b": 9,
+      "cells_a": [
+        "A3",
+        "A4",
+        "B3",
+        "B4",
+        "C3",
+        "C4"
+      ],
+      "cells_b": [
+        "A1",
+        "A3",
+        "A4",
+        "B1",
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "cell_jaccard": 0.6667,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.1935
+    },
+    {
+      "image": "MHIST_bqc.png",
+      "label_true": "SSA",
+      "label_a": "HP",
+      "label_b": "SSA",
+      "labels_agree": false,
+      "conf_a": 0.8,
+      "conf_b": 0.85,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 9,
+      "n_cells_b": 9,
+      "cells_a": [
+        "A2",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C3",
+        "C4",
+        "D2",
+        "D4"
+      ],
+      "cells_b": [
+        "A2",
+        "B2",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 0.6364,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.1515
+    },
+    {
+      "image": "MHIST_bxx.png",
+      "label_true": "HP",
+      "label_a": "HP",
+      "label_b": "HP",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.8,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 9,
+      "n_cells_b": 11,
+      "cells_a": [
+        "A2",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "D1",
+        "D2"
+      ],
+      "cells_b": [
+        "A2",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D4"
+      ],
+      "cell_jaccard": 0.8182,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.1282
+    },
+    {
+      "image": "MHIST_ccn.png",
+      "label_true": "HP",
+      "label_a": "HP",
+      "label_b": "SSA",
+      "labels_agree": false,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 7,
+      "n_cells_b": 9,
+      "cells_a": [
+        "A4",
+        "B3",
+        "B4",
+        "C3",
+        "C4",
+        "D2",
+        "D3"
+      ],
+      "cells_b": [
+        "A1",
+        "A4",
+        "B3",
+        "B4",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3"
+      ],
+      "cell_jaccard": 0.7778,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.1923
+    },
+    {
+      "image": "MHIST_cdr.png",
+      "label_true": "HP",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 7,
+      "n_cells_b": 12,
+      "cells_a": [
+        "A1",
+        "A2",
+        "B2",
+        "B3",
+        "C2",
+        "D1",
+        "D2"
+      ],
+      "cells_b": [
+        "A1",
+        "A2",
+        "A3",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "D1",
+        "D2",
+        "D4"
+      ],
+      "cell_jaccard": 0.5833,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.2222
+    },
+    {
+      "image": "MHIST_cmt.png",
+      "label_true": "SSA",
+      "label_a": "HP",
+      "label_b": "HP",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.8,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 8,
+      "n_cells_b": 9,
+      "cells_a": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "cells_b": [
+        "A2",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D2"
+      ],
+      "cell_jaccard": 0.7,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.3077
+    },
+    {
+      "image": "MHIST_cve.png",
+      "label_true": "HP",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 6,
+      "n_cells_b": 11,
+      "cells_a": [
+        "B2",
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "cells_b": [
+        "A2",
+        "A3",
+        "A4",
+        "B2",
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4",
+        "D2",
+        "D3"
+      ],
+      "cell_jaccard": 0.5455,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.4
+    },
+    {
+      "image": "MHIST_cxx.png",
+      "label_true": "SSA",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.85,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 6,
+      "n_cells_b": 9,
+      "cells_a": [
+        "B2",
+        "B3",
+        "C2",
+        "C3",
+        "D3",
+        "D4"
+      ],
+      "cells_b": [
+        "A2",
+        "A3",
+        "B2",
+        "B3",
+        "C2",
+        "C3",
+        "C4",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 0.6667,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.1724
+    },
+    {
+      "image": "MHIST_dbe.png",
+      "label_true": "HP",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.8,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 7,
+      "n_cells_b": 9,
+      "cells_a": [
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "D2",
+        "D3"
+      ],
+      "cells_b": [
+        "B1",
+        "B2",
+        "C1",
+        "C2",
+        "C3",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 0.6,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.1765
+    },
+    {
+      "image": "MHIST_ddn.png",
+      "label_true": "HP",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.85,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 7,
+      "n_cells_b": 11,
+      "cells_a": [
+        "A2",
+        "A3",
+        "B2",
+        "B3",
+        "C2",
+        "C3",
+        "D2"
+      ],
+      "cells_b": [
+        "A1",
+        "A2",
+        "A4",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "D2",
+        "D4"
+      ],
+      "cell_jaccard": 0.5,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.1471
+    },
+    {
+      "image": "MHIST_dey.png",
+      "label_true": "HP",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 8,
+      "n_cells_b": 7,
+      "cells_a": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cells_b": [
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 0.875,
+      "feature_jaccard": 0.5,
+      "description_token_jaccard": 0.1667
+    },
+    {
+      "image": "MHIST_dtq.png",
+      "label_true": "SSA",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.8,
+      "conf_b": 0.85,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 8,
+      "n_cells_b": 9,
+      "cells_a": [
+        "A1",
+        "A2",
+        "B2",
+        "B4",
+        "C1",
+        "C2",
+        "C3",
+        "C4"
+      ],
+      "cells_b": [
+        "A1",
+        "A2",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D1"
+      ],
+      "cell_jaccard": 0.7,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.2759
+    },
+    {
+      "image": "MHIST_ekh.png",
+      "label_true": "SSA",
+      "label_a": "HP",
+      "label_b": "SSA",
+      "labels_agree": false,
+      "conf_a": 0.8,
+      "conf_b": 0.8,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 8,
+      "n_cells_b": 8,
+      "cells_a": [
+        "A3",
+        "A4",
+        "B3",
+        "B4",
+        "C3",
+        "C4",
+        "D2",
+        "D3"
+      ],
+      "cells_b": [
+        "A2",
+        "A3",
+        "B2",
+        "B3",
+        "C2",
+        "C3",
+        "D2",
+        "D3"
+      ],
+      "cell_jaccard": 0.4545,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.2188
+    },
+    {
+      "image": "MHIST_ekm.png",
+      "label_true": "SSA",
+      "label_a": "HP",
+      "label_b": "SSA",
+      "labels_agree": false,
+      "conf_a": 0.8,
+      "conf_b": 0.8,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 9,
+      "n_cells_b": 9,
+      "cells_a": [
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cells_b": [
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 1.0,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.1351
+    },
+    {
+      "image": "MHIST_elb.png",
+      "label_true": "SSA",
+      "label_a": "SSA",
+      "label_b": "SSA",
+      "labels_agree": true,
+      "conf_a": 0.85,
+      "conf_b": 0.9,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 8,
+      "n_cells_b": 9,
+      "cells_a": [
+        "A4",
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2"
+      ],
+      "cells_b": [
+        "A4",
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3"
+      ],
+      "cell_jaccard": 0.8889,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.1667
+    },
+    {
+      "image": "MHIST_epj.png",
+      "label_true": "HP",
+      "label_a": "HP",
+      "label_b": "SSA",
+      "labels_agree": false,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 3,
+      "n_evidence_b": 3,
+      "n_cells_a": 9,
+      "n_cells_b": 15,
+      "cells_a": [
+        "A1",
+        "A2",
+        "A3",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "C2",
+        "C3"
+      ],
+      "cells_b": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 0.6,
+      "feature_jaccard": 1.0,
+      "description_token_jaccard": 0.2812
+    },
+    {
+      "image": "MHIST_epo.png",
+      "label_true": "HP",
+      "label_a": "HP",
+      "label_b": "SSA",
+      "labels_agree": false,
+      "conf_a": 0.8,
+      "conf_b": 0.9,
+      "n_evidence_a": 2,
+      "n_evidence_b": 3,
+      "n_cells_a": 7,
+      "n_cells_b": 12,
+      "cells_a": [
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "D1",
+        "D2"
+      ],
+      "cells_b": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "cell_jaccard": 0.5833,
+      "feature_jaccard": 0.6667,
+      "description_token_jaccard": 0.3182
+    }
+  ]
+}

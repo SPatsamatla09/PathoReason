@@ -1,0 +1,95 @@
+{
+  "image": "MHIST_apc.png",
+  "source": "clean/MHIST_apc.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "A1",
+    "A3",
+    "B1",
+    "B2",
+    "C1",
+    "C2",
+    "D1",
+    "D2"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.47,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 23.61,
+    "usable": true
+  },
+  "tile_tissue_px": 39007,
+  "tissue_px_per_cell": {
+    "A1": 2530,
+    "A2": 3039,
+    "A3": 3066,
+    "A4": 2615,
+    "B1": 3111,
+    "B2": 3034,
+    "B3": 1818,
+    "B4": 1317,
+    "C1": 2871,
+    "C2": 1643,
+    "C3": 636,
+    "C4": 2229,
+    "D1": 2312,
+    "D2": 2798,
+    "D3": 2879,
+    "D4": 3109
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "A3",
+        "B1",
+        "B2"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 23.61
+    },
+    "random": {
+      "cells": [
+        "A2",
+        "B3",
+        "C4"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 18.17
+    },
+    "tissue_matched": {
+      "cells": [
+        "A2",
+        "D3",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 184,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 23.14
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/cte_p1_k3/MHIST_apc/cited__mean.png",
+    "masked/cte_p1_k3/MHIST_apc/cited__blur.png",
+    "masked/cte_p1_k3/MHIST_apc/cited__black.png",
+    "masked/cte_p1_k3/MHIST_apc/random__mean.png",
+    "masked/cte_p1_k3/MHIST_apc/random__blur.png",
+    "masked/cte_p1_k3/MHIST_apc/random__black.png",
+    "masked/cte_p1_k3/MHIST_apc/tissue_matched__mean.png",
+    "masked/cte_p1_k3/MHIST_apc/tissue_matched__blur.png",
+    "masked/cte_p1_k3/MHIST_apc/tissue_matched__black.png"
+  ]
+}

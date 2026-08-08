@@ -1,0 +1,282 @@
+{
+  "image": "MHIST_cdr.png",
+  "label": "HP",
+  "ssa_votes_out_of_7": 0,
+  "partition": "test",
+  "grid": {
+    "rows": 4,
+    "cols": 4,
+    "cell_px": 56,
+    "tile_px": 224,
+    "naming": "row letter A-D top to bottom, column number 1-4 left to right; A1 = top-left"
+  },
+  "tissue_rule": {
+    "primary": "HSV: saturation > 0.08 OR value < 0.80",
+    "sat_thresh": 0.08,
+    "val_thresh": 0.8,
+    "secondary": "grayscale < 220",
+    "gray_thresh": 220,
+    "empty_cell_pct": 5.0
+  },
+  "tile_tissue_pct": 92.92,
+  "n_empty_cells": 0,
+  "empty_cells": [],
+  "cells": {
+    "A1": {
+      "row": 0,
+      "col": 0,
+      "bbox_xyxy": [
+        0,
+        0,
+        56,
+        56
+      ],
+      "tissue_pct": 94.58,
+      "tissue_pct_gray_rule": 95.79,
+      "mean_gray": 158.3,
+      "mean_saturation": 0.3044,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "A2": {
+      "row": 0,
+      "col": 1,
+      "bbox_xyxy": [
+        56,
+        0,
+        112,
+        56
+      ],
+      "tissue_pct": 95.82,
+      "tissue_pct_gray_rule": 96.56,
+      "mean_gray": 161.4,
+      "mean_saturation": 0.2929,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "A3": {
+      "row": 0,
+      "col": 2,
+      "bbox_xyxy": [
+        112,
+        0,
+        168,
+        56
+      ],
+      "tissue_pct": 97.83,
+      "tissue_pct_gray_rule": 98.5,
+      "mean_gray": 156.8,
+      "mean_saturation": 0.3093,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "A4": {
+      "row": 0,
+      "col": 3,
+      "bbox_xyxy": [
+        168,
+        0,
+        224,
+        56
+      ],
+      "tissue_pct": 59.82,
+      "tissue_pct_gray_rule": 59.92,
+      "mean_gray": 191.9,
+      "mean_saturation": 0.1816,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "B1": {
+      "row": 1,
+      "col": 0,
+      "bbox_xyxy": [
+        0,
+        56,
+        56,
+        112
+      ],
+      "tissue_pct": 93.14,
+      "tissue_pct_gray_rule": 95.92,
+      "mean_gray": 161.5,
+      "mean_saturation": 0.2892,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "B2": {
+      "row": 1,
+      "col": 1,
+      "bbox_xyxy": [
+        56,
+        56,
+        112,
+        112
+      ],
+      "tissue_pct": 95.18,
+      "tissue_pct_gray_rule": 95.95,
+      "mean_gray": 159.5,
+      "mean_saturation": 0.2983,
+      "is_empty": false,
+      "touches_tile_border": false
+    },
+    "B3": {
+      "row": 1,
+      "col": 2,
+      "bbox_xyxy": [
+        112,
+        56,
+        168,
+        112
+      ],
+      "tissue_pct": 93.75,
+      "tissue_pct_gray_rule": 94.83,
+      "mean_gray": 166.5,
+      "mean_saturation": 0.2684,
+      "is_empty": false,
+      "touches_tile_border": false
+    },
+    "B4": {
+      "row": 1,
+      "col": 3,
+      "bbox_xyxy": [
+        168,
+        56,
+        224,
+        112
+      ],
+      "tissue_pct": 77.23,
+      "tissue_pct_gray_rule": 80.04,
+      "mean_gray": 187.7,
+      "mean_saturation": 0.1944,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "C1": {
+      "row": 2,
+      "col": 0,
+      "bbox_xyxy": [
+        0,
+        112,
+        56,
+        168
+      ],
+      "tissue_pct": 94.2,
+      "tissue_pct_gray_rule": 96.65,
+      "mean_gray": 159.0,
+      "mean_saturation": 0.296,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "C2": {
+      "row": 2,
+      "col": 1,
+      "bbox_xyxy": [
+        56,
+        112,
+        112,
+        168
+      ],
+      "tissue_pct": 95.95,
+      "tissue_pct_gray_rule": 97.26,
+      "mean_gray": 161.8,
+      "mean_saturation": 0.2897,
+      "is_empty": false,
+      "touches_tile_border": false
+    },
+    "C3": {
+      "row": 2,
+      "col": 2,
+      "bbox_xyxy": [
+        112,
+        112,
+        168,
+        168
+      ],
+      "tissue_pct": 96.01,
+      "tissue_pct_gray_rule": 97.35,
+      "mean_gray": 163.5,
+      "mean_saturation": 0.2837,
+      "is_empty": false,
+      "touches_tile_border": false
+    },
+    "C4": {
+      "row": 2,
+      "col": 3,
+      "bbox_xyxy": [
+        168,
+        112,
+        224,
+        168
+      ],
+      "tissue_pct": 99.01,
+      "tissue_pct_gray_rule": 99.04,
+      "mean_gray": 158.8,
+      "mean_saturation": 0.3042,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "D1": {
+      "row": 3,
+      "col": 0,
+      "bbox_xyxy": [
+        0,
+        168,
+        56,
+        224
+      ],
+      "tissue_pct": 98.76,
+      "tissue_pct_gray_rule": 99.11,
+      "mean_gray": 162.7,
+      "mean_saturation": 0.3006,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "D2": {
+      "row": 3,
+      "col": 1,
+      "bbox_xyxy": [
+        56,
+        168,
+        112,
+        224
+      ],
+      "tissue_pct": 98.82,
+      "tissue_pct_gray_rule": 99.3,
+      "mean_gray": 165.5,
+      "mean_saturation": 0.2837,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "D3": {
+      "row": 3,
+      "col": 2,
+      "bbox_xyxy": [
+        112,
+        168,
+        168,
+        224
+      ],
+      "tissue_pct": 97.8,
+      "tissue_pct_gray_rule": 99.04,
+      "mean_gray": 158.7,
+      "mean_saturation": 0.2953,
+      "is_empty": false,
+      "touches_tile_border": true
+    },
+    "D4": {
+      "row": 3,
+      "col": 3,
+      "bbox_xyxy": [
+        168,
+        168,
+        224,
+        224
+      ],
+      "tissue_pct": 98.76,
+      "tissue_pct_gray_rule": 98.85,
+      "mean_gray": 161.8,
+      "mean_saturation": 0.2911,
+      "is_empty": false,
+      "touches_tile_border": true
+    }
+  }
+}

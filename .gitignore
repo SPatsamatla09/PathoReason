@@ -17,3 +17,33 @@ results/
 # Jupyter
 .ipynb_checkpoints/
 .env
+
+# MHIST dataset (data-use agreement: never commit tile pixels)
+/images
+/annotations.csv
+grid_experiment/clean/
+grid_experiment/gridded/
+grid_experiment/masked/**/*.png
+grid_experiment/runs/*.log
+grid_experiment/runs/cited_vs_truth.png
+grid_experiment/coverage/*.json
+!grid_experiment/coverage/MHIST_dbe.json
+!grid_experiment/coverage/MHIST_cve.json
+!grid_experiment/coverage/MHIST_ddn.json
+!grid_experiment/coverage/MHIST_ekm.json
+!grid_experiment/coverage/MHIST_cmt.json
+!grid_experiment/coverage/MHIST_apc.json
+!grid_experiment/coverage/MHIST_bmy.json
+!grid_experiment/coverage/MHIST_epo.json
+!grid_experiment/coverage/MHIST_ajp.json
+!grid_experiment/coverage/MHIST_dey.json
+!grid_experiment/coverage/MHIST_epj.json
+!grid_experiment/coverage/MHIST_elb.json
+!grid_experiment/coverage/MHIST_ekh.json
+!grid_experiment/coverage/MHIST_bqc.json
+!grid_experiment/coverage/MHIST_ccn.json
+!grid_experiment/coverage/MHIST_bxx.json
+!grid_experiment/coverage/MHIST_cdr.json
+!grid_experiment/coverage/MHIST_cxx.json
+!grid_experiment/coverage/MHIST_abb.json
+!grid_experiment/coverage/MHIST_dtq.json

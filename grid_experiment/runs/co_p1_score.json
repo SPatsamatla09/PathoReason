@@ -1,0 +1,108 @@
+{
+  "run": "runs/co_p1.jsonl",
+  "model": "gemma-4-31b",
+  "prompt_id": "co_p1",
+  "temperature": 1.0,
+  "q1_cell_validity": {
+    "responses": 26,
+    "parsed_ok": 26,
+    "parse_failures": 0,
+    "citations_valid": 0,
+    "citations_invalid": 0,
+    "invalid_rate": 0.0,
+    "responses_with_invalid_cell": 0,
+    "invalid_cell_examples": [],
+    "violation_kinds": []
+  },
+  "q2_cross_image_variation": {
+    "n_images": 0,
+    "mean_pairwise_jaccard_between_images": 0.0,
+    "null_uniform_random_jaccard": 0.0,
+    "p_observed_ge_null": 1.0,
+    "cells_never_cited": [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "D1",
+      "D2",
+      "D3",
+      "D4"
+    ],
+    "cell_frequency": {
+      "A1": 0,
+      "A2": 0,
+      "A3": 0,
+      "A4": 0,
+      "B1": 0,
+      "B2": 0,
+      "B3": 0,
+      "B4": 0,
+      "C1": 0,
+      "C2": 0,
+      "C3": 0,
+      "C4": 0,
+      "D1": 0,
+      "D2": 0,
+      "D3": 0,
+      "D4": 0
+    },
+    "mean_cells_cited_per_response": 0.0
+  },
+  "q3_within_tile_stability": {
+    "per_image": {},
+    "mean_within_image_jaccard": null
+  },
+  "q4_empty_cell_control": {
+    "responses_scored": 0,
+    "total_cells_cited": 0,
+    "cells_cited_that_are_empty": 0,
+    "empty_citation_rate": 0.0,
+    "null_uniform_random_expected": 0.0,
+    "null_uniform_rate": 0.0,
+    "p_observed_le_uniform_null": 1.0,
+    "null_shuffled_image_expected": 0.0,
+    "null_shuffled_rate": 0.0,
+    "p_observed_le_shuffled_null": 1.0,
+    "empty_citations_by_feature": [],
+    "per_response": []
+  },
+  "q5_transposition": {
+    "citations_examined": 0,
+    "on_diagonal_transpose_is_identity": 0,
+    "off_diagonal": 0,
+    "as_is_has_more_tissue": 0,
+    "transposed_has_more_tissue": 0,
+    "mean_tissue_pct_as_cited": 0.0,
+    "mean_tissue_pct_if_transposed": 0.0,
+    "empty_citations_off_diagonal": 0,
+    "empty_citations_whose_transpose_is_non_empty": 0,
+    "rescue_rate": 0.0
+  },
+  "classification": {
+    "n": 20,
+    "accuracy": 0.5,
+    "predicted_distribution": {
+      "SSA": 14,
+      "HP": 6
+    },
+    "true_distribution": {
+      "HP": 10,
+      "SSA": 10
+    },
+    "accuracy_by_band": {
+      "borderline": "3/7",
+      "strong": "4/7",
+      "unanimous": "3/6"
+    },
+    "mean_confidence": 0.825
+  }
+}
