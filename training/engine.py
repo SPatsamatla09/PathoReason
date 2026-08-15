@@ -182,6 +182,7 @@ def run_baseline_training(
     optimizer: Optimizer,
     epochs: int,
     device: torch.device | None = None,
+    checkpoint_path: Path | None = None,
 ) -> BaselineRunResult:
     """Train and evaluate one baseline while recording compute time."""
     if epochs <= 0:
@@ -232,6 +233,18 @@ def run_baseline_training(
         if resolved_device.type in {"cuda", "mps"}
         else 0.0
     )
+
+    if checkpoint_path is not None:
+        checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+        torch.save(
+            {
+                "model_state_dict": model.state_dict(),
+                "model_name": model_name,
+                "training_mode": training_mode,
+                "epochs": epochs,
+            },
+            checkpoint_path,
+        )
 
     return BaselineRunResult(
         model_name=model_name,

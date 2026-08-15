@@ -19,7 +19,7 @@ class PredictionResult:
     label: str
     confidence: float | None
     explanation: str | None = None
-    evidence: tuple[str, ...] = ()
+    evidence: tuple[Any, ...] = ()
     model_name: str = ""
     metadata: dict[str, Any] = field(default_factory=dict)
 

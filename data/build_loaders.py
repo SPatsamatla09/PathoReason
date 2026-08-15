@@ -52,6 +52,8 @@ def build_mhist_loaders(
     batch_size: int = BATCH_SIZE,
     num_workers: int = NUM_WORKERS,
     seed: int = SEED,
+    train_transform=None,
+    test_transform=None,
 ) -> MHISTLoaders:
     """
     Build DataLoaders using the official MHIST train/test partitions.
@@ -73,13 +75,18 @@ def build_mhist_loaders(
     if num_workers < 0:
         raise ValueError("num_workers cannot be negative.")
 
+    if train_transform is None:
+        train_transform = build_train_transform()
+    if test_transform is None:
+        test_transform = build_test_transform()
+
     train_dataset = MHISTDataset(
         partition="train",
-        transform=build_train_transform(),
+        transform=train_transform,
     )
     test_dataset = MHISTDataset(
         partition="test",
-        transform=build_test_transform(),
+        transform=test_transform,
     )
 
     generator = torch.Generator()

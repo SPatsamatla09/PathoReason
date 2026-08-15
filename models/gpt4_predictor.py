@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 from collections.abc import Sequence
 from io import BytesIO
 
@@ -33,6 +34,24 @@ Do not mention features that are not visibly supported by the image.
 """.strip()
 
 
+FEATURE_VOCABULARY = [
+    "nuclear atypia",
+    "crypt/gland architecture",
+    "serration",
+    "mitotic figures",
+    "necrosis",
+    "stroma",
+    "surface epithelium",
+    "inflammatory infiltrate",
+]
+
+GRID_CELLS = [
+    "A1", "A2", "A3", "A4",
+    "B1", "B2", "B3", "B4",
+    "C1", "C2", "C3", "C4",
+    "D1", "D2", "D3", "D4",
+]
+
 RESPONSE_SCHEMA: dict = {
     "type": "object",
     "properties": {
@@ -40,31 +59,159 @@ RESPONSE_SCHEMA: dict = {
             "type": "string",
             "enum": ["HP", "SSA"],
         },
-        "verbalized_confidence": {
+        "confidence": {
             "type": "number",
             "minimum": 0.0,
             "maximum": 1.0,
         },
-        "explanation": {
-            "type": "string",
-            "minLength": 1,
-        },
         "evidence": {
             "type": "array",
             "items": {
-                "type": "string",
-                "minLength": 1,
+                "type": "object",
+                "properties": {
+                    "feature": {
+                        "type": "string",
+                        "enum": FEATURE_VOCABULARY,
+                    },
+                    "grid_cells": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": GRID_CELLS,
+                        },
+                        "minItems": 1,
+                    },
+                    "description": {
+                        "type": "string",
+                        "minLength": 1,
+                    },
+                },
+                "required": [
+                    "feature",
+                    "grid_cells",
+                    "description",
+                ],
+                "additionalProperties": False,
             },
         },
     },
     "required": [
         "label",
-        "verbalized_confidence",
-        "explanation",
+        "confidence",
         "evidence",
     ],
     "additionalProperties": False,
 }
+
+
+
+def extract_json(raw: str) -> str:
+    """Extract one JSON object from a possibly fenced/prefixed response."""
+    s = raw.strip()
+
+    fence = re.search(r"```(?:json)?\s*(.*?)```", s, re.S)
+    if fence:
+        s = fence.group(1).strip()
+
+    start = s.find("{")
+    if start < 0:
+        raise ValueError("No opening JSON brace found.")
+
+    depth = 0
+    in_string = False
+    escaped = False
+
+    for i in range(start, len(s)):
+        ch = s[i]
+
+        if in_string:
+            if escaped:
+                escaped = False
+            elif ch == "\\":
+                escaped = True
+            elif ch == '"':
+                in_string = False
+            continue
+
+        if ch == '"':
+            in_string = True
+        elif ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return s[start:i + 1]
+
+    raise ValueError("Unbalanced JSON braces.")
+
+
+def validate_payload(payload: object) -> list[str]:
+    """Return frozen-protocol violations without silently normalizing them."""
+    violations: list[str] = []
+
+    if not isinstance(payload, dict):
+        return ["top-level response is not a JSON object"]
+
+    if set(payload) != {"label", "confidence", "evidence"}:
+        violations.append(
+            "top-level keys must be exactly label, confidence, evidence"
+        )
+
+    label = payload.get("label")
+    if label not in {"HP", "SSA"}:
+        violations.append(f"invalid label: {label!r}")
+
+    confidence = payload.get("confidence")
+    if (
+        isinstance(confidence, bool)
+        or not isinstance(confidence, (int, float))
+        or not 0.0 <= float(confidence) <= 1.0
+    ):
+        violations.append(f"invalid confidence: {confidence!r}")
+
+    evidence = payload.get("evidence")
+    if not isinstance(evidence, list):
+        violations.append("evidence must be a list")
+        return violations
+
+    for i, item in enumerate(evidence):
+        prefix = f"evidence[{i}]"
+
+        if not isinstance(item, dict):
+            violations.append(f"{prefix} must be an object")
+            continue
+
+        if set(item) != {"feature", "grid_cells", "description"}:
+            violations.append(
+                f"{prefix} must contain exactly "
+                "feature, grid_cells, description"
+            )
+
+        feature = item.get("feature")
+        if feature not in FEATURE_VOCABULARY:
+            violations.append(
+                f"{prefix}.feature outside frozen vocabulary: {feature!r}"
+            )
+
+        cells = item.get("grid_cells")
+        if not isinstance(cells, list) or not cells:
+            violations.append(
+                f"{prefix}.grid_cells must be a non-empty list"
+            )
+        else:
+            for cell in cells:
+                if cell not in GRID_CELLS:
+                    violations.append(
+                        f"{prefix}.grid_cells contains invalid cell: {cell!r}"
+                    )
+
+        description = item.get("description")
+        if not isinstance(description, str) or not description.strip():
+            violations.append(
+                f"{prefix}.description must be a non-empty string"
+            )
+
+    return violations
 
 
 class GPT4Predictor(BasePredictor):
@@ -125,33 +272,23 @@ class GPT4Predictor(BasePredictor):
 
         response = self.client.responses.create(
             model=self.model_name,
+            temperature=1.0,
             input=[
                 {
                     "role": "user",
                     "content": [
                         {
-                            "type": "input_text",
-                            "text": normalized_prompt,
-                        },
-                        {
                             "type": "input_image",
                             "image_url": image_data_url,
                             "detail": self.image_detail,
                         },
+                        {
+                            "type": "input_text",
+                            "text": normalized_prompt,
+                        },
                     ],
                 }
             ],
-            text={
-                "format": {
-                    "type": "json_schema",
-                    "name": "mhist_pathology_prediction",
-                    "description": (
-                        "Structured HP-versus-SSA histopathology prediction."
-                    ),
-                    "strict": True,
-                    "schema": RESPONSE_SCHEMA,
-                }
-            },
         )
 
         if not response.output_text:
@@ -159,22 +296,80 @@ class GPT4Predictor(BasePredictor):
                 "The OpenAI API returned no structured prediction text."
             )
 
+        raw_response = response.output_text.strip()
+
         try:
-            payload = json.loads(response.output_text)
-        except json.JSONDecodeError as exc:
-            raise RuntimeError(
-                "The OpenAI API returned invalid JSON."
-            ) from exc
+            extracted_json = extract_json(raw_response)
+            payload = json.loads(extracted_json)
+        except (ValueError, json.JSONDecodeError) as exc:
+            err = RuntimeError(
+                f"The OpenAI API returned unparseable JSON: {exc}"
+            )
+            err.raw_response = raw_response
+            err.response_id = response.id
+            raise err from exc
+
+        violations = validate_payload(payload)
+
+        if violations:
+            err = RuntimeError(
+                "The OpenAI API response violated the frozen protocol: "
+                + "; ".join(violations)
+            )
+            err.raw_response = raw_response
+            err.response_id = response.id
+            err.protocol_violations = violations
+            raise err
+
+        top_level_key_order = list(payload.keys())
+
+        expected_key_order = (
+            ["evidence", "label", "confidence"]
+            if normalized_prompt.lstrip().startswith(
+                "You are shown"
+            ) and '"evidence": [' in normalized_prompt
+            and normalized_prompt.rfind('"evidence"')
+                < normalized_prompt.rfind('"label"')
+            else ["label", "confidence", "evidence"]
+        )
+
+        key_order_valid = (
+            top_level_key_order == expected_key_order
+        )
 
         label = str(payload["label"])
-        explanation = str(payload["explanation"]).strip()
+        verbalized_confidence = float(payload["confidence"])
+
         evidence = tuple(
-            str(item).strip()
+            {
+                "feature": str(item["feature"]),
+                "grid_cells": [
+                    str(cell)
+                    for cell in item["grid_cells"]
+                ],
+                "description": str(item["description"]).strip(),
+            }
             for item in payload["evidence"]
-            if str(item).strip()
         )
-        verbalized_confidence = float(
-            payload["verbalized_confidence"]
+
+        explanation = None
+
+        usage = getattr(response, "usage", None)
+
+        input_tokens = (
+            getattr(usage, "input_tokens", None)
+            if usage is not None
+            else None
+        )
+        output_tokens = (
+            getattr(usage, "output_tokens", None)
+            if usage is not None
+            else None
+        )
+        total_tokens = (
+            getattr(usage, "total_tokens", None)
+            if usage is not None
+            else None
         )
 
         return PredictionResult(
@@ -188,6 +383,15 @@ class GPT4Predictor(BasePredictor):
                 "confidence_status": "unaudited",
                 "image_detail": self.image_detail,
                 "response_id": response.id,
+                "raw_response": raw_response,
+                "top_level_key_order": top_level_key_order,
+                "expected_key_order": expected_key_order,
+                "key_order_valid": key_order_valid,
+                "usage": {
+                    "input_tokens": input_tokens,
+                    "output_tokens": output_tokens,
+                    "total_tokens": total_tokens,
+                },
             },
         )
 

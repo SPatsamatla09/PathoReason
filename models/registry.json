@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "dataset": "mhist",
+  "models": {
+    "A_mhist_seed42/resnet18.pt": {
+      "track": "A",
+      "model": "resnet18",
+      "seed": 42,
+      "status": "frozen",
+      "training_mode": "fine_tune"
+    },
+    "A_mhist_seed42/vit_b16.pt": {
+      "track": "A",
+      "model": "vit_b16",
+      "seed": 42,
+      "status": "frozen",
+      "training_mode": "linear_probe"
+    }
+  }
+}

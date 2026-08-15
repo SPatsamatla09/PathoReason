@@ -35,6 +35,8 @@ def main() -> None:
         weight_decay=WEIGHT_DECAY,
     )
 
+    checkpoint_path = Path("models") / f"A_mhist_seed{SEED}" / "resnet18.pt"
+
     result = run_baseline_training(
         model=model,
         model_name="resnet18",
@@ -44,6 +46,7 @@ def main() -> None:
         optimizer=optimizer,
         epochs=EPOCHS,
         device=device,
+        checkpoint_path=checkpoint_path,
     )
 
     output_path = Path(RESULTS_DIR) / "baselines" / "resnet18.json"
