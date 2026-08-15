@@ -1,0 +1,43 @@
+{
+  "week": 2,
+  "dataset": "MHIST",
+  "status": "maximally_complete_under_current_constraints",
+  "track_a": {
+    "plip": {
+      "status": "complete",
+      "test_samples": 977,
+      "seed": 42,
+      "seed_replication": "not_applicable",
+      "seed_replication_reason": "Frozen zero-shot PLIP inference is deterministic; repeating identical inference under additional seeds would duplicate predictions.",
+      "prompt_paraphrases": "not_applicable",
+      "prompt_reason": "PLIP uses fixed HP and SSA class prompts rather than the structured Track B prompt-paraphrase grid."
+    }
+  },
+  "track_b": {
+    "gpt": {
+      "completed": [
+        {
+          "prompt_id": "cte_p1",
+          "seed": 42,
+          "attempted_samples": 977,
+          "successful_predictions": 966,
+          "refusals": 11
+        }
+      ],
+      "remaining_status": "blocked_budget",
+      "reason": "Cost/runtime dashboard projects that another full GPT configuration would exceed the configured API budget."
+    }
+  },
+  "foundation_baselines": {
+    "uni": {
+      "implementation": "complete",
+      "execution": "blocked_access",
+      "reason": "Hugging Face gated repository access not granted."
+    },
+    "virchow": {
+      "implementation": "complete",
+      "execution": "blocked_access",
+      "reason": "Hugging Face gated repository access not granted."
+    }
+  }
+}
