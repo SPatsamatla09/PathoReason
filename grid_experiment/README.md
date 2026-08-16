@@ -261,6 +261,34 @@ python3 mask.py --image MHIST_ccn.png --cells B2,B3,C2,C3
 python3 mask.py --from-run runs/cte_p1.jsonl --subset 3 --out masked/cte_p1_k3
 ```
 
+## Causal masking sweep (gemma, cte_p1, k=3)
+
+120 calls: 20 tiles x {cited, tissue_matched} x {mean, blur, black}, zero
+errors. Masking the 3 cells the model itself named flipped its label on
+10-15% of tiles; masking tissue-matched cells it never mentioned flipped
+15-25%. Pooled cited-only vs control-only flips: 7 vs 11, exact sign test
+p=0.48 -- numerically the wrong direction for faithfulness. Mean |dconf|
+never exceeded 0.018 in any arm. The citations are perceptually grounded
+but **causally inert**. (`runs/masking_analysis.json`)
+
+## Paraphrase crossing (all 9 prompts, gemma)
+
+The HP->SSA ordering flip survives rewording: p1 6-0, p2 3-1, p3 4-0,
+pooled 13 vs 1 reverse, exact McNemar **p=0.0018**. etc_* runs show a
+higher SSA rate (17-19/20 vs 12-17/20) and higher confidence (0.85-0.86 vs
+0.80-0.82) under every wording. Accuracy stays at chance in all nine runs
+(9-13/20). Tile `ccn` flips under all three wordings.
+(`runs/paraphrase_analysis.json`)
+
+## Stability probe (5 tiles x 5 reps, cte_p1, temperature 1.0)
+
+Mean within-image Jaccard 0.71 vs the 0.39 between-image floor; only 43% of
+cells ever cited on a tile are cited in all five reps. The two failure modes
+split cleanly and are both incompatible with the explanation driving the
+decision: ddn/epj churn ~half their citations while the label stays fixed;
+ccn/ekm hold citations nearly constant (J=0.91) while the label flips anyway.
+(`runs/stability_analysis.json`)
+
 ## Reproducing
 
 ```bash

@@ -1,0 +1,117 @@
+{
+  "per_run": {
+    "co_p1": {
+      "n": 20,
+      "accuracy": "10/20",
+      "ssa_predictions": 14,
+      "mean_confidence": 0.825
+    },
+    "co_p2": {
+      "n": 20,
+      "accuracy": "13/20",
+      "ssa_predictions": 15,
+      "mean_confidence": 0.812
+    },
+    "co_p3": {
+      "n": 20,
+      "accuracy": "10/20",
+      "ssa_predictions": 16,
+      "mean_confidence": 0.81
+    },
+    "cte_p1": {
+      "n": 20,
+      "accuracy": "10/20",
+      "ssa_predictions": 12,
+      "mean_confidence": 0.802
+    },
+    "cte_p2": {
+      "n": 20,
+      "accuracy": "13/20",
+      "ssa_predictions": 17,
+      "mean_confidence": 0.81
+    },
+    "cte_p3": {
+      "n": 20,
+      "accuracy": "9/20",
+      "ssa_predictions": 13,
+      "mean_confidence": 0.818
+    },
+    "etc_p1": {
+      "n": 20,
+      "accuracy": "10/20",
+      "ssa_predictions": 18,
+      "mean_confidence": 0.86
+    },
+    "etc_p2": {
+      "n": 20,
+      "accuracy": "11/20",
+      "ssa_predictions": 19,
+      "mean_confidence": 0.86
+    },
+    "etc_p3": {
+      "n": 20,
+      "accuracy": "11/20",
+      "ssa_predictions": 17,
+      "mean_confidence": 0.85
+    }
+  },
+  "cte_vs_etc_flips_by_paraphrase": {
+    "p1": {
+      "n_shared": 20,
+      "cte_HP_to_etc_SSA": 6,
+      "cte_SSA_to_etc_HP": 0,
+      "flipped_tiles": [
+        "bqc",
+        "ccn",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo"
+      ],
+      "mcnemar_p": 0.0312
+    },
+    "p2": {
+      "n_shared": 20,
+      "cte_HP_to_etc_SSA": 3,
+      "cte_SSA_to_etc_HP": 1,
+      "flipped_tiles": [
+        "bxx",
+        "ccn",
+        "epj",
+        "epo"
+      ],
+      "mcnemar_p": 0.625
+    },
+    "p3": {
+      "n_shared": 20,
+      "cte_HP_to_etc_SSA": 4,
+      "cte_SSA_to_etc_HP": 0,
+      "flipped_tiles": [
+        "abb",
+        "ccn",
+        "ekh",
+        "ekm"
+      ],
+      "mcnemar_p": 0.125
+    }
+  },
+  "pooled_mcnemar": {
+    "cte_HP_to_etc_SSA": 13,
+    "cte_SSA_to_etc_HP": 1,
+    "p": 0.0018
+  },
+  "label_agreement_across_wordings": {
+    "co": {
+      "n_shared": 20,
+      "label_unanimous_across_paraphrases": 14
+    },
+    "cte": {
+      "n_shared": 20,
+      "label_unanimous_across_paraphrases": 13
+    },
+    "etc": {
+      "n_shared": 20,
+      "label_unanimous_across_paraphrases": 16
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "run": "cte_p1_stability.jsonl",
+  "records": 25,
+  "parse_failures": 0,
+  "mean_within_image_jaccard": 0.7123,
+  "between_image_floor_cte_p1": 0.3925,
+  "core_cells_cited_in_every_rep": 25,
+  "distinct_cells_cited_anywhere": 58,
+  "core_fraction": 0.431,
+  "per_image": {
+    "MHIST_ccn.png": {
+      "n_reps": 5,
+      "temperature": 1.0,
+      "labels": [
+        "SSA",
+        "HP",
+        "HP",
+        "HP",
+        "HP"
+      ],
+      "label_stable": false,
+      "confidences": [
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "mean_pairwise_jaccard": 0.9111,
+      "cited_per_rep": [
+        [
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D2",
+          "D3"
+        ],
+        [
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D2",
+          "D3"
+        ],
+        [
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D2",
+          "D3"
+        ],
+        [
+          "A1",
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        [
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D2",
+          "D3"
+        ]
+      ],
+      "cells_in_all_reps": [
+        "A4",
+        "B3",
+        "B4",
+        "C3",
+        "C4",
+        "D2",
+        "D3"
+      ],
+      "cells_in_one_rep_only": [
+        "A1",
+        "D1"
+      ],
+      "mean_cells_per_rep": 7.4
+    },
+    "MHIST_cxx.png": {
+      "n_reps": 5,
+      "temperature": 1.0,
+      "labels": [
+        "SSA",
+        "SSA",
+        "SSA",
+        "SSA",
+        "SSA"
+      ],
+      "label_stable": true,
+      "confidences": [
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "mean_pairwise_jaccard": 0.7778,
+      "cited_per_rep": [
+        [
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ],
+        [
+          "A2",
+          "A3",
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ],
+        [
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "D3",
+          "D4"
+        ],
+        [
+          "B2",
+          "B3",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ],
+        [
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "D3",
+          "D4"
+        ]
+      ],
+      "cells_in_all_reps": [
+        "B2",
+        "B3",
+        "C3",
+        "D3",
+        "D4"
+      ],
+      "cells_in_one_rep_only": [
+        "A2",
+        "A3"
+      ],
+      "mean_cells_per_rep": 6.8
+    },
+    "MHIST_ddn.png": {
+      "n_reps": 5,
+      "temperature": 1.0,
+      "labels": [
+        "SSA",
+        "SSA",
+        "SSA",
+        "SSA",
+        "SSA"
+      ],
+      "label_stable": true,
+      "confidences": [
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "mean_pairwise_jaccard": 0.4794,
+      "cited_per_rep": [
+        [
+          "A1",
+          "A2",
+          "B1",
+          "B2",
+          "B3",
+          "C1",
+          "C2",
+          "C3",
+          "D2"
+        ],
+        [
+          "A2",
+          "A3",
+          "B2",
+          "B3",
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        [
+          "A2",
+          "A3",
+          "A4",
+          "B2",
+          "B3",
+          "B4",
+          "C2",
+          "D2"
+        ],
+        [
+          "A2",
+          "B2",
+          "B3",
+          "C2",
+          "C3",
+          "D2",
+          "D3"
+        ],
+        [
+          "A2",
+          "A3",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2"
+        ]
+      ],
+      "cells_in_all_reps": [
+        "A2",
+        "B2",
+        "B3",
+        "D2"
+      ],
+      "cells_in_one_rep_only": [
+        "A1",
+        "C4",
+        "D4"
+      ],
+      "mean_cells_per_rep": 9.0
+    },
+    "MHIST_ekm.png": {
+      "n_reps": 5,
+      "temperature": 1.0,
+      "labels": [
+        "HP",
+        "HP",
+        "HP",
+        "HP",
+        "SSA"
+      ],
+      "label_stable": false,
+      "confidences": [
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "mean_pairwise_jaccard": 0.9069,
+      "cited_per_rep": [
+        [
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        [
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3",
+          "D4"
+        ],
+        [
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        [
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ],
+        [
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D3"
+        ]
+      ],
+      "cells_in_all_reps": [
+        "B3",
+        "B4",
+        "C2",
+        "C3",
+        "D1",
+        "D2",
+        "D3"
+      ],
+      "cells_in_one_rep_only": [
+        "D4"
+      ],
+      "mean_cells_per_rep": 8.0
+    },
+    "MHIST_epj.png": {
+      "n_reps": 5,
+      "temperature": 1.0,
+      "labels": [
+        "HP",
+        "HP",
+        "HP",
+        "HP",
+        "SSA"
+      ],
+      "label_stable": false,
+      "confidences": [
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "mean_pairwise_jaccard": 0.4861,
+      "cited_per_rep": [
+        [
+          "A1",
+          "A2",
+          "B1",
+          "B2",
+          "C2",
+          "C3",
+          "D3"
+        ],
+        [
+          "A1",
+          "A2",
+          "A4",
+          "B2",
+          "B3",
+          "B4",
+          "C3"
+        ],
+        [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "C2",
+          "C3",
+          "C4",
+          "D1",
+          "D2",
+          "D4"
+        ],
+        [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "C2",
+          "C3"
+        ],
+        [
+          "A2",
+          "A4",
+          "B3",
+          "B4",
+          "C3",
+          "C4",
+          "D3",
+          "D4"
+        ]
+      ],
+      "cells_in_all_reps": [
+        "A2",
+        "C3"
+      ],
+      "cells_in_one_rep_only": [
+        "D1",
+        "D2"
+      ],
+      "mean_cells_per_rep": 9.2
+    }
+  }
+}

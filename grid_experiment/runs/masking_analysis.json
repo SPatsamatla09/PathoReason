@@ -1,0 +1,107 @@
+{
+  "run": "masking_cte_p1_k3.jsonl",
+  "records": 120,
+  "scored": 120,
+  "errors": 0,
+  "parse_failures": 0,
+  "subset_n": 3,
+  "mean_tissue_match_gap_pp": 1.9,
+  "per_arm_occlusion": {
+    "cited/mean": {
+      "n": 20,
+      "flips": 3,
+      "flip_rate": 0.15,
+      "flipped_images": [
+        "cxx",
+        "ekm",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.0025
+    },
+    "cited/blur": {
+      "n": 20,
+      "flips": 3,
+      "flip_rate": 0.15,
+      "flipped_images": [
+        "dey",
+        "ekh",
+        "epj"
+      ],
+      "mean_abs_dconf": 0.01
+    },
+    "cited/black": {
+      "n": 20,
+      "flips": 2,
+      "flip_rate": 0.1,
+      "flipped_images": [
+        "dey",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.015
+    },
+    "tissue_matched/mean": {
+      "n": 20,
+      "flips": 3,
+      "flip_rate": 0.15,
+      "flipped_images": [
+        "abb",
+        "apc",
+        "ccn"
+      ],
+      "mean_abs_dconf": 0.01
+    },
+    "tissue_matched/blur": {
+      "n": 20,
+      "flips": 5,
+      "flip_rate": 0.25,
+      "flipped_images": [
+        "abb",
+        "apc",
+        "dbe",
+        "ekm",
+        "elb"
+      ],
+      "mean_abs_dconf": 0.0175
+    },
+    "tissue_matched/black": {
+      "n": 20,
+      "flips": 4,
+      "flip_rate": 0.2,
+      "flipped_images": [
+        "abb",
+        "bqc",
+        "cxx",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.0125
+    }
+  },
+  "cited_vs_control_contrast": {
+    "mean": {
+      "cited_flip_only": 3,
+      "control_flip_only": 3,
+      "both_flip": 0,
+      "neither": 14,
+      "sign_test_p": 1.0
+    },
+    "blur": {
+      "cited_flip_only": 3,
+      "control_flip_only": 5,
+      "both_flip": 0,
+      "neither": 12,
+      "sign_test_p": 0.7266
+    },
+    "black": {
+      "cited_flip_only": 1,
+      "control_flip_only": 3,
+      "both_flip": 1,
+      "neither": 15,
+      "sign_test_p": 0.625
+    }
+  },
+  "pooled_contrast": {
+    "cited_flip_only": 7,
+    "control_flip_only": 11,
+    "sign_test_p": 0.4807
+  }
+}

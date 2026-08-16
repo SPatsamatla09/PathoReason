@@ -187,12 +187,12 @@ def validate(obj, spec):
     return v, {"label": label, "confidence": conf, "evidence": norm_ev}
 
 
-def call(session, prompt_text, img_b64, api_key):
+def call(session, prompt_text, img_b64, api_key, temperature=TEMPERATURE):
     """One chat completion with backoff. Returns (raw_text, meta, error)."""
     body = {
         "model": MODEL,
         "max_completion_tokens": MAX_TOKENS,
-        "temperature": TEMPERATURE,
+        "temperature": temperature,
         "messages": [
             {
                 "role": "user",
@@ -247,6 +247,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--prompt", default="cte_p1")
     ap.add_argument("--limit", type=int, default=None, help="cap number of calls (smoke test)")
+    ap.add_argument("--temperature", type=float, default=TEMPERATURE)
+    ap.add_argument("--tiles", default=None,
+                    help="comma-separated image names; restricts the tile set")
+    ap.add_argument("--reps", type=int, default=None,
+                    help="replicates per tile for EVERY selected tile "
+                         "(replaces the default 20+repeat-triple plan)")
+    ap.add_argument("--tag", default="",
+                    help="suffix for the output file, e.g. _stability")
     args = ap.parse_args()
 
     api_key = os.environ.get("CEREBRAS_API_KEY")
@@ -257,18 +265,28 @@ def main():
     prompt_text = open(os.path.join(RENDERED, f"{args.prompt}.txt")).read()
     manifest = json.load(open(MANIFEST))
     tiles = manifest["tiles"]
+    if args.tiles:
+        want = {n.strip() for n in args.tiles.split(",")}
+        tiles = [t for t in tiles if t["image"] in want]
+        missing = want - {t["image"] for t in tiles}
+        if missing:
+            sys.exit(f"unknown tiles: {sorted(missing)}")
 
-    # main pass over all 20, then the extra repeats for the stability check
-    jobs = [(t, 1) for t in tiles]
-    by_name = {t["image"]: t for t in tiles}
-    for name in REPEAT_TILES:
-        for rep in range(2, N_REPEATS + 1):
-            jobs.append((by_name[name], rep))
+    if args.reps:
+        jobs = [(t, rep) for t in tiles for rep in range(1, args.reps + 1)]
+    else:
+        # main pass over all 20, then the extra repeats for the stability check
+        jobs = [(t, 1) for t in tiles]
+        by_name = {t["image"]: t for t in tiles}
+        for name in REPEAT_TILES:
+            if name in by_name:
+                for rep in range(2, N_REPEATS + 1):
+                    jobs.append((by_name[name], rep))
     if args.limit:
         jobs = jobs[: args.limit]
 
     os.makedirs(RUNS, exist_ok=True)
-    out_path = os.path.join(RUNS, f"{args.prompt}.jsonl")
+    out_path = os.path.join(RUNS, f"{args.prompt}{args.tag}.jsonl")
     done = set()
     if os.path.exists(out_path):
         with open(out_path) as fh:
@@ -294,13 +312,14 @@ def main():
 
         print(f"[{n}] {tile['image']} rep{rep}", file=sys.stderr, flush=True)
         raw, meta, err = call(
-            session, prompt_text, b64_png(os.path.join(ROOT, tile["gridded"])), api_key
+            session, prompt_text, b64_png(os.path.join(ROOT, tile["gridded"])), api_key,
+            temperature=args.temperature,
         )
 
         rec = {
             "prompt_id": args.prompt,
             "model": MODEL,
-            "temperature": TEMPERATURE,
+            "temperature": args.temperature,
             "image": tile["image"],
             "replicate": rep,
             "label_true": tile["label"],
