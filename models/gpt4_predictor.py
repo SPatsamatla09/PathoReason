@@ -273,6 +273,14 @@ class GPT4Predictor(BasePredictor):
         response = self.client.responses.create(
             model=self.model_name,
             temperature=1.0,
+            text={
+                "format": {
+                    "type": "json_schema",
+                    "name": "pathoreason_prediction",
+                    "schema": RESPONSE_SCHEMA,
+                    "strict": True,
+                }
+            },
             input=[
                 {
                     "role": "user",

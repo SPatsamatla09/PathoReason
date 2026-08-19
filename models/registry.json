@@ -15,6 +15,20 @@
       "seed": 42,
       "status": "frozen",
       "training_mode": "linear_probe"
+    },
+    "A_mhist_seed42/uni.pt": {
+      "track": "A",
+      "model": "uni",
+      "seed": 42,
+      "status": "frozen",
+      "training_mode": "linear_probe"
+    },
+    "A_mhist_seed42/virchow.pt": {
+      "track": "A",
+      "model": "virchow",
+      "seed": 42,
+      "status": "frozen",
+      "training_mode": "linear_probe"
     }
   }
 }
