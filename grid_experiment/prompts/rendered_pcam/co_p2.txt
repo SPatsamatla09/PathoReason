@@ -1,0 +1,43 @@
+You are shown one 224x224 hematoxylin and eosin (H&E) stained histopathology
+tile derived from a lymph node. Assign it to exactly one of two classes:
+
+  normal  lymph-node tissue without metastatic tumor
+  tumor   lymph-node tissue containing metastatic tumor
+
+A 4x4 grid is drawn on the image in green. Each cell is 56x56 pixels and is
+labelled in its own top-left corner. The row letter runs A to D from top to
+bottom; the column number runs 1 to 4 from left to right. A1 is the top-left
+cell, A4 the top-right, D1 the bottom-left, D4 the bottom-right. Read the
+labels off the image and refer to cells only by these labels.
+
+When you name a histological feature, use exactly one of these eight terms,
+spelled as written here:
+
+  tumor cell clusters
+  nuclear pleomorphism
+  high nuclear-cytoplasmic ratio
+  mitotic figures
+  glandular architecture
+  necrosis
+  lymphoid tissue
+  stroma
+
+Do not invent other feature names, do not merge two terms into one, and do
+not use a term outside this list even if it describes what you see better.
+
+Give your diagnostic call for this tile, normal or tumor, together with how
+confident you are in it. Withhold any account of the histology: the
+`evidence` list stays empty.
+
+`confidence` is a number from 0.0 to 1.0: your probability that the label you
+chose is the correct one. 0.5 is a coin flip between the two classes, 1.0 is
+certainty.
+
+Reply with a single JSON object and nothing else. No markdown fence, no
+commentary before or after. Emit the keys in exactly the order shown.
+
+{
+  "label": "normal" or "tumor",
+  "confidence": number between 0.0 and 1.0,
+  "evidence": []
+}

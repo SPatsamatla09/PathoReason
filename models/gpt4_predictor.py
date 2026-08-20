@@ -45,6 +45,28 @@ FEATURE_VOCABULARY = [
     "inflammatory infiltrate",
 ]
 
+PCAM_FEATURE_VOCABULARY = [
+    "tumor cell clusters",
+    "nuclear pleomorphism",
+    "high nuclear-cytoplasmic ratio",
+    "mitotic figures",
+    "glandular architecture",
+    "necrosis",
+    "lymphoid tissue",
+    "stroma",
+]
+
+PROTOCOLS = {
+    "mhist": {
+        "labels": ["HP", "SSA"],
+        "features": FEATURE_VOCABULARY,
+    },
+    "pcam": {
+        "labels": ["normal", "tumor"],
+        "features": PCAM_FEATURE_VOCABULARY,
+    },
+}
+
 GRID_CELLS = [
     "A1", "A2", "A3", "A4",
     "B1", "B2", "B3", "B4",
@@ -52,56 +74,69 @@ GRID_CELLS = [
     "D1", "D2", "D3", "D4",
 ]
 
-RESPONSE_SCHEMA: dict = {
-    "type": "object",
-    "properties": {
-        "label": {
-            "type": "string",
-            "enum": ["HP", "SSA"],
-        },
-        "confidence": {
-            "type": "number",
-            "minimum": 0.0,
-            "maximum": 1.0,
-        },
-        "evidence": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "feature": {
-                        "type": "string",
-                        "enum": FEATURE_VOCABULARY,
-                    },
-                    "grid_cells": {
-                        "type": "array",
-                        "items": {
+def build_response_schema(protocol: str = "mhist") -> dict:
+    """Build the strict structured-output schema for one dataset protocol."""
+    if protocol not in PROTOCOLS:
+        raise ValueError(
+            f"Unknown protocol {protocol!r}. Expected one of {sorted(PROTOCOLS)}."
+        )
+
+    cfg = PROTOCOLS[protocol]
+    return {
+        "type": "object",
+        "properties": {
+            "label": {
+                "type": "string",
+                "enum": list(cfg["labels"]),
+            },
+            "confidence": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+            },
+            "evidence": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "feature": {
                             "type": "string",
-                            "enum": GRID_CELLS,
+                            "enum": list(cfg["features"]),
                         },
-                        "minItems": 1,
+                        "grid_cells": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": GRID_CELLS,
+                            },
+                            "minItems": 1,
+                        },
+                        "description": {
+                            "type": "string",
+                            "minLength": 1,
+                        },
                     },
-                    "description": {
-                        "type": "string",
-                        "minLength": 1,
-                    },
+                    "required": [
+                        "feature",
+                        "grid_cells",
+                        "description",
+                    ],
+                    "additionalProperties": False,
                 },
-                "required": [
-                    "feature",
-                    "grid_cells",
-                    "description",
-                ],
-                "additionalProperties": False,
             },
         },
-    },
-    "required": [
-        "label",
-        "confidence",
-        "evidence",
-    ],
-    "additionalProperties": False,
-}
+        "required": [
+            "label",
+            "confidence",
+            "evidence",
+        ],
+        "additionalProperties": False,
+    }
+
+
+# Backward-compatible public constant: existing MHIST code sees the exact
+# original protocol unless a predictor explicitly requests another protocol.
+RESPONSE_SCHEMA: dict = build_response_schema("mhist")
 
 
 
@@ -145,8 +180,13 @@ def extract_json(raw: str) -> str:
     raise ValueError("Unbalanced JSON braces.")
 
 
-def validate_payload(payload: object) -> list[str]:
-    """Return frozen-protocol violations without silently normalizing them."""
+def validate_payload(payload: object, protocol: str = "mhist") -> list[str]:
+    """Return protocol violations without silently normalizing them."""
+    if protocol not in PROTOCOLS:
+        raise ValueError(
+            f"Unknown protocol {protocol!r}. Expected one of {sorted(PROTOCOLS)}."
+        )
+    cfg = PROTOCOLS[protocol]
     violations: list[str] = []
 
     if not isinstance(payload, dict):
@@ -158,7 +198,7 @@ def validate_payload(payload: object) -> list[str]:
         )
 
     label = payload.get("label")
-    if label not in {"HP", "SSA"}:
+    if label not in set(cfg["labels"]):
         violations.append(f"invalid label: {label!r}")
 
     confidence = payload.get("confidence")
@@ -188,7 +228,7 @@ def validate_payload(payload: object) -> list[str]:
             )
 
         feature = item.get("feature")
-        if feature not in FEATURE_VOCABULARY:
+        if feature not in cfg["features"]:
             violations.append(
                 f"{prefix}.feature outside frozen vocabulary: {feature!r}"
             )
@@ -221,6 +261,7 @@ class GPT4Predictor(BasePredictor):
         self,
         model: str = "gpt-4o",
         image_detail: str = "high",
+        protocol: str = "mhist",
     ) -> None:
         """
         Initialize the API-backed pathology predictor.
@@ -244,6 +285,14 @@ class GPT4Predictor(BasePredictor):
                 "image_detail must be 'low', 'high', or 'auto'."
             )
 
+        if protocol not in PROTOCOLS:
+            raise ValueError(
+                f"Unknown protocol {protocol!r}. Expected one of {sorted(PROTOCOLS)}."
+            )
+
+        self.protocol = protocol
+        self.response_schema = build_response_schema(protocol)
+
         self.client = OpenAI(api_key=api_key)
         self._model_name = model
         self.image_detail = image_detail
@@ -259,7 +308,7 @@ class GPT4Predictor(BasePredictor):
         prompt: str | Sequence[str] | None,
     ) -> PredictionResult:
         """
-        Generate an MHIST classification and structured explanation.
+        Generate a pathology classification and structured explanation.
 
         The API model's verbalized confidence is retained in metadata for
         calibration auditing. It is not treated as a reliable probability
@@ -277,7 +326,7 @@ class GPT4Predictor(BasePredictor):
                 "format": {
                     "type": "json_schema",
                     "name": "pathoreason_prediction",
-                    "schema": RESPONSE_SCHEMA,
+                    "schema": self.response_schema,
                     "strict": True,
                 }
             },
@@ -317,7 +366,7 @@ class GPT4Predictor(BasePredictor):
             err.response_id = response.id
             raise err from exc
 
-        violations = validate_payload(payload)
+        violations = validate_payload(payload, protocol=self.protocol)
 
         if violations:
             err = RuntimeError(

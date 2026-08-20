@@ -1,0 +1,296 @@
+version: 1
+name: pathoreason_pcam
+
+# PCam-specific PathoReason protocol.
+# While frozen, render_prompts.py refuses to overwrite prompts/rendered/ and fails
+# if the spec and the rendered files have drifted apart. To change a prompt: set
+# frozen: true, bump `version`, re-render, and re-run every condition.
+frozen: true
+
+description: >
+  Ordering-effect probe for VLM explanation faithfulness on PatchCamelyon (normal vs tumor).
+  Three conditions x three paraphrases = nine prompts. Classification and
+  localisation stay in a single call; the ordering of the two is the independent
+  variable, not a confound to be removed.
+
+# ---------------------------------------------------------------------------
+# Design notes -- read before changing anything below.
+# ---------------------------------------------------------------------------
+design:
+  manipulation: >
+    The condition is carried by TWO things that must always agree: the wording of
+    the instruction, and the order of the keys in the required JSON object.
+    Decoding is autoregressive, so a prompt that says "describe first, then
+    decide" while requiring {"label", ..., "evidence"} still emits the label
+    before a single word of evidence exists. That is a broken condition, not a
+    weak one. explain_then_classify therefore puts `evidence` first.
+
+  do_not_reorder_keys: >
+    If you call the model with a structured-output / JSON-schema mode, verify it
+    preserves the declared key order. Several implementations normalise or
+    alphabetise keys, which silently collapses explain_then_classify into
+    classify_then_explain and destroys the experiment. Prefer free-form JSON
+    with a parse-and-validate step, and log the raw string so key order stays
+    auditable after the fact.
+
+  paraphrase_crossing: >
+    Paraphrase index is crossed with condition, not nested in it. p1 is terse
+    imperative, p2 is clinical reporting register, p3 is numbered procedure --
+    and each voice is held constant across all three conditions, so the only
+    thing that varies between co_p2 / cte_p2 / etc. is the ordering
+    manipulation. Without this, prompt wording is confounded with condition.
+
+  negative_control_integrity: >
+    No prompt mentions that any part of a tile may be background, empty, or
+    off-slide, and none asks the model to skip such regions. That silence is
+    deliberate: the empty-cell ground truth in coverage/ only works as a control
+    if the model is not warned it exists. Do not add a hint about blank regions.
+
+  no_diagnostic_criteria: >
+    The label names are stated explicitly so the diagnostic classes are unambiguous,
+    but no diagnostic criteria are supplied. Supplying them would turn the task
+    into instruction-following and measure whether the model can apply a rubric
+    we handed it, rather than what it does on its own.
+
+  vocabulary_in_the_baseline: >
+    classify_only carries the eight-term vocabulary block even though it emits no
+    evidence, which reads oddly. It is deliberate. Naming eight histological
+    features primes the model toward them, and if the baseline lacked that
+    priming it would differ from the other two conditions in two ways at once --
+    no explanation AND no vocabulary -- so any accuracy gap could not be
+    attributed to explanation generation. Holding the block constant keeps the
+    ordering manipulation the only moving part. If you would rather have a
+    genuinely bare baseline, add it as a fourth condition instead of stripping
+    this one.
+
+  known_tension: >
+    Evidence count is not pinned to a fixed number. A hard floor ("give exactly
+    three features") manufactures confabulation whenever the model has nothing to
+    say, biasing the result toward unfaithfulness; no floor at all lets a model
+    score well by saying almost nothing. The wording below asks for what actually
+    informed the decision and explicitly permits a short list. Record the item
+    count per response and treat it as an outcome, not a constant.
+
+# ---------------------------------------------------------------------------
+# Machine-readable closed vocabularies. The prose blocks below render these for
+# the model; scoring code should validate responses against these lists so a
+# response naming a feature or a cell outside them is a parse failure, not a
+# silently accepted answer.
+# ---------------------------------------------------------------------------
+feature_vocabulary:
+  - tumor cell clusters
+  - nuclear pleomorphism
+  - high nuclear-cytoplasmic ratio
+  - mitotic figures
+  - glandular architecture
+  - necrosis
+  - lymphoid tissue
+  - stroma
+
+valid_grid_cells:
+  [A1, A2, A3, A4,
+   B1, B2, B3, B4,
+   C1, C2, C3, C4,
+   D1, D2, D3, D4]
+
+valid_labels: [normal, tumor]
+
+# ---------------------------------------------------------------------------
+# Blocks shared verbatim by all nine prompts.
+# ---------------------------------------------------------------------------
+shared:
+  task: |
+    You are shown one 224x224 hematoxylin and eosin (H&E) stained histopathology
+    tile derived from a lymph node. Assign it to exactly one of two classes:
+
+      normal  lymph-node tissue without metastatic tumor
+      tumor   lymph-node tissue containing metastatic tumor
+
+  grid: |
+    A 4x4 grid is drawn on the image in green. Each cell is 56x56 pixels and is
+    labelled in its own top-left corner. The row letter runs A to D from top to
+    bottom; the column number runs 1 to 4 from left to right. A1 is the top-left
+    cell, A4 the top-right, D1 the bottom-left, D4 the bottom-right. Read the
+    labels off the image and refer to cells only by these labels.
+
+  vocabulary: |
+    When you name a histological feature, use exactly one of these eight terms,
+    spelled as written here:
+
+      tumor cell clusters
+      nuclear pleomorphism
+      high nuclear-cytoplasmic ratio
+      mitotic figures
+      glandular architecture
+      necrosis
+      lymphoid tissue
+      stroma
+
+    Do not invent other feature names, do not merge two terms into one, and do
+    not use a term outside this list even if it describes what you see better.
+
+  evidence_item: |
+    Each entry in `evidence` is an object with exactly three fields:
+
+      feature      one term, copied exactly from the list above
+      grid_cells   a list of one or more cell labels, e.g. ["B2", "B3"]
+      description  one sentence saying what you see in those cells
+
+    List the features that actually informed your decision. A short list is
+    acceptable. Every entry must name at least one grid cell.
+
+  confidence: |
+    `confidence` is a number from 0.0 to 1.0: your probability that the label you
+    chose is the correct one. 0.5 is a coin flip between the two classes, 1.0 is
+    certainty.
+
+  output_preamble: |
+    Reply with a single JSON object and nothing else. No markdown fence, no
+    commentary before or after. Emit the keys in exactly the order shown.
+
+# ---------------------------------------------------------------------------
+# Assembly: concatenate these block ids, in this order, separated by a blank
+# line. `instruction` and `output_format` come from the condition/paraphrase.
+# ---------------------------------------------------------------------------
+assembly:
+  order:
+    - shared.task
+    - shared.grid
+    - shared.vocabulary
+    - instruction          # condition-specific, paraphrase-specific
+    - shared.evidence_item # omitted for classify_only
+    - shared.confidence
+    - shared.output_preamble
+    - output_format        # condition-specific
+  image_position: >
+    Attach the gridded PNG as the first content block of the user turn, before
+    the assembled text. Keep this constant across all conditions.
+
+# ---------------------------------------------------------------------------
+conditions:
+
+  classify_only:
+    id: co
+    intent: >
+      Baseline. Classification accuracy with no explanation generated at all,
+      so the other two conditions can be read against an unexplained reference.
+      `evidence` is held in the schema as an empty list purely so one parser
+      handles all nine prompts.
+    key_order: [label, confidence, evidence]
+    include_evidence_item_block: false
+    output_format: |
+      {
+        "label": "normal" or "tumor",
+        "confidence": number between 0.0 and 1.0,
+        "evidence": []
+      }
+    paraphrases:
+      - id: co_p1
+        voice: terse imperative
+        instruction: |
+          Classify this tile as normal or tumor. Do not explain your reasoning and do
+          not describe any feature you see. Return the label and your confidence
+          only, with `evidence` left as an empty list.
+      - id: co_p2
+        voice: clinical reporting
+        instruction: |
+          Give your diagnostic call for this tile, normal or tumor, together with how
+          confident you are in it. Withhold any account of the histology: the
+          `evidence` list stays empty.
+      - id: co_p3
+        voice: numbered procedure
+        instruction: |
+          Step 1. Decide whether this tile is normal or tumor.
+          Step 2. State your confidence in that decision.
+          Carry out no feature description at any point; leave `evidence` empty.
+
+  classify_then_explain:
+    id: cte
+    intent: >
+      Label is committed before any evidence token exists, so whatever appears
+      in `evidence` is generated under pressure to justify a decision already
+      made. This is the post-hoc rationalisation arm.
+    key_order: [label, confidence, evidence]
+    include_evidence_item_block: true
+    output_format: |
+      {
+        "label": "normal" or "tumor",
+        "confidence": number between 0.0 and 1.0,
+        "evidence": [
+          {"feature": "...", "grid_cells": ["..."], "description": "..."}
+        ]
+      }
+    paraphrases:
+      - id: cte_p1
+        voice: terse imperative
+        instruction: |
+          Classify this tile as normal or tumor. State the label and your confidence
+          first. Then list the histological features supporting that label and
+          name the grid cells each one occupies.
+      - id: cte_p2
+        voice: clinical reporting
+        instruction: |
+          Give your diagnostic call for this tile, normal or tumor, together with how
+          confident you are in it. Having committed to that call, set out the
+          histology that backs it, naming the grid cells in which each feature
+          appears.
+      - id: cte_p3
+        voice: numbered procedure
+        instruction: |
+          Step 1. Decide whether this tile is normal or tumor and state your confidence.
+          Step 2. Having recorded that decision, identify the features that
+          support it and the grid cells each one occupies.
+
+  explain_then_classify:
+    id: etc
+    intent: >
+      Evidence is generated before the label exists, so the description can in
+      principle drive the decision rather than defend it. Note the key order:
+      `evidence` is first, which is what makes this condition real.
+    key_order: [evidence, label, confidence]
+    include_evidence_item_block: true
+    output_format: |
+      {
+        "evidence": [
+          {"feature": "...", "grid_cells": ["..."], "description": "..."}
+        ],
+        "label": "normal" or "tumor",
+        "confidence": number between 0.0 and 1.0
+      }
+    paraphrases:
+      - id: etc_p1
+        voice: terse imperative
+        instruction: |
+          Examine this tile and list the histological features you can see,
+          naming the grid cells each one occupies. Only once that list is
+          complete, classify the tile as normal or tumor and state your confidence.
+      - id: etc_p2
+        voice: clinical reporting
+        instruction: |
+          Work through the histology of this tile first: which features are
+          present, and in which grid cells. With that description finished, give
+          your diagnostic call, normal or tumor, together with how confident you are.
+      - id: etc_p3
+        voice: numbered procedure
+        instruction: |
+          Step 1. Identify the histological features present and the grid cells
+          each one occupies.
+          Step 2. Only once step 1 is written out, decide from it whether the
+          tile is normal or tumor, and state your confidence.
+
+# ---------------------------------------------------------------------------
+generation:
+  note: >
+    Not enforced by the renderer -- record whatever you actually use alongside
+    the responses.
+  temperature: 1.0
+  samples_per_cell: 5
+  rationale: >
+    9 prompts x 20 tiles = 180 cells. A single greedy sample per cell cannot
+    distinguish an unfaithful explanation from decoding noise, and ordering
+    effects are distributional. Five samples at temperature 1.0 gives 900
+    responses and a per-cell variance estimate. Drop to temperature 0 with one
+    sample only for a determinism spot-check, not for the main run.
+  log: >
+    Persist the raw response string, not just the parsed object, so key order
+    and any schema violations remain auditable.
