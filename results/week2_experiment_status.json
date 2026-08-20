@@ -1,11 +1,12 @@
 {
   "week": 2,
   "dataset": "MHIST",
-  "status": "maximally_complete_under_current_constraints",
+  "status": "api_free_work_complete_paid_inference_partial",
   "track_a": {
     "plip": {
       "status": "complete",
       "test_samples": 977,
+      "completed_samples": 977,
       "seed": 42,
       "seed_replication": "not_applicable",
       "seed_replication_reason": "Frozen zero-shot PLIP inference is deterministic; repeating identical inference under additional seeds would duplicate predictions.",
@@ -15,29 +16,49 @@
   },
   "track_b": {
     "gpt": {
-      "completed": [
+      "protocol_version": 2,
+      "configurations": [
         {
           "prompt_id": "cte_p1",
           "seed": 42,
-          "attempted_samples": 977,
-          "successful_predictions": 966,
-          "refusals": 11
+          "status": "complete",
+          "test_samples": 977,
+          "successful_rows": 977,
+          "unique_completed_images": 977,
+          "remaining_images": 0,
+          "historical_failure_rows": 11,
+          "historical_failure_images_recovered": 11
+        },
+        {
+          "prompt_id": "co_p1",
+          "seed": 42,
+          "status": "partial",
+          "test_samples": 977,
+          "successful_rows": 426,
+          "unique_completed_images": 362,
+          "duplicate_success_rows": 64,
+          "remaining_images": 615,
+          "historical_failure_rows": 61,
+          "unique_historical_failure_images": 57,
+          "historical_failure_images_recovered": 1
         }
       ],
       "remaining_status": "blocked_budget",
-      "reason": "Cost/runtime dashboard projects that another full GPT configuration would exceed the configured API budget."
+      "reason": "All API-free preparation and auditing are complete. Further GPT-4o inference requires additional API budget; no additional paid calls were made during the audit."
     }
   },
   "foundation_baselines": {
     "uni": {
       "implementation": "complete",
-      "execution": "blocked_access",
-      "reason": "Hugging Face gated repository access not granted."
+      "execution": "complete",
+      "accuracy": 0.80450358,
+      "roc_auc": 0.88646677
     },
     "virchow": {
       "implementation": "complete",
-      "execution": "blocked_access",
-      "reason": "Hugging Face gated repository access not granted."
+      "execution": "complete",
+      "accuracy": 0.8004094,
+      "roc_auc": 0.88972177
     }
   }
 }

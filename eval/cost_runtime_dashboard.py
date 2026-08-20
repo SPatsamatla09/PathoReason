@@ -53,11 +53,22 @@ def gpt_experiment(
         + output_tokens / 1_000_000 * output_rate
     )
 
+    # Cost/runtime are based on every successful API row because duplicate
+    # calls still consumed tokens and time. Experimental completion, however,
+    # is based on unique images with a valid prediction.
+    valid_labels = {"HP", "SSA"}
+    completed_ids = {
+        row.get("image_id")
+        for row in rows
+        if row.get("image_id") is not None
+        and row.get("predicted_label") in valid_labels
+    }
+
     return {
         "experiment": path.stem,
         "type": "API",
-        "completed": len(rows),
-        "coverage": len(rows) / test_size if test_size else 0,
+        "completed": len(completed_ids),
+        "coverage": len(completed_ids) / test_size if test_size else 0,
         "calls": len(rows),
         "input_tokens": input_tokens,
         "output_tokens": output_tokens,

@@ -1,0 +1,84 @@
+{
+  "budget_usd": 5.0,
+  "pricing_usd_per_1m_tokens": {
+    "gpt4o_input": 2.5,
+    "gpt4o_output": 10.0
+  },
+  "total_api_calls": 1403,
+  "total_api_cost_usd": 4.422555,
+  "total_gpu_hours": 0.4488928920600003,
+  "experiments": [
+    {
+      "experiment": "co_p1_seed42_v2",
+      "type": "API",
+      "completed": 362,
+      "coverage": 0.3705220061412487,
+      "calls": 426,
+      "input_tokens": 363828,
+      "output_tokens": 7007,
+      "cost_usd": 0.97964,
+      "runtime_seconds": 905.1712142420511,
+      "gpu_hours": 0.0
+    },
+    {
+      "experiment": "cte_p1_seed42_v2",
+      "type": "API",
+      "completed": 977,
+      "coverage": 1.0,
+      "calls": 977,
+      "input_tokens": 777586,
+      "output_tokens": 149895,
+      "cost_usd": 3.442915,
+      "runtime_seconds": 2753.760415955938,
+      "gpu_hours": 0.0
+    },
+    {
+      "experiment": "resnet18",
+      "type": "LOCAL",
+      "completed": 1,
+      "coverage": 1.0,
+      "calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "runtime_seconds": 175.14014633299666,
+      "gpu_hours": 0.04865004064805463
+    },
+    {
+      "experiment": "vit_b16",
+      "type": "LOCAL",
+      "completed": 1,
+      "coverage": 1.0,
+      "calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "runtime_seconds": 487.9482943750045,
+      "gpu_hours": 0.1355411928819457
+    },
+    {
+      "experiment": "uni",
+      "type": "LOCAL",
+      "completed": 1,
+      "coverage": 1.0,
+      "calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "runtime_seconds": 262.15907683300065,
+      "gpu_hours": 0.07282196578694462
+    },
+    {
+      "experiment": "virchow",
+      "type": "LOCAL",
+      "completed": 1,
+      "coverage": 1.0,
+      "calls": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0.0,
+      "runtime_seconds": 690.7668938749994,
+      "gpu_hours": 0.19187969274305539
+    }
+  ]
+}
