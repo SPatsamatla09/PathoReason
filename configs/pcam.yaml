@@ -1,0 +1,27 @@
+seed: 42
+
+dataset:
+  name: "PatchCamelyon"
+  source: "1aurent/PatchCamelyon"
+  streaming: true
+  image_size: 224
+  native_image_size: 96
+  num_classes: 2
+  class_names:
+    - normal
+    - tumor
+  splits:
+    - train
+    - valid
+    - test
+
+training:
+  batch_size: 32
+  num_workers: 0
+  epochs: 10
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+
+paths:
+  results: "./results/pcam"
+  figures: "./figures/pcam"
