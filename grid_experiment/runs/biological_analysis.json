@@ -1,0 +1,165 @@
+{
+  "run": "biological_masking.jsonl",
+  "records": 120,
+  "scored": 120,
+  "errors": 0,
+  "parse_failures": 0,
+  "per_source_arm": {
+    "epithelium/struct": {
+      "n": 20,
+      "flips": 9,
+      "flip_rate": 0.45,
+      "flipped_images": [
+        "bmy",
+        "bqc",
+        "bxx",
+        "ccn",
+        "cmt",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.0575,
+      "mean_pct_of_tissue_masked": 50.4
+    },
+    "epithelium/control": {
+      "n": 20,
+      "flips": 7,
+      "flip_rate": 0.35,
+      "flipped_images": [
+        "bmy",
+        "bqc",
+        "ccn",
+        "cdr",
+        "dbe",
+        "ekh",
+        "ekm"
+      ],
+      "mean_abs_dconf": 0.1075,
+      "mean_pct_of_tissue_masked": 50.4
+    },
+    "stroma/struct": {
+      "n": 20,
+      "flips": 7,
+      "flip_rate": 0.35,
+      "flipped_images": [
+        "bqc",
+        "ccn",
+        "cmt",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.015,
+      "mean_pct_of_tissue_masked": 41.6
+    },
+    "stroma/control": {
+      "n": 20,
+      "flips": 9,
+      "flip_rate": 0.45,
+      "flipped_images": [
+        "bqc",
+        "ccn",
+        "cdr",
+        "dbe",
+        "dtq",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.075,
+      "mean_pct_of_tissue_masked": 41.6
+    },
+    "nuclei/struct": {
+      "n": 20,
+      "flips": 10,
+      "flip_rate": 0.5,
+      "flipped_images": [
+        "bqc",
+        "bxx",
+        "ccn",
+        "cmt",
+        "cxx",
+        "dbe",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.01,
+      "mean_pct_of_tissue_masked": 34.1
+    },
+    "nuclei/control": {
+      "n": 20,
+      "flips": 7,
+      "flip_rate": 0.35,
+      "flipped_images": [
+        "bqc",
+        "ccn",
+        "cmt",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo"
+      ],
+      "mean_abs_dconf": 0.0325,
+      "mean_pct_of_tissue_masked": 34.0
+    }
+  },
+  "struct_vs_control": {
+    "epithelium": {
+      "struct_flip_only": 4,
+      "control_flip_only": 2,
+      "both_flip": 5,
+      "sign_test_p": 0.6875
+    },
+    "stroma": {
+      "struct_flip_only": 1,
+      "control_flip_only": 3,
+      "both_flip": 6,
+      "sign_test_p": 0.625
+    },
+    "nuclei": {
+      "struct_flip_only": 3,
+      "control_flip_only": 0,
+      "both_flip": 7,
+      "sign_test_p": 0.25
+    }
+  },
+  "pooled_struct_vs_control": {
+    "struct_flip_only": 8,
+    "control_flip_only": 5,
+    "sign_test_p": 0.5811
+  },
+  "named_vs_unnamed_struct": {
+    "epithelium/named=True": {
+      "n": 20,
+      "flip_rate": 0.45
+    },
+    "stroma/named=True": {
+      "n": 8,
+      "flip_rate": 0.5
+    },
+    "stroma/named=False": {
+      "n": 12,
+      "flip_rate": 0.25
+    },
+    "nuclei/named=False": {
+      "n": 20,
+      "flip_rate": 0.5
+    }
+  },
+  "grid_sweep_reference": {
+    "cited/mean_flip_rate": 0.15,
+    "control/mean_flip_rate": 0.15,
+    "pooled_contrast": {
+      "cited_flip_only": 7,
+      "control_flip_only": 11,
+      "sign_test_p": 0.4807
+    },
+    "note": "grid subsets masked ~19% of tile / ~35% of cited-cell tissue; epithelium and stroma masks here cover ~40-55% of ALL tissue, so raw flip-rate differences across sweeps partly reflect area, not targeting. Compare struct-minus-control within each sweep instead."
+  }
+}

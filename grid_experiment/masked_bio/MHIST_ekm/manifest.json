@@ -1,0 +1,47 @@
+{
+  "image": "MHIST_ekm.png",
+  "seed": 20260806,
+  "occlusion": "mean",
+  "block_px": 8,
+  "segmentation_method": "cellpose-3.1.1.3 model_type=nuclei on H channel (rgb2hed), x4 lanczos upsample, diameter=10, labels nearest-downscaled to 224, binary mask dilated 1px",
+  "n_nuclei": 773,
+  "cited_features": [
+    "serration",
+    "crypt/gland architecture",
+    "inflammatory infiltrate"
+  ],
+  "named_sources": [
+    "epithelium",
+    "stroma"
+  ],
+  "tile_tissue_px": 28509,
+  "sources": {
+    "epithelium": {
+      "named": true,
+      "mask_px": 14736,
+      "pct_of_tile": 29.37,
+      "pct_of_tissue": 51.69,
+      "control_px": 14736,
+      "control_pct_of_tissue": 51.69,
+      "control_overlap_with_struct_pct": 48.97
+    },
+    "stroma": {
+      "named": true,
+      "mask_px": 12104,
+      "pct_of_tile": 24.12,
+      "pct_of_tissue": 42.46,
+      "control_px": 12104,
+      "control_pct_of_tissue": 42.46,
+      "control_overlap_with_struct_pct": 39.52
+    },
+    "nuclei": {
+      "named": false,
+      "mask_px": 8820,
+      "pct_of_tile": 17.58,
+      "pct_of_tissue": 30.94,
+      "control_px": 8820,
+      "control_pct_of_tissue": 30.94,
+      "control_overlap_with_struct_pct": 29.1
+    }
+  }
+}

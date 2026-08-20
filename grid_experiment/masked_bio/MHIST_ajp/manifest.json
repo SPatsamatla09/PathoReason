@@ -1,0 +1,46 @@
+{
+  "image": "MHIST_ajp.png",
+  "seed": 20260806,
+  "occlusion": "mean",
+  "block_px": 8,
+  "segmentation_method": "cellpose-3.1.1.3 model_type=nuclei on H channel (rgb2hed), x4 lanczos upsample, diameter=10, labels nearest-downscaled to 224, binary mask dilated 1px",
+  "n_nuclei": 496,
+  "cited_features": [
+    "crypt/gland architecture",
+    "serration",
+    "surface epithelium"
+  ],
+  "named_sources": [
+    "epithelium"
+  ],
+  "tile_tissue_px": 27261,
+  "sources": {
+    "epithelium": {
+      "named": true,
+      "mask_px": 18755,
+      "pct_of_tile": 37.38,
+      "pct_of_tissue": 68.8,
+      "control_px": 18755,
+      "control_pct_of_tissue": 68.8,
+      "control_overlap_with_struct_pct": 64.87
+    },
+    "stroma": {
+      "named": false,
+      "mask_px": 7546,
+      "pct_of_tile": 15.04,
+      "pct_of_tissue": 27.68,
+      "control_px": 7546,
+      "control_pct_of_tissue": 27.68,
+      "control_overlap_with_struct_pct": 28.51
+    },
+    "nuclei": {
+      "named": false,
+      "mask_px": 6807,
+      "pct_of_tile": 13.57,
+      "pct_of_tissue": 24.97,
+      "control_px": 6807,
+      "control_pct_of_tissue": 24.97,
+      "control_overlap_with_struct_pct": 23.48
+    }
+  }
+}

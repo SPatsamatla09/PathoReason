@@ -1,0 +1,45 @@
+{
+  "image": "MHIST_cve.png",
+  "seed": 20260806,
+  "occlusion": "mean",
+  "block_px": 8,
+  "segmentation_method": "cellpose-3.1.1.3 model_type=nuclei on H channel (rgb2hed), x4 lanczos upsample, diameter=10, labels nearest-downscaled to 224, binary mask dilated 1px",
+  "n_nuclei": 811,
+  "cited_features": [
+    "crypt/gland architecture",
+    "serration"
+  ],
+  "named_sources": [
+    "epithelium"
+  ],
+  "tile_tissue_px": 31560,
+  "sources": {
+    "epithelium": {
+      "named": true,
+      "mask_px": 14109,
+      "pct_of_tile": 28.12,
+      "pct_of_tissue": 44.71,
+      "control_px": 14109,
+      "control_pct_of_tissue": 44.71,
+      "control_overlap_with_struct_pct": 40.47
+    },
+    "stroma": {
+      "named": false,
+      "mask_px": 14027,
+      "pct_of_tile": 27.96,
+      "pct_of_tissue": 44.45,
+      "control_px": 14027,
+      "control_pct_of_tissue": 44.45,
+      "control_overlap_with_struct_pct": 38.58
+    },
+    "nuclei": {
+      "named": false,
+      "mask_px": 8513,
+      "pct_of_tile": 16.97,
+      "pct_of_tissue": 26.97,
+      "control_px": 8513,
+      "control_pct_of_tissue": 26.97,
+      "control_overlap_with_struct_pct": 24.08
+    }
+  }
+}

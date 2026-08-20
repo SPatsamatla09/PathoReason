@@ -47,3 +47,6 @@ grid_experiment/coverage/*.json
 !grid_experiment/coverage/MHIST_cxx.json
 !grid_experiment/coverage/MHIST_abb.json
 !grid_experiment/coverage/MHIST_dtq.json
+grid_experiment/masked_bio/**/*.png
+grid_experiment/masked_bio/qa_sheet.png
+grid_experiment/biological/nuclei/*.png

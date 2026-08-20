@@ -289,6 +289,40 @@ decision: ddn/epj churn ~half their citations while the label stays fixed;
 ccn/ekm hold citations nearly constant (J=0.91) while the label flips anyway.
 (`runs/stability_analysis.json`)
 
+## Biological masking (Week 2)
+
+Structure-targeted occlusion instead of grid squares. `stains.py` partitions
+tissue via rgb2hed into hematoxylin-dominant epithelium and eosin-dominant
+stroma; `biological_mask.py` adds CellPose nuclei (x4 upsample of the H
+channel, diameter 10; dense epithelial rims under-segmented) and builds, per
+tile, each structure mask plus an area-matched block-shuffled control,
+mean-filled and re-gridded. Feature mapping from gemma's own cte_p1 citations:
+crypt/serration/surface -> epithelium (named on 20/20 tiles), stroma/
+infiltrate -> stroma (named on 8), atypia/mitoses -> nuclei (named on 0).
+
+120 calls, zero errors. Flip rates vs the unmasked baseline:
+
+| source | struct | control | discordant | p |
+|---|---|---|---|---|
+| epithelium (named 20/20) | 45% | 35% | 4 vs 2 | 0.69 |
+| stroma (named 8/20) | 35% | 45% | 1 vs 3 | 0.63 |
+| nuclei (named 0/20) | **50%** | 35% | 3 vs 0 | 0.25 |
+
+Pooled struct-vs-control: 8 vs 5, p=0.58 -- no significant targeting effect,
+same null as the grid sweep (7 vs 11, p=0.48). The sharpest single fact: the
+highest flip rate in the whole study comes from masking **nuclei, a structure
+gemma never once named** across 26 cte_p1 responses. Flips run 40 HP->SSA vs 9
+SSA->HP -- occlusion pushes toward SSA, echoing the explain-first bias --
+and flip probability is unrelated to masked area (27.0% vs 27.8% of tile
+for flipped vs not). Confidence stays frozen throughout (|dconf| <= 0.11).
+
+Verdict: gemma is occlusion-sensitive but not evidence-specific. Perturbing
+what it *says* it uses does no more than perturbing matched arbitrary tissue,
+under grid-cell masking and under biologically-targeted masking alike -- and
+the structure that perturbs it most is one it never mentions. This is the
+distinction the biological sweep exists to draw, and it lands on the
+unfaithful side. (`runs/biological_analysis.json`)
+
 ## Reproducing
 
 ```bash
