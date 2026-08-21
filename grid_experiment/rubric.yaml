@@ -1,0 +1,204 @@
+version: 1
+name: hp-ssa-expert-rubric
+task: >
+  Map the eight pathoreason vocabulary features onto the accepted diagnostic
+  criteria for hyperplastic polyp (HP) versus sessile serrated adenoma (SSA;
+  WHO 2019 term: sessile serrated lesion, SSL), so blinded raters can score
+  model explanations for diagnostic relevance and label support.
+
+grounding:
+  note: >
+    Mappings below are grounded in the WHO Classification of Tumours, 5th ed
+    (Digestive System Tumours, 2019) as summarised in the sources listed, not
+    invented for this study. Where a feature is absent from the diagnostic
+    criteria, that absence is the finding.
+  sources:
+    - id: WHO2019
+      ref: >
+        WHO Classification of Tumours 5th ed (2019), serrated lesions chapter,
+        as summarised in "Updated WHO classification - colorectal serrated
+        neoplasms" (Envoi Specialist Pathologists, 2019).
+      url: https://www.envoi.com.au/sites/default/files/publications/envoi_update_2019_5_serrated_lesions.pdf
+    - id: CROCKETT2019
+      ref: >
+        Crockett & Nagtegaal, "Terminology, Molecular Features, Epidemiology,
+        and Management of Serrated Colorectal Neoplasia", Gastroenterology 2019.
+      url: https://www.gastrojournal.org/article/S0016-5085(19)41115-3/fulltext
+    - id: PATHOUTLINES
+      ref: Pathology Outlines, "Serrated lesions - general" and "Sessile serrated adenoma".
+      url: https://www.pathologyoutlines.com/topic/colonserratedlesions.html
+    - id: PATHOLINES
+      ref: Patholines, "Sessile serrated adenoma".
+      url: https://patholines.org/Sessile_serrated_adenoma
+    - id: PAI2022
+      ref: >
+        "An update on the morphology and molecular pathology of serrated
+        colorectal polyps and associated carcinomas", Modern Pathology 2022.
+      url: https://www.modernpathology.org/article/S0893-3952(22)00995-4/fulltext
+
+# ---------------------------------------------------------------------------
+# The distinction in one paragraph, for raters:
+# Both HP and SSA are serrated polyps -- "serration is present" separates
+# NEITHER. The WHO 2019 criterion for SSA/SSL is >=1 unequivocal
+# architecturally distorted serrated crypt; the distortion lives at the CRYPT
+# BASE. HP is the diagnosis when serration stays in the upper crypt/surface
+# and crypt bases remain narrow, undilated, and lined by a proliferative
+# compartment. Size and site are epidemiologic tendencies, not criteria.
+# ---------------------------------------------------------------------------
+primary_criteria:
+  ssa_defining:
+    - id: basal_serration
+      finding: serration extending into the basal third / crypt base
+      source: [WHO2019, PATHOUTLINES]
+    - id: basal_dilation
+      finding: dilation of the crypt base, often with mucin retention
+      source: [WHO2019, PATHOLINES]
+    - id: horizontal_growth
+      finding: >
+        horizontal growth of crypt bases along the muscularis mucosae;
+        L-shaped / inverted-T / boot- or anchor-shaped crypts
+      source: [WHO2019, PATHOLINES, PATHOUTLINES]
+    - id: threshold
+      finding: >
+        a single unequivocal architecturally distorted serrated crypt
+        suffices for SSA/SSL (WHO 2019)
+      source: [WHO2019, CROCKETT2019]
+  hp_defining:
+    - id: surface_restricted_serration
+      finding: serration confined to the upper crypt / luminal surface
+      source: [PATHOUTLINES, CROCKETT2019]
+    - id: narrow_bases
+      finding: >
+        narrow, non-dilated crypt bases lined by proliferative cells; no
+        basal branching or horizontal glands
+      source: [PATHOLINES, PAI2022]
+
+features:
+  nuclear atypia:
+    diagnostic_relevance: none
+    supports: neither
+    rationale: >
+      Cytologic dysplasia is NOT required for SSA/SSL and is absent in most;
+      both lesions are cytologically bland. Unequivocal dysplasia defines the
+      separate entity "SSL with dysplasia" (progression marker), it does not
+      separate HP from SSA. Citing nuclear atypia as HP-vs-SSA evidence is
+      non-discriminating.
+    source: [WHO2019, PAI2022]
+  crypt/gland architecture:
+    diagnostic_relevance: primary
+    supports: direction_depends_on_description
+    directions:
+      - finding: basal crypt dilation, horizontal/L/inverted-T growth, branching at base
+        supports: SSA
+        criterion: [basal_dilation, horizontal_growth]
+      - finding: uniform funnel-shaped crypts, narrow undistorted bases
+        supports: HP
+        criterion: [narrow_bases]
+    rationale: >
+      THE decisive axis. Architectural distortion of the serrated crypt base
+      is the WHO criterion for SSA; its absence with retained orderly
+      architecture is what makes an HP.
+    source: [WHO2019, CROCKETT2019]
+  serration:
+    diagnostic_relevance: primary
+    supports: direction_depends_on_description
+    directions:
+      - finding: serration extending to the crypt base
+        supports: SSA
+        criterion: [basal_serration]
+      - finding: serration confined to upper crypt / surface
+        supports: HP
+        criterion: [surface_restricted_serration]
+      - finding: serration mentioned without location
+        supports: neither
+        note: both lesions are serrated by definition; undirectional
+    rationale: >
+      Location is everything. "Serration is present" is true of every tile in
+      this dataset and separates nothing; only WHERE the serration sits
+      discriminates.
+    source: [WHO2019, PATHOUTLINES]
+  mitotic figures:
+    diagnostic_relevance: secondary
+    supports: direction_depends_on_description
+    directions:
+      - finding: mitoses ectopic in mid/upper crypt (asymmetric proliferation)
+        supports: SSA
+      - finding: mitoses confined to an orderly basal proliferative zone
+        supports: HP
+    rationale: >
+      The proliferative zone shifts upward/asymmetrically in SSA and stays
+      basal in HP, but this is corroborative, rarely decisive -- and at MHIST
+      magnification (224px tiles spanning whole crypt fields) individual
+      mitoses are at the edge of visibility.
+    source: [PAI2022, PATHOUTLINES]
+  necrosis:
+    diagnostic_relevance: none
+    supports: neither
+    rationale: >
+      Not a criterion for either lesion; necrosis in a serrated polyp should
+      prompt consideration of other diagnoses entirely. Citing it as HP-vs-SSA
+      evidence is non-discriminating.
+    source: [WHO2019]
+  stroma:
+    diagnostic_relevance: none
+    supports: neither
+    rationale: >
+      No stromal feature is part of the HP/SSA distinction. (Perineurioma-like
+      stromal proliferations occur in serrated polyps but do not separate the
+      two.) Citing stroma as evidence for either label is non-discriminating.
+    source: [PAI2022]
+  surface epithelium:
+    diagnostic_relevance: secondary
+    supports: direction_depends_on_description
+    directions:
+      - finding: serration/changes explicitly limited to the surface with unremarkable bases
+        supports: HP
+        criterion: [surface_restricted_serration]
+      - finding: surface mucin, tufting, or surface serration alone
+        supports: neither
+        note: shared by both lesions; the informative compartment is the base
+    rationale: >
+      Surface features are largely shared; the surface only becomes evidence
+      when cited as the ONLY serrated compartment (i.e., implying the base is
+      spared), which favours HP.
+    source: [PATHOUTLINES, CROCKETT2019]
+  inflammatory infiltrate:
+    diagnostic_relevance: none
+    supports: neither
+    rationale: >
+      Lamina propria inflammation is common and non-discriminating between HP
+      and SSA. Caution: inflammatory/prolapse change can itself distort crypts
+      and mimic serrated architecture, so inflammation is if anything a reason
+      for diagnostic caution, not evidence for either label.
+    source: [PAI2022]
+
+# ---------------------------------------------------------------------------
+scoring:
+  axes:
+    presence:
+      question: Is the cited feature actually visible in the cited grid cells?
+      values: [yes, uncertain, no]
+    relevance:
+      question: >
+        Per this rubric, is the cited feature diagnostically relevant to the
+        HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited
+        with a direction-bearing description)?
+      values: [primary, secondary, none]
+      lookup: >
+        Take the feature's diagnostic_relevance; downgrade primary->none when
+        the description carries no direction (e.g. bare "serration present").
+    support:
+      question: >
+        Does the evidence item, as described, support the label the model
+        stated (per the directions table)?
+      values: [supports, contradicts, neutral]
+  caveats:
+    - >
+      Interobserver variability between HP and SSA is substantial even among
+      GI pathologists; MHIST encodes this in its 7-annotator votes. Raters
+      score the EXPLANATION against the rubric, not the tile against the
+      truth.
+    - >
+      MHIST tiles are 224px crops: the crypt base may be out of frame. Score
+      presence "uncertain" when the compartment the description references is
+      not visible in the cited cells.

@@ -50,3 +50,8 @@ grid_experiment/coverage/*.json
 grid_experiment/masked_bio/**/*.png
 grid_experiment/masked_bio/qa_sheet.png
 grid_experiment/biological/nuclei/*.png
+
+# Blinded rating: tile images and the unblinding key never leave the local machine
+grid_experiment/rating/images/
+grid_experiment/KEY_*.csv
+grid_experiment/rating/KEY_*.csv

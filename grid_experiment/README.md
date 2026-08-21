@@ -323,6 +323,62 @@ the structure that perturbs it most is one it never mentions. This is the
 distinction the biological sweep exists to draw, and it lands on the
 unfaithful side. (`runs/biological_analysis.json`)
 
+## Expert rubric and description scoring
+
+`rubric.yaml` maps the eight vocabulary features onto the accepted HP/SSA
+criteria, grounded in WHO 2019 and the standard reviews (sources cited per
+mapping, with URLs). Two features are **primary and direction-dependent**:
+crypt/gland architecture (basal dilation, horizontal, L/inverted-T growth ->
+SSA; narrow orderly bases -> HP) and serration (base-extending -> SSA,
+surface-confined -> HP, **unlocated -> neither**, since every tile here is
+serrated). Mitoses and surface epithelium are secondary. Nuclear atypia,
+necrosis, stroma, and inflammatory infiltrate are **not criteria for this
+distinction at all** -- dysplasia is not required for SSL -- so citing them is
+scoreable as non-discriminating.
+
+`score_descriptions.py` grades gemma's cte_p1 descriptions against it
+(`runs/description_scoring.json`, every item with its class and exact string):
+
+| | serration | crypt architecture |
+|---|---|---|
+| directional (not generic) | 20/26 | 26/26 |
+| direction matches gemma's stated label | 19/20 | 26/26 |
+| direction matches the **true** label | 10/20 | 14/26 |
+
+The descriptions are fluent in the criterion vocabulary -- "basal dilation" in
+24/26 architecture items, boot/L-shaped in 10, horizontal growth in 2 -- and
+almost never generic. But the direction they assert tracks gemma's own
+diagnosis 45/46 times and expert truth at chance. It writes "basal dilation,
+boot-shaped" on 8 expert-HP tiles and "straight, parallel, no basal dilation"
+on 4 expert-SSA tiles. The description-level signature of the causal and
+stability results: direction is generated from the label, not from the image.
+
+## Blinded rating instrument
+
+`make_rating_sheet.py` builds a two-rater pack: 100 evidence items sampled
+(seed 20260806) from gemma cte_p1, its stability replicates, and the gpt-4o
+Track B run, shuffled together and stripped of tile ID, true label, run, and
+condition. Outputs `rating/rater_{A,B}.csv` plus `rating_form.html`, a
+self-contained local form (radio buttons on the three rubric axes, autosave,
+CSV export). Rating tile images and `KEY_do_not_open_until_scored.csv` are
+gitignored -- regenerate locally with the dataset present.
+
+Prediction worth pre-registering: axes 2 (relevance) and 3 (label-support)
+should score near ceiling; the unfaithfulness should surface on axis 1,
+whether the asserted feature is actually visible in the cited cells.
+
+## Qualitative figure
+
+`make_qual_figure.py` -> `figures/qualitative_cases.{pdf,png}`, six cases from
+six tiles in three rows, each with original tile, perturbed tile, and the
+model's verbatim explanation. FLIPPED: `epo` (blacking out the cells it called
+"straight, no basal dilation" flips HP->SSA) and `dbe` (masking segmented
+nuclei, a feature class cited in 0/26 responses, flips SSA->HP). UNCHANGED:
+`abb` and `elb`, cited evidence and whole named epithelial compartment removed,
+verdict identical. ABSENT: gemma and gpt-4o each citing a feature in a cell
+that is <2% tissue. Note the figure embeds six MHIST tiles as publication
+illustration; the dataset itself remains uncommitted.
+
 ## Reproducing
 
 ```bash

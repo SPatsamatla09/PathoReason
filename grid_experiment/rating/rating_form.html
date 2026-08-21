@@ -1,0 +1,1473 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>Blinded explanation rating</title>
+<style>
+ body { font: 14px/1.45 -apple-system, sans-serif; margin: 24px; background:#fafafa; }
+ .card { display:flex; gap:20px; background:#fff; border:1px solid #ddd;
+          border-radius:8px; padding:16px; margin-bottom:18px; }
+ .rid { color:#888; font-size:12px; }
+ .desc { margin:6px 0; font-style:italic; }
+ .axis { margin:8px 0; } .q { font-weight:600; font-size:13px; }
+ .notes { width:95%; margin-top:6px; }
+ #bar { position:sticky; top:0; background:#fff; border-bottom:2px solid #ccc;
+        padding:10px 0; margin-bottom:16px; z-index:9; }
+ button { font-size:14px; padding:6px 14px; }
+</style></head><body>
+<div id="bar">
+ <b>Blinded explanation rating</b> &nbsp; Rater initials:
+ <input id="rater" size="6"> &nbsp; <span id="prog"></span> &nbsp;
+ <button onclick="exportCsv()">Export CSV</button>
+ <div style="font-size:12px;color:#555;margin-top:4px">
+  Score each explanation against rubric.yaml. Answers autosave locally.
+  presence: is the cited feature visible in the cited cells? &middot;
+  relevance: per the rubric, is it diagnostically relevant AS DESCRIBED? &middot;
+  support: does it support the model's stated label?
+ </div>
+</div>
+
+<div class="card" id="r001">
+  <div class="imgcol"><img src="images/r001.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r001</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>A2 B2 C3</b></div>
+    <div class="desc">&ldquo;The crypts show architectural distortion with a serrated appearance.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r001_presence" value="True"> True</label> <label><input type="radio" name="r001_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r001_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r001_relevance" value="primary"> primary</label> <label><input type="radio" name="r001_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r001_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r001_support" value="supports"> supports</label> <label><input type="radio" name="r001_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r001_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r001_notes">
+  </div>
+</div>
+<div class="card" id="r002">
+  <div class="imgcol"><img src="images/r002.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r002</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C2 C3</b></div>
+    <div class="desc">&ldquo;The crypts show abnormal architecture typical of SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r002_presence" value="True"> True</label> <label><input type="radio" name="r002_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r002_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r002_relevance" value="primary"> primary</label> <label><input type="radio" name="r002_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r002_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r002_support" value="supports"> supports</label> <label><input type="radio" name="r002_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r002_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r002_notes">
+  </div>
+</div>
+<div class="card" id="r003">
+  <div class="imgcol"><img src="images/r003.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r003</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C2 C3 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts are relatively straight and do not show the basal dilation or distortion typical of SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r003_presence" value="True"> True</label> <label><input type="radio" name="r003_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r003_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r003_relevance" value="primary"> primary</label> <label><input type="radio" name="r003_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r003_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r003_support" value="supports"> supports</label> <label><input type="radio" name="r003_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r003_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r003_notes">
+  </div>
+</div>
+<div class="card" id="r004">
+  <div class="imgcol"><img src="images/r004.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r004</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>B4 C3 C4 D3</b></div>
+    <div class="desc">&ldquo;There is a moderate amount of chronic inflammatory cells within the lamina propria.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r004_presence" value="True"> True</label> <label><input type="radio" name="r004_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r004_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r004_relevance" value="primary"> primary</label> <label><input type="radio" name="r004_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r004_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r004_support" value="supports"> supports</label> <label><input type="radio" name="r004_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r004_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r004_notes">
+  </div>
+</div>
+<div class="card" id="r005">
+  <div class="imgcol"><img src="images/r005.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r005</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 B4 C3 C4 D2 D3</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and a boot-shaped configuration characteristic of sessile serrated lesions.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r005_presence" value="True"> True</label> <label><input type="radio" name="r005_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r005_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r005_relevance" value="primary"> primary</label> <label><input type="radio" name="r005_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r005_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r005_support" value="supports"> supports</label> <label><input type="radio" name="r005_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r005_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r005_notes">
+  </div>
+</div>
+<div class="card" id="r006">
+  <div class="imgcol"><img src="images/r006.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r006</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B3 B4 C4</b></div>
+    <div class="desc">&ldquo;The upper portions of the crypts show a characteristic saw-tooth pattern.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r006_presence" value="True"> True</label> <label><input type="radio" name="r006_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r006_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r006_relevance" value="primary"> primary</label> <label><input type="radio" name="r006_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r006_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r006_support" value="supports"> supports</label> <label><input type="radio" name="r006_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r006_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r006_notes">
+  </div>
+</div>
+<div class="card" id="r007">
+  <div class="imgcol"><img src="images/r007.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r007</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B1 B2 B3</b></div>
+    <div class="desc">&ldquo;Saw-tooth shaped folds are visible in the upper crypts near the surface.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r007_presence" value="True"> True</label> <label><input type="radio" name="r007_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r007_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r007_relevance" value="primary"> primary</label> <label><input type="radio" name="r007_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r007_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r007_support" value="supports"> supports</label> <label><input type="radio" name="r007_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r007_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r007_notes">
+  </div>
+</div>
+<div class="card" id="r008">
+  <div class="imgcol"><img src="images/r008.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r008</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A1 A2 B3 C3</b></div>
+    <div class="desc">&ldquo;The glands exhibit a saw-tooth or serrated luminal contour.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r008_presence" value="True"> True</label> <label><input type="radio" name="r008_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r008_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r008_relevance" value="primary"> primary</label> <label><input type="radio" name="r008_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r008_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r008_support" value="supports"> supports</label> <label><input type="radio" name="r008_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r008_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r008_notes">
+  </div>
+</div>
+<div class="card" id="r009">
+  <div class="imgcol"><img src="images/r009.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r009</div>
+    <div class="ev"><b>stroma</b> in cells
+      <b>A1 B1</b></div>
+    <div class="desc">&ldquo;The intervening stroma is narrow and separates the distorted glandular structures.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r009_presence" value="True"> True</label> <label><input type="radio" name="r009_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r009_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r009_relevance" value="primary"> primary</label> <label><input type="radio" name="r009_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r009_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r009_support" value="supports"> supports</label> <label><input type="radio" name="r009_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r009_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r009_notes">
+  </div>
+</div>
+<div class="card" id="r010">
+  <div class="imgcol"><img src="images/r010.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r010</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>A2 B2 C2 D2</b></div>
+    <div class="desc">&ldquo;There are dilated, irregularly shaped crypts with basal expansion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r010_presence" value="True"> True</label> <label><input type="radio" name="r010_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r010_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r010_relevance" value="primary"> primary</label> <label><input type="radio" name="r010_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r010_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r010_support" value="supports"> supports</label> <label><input type="radio" name="r010_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r010_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r010_notes">
+  </div>
+</div>
+<div class="card" id="r011">
+  <div class="imgcol"><img src="images/r011.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r011</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 C3 D3</b></div>
+    <div class="desc">&ldquo;The crypts show a characteristic saw-tooth serrated pattern primarily in the upper portions.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r011_presence" value="True"> True</label> <label><input type="radio" name="r011_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r011_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r011_relevance" value="primary"> primary</label> <label><input type="radio" name="r011_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r011_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r011_support" value="supports"> supports</label> <label><input type="radio" name="r011_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r011_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r011_notes">
+  </div>
+</div>
+<div class="card" id="r012">
+  <div class="imgcol"><img src="images/r012.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r012</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C2 C3 D3 D4</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and a boot-shaped configuration.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r012_presence" value="True"> True</label> <label><input type="radio" name="r012_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r012_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r012_relevance" value="primary"> primary</label> <label><input type="radio" name="r012_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r012_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r012_support" value="supports"> supports</label> <label><input type="radio" name="r012_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r012_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r012_notes">
+  </div>
+</div>
+<div class="card" id="r013">
+  <div class="imgcol"><img src="images/r013.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r013</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A3 B3 C3</b></div>
+    <div class="desc">&ldquo;Prominent serrated architecture is visible in these cells.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r013_presence" value="True"> True</label> <label><input type="radio" name="r013_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r013_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r013_relevance" value="primary"> primary</label> <label><input type="radio" name="r013_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r013_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r013_support" value="supports"> supports</label> <label><input type="radio" name="r013_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r013_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r013_notes">
+  </div>
+</div>
+<div class="card" id="r014">
+  <div class="imgcol"><img src="images/r014.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r014</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C3 D3</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilatation and a characteristic boot-shaped or L-shaped morphology.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r014_presence" value="True"> True</label> <label><input type="radio" name="r014_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r014_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r014_relevance" value="primary"> primary</label> <label><input type="radio" name="r014_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r014_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r014_support" value="supports"> supports</label> <label><input type="radio" name="r014_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r014_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r014_notes">
+  </div>
+</div>
+<div class="card" id="r015">
+  <div class="imgcol"><img src="images/r015.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r015</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B4 C4 D2 D3</b></div>
+    <div class="desc">&ldquo;The crypts are straight and parallel, lacking the basal dilation seen in SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r015_presence" value="True"> True</label> <label><input type="radio" name="r015_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r015_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r015_relevance" value="primary"> primary</label> <label><input type="radio" name="r015_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r015_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r015_support" value="supports"> supports</label> <label><input type="radio" name="r015_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r015_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r015_notes">
+  </div>
+</div>
+<div class="card" id="r016">
+  <div class="imgcol"><img src="images/r016.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r016</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B4 C4 D4</b></div>
+    <div class="desc">&ldquo;The crypts show dilation and horizontal growth, which is typical of SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r016_presence" value="True"> True</label> <label><input type="radio" name="r016_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r016_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r016_relevance" value="primary"> primary</label> <label><input type="radio" name="r016_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r016_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r016_support" value="supports"> supports</label> <label><input type="radio" name="r016_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r016_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r016_notes">
+  </div>
+</div>
+<div class="card" id="r017">
+  <div class="imgcol"><img src="images/r017.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r017</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>C2 D2 D3</b></div>
+    <div class="desc">&ldquo;Chronic inflammatory cells are present in the stroma between the distorted glands.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r017_presence" value="True"> True</label> <label><input type="radio" name="r017_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r017_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r017_relevance" value="primary"> primary</label> <label><input type="radio" name="r017_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r017_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r017_support" value="supports"> supports</label> <label><input type="radio" name="r017_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r017_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r017_notes">
+  </div>
+</div>
+<div class="card" id="r018">
+  <div class="imgcol"><img src="images/r018.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r018</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C3 C4 D2 D3 D4</b></div>
+    <div class="desc">&ldquo;The crypts show a dilated and distorted architecture with basal expansion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r018_presence" value="True"> True</label> <label><input type="radio" name="r018_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r018_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r018_relevance" value="primary"> primary</label> <label><input type="radio" name="r018_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r018_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r018_support" value="supports"> supports</label> <label><input type="radio" name="r018_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r018_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r018_notes">
+  </div>
+</div>
+<div class="card" id="r019">
+  <div class="imgcol"><img src="images/r019.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r019</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B3 B4 C3 C4</b></div>
+    <div class="desc">&ldquo;The surface and superficial crypt epithelium show characteristic saw-tooth luminal contours.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r019_presence" value="True"> True</label> <label><input type="radio" name="r019_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r019_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r019_relevance" value="primary"> primary</label> <label><input type="radio" name="r019_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r019_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r019_support" value="supports"> supports</label> <label><input type="radio" name="r019_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r019_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r019_notes">
+  </div>
+</div>
+<div class="card" id="r020">
+  <div class="imgcol"><img src="images/r020.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r020</div>
+    <div class="ev"><b>surface epithelium</b> in cells
+      <b>A4 B4 C4</b></div>
+    <div class="desc">&ldquo;Surface epithelium with exaggeration suggestive of a serrated pattern.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r020_presence" value="True"> True</label> <label><input type="radio" name="r020_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r020_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r020_relevance" value="primary"> primary</label> <label><input type="radio" name="r020_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r020_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r020_support" value="supports"> supports</label> <label><input type="radio" name="r020_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r020_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r020_notes">
+  </div>
+</div>
+<div class="card" id="r021">
+  <div class="imgcol"><img src="images/r021.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r021</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C2 C3 D3 D4</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and an expanded, boot-shaped appearance.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r021_presence" value="True"> True</label> <label><input type="radio" name="r021_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r021_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r021_relevance" value="primary"> primary</label> <label><input type="radio" name="r021_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r021_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r021_support" value="supports"> supports</label> <label><input type="radio" name="r021_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r021_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r021_notes">
+  </div>
+</div>
+<div class="card" id="r022">
+  <div class="imgcol"><img src="images/r022.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r022</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A1 A2 B1 B2</b></div>
+    <div class="desc">&ldquo;Saw-tooth serration is visible in the crypt architecture.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r022_presence" value="True"> True</label> <label><input type="radio" name="r022_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r022_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r022_relevance" value="primary"> primary</label> <label><input type="radio" name="r022_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r022_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r022_support" value="supports"> supports</label> <label><input type="radio" name="r022_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r022_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r022_notes">
+  </div>
+</div>
+<div class="card" id="r023">
+  <div class="imgcol"><img src="images/r023.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r023</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B3 B4 C3 C4</b></div>
+    <div class="desc">&ldquo;Serrated architecture is evident in the glands.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r023_presence" value="True"> True</label> <label><input type="radio" name="r023_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r023_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r023_relevance" value="primary"> primary</label> <label><input type="radio" name="r023_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r023_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r023_support" value="supports"> supports</label> <label><input type="radio" name="r023_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r023_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r023_notes">
+  </div>
+</div>
+<div class="card" id="r024">
+  <div class="imgcol"><img src="images/r024.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r024</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 B3 C3 D4</b></div>
+    <div class="desc">&ldquo;Saw-tooth folding of the luminal surface extends deep into the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r024_presence" value="True"> True</label> <label><input type="radio" name="r024_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r024_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r024_relevance" value="primary"> primary</label> <label><input type="radio" name="r024_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r024_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r024_support" value="supports"> supports</label> <label><input type="radio" name="r024_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r024_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r024_notes">
+  </div>
+</div>
+<div class="card" id="r025">
+  <div class="imgcol"><img src="images/r025.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r025</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A3 A4 B3 B4 C3 C4</b></div>
+    <div class="desc">&ldquo;The glands show characteristic saw-tooth serrations primarily in the upper half of the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r025_presence" value="True"> True</label> <label><input type="radio" name="r025_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r025_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r025_relevance" value="primary"> primary</label> <label><input type="radio" name="r025_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r025_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r025_support" value="supports"> supports</label> <label><input type="radio" name="r025_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r025_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r025_notes">
+  </div>
+</div>
+<div class="card" id="r026">
+  <div class="imgcol"><img src="images/r026.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r026</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C2 C3 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and distorted, boot-shaped configurations typical of sessile serrated lesions.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r026_presence" value="True"> True</label> <label><input type="radio" name="r026_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r026_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r026_relevance" value="primary"> primary</label> <label><input type="radio" name="r026_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r026_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r026_support" value="supports"> supports</label> <label><input type="radio" name="r026_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r026_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r026_notes">
+  </div>
+</div>
+<div class="card" id="r027">
+  <div class="imgcol"><img src="images/r027.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r027</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A2 A3 B2 B3 C2 C3</b></div>
+    <div class="desc">&ldquo;The luminal surfaces of the crypts exhibit saw-tooth like folding patterns.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r027_presence" value="True"> True</label> <label><input type="radio" name="r027_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r027_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r027_relevance" value="primary"> primary</label> <label><input type="radio" name="r027_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r027_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r027_support" value="supports"> supports</label> <label><input type="radio" name="r027_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r027_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r027_notes">
+  </div>
+</div>
+<div class="card" id="r028">
+  <div class="imgcol"><img src="images/r028.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r028</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C2 D2</b></div>
+    <div class="desc">&ldquo;The crypts exhibit basal dilation and an irregular, boot-shaped or L-shaped configuration.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r028_presence" value="True"> True</label> <label><input type="radio" name="r028_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r028_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r028_relevance" value="primary"> primary</label> <label><input type="radio" name="r028_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r028_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r028_support" value="supports"> supports</label> <label><input type="radio" name="r028_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r028_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r028_notes">
+  </div>
+</div>
+<div class="card" id="r029">
+  <div class="imgcol"><img src="images/r029.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r029</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C2 C3 D2 D3</b></div>
+    <div class="desc">&ldquo;The crypts show abnormal shape and size, indicative of distorted architecture.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r029_presence" value="True"> True</label> <label><input type="radio" name="r029_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r029_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r029_relevance" value="primary"> primary</label> <label><input type="radio" name="r029_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r029_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r029_support" value="supports"> supports</label> <label><input type="radio" name="r029_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r029_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r029_notes">
+  </div>
+</div>
+<div class="card" id="r030">
+  <div class="imgcol"><img src="images/r030.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r030</div>
+    <div class="ev"><b>surface epithelium</b> in cells
+      <b>A3 A4</b></div>
+    <div class="desc">&ldquo;Surface epithelium shows flattened appearance typical in SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r030_presence" value="True"> True</label> <label><input type="radio" name="r030_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r030_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r030_relevance" value="primary"> primary</label> <label><input type="radio" name="r030_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r030_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r030_support" value="supports"> supports</label> <label><input type="radio" name="r030_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r030_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r030_notes">
+  </div>
+</div>
+<div class="card" id="r031">
+  <div class="imgcol"><img src="images/r031.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r031</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C2 C3</b></div>
+    <div class="desc">&ldquo;Architectural distortion typical of serrated lesions.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r031_presence" value="True"> True</label> <label><input type="radio" name="r031_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r031_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r031_relevance" value="primary"> primary</label> <label><input type="radio" name="r031_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r031_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r031_support" value="supports"> supports</label> <label><input type="radio" name="r031_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r031_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r031_notes">
+  </div>
+</div>
+<div class="card" id="r032">
+  <div class="imgcol"><img src="images/r032.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r032</div>
+    <div class="ev"><b>stroma</b> in cells
+      <b>A1 A2 D1</b></div>
+    <div class="desc">&ldquo;There is an abundance of lamina propria and stroma between the distorted glandular structures.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r032_presence" value="True"> True</label> <label><input type="radio" name="r032_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r032_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r032_relevance" value="primary"> primary</label> <label><input type="radio" name="r032_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r032_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r032_support" value="supports"> supports</label> <label><input type="radio" name="r032_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r032_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r032_notes">
+  </div>
+</div>
+<div class="card" id="r033">
+  <div class="imgcol"><img src="images/r033.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r033</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 B3 C2</b></div>
+    <div class="desc">&ldquo;Intraluminal folding and sawtooth patterns are evident throughout the deeper parts of the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r033_presence" value="True"> True</label> <label><input type="radio" name="r033_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r033_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r033_relevance" value="primary"> primary</label> <label><input type="radio" name="r033_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r033_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r033_support" value="supports"> supports</label> <label><input type="radio" name="r033_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r033_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r033_notes">
+  </div>
+</div>
+<div class="card" id="r034">
+  <div class="imgcol"><img src="images/r034.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r034</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C2 C3 D3 D4</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and irregular, distorted architecture characteristic of serrated lesions.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r034_presence" value="True"> True</label> <label><input type="radio" name="r034_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r034_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r034_relevance" value="primary"> primary</label> <label><input type="radio" name="r034_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r034_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r034_support" value="supports"> supports</label> <label><input type="radio" name="r034_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r034_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r034_notes">
+  </div>
+</div>
+<div class="card" id="r035">
+  <div class="imgcol"><img src="images/r035.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r035</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 C2 D2</b></div>
+    <div class="desc">&ldquo;Distorted crypt architecture with irregular shapes.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r035_presence" value="True"> True</label> <label><input type="radio" name="r035_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r035_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r035_relevance" value="primary"> primary</label> <label><input type="radio" name="r035_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r035_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r035_support" value="supports"> supports</label> <label><input type="radio" name="r035_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r035_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r035_notes">
+  </div>
+</div>
+<div class="card" id="r036">
+  <div class="imgcol"><img src="images/r036.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r036</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>B4 C4 D3 D4</b></div>
+    <div class="desc">&ldquo;There is a moderate amount of chronic inflammatory cells within the stroma.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r036_presence" value="True"> True</label> <label><input type="radio" name="r036_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r036_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r036_relevance" value="primary"> primary</label> <label><input type="radio" name="r036_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r036_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r036_support" value="supports"> supports</label> <label><input type="radio" name="r036_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r036_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r036_notes">
+  </div>
+</div>
+<div class="card" id="r037">
+  <div class="imgcol"><img src="images/r037.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r037</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A1 A3 B2 D2</b></div>
+    <div class="desc">&ldquo;Saw-tooth like indentations are visible along the luminal borders of the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r037_presence" value="True"> True</label> <label><input type="radio" name="r037_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r037_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r037_relevance" value="primary"> primary</label> <label><input type="radio" name="r037_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r037_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r037_support" value="supports"> supports</label> <label><input type="radio" name="r037_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r037_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r037_notes">
+  </div>
+</div>
+<div class="card" id="r038">
+  <div class="imgcol"><img src="images/r038.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r038</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B1 B2 B3 C1 C2 C3</b></div>
+    <div class="desc">&ldquo;The crypts remain straight and parallel without the basal dilation seen in SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r038_presence" value="True"> True</label> <label><input type="radio" name="r038_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r038_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r038_relevance" value="primary"> primary</label> <label><input type="radio" name="r038_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r038_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r038_support" value="supports"> supports</label> <label><input type="radio" name="r038_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r038_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r038_notes">
+  </div>
+</div>
+<div class="card" id="r039">
+  <div class="imgcol"><img src="images/r039.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r039</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A2 B2 C3</b></div>
+    <div class="desc">&ldquo;Sawtooth pattern in the glandular structures indicating serration.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r039_presence" value="True"> True</label> <label><input type="radio" name="r039_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r039_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r039_relevance" value="primary"> primary</label> <label><input type="radio" name="r039_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r039_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r039_support" value="supports"> supports</label> <label><input type="radio" name="r039_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r039_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r039_notes">
+  </div>
+</div>
+<div class="card" id="r040">
+  <div class="imgcol"><img src="images/r040.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r040</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 C2 D2</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and an irregular, boot-shaped growth pattern.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r040_presence" value="True"> True</label> <label><input type="radio" name="r040_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r040_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r040_relevance" value="primary"> primary</label> <label><input type="radio" name="r040_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r040_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r040_support" value="supports"> supports</label> <label><input type="radio" name="r040_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r040_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r040_notes">
+  </div>
+</div>
+<div class="card" id="r041">
+  <div class="imgcol"><img src="images/r041.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r041</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 B4 C3 C4 D2 D3</b></div>
+    <div class="desc">&ldquo;The crypts are relatively straight and parallel without the basal dilation characteristic of SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r041_presence" value="True"> True</label> <label><input type="radio" name="r041_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r041_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r041_relevance" value="primary"> primary</label> <label><input type="radio" name="r041_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r041_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r041_support" value="supports"> supports</label> <label><input type="radio" name="r041_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r041_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r041_notes">
+  </div>
+</div>
+<div class="card" id="r042">
+  <div class="imgcol"><img src="images/r042.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r042</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 C2 C3</b></div>
+    <div class="desc">&ldquo;Prominent serrated architecture is evident in these cells.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r042_presence" value="True"> True</label> <label><input type="radio" name="r042_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r042_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r042_relevance" value="primary"> primary</label> <label><input type="radio" name="r042_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r042_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r042_support" value="supports"> supports</label> <label><input type="radio" name="r042_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r042_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r042_notes">
+  </div>
+</div>
+<div class="card" id="r043">
+  <div class="imgcol"><img src="images/r043.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r043</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A1 A2 B1 B2</b></div>
+    <div class="desc">&ldquo;The crypts show characteristic superficial sawtooth serrations.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r043_presence" value="True"> True</label> <label><input type="radio" name="r043_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r043_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r043_relevance" value="primary"> primary</label> <label><input type="radio" name="r043_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r043_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r043_support" value="supports"> supports</label> <label><input type="radio" name="r043_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r043_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r043_notes">
+  </div>
+</div>
+<div class="card" id="r044">
+  <div class="imgcol"><img src="images/r044.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r044</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 C2 C3</b></div>
+    <div class="desc">&ldquo;Crypts appear dilated and asymmetrical with horizontally arranged bases.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r044_presence" value="True"> True</label> <label><input type="radio" name="r044_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r044_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r044_relevance" value="primary"> primary</label> <label><input type="radio" name="r044_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r044_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r044_support" value="supports"> supports</label> <label><input type="radio" name="r044_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r044_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r044_notes">
+  </div>
+</div>
+<div class="card" id="r045">
+  <div class="imgcol"><img src="images/r045.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r045</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C2 C3</b></div>
+    <div class="desc">&ldquo;The crypts show horizontal growth and basal dilatation characteristic of a sessile serrated lesion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r045_presence" value="True"> True</label> <label><input type="radio" name="r045_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r045_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r045_relevance" value="primary"> primary</label> <label><input type="radio" name="r045_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r045_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r045_support" value="supports"> supports</label> <label><input type="radio" name="r045_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r045_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r045_notes">
+  </div>
+</div>
+<div class="card" id="r046">
+  <div class="imgcol"><img src="images/r046.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r046</div>
+    <div class="ev"><b>stroma</b> in cells
+      <b>B1 C1</b></div>
+    <div class="desc">&ldquo;The lamina propria is expanded with mild inflammatory infiltrate between distorted glands.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r046_presence" value="True"> True</label> <label><input type="radio" name="r046_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r046_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r046_relevance" value="primary"> primary</label> <label><input type="radio" name="r046_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r046_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r046_support" value="supports"> supports</label> <label><input type="radio" name="r046_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r046_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r046_notes">
+  </div>
+</div>
+<div class="card" id="r047">
+  <div class="imgcol"><img src="images/r047.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r047</div>
+    <div class="ev"><b>surface epithelium</b> in cells
+      <b>A3 A4 B4</b></div>
+    <div class="desc">&ldquo;Surface epithelium is significantly serrated.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r047_presence" value="True"> True</label> <label><input type="radio" name="r047_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r047_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r047_relevance" value="primary"> primary</label> <label><input type="radio" name="r047_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r047_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r047_support" value="supports"> supports</label> <label><input type="radio" name="r047_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r047_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r047_notes">
+  </div>
+</div>
+<div class="card" id="r048">
+  <div class="imgcol"><img src="images/r048.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r048</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>A2 A4 B3 B4 C3 C4 D3 D4</b></div>
+    <div class="desc">&ldquo;The crypts show an expanded, distorted base and dilated morphology characteristic of a sessile serrated lesion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r048_presence" value="True"> True</label> <label><input type="radio" name="r048_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r048_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r048_relevance" value="primary"> primary</label> <label><input type="radio" name="r048_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r048_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r048_support" value="supports"> supports</label> <label><input type="radio" name="r048_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r048_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r048_notes">
+  </div>
+</div>
+<div class="card" id="r049">
+  <div class="imgcol"><img src="images/r049.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r049</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A4 B3 B4 C3 C4</b></div>
+    <div class="desc">&ldquo;The crypts exhibit a saw-tooth pattern primarily limited to the upper portion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r049_presence" value="True"> True</label> <label><input type="radio" name="r049_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r049_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r049_relevance" value="primary"> primary</label> <label><input type="radio" name="r049_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r049_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r049_support" value="supports"> supports</label> <label><input type="radio" name="r049_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r049_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r049_notes">
+  </div>
+</div>
+<div class="card" id="r050">
+  <div class="imgcol"><img src="images/r050.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r050</div>
+    <div class="ev"><b>surface epithelium</b> in cells
+      <b>A4 B3 B4</b></div>
+    <div class="desc">&ldquo;The surface lining shows characteristic serrated morphology.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r050_presence" value="True"> True</label> <label><input type="radio" name="r050_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r050_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r050_relevance" value="primary"> primary</label> <label><input type="radio" name="r050_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r050_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r050_support" value="supports"> supports</label> <label><input type="radio" name="r050_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r050_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r050_notes">
+  </div>
+</div>
+<div class="card" id="r051">
+  <div class="imgcol"><img src="images/r051.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r051</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A3 A4 B3 B4</b></div>
+    <div class="desc">&ldquo;The glandular epithelium exhibits saw-tooth like folding and serration throughout the depth of the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r051_presence" value="True"> True</label> <label><input type="radio" name="r051_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r051_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r051_relevance" value="primary"> primary</label> <label><input type="radio" name="r051_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r051_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r051_support" value="supports"> supports</label> <label><input type="radio" name="r051_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r051_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r051_notes">
+  </div>
+</div>
+<div class="card" id="r052">
+  <div class="imgcol"><img src="images/r052.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r052</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>D1 D2 D3</b></div>
+    <div class="desc">&ldquo;There is a moderate amount of mononuclear inflammatory cells in the lamina propria.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r052_presence" value="True"> True</label> <label><input type="radio" name="r052_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r052_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r052_relevance" value="primary"> primary</label> <label><input type="radio" name="r052_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r052_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r052_support" value="supports"> supports</label> <label><input type="radio" name="r052_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r052_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r052_notes">
+  </div>
+</div>
+<div class="card" id="r053">
+  <div class="imgcol"><img src="images/r053.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r053</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C1 C2 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts maintain a relatively straight, parallel orientation at the base without significant basal dilation.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r053_presence" value="True"> True</label> <label><input type="radio" name="r053_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r053_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r053_relevance" value="primary"> primary</label> <label><input type="radio" name="r053_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r053_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r053_support" value="supports"> supports</label> <label><input type="radio" name="r053_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r053_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r053_notes">
+  </div>
+</div>
+<div class="card" id="r054">
+  <div class="imgcol"><img src="images/r054.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r054</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 B2 C3</b></div>
+    <div class="desc">&ldquo;Distorted crypt architecture with dilated crypt bases suggesting sessile serrated features.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r054_presence" value="True"> True</label> <label><input type="radio" name="r054_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r054_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r054_relevance" value="primary"> primary</label> <label><input type="radio" name="r054_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r054_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r054_support" value="supports"> supports</label> <label><input type="radio" name="r054_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r054_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r054_notes">
+  </div>
+</div>
+<div class="card" id="r055">
+  <div class="imgcol"><img src="images/r055.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r055</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C3 C4 D3 D4</b></div>
+    <div class="desc">&ldquo;Expansion and branching of crypts with irregular shapes.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r055_presence" value="True"> True</label> <label><input type="radio" name="r055_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r055_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r055_relevance" value="primary"> primary</label> <label><input type="radio" name="r055_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r055_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r055_support" value="supports"> supports</label> <label><input type="radio" name="r055_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r055_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r055_notes">
+  </div>
+</div>
+<div class="card" id="r056">
+  <div class="imgcol"><img src="images/r056.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r056</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A3 A4 B4 C4</b></div>
+    <div class="desc">&ldquo;Prominent serrated architecture is evident in these cells.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r056_presence" value="True"> True</label> <label><input type="radio" name="r056_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r056_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r056_relevance" value="primary"> primary</label> <label><input type="radio" name="r056_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r056_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r056_support" value="supports"> supports</label> <label><input type="radio" name="r056_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r056_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r056_notes">
+  </div>
+</div>
+<div class="card" id="r057">
+  <div class="imgcol"><img src="images/r057.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r057</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B3 B4 C4</b></div>
+    <div class="desc">&ldquo;Saw-tooth folding of the glandular epithelium is evident throughout the upper crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r057_presence" value="True"> True</label> <label><input type="radio" name="r057_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r057_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r057_relevance" value="primary"> primary</label> <label><input type="radio" name="r057_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r057_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r057_support" value="supports"> supports</label> <label><input type="radio" name="r057_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r057_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r057_notes">
+  </div>
+</div>
+<div class="card" id="r058">
+  <div class="imgcol"><img src="images/r058.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r058</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A3 A4 B3 B4</b></div>
+    <div class="desc">&ldquo;Saw-toothed appearance in surface epithelium and deeper crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r058_presence" value="True"> True</label> <label><input type="radio" name="r058_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r058_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r058_relevance" value="primary"> primary</label> <label><input type="radio" name="r058_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r058_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r058_support" value="supports"> supports</label> <label><input type="radio" name="r058_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r058_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r058_notes">
+  </div>
+</div>
+<div class="card" id="r059">
+  <div class="imgcol"><img src="images/r059.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r059</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B1 B2 B3 C3</b></div>
+    <div class="desc">&ldquo;Sawtooth appearances indicating serration in the glands.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r059_presence" value="True"> True</label> <label><input type="radio" name="r059_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r059_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r059_relevance" value="primary"> primary</label> <label><input type="radio" name="r059_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r059_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r059_support" value="supports"> supports</label> <label><input type="radio" name="r059_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r059_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r059_notes">
+  </div>
+</div>
+<div class="card" id="r060">
+  <div class="imgcol"><img src="images/r060.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r060</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A3 B3 C3</b></div>
+    <div class="desc">&ldquo;Saw-toothed appearance in the epithelial layer.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r060_presence" value="True"> True</label> <label><input type="radio" name="r060_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r060_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r060_relevance" value="primary"> primary</label> <label><input type="radio" name="r060_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r060_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r060_support" value="supports"> supports</label> <label><input type="radio" name="r060_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r060_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r060_notes">
+  </div>
+</div>
+<div class="card" id="r061">
+  <div class="imgcol"><img src="images/r061.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r061</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>C3 C4 D3 D4</b></div>
+    <div class="desc">&ldquo;The glandular epithelium shows a characteristic saw-tooth serrated pattern throughout the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r061_presence" value="True"> True</label> <label><input type="radio" name="r061_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r061_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r061_relevance" value="primary"> primary</label> <label><input type="radio" name="r061_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r061_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r061_support" value="supports"> supports</label> <label><input type="radio" name="r061_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r061_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r061_notes">
+  </div>
+</div>
+<div class="card" id="r062">
+  <div class="imgcol"><img src="images/r062.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r062</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 B4 C3 C4 D2 D3</b></div>
+    <div class="desc">&ldquo;The crypts remain straight and parallel without the basal dilation typically seen in SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r062_presence" value="True"> True</label> <label><input type="radio" name="r062_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r062_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r062_relevance" value="primary"> primary</label> <label><input type="radio" name="r062_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r062_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r062_support" value="supports"> supports</label> <label><input type="radio" name="r062_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r062_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r062_notes">
+  </div>
+</div>
+<div class="card" id="r063">
+  <div class="imgcol"><img src="images/r063.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r063</div>
+    <div class="ev"><b>surface epithelium</b> in cells
+      <b>A1 A4 D1 D2</b></div>
+    <div class="desc">&ldquo;The surface lining is intact and consistent with a hyperplastic process.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r063_presence" value="True"> True</label> <label><input type="radio" name="r063_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r063_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r063_relevance" value="primary"> primary</label> <label><input type="radio" name="r063_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r063_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r063_support" value="supports"> supports</label> <label><input type="radio" name="r063_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r063_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r063_notes">
+  </div>
+</div>
+<div class="card" id="r064">
+  <div class="imgcol"><img src="images/r064.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r064</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C3 D3</b></div>
+    <div class="desc">&ldquo;There are dilated, irregularly shaped crypts with a boot-shaped profile and basal expansion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r064_presence" value="True"> True</label> <label><input type="radio" name="r064_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r064_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r064_relevance" value="primary"> primary</label> <label><input type="radio" name="r064_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r064_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r064_support" value="supports"> supports</label> <label><input type="radio" name="r064_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r064_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r064_notes">
+  </div>
+</div>
+<div class="card" id="r065">
+  <div class="imgcol"><img src="images/r065.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r065</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A3 A4 B4</b></div>
+    <div class="desc">&ldquo;There is a saw-tooth pattern in the crypts indicating serration.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r065_presence" value="True"> True</label> <label><input type="radio" name="r065_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r065_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r065_relevance" value="primary"> primary</label> <label><input type="radio" name="r065_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r065_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r065_support" value="supports"> supports</label> <label><input type="radio" name="r065_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r065_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r065_notes">
+  </div>
+</div>
+<div class="card" id="r066">
+  <div class="imgcol"><img src="images/r066.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r066</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>D1 D2 D3 D4</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilatation and a boot-shaped appearance.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r066_presence" value="True"> True</label> <label><input type="radio" name="r066_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r066_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r066_relevance" value="primary"> primary</label> <label><input type="radio" name="r066_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r066_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r066_support" value="supports"> supports</label> <label><input type="radio" name="r066_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r066_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r066_notes">
+  </div>
+</div>
+<div class="card" id="r067">
+  <div class="imgcol"><img src="images/r067.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r067</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A2 A3 B2 B3</b></div>
+    <div class="desc">&ldquo;Saw-tooth like folding of the epithelium is present throughout the upper and middle crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r067_presence" value="True"> True</label> <label><input type="radio" name="r067_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r067_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r067_relevance" value="primary"> primary</label> <label><input type="radio" name="r067_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r067_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r067_support" value="supports"> supports</label> <label><input type="radio" name="r067_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r067_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r067_notes">
+  </div>
+</div>
+<div class="card" id="r068">
+  <div class="imgcol"><img src="images/r068.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r068</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A2 A3 B2 B3</b></div>
+    <div class="desc">&ldquo;The glandular epithelium exhibits characteristic sawtooth serration.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r068_presence" value="True"> True</label> <label><input type="radio" name="r068_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r068_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r068_relevance" value="primary"> primary</label> <label><input type="radio" name="r068_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r068_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r068_support" value="supports"> supports</label> <label><input type="radio" name="r068_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r068_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r068_notes">
+  </div>
+</div>
+<div class="card" id="r069">
+  <div class="imgcol"><img src="images/r069.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r069</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A4 B4 C4</b></div>
+    <div class="desc">&ldquo;Prominent serrations seen in the glands.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r069_presence" value="True"> True</label> <label><input type="radio" name="r069_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r069_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r069_relevance" value="primary"> primary</label> <label><input type="radio" name="r069_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r069_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r069_support" value="supports"> supports</label> <label><input type="radio" name="r069_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r069_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r069_notes">
+  </div>
+</div>
+<div class="card" id="r070">
+  <div class="imgcol"><img src="images/r070.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r070</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A1 A2 B3 B4</b></div>
+    <div class="desc">&ldquo;The crypts show a characteristic saw-tooth appearance primarily in the upper portions.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r070_presence" value="True"> True</label> <label><input type="radio" name="r070_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r070_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r070_relevance" value="primary"> primary</label> <label><input type="radio" name="r070_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r070_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r070_support" value="supports"> supports</label> <label><input type="radio" name="r070_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r070_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r070_notes">
+  </div>
+</div>
+<div class="card" id="r071">
+  <div class="imgcol"><img src="images/r071.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r071</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 B3 C2 C3</b></div>
+    <div class="desc">&ldquo;Prominent serration is visible in the crypt architecture, consistent with features of SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r071_presence" value="True"> True</label> <label><input type="radio" name="r071_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r071_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r071_relevance" value="primary"> primary</label> <label><input type="radio" name="r071_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r071_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r071_support" value="supports"> supports</label> <label><input type="radio" name="r071_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r071_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r071_notes">
+  </div>
+</div>
+<div class="card" id="r072">
+  <div class="imgcol"><img src="images/r072.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r072</div>
+    <div class="ev"><b>stroma</b> in cells
+      <b>B1 C1 D1</b></div>
+    <div class="desc">&ldquo;The surrounding stroma contains a mild inflammatory infiltrate.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r072_presence" value="True"> True</label> <label><input type="radio" name="r072_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r072_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r072_relevance" value="primary"> primary</label> <label><input type="radio" name="r072_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r072_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r072_support" value="supports"> supports</label> <label><input type="radio" name="r072_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r072_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r072_notes">
+  </div>
+</div>
+<div class="card" id="r073">
+  <div class="imgcol"><img src="images/r073.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r073</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>A1 A2 B1 B2 C2 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts are straight and parallel, lacking the basal dilation seen in SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r073_presence" value="True"> True</label> <label><input type="radio" name="r073_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r073_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r073_relevance" value="primary"> primary</label> <label><input type="radio" name="r073_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r073_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r073_support" value="supports"> supports</label> <label><input type="radio" name="r073_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r073_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r073_notes">
+  </div>
+</div>
+<div class="card" id="r074">
+  <div class="imgcol"><img src="images/r074.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r074</div>
+    <div class="ev"><b>stroma</b> in cells
+      <b>B1 D1</b></div>
+    <div class="desc">&ldquo;The intervening stroma appears expanded and contains mild inflammatory cells.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r074_presence" value="True"> True</label> <label><input type="radio" name="r074_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r074_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r074_relevance" value="primary"> primary</label> <label><input type="radio" name="r074_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r074_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r074_support" value="supports"> supports</label> <label><input type="radio" name="r074_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r074_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r074_notes">
+  </div>
+</div>
+<div class="card" id="r075">
+  <div class="imgcol"><img src="images/r075.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r075</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C2 C3 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts are relatively straight and do not show the basal dilation typical of SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r075_presence" value="True"> True</label> <label><input type="radio" name="r075_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r075_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r075_relevance" value="primary"> primary</label> <label><input type="radio" name="r075_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r075_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r075_support" value="supports"> supports</label> <label><input type="radio" name="r075_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r075_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r075_notes">
+  </div>
+</div>
+<div class="card" id="r076">
+  <div class="imgcol"><img src="images/r076.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r076</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 C3 C4 D3 D4</b></div>
+    <div class="desc">&ldquo;Crypts appear dilated and show horizontal growth.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r076_presence" value="True"> True</label> <label><input type="radio" name="r076_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r076_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r076_relevance" value="primary"> primary</label> <label><input type="radio" name="r076_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r076_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r076_support" value="supports"> supports</label> <label><input type="radio" name="r076_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r076_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r076_notes">
+  </div>
+</div>
+<div class="card" id="r077">
+  <div class="imgcol"><img src="images/r077.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r077</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B2 B3 C3 D3</b></div>
+    <div class="desc">&ldquo;The crypts show significant basal dilation and a boot-shaped appearance.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r077_presence" value="True"> True</label> <label><input type="radio" name="r077_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r077_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r077_relevance" value="primary"> primary</label> <label><input type="radio" name="r077_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r077_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r077_support" value="supports"> supports</label> <label><input type="radio" name="r077_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r077_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r077_notes">
+  </div>
+</div>
+<div class="card" id="r078">
+  <div class="imgcol"><img src="images/r078.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r078</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B4 C4 D2 D3</b></div>
+    <div class="desc">&ldquo;The crypts are straight and parallel, lacking the basal dilation often seen in SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r078_presence" value="True"> True</label> <label><input type="radio" name="r078_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r078_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r078_relevance" value="primary"> primary</label> <label><input type="radio" name="r078_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r078_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r078_support" value="supports"> supports</label> <label><input type="radio" name="r078_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r078_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r078_notes">
+  </div>
+</div>
+<div class="card" id="r079">
+  <div class="imgcol"><img src="images/r079.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r079</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C3 C4</b></div>
+    <div class="desc">&ldquo;The crypts show disorganized and distorted glandular architecture.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r079_presence" value="True"> True</label> <label><input type="radio" name="r079_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r079_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r079_relevance" value="primary"> primary</label> <label><input type="radio" name="r079_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r079_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r079_support" value="supports"> supports</label> <label><input type="radio" name="r079_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r079_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r079_notes">
+  </div>
+</div>
+<div class="card" id="r080">
+  <div class="imgcol"><img src="images/r080.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r080</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 C2 C3 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and expanded, distorted shapes characteristic of a sessile serrated lesion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r080_presence" value="True"> True</label> <label><input type="radio" name="r080_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r080_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r080_relevance" value="primary"> primary</label> <label><input type="radio" name="r080_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r080_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r080_support" value="supports"> supports</label> <label><input type="radio" name="r080_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r080_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r080_notes">
+  </div>
+</div>
+<div class="card" id="r081">
+  <div class="imgcol"><img src="images/r081.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r081</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>A3 B1 C3</b></div>
+    <div class="desc">&ldquo;There is a moderate amount of lymphoplasmacytic cells within the lamina propria.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r081_presence" value="True"> True</label> <label><input type="radio" name="r081_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r081_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r081_relevance" value="primary"> primary</label> <label><input type="radio" name="r081_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r081_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r081_support" value="supports"> supports</label> <label><input type="radio" name="r081_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r081_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r081_notes">
+  </div>
+</div>
+<div class="card" id="r082">
+  <div class="imgcol"><img src="images/r082.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r082</div>
+    <div class="ev"><b>surface epithelium</b> in cells
+      <b>A1 A4 D1 D2</b></div>
+    <div class="desc">&ldquo;The surface shows a typical columnar epithelium layering.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r082_presence" value="True"> True</label> <label><input type="radio" name="r082_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r082_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r082_relevance" value="primary"> primary</label> <label><input type="radio" name="r082_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r082_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r082_support" value="supports"> supports</label> <label><input type="radio" name="r082_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r082_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r082_notes">
+  </div>
+</div>
+<div class="card" id="r083">
+  <div class="imgcol"><img src="images/r083.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r083</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>D3 D4</b></div>
+    <div class="desc">&ldquo;There is a moderate amount of mononuclear inflammatory cells within the lamina propria.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r083_presence" value="True"> True</label> <label><input type="radio" name="r083_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r083_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r083_relevance" value="primary"> primary</label> <label><input type="radio" name="r083_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r083_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r083_support" value="supports"> supports</label> <label><input type="radio" name="r083_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r083_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r083_notes">
+  </div>
+</div>
+<div class="card" id="r084">
+  <div class="imgcol"><img src="images/r084.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r084</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 B3 C3</b></div>
+    <div class="desc">&ldquo;The crypts exhibit a characteristic saw-tooth appearance with superficial serration.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r084_presence" value="True"> True</label> <label><input type="radio" name="r084_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r084_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r084_relevance" value="primary"> primary</label> <label><input type="radio" name="r084_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r084_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r084_support" value="supports"> supports</label> <label><input type="radio" name="r084_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r084_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r084_notes">
+  </div>
+</div>
+<div class="card" id="r085">
+  <div class="imgcol"><img src="images/r085.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r085</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 C3 D3</b></div>
+    <div class="desc">&ldquo;Architectural distortion with crypt dilation and branching.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r085_presence" value="True"> True</label> <label><input type="radio" name="r085_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r085_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r085_relevance" value="primary"> primary</label> <label><input type="radio" name="r085_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r085_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r085_support" value="supports"> supports</label> <label><input type="radio" name="r085_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r085_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r085_notes">
+  </div>
+</div>
+<div class="card" id="r086">
+  <div class="imgcol"><img src="images/r086.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r086</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>A2 B2 D3</b></div>
+    <div class="desc">&ldquo;There is a moderate amount of inflammatory cells within the stroma.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r086_presence" value="True"> True</label> <label><input type="radio" name="r086_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r086_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r086_relevance" value="primary"> primary</label> <label><input type="radio" name="r086_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r086_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r086_support" value="supports"> supports</label> <label><input type="radio" name="r086_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r086_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r086_notes">
+  </div>
+</div>
+<div class="card" id="r087">
+  <div class="imgcol"><img src="images/r087.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r087</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A4 B3 B4 C3 C4</b></div>
+    <div class="desc">&ldquo;The crypts show a saw-tooth appearance primarily in the upper half of the mucosa.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r087_presence" value="True"> True</label> <label><input type="radio" name="r087_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r087_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r087_relevance" value="primary"> primary</label> <label><input type="radio" name="r087_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r087_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r087_support" value="supports"> supports</label> <label><input type="radio" name="r087_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r087_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r087_notes">
+  </div>
+</div>
+<div class="card" id="r088">
+  <div class="imgcol"><img src="images/r088.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r088</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>A4 B4 C4 D4</b></div>
+    <div class="desc">&ldquo;Abnormal crypt architecture with dilation is observed.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r088_presence" value="True"> True</label> <label><input type="radio" name="r088_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r088_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r088_relevance" value="primary"> primary</label> <label><input type="radio" name="r088_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r088_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r088_support" value="supports"> supports</label> <label><input type="radio" name="r088_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r088_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r088_notes">
+  </div>
+</div>
+<div class="card" id="r089">
+  <div class="imgcol"><img src="images/r089.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r089</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>B3 B4 D3</b></div>
+    <div class="desc">&ldquo;Chronic inflammatory cells are present within the lamina propria.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r089_presence" value="True"> True</label> <label><input type="radio" name="r089_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r089_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r089_relevance" value="primary"> primary</label> <label><input type="radio" name="r089_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r089_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r089_support" value="supports"> supports</label> <label><input type="radio" name="r089_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r089_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r089_notes">
+  </div>
+</div>
+<div class="card" id="r090">
+  <div class="imgcol"><img src="images/r090.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r090</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>A2 B2 C2 D2</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and a flattened, broadened base.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r090_presence" value="True"> True</label> <label><input type="radio" name="r090_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r090_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r090_relevance" value="primary"> primary</label> <label><input type="radio" name="r090_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r090_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r090_support" value="supports"> supports</label> <label><input type="radio" name="r090_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r090_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r090_notes">
+  </div>
+</div>
+<div class="card" id="r091">
+  <div class="imgcol"><img src="images/r091.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r091</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 B3 C3 C4</b></div>
+    <div class="desc">&ldquo;The glands show a saw-tooth appearance primarily in the upper portions of the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r091_presence" value="True"> True</label> <label><input type="radio" name="r091_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r091_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r091_relevance" value="primary"> primary</label> <label><input type="radio" name="r091_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r091_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r091_support" value="supports"> supports</label> <label><input type="radio" name="r091_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r091_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r091_notes">
+  </div>
+</div>
+<div class="card" id="r092">
+  <div class="imgcol"><img src="images/r092.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r092</div>
+    <div class="ev"><b>inflammatory infiltrate</b> in cells
+      <b>B1 C1 D2</b></div>
+    <div class="desc">&ldquo;There is a moderate amount of inflammatory cells within the lamina propria.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r092_presence" value="True"> True</label> <label><input type="radio" name="r092_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r092_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r092_relevance" value="primary"> primary</label> <label><input type="radio" name="r092_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r092_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r092_support" value="supports"> supports</label> <label><input type="radio" name="r092_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r092_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r092_notes">
+  </div>
+</div>
+<div class="card" id="r093">
+  <div class="imgcol"><img src="images/r093.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r093</div>
+    <div class="ev"><b>surface epithelium</b> in cells
+      <b>B2 C2</b></div>
+    <div class="desc">&ldquo;The surface epithelium appears intact and minimally atypical.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r093_presence" value="True"> True</label> <label><input type="radio" name="r093_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r093_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r093_relevance" value="primary"> primary</label> <label><input type="radio" name="r093_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r093_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r093_support" value="supports"> supports</label> <label><input type="radio" name="r093_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r093_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r093_notes">
+  </div>
+</div>
+<div class="card" id="r094">
+  <div class="imgcol"><img src="images/r094.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r094</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B1 B2 C1 C2</b></div>
+    <div class="desc">&ldquo;Saw-tooth like indentation of the crypts is present primarily in the upper half of the mucosa.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r094_presence" value="True"> True</label> <label><input type="radio" name="r094_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r094_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r094_relevance" value="primary"> primary</label> <label><input type="radio" name="r094_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r094_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r094_support" value="supports"> supports</label> <label><input type="radio" name="r094_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r094_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r094_notes">
+  </div>
+</div>
+<div class="card" id="r095">
+  <div class="imgcol"><img src="images/r095.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r095</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>C1 C2 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts are straight and do not show basal dilation or distortion.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r095_presence" value="True"> True</label> <label><input type="radio" name="r095_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r095_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r095_relevance" value="primary"> primary</label> <label><input type="radio" name="r095_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r095_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r095_support" value="supports"> supports</label> <label><input type="radio" name="r095_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r095_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r095_notes">
+  </div>
+</div>
+<div class="card" id="r096">
+  <div class="imgcol"><img src="images/r096.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r096</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>A3 B2 D1 D2</b></div>
+    <div class="desc">&ldquo;The crypts show basal dilation and architectural distortion typical of serrated lesions.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r096_presence" value="True"> True</label> <label><input type="radio" name="r096_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r096_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r096_relevance" value="primary"> primary</label> <label><input type="radio" name="r096_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r096_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r096_support" value="supports"> supports</label> <label><input type="radio" name="r096_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r096_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r096_notes">
+  </div>
+</div>
+<div class="card" id="r097">
+  <div class="imgcol"><img src="images/r097.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r097</div>
+    <div class="ev"><b>crypt/gland architecture</b> in cells
+      <b>B3 B4 C3 C4 D2 D3</b></div>
+    <div class="desc">&ldquo;The crypts are relatively straight and parallel, lacking the basal dilation or distortion characteristic of SSA.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r097_presence" value="True"> True</label> <label><input type="radio" name="r097_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r097_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r097_relevance" value="primary"> primary</label> <label><input type="radio" name="r097_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r097_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r097_support" value="supports"> supports</label> <label><input type="radio" name="r097_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r097_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r097_notes">
+  </div>
+</div>
+<div class="card" id="r098">
+  <div class="imgcol"><img src="images/r098.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r098</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A4 B3 B4 C3 C4</b></div>
+    <div class="desc">&ldquo;Saw-tooth like indentations of the luminal surface are visible throughout the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r098_presence" value="True"> True</label> <label><input type="radio" name="r098_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r098_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r098_relevance" value="primary"> primary</label> <label><input type="radio" name="r098_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r098_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r098_support" value="supports"> supports</label> <label><input type="radio" name="r098_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r098_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r098_notes">
+  </div>
+</div>
+<div class="card" id="r099">
+  <div class="imgcol"><img src="images/r099.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r099</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>B2 B3 C2 C3</b></div>
+    <div class="desc">&ldquo;Sawtooth-like indentations are visible along the crypt walls.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>SSA</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r099_presence" value="True"> True</label> <label><input type="radio" name="r099_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r099_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r099_relevance" value="primary"> primary</label> <label><input type="radio" name="r099_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r099_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r099_support" value="supports"> supports</label> <label><input type="radio" name="r099_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r099_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r099_notes">
+  </div>
+</div>
+<div class="card" id="r100">
+  <div class="imgcol"><img src="images/r100.png" width="336"></div>
+  <div class="txtcol">
+    <div class="rid">r100</div>
+    <div class="ev"><b>serration</b> in cells
+      <b>A4 B3 B4 C3 C4</b></div>
+    <div class="desc">&ldquo;Saw-tooth patterns are observed primarily in the upper portions of the crypts.&rdquo;</div>
+    <div class="lab">Model's stated label: <b>HP</b></div>
+    <div class="axis"><span class="q">Is the cited feature actually visible in the cited grid cells?</span><br><label><input type="radio" name="r100_presence" value="True"> True</label> <label><input type="radio" name="r100_presence" value="uncertain"> uncertain</label> <label><input type="radio" name="r100_presence" value="False"> False</label> </div><div class="axis"><span class="q">Per this rubric, is the cited feature diagnostically relevant to the HP-vs-SSA distinction AS DESCRIBED (a primary/secondary feature cited with a direction-bearing description)?
+</span><br><label><input type="radio" name="r100_relevance" value="primary"> primary</label> <label><input type="radio" name="r100_relevance" value="secondary"> secondary</label> <label><input type="radio" name="r100_relevance" value="none"> none</label> </div><div class="axis"><span class="q">Does the evidence item, as described, support the label the model stated (per the directions table)?
+</span><br><label><input type="radio" name="r100_support" value="supports"> supports</label> <label><input type="radio" name="r100_support" value="contradicts"> contradicts</label> <label><input type="radio" name="r100_support" value="neutral"> neutral</label> </div>
+    <input class="notes" placeholder="notes (optional)" name="r100_notes">
+  </div>
+</div>
+<script>
+const ids = ["r001", "r002", "r003", "r004", "r005", "r006", "r007", "r008", "r009", "r010", "r011", "r012", "r013", "r014", "r015", "r016", "r017", "r018", "r019", "r020", "r021", "r022", "r023", "r024", "r025", "r026", "r027", "r028", "r029", "r030", "r031", "r032", "r033", "r034", "r035", "r036", "r037", "r038", "r039", "r040", "r041", "r042", "r043", "r044", "r045", "r046", "r047", "r048", "r049", "r050", "r051", "r052", "r053", "r054", "r055", "r056", "r057", "r058", "r059", "r060", "r061", "r062", "r063", "r064", "r065", "r066", "r067", "r068", "r069", "r070", "r071", "r072", "r073", "r074", "r075", "r076", "r077", "r078", "r079", "r080", "r081", "r082", "r083", "r084", "r085", "r086", "r087", "r088", "r089", "r090", "r091", "r092", "r093", "r094", "r095", "r096", "r097", "r098", "r099", "r100"];
+const axes = ["presence","relevance","support"];
+document.addEventListener("change", save);
+document.addEventListener("input", save);
+function save() {
+  const s = {rater: document.getElementById("rater").value};
+  for (const id of ids) {
+    for (const ax of axes) {
+      const el = document.querySelector(`input[name="${id}_${ax}"]:checked`);
+      if (el) s[`${id}_${ax}`] = el.value;
+    }
+    const n = document.querySelector(`input[name="${id}_notes"]`);
+    if (n && n.value) s[`${id}_notes`] = n.value;
+  }
+  localStorage.setItem("rating_state", JSON.stringify(s));
+  const done = ids.filter(id => axes.every(ax => s[`${id}_${ax}`])).length;
+  document.getElementById("prog").textContent = `${done}/${ids.length} complete`;
+}
+(function restore() {
+  const s = JSON.parse(localStorage.getItem("rating_state") || "{}");
+  if (s.rater) document.getElementById("rater").value = s.rater;
+  for (const [k,v] of Object.entries(s)) {
+    if (k === "rater") continue;
+    if (k.endsWith("_notes")) {
+      const n = document.querySelector(`input[name="${k}"]`); if (n) n.value = v;
+    } else {
+      const el = document.querySelector(`input[name="${k}"][value="${v}"]`);
+      if (el) el.checked = true;
+    }
+  }
+  save();
+})();
+function exportCsv() {
+  const s = JSON.parse(localStorage.getItem("rating_state") || "{}");
+  let out = "rating_id,rater,presence,relevance,support,notes\n";
+  for (const id of ids) {
+    const row = [id, s.rater||"", ...axes.map(ax => s[`${id}_${ax}`]||""),
+                 (s[`${id}_notes`]||"").replace(/"/g,'""')];
+    out += row.map(v => `"${v}"`).join(",") + "\n";
+  }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([out], {type:"text/csv"}));
+  a.download = `ratings_${s.rater||"anon"}.csv`;
+  a.click();
+}
+</script></body></html>

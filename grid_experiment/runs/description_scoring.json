@@ -1,0 +1,783 @@
+{
+  "serration": {
+    "n_items": 26,
+    "class_counts": {
+      "throughout_implicit_base": 6,
+      "base_extending": 4,
+      "no_location": 6,
+      "upper_confined": 10
+    },
+    "directional": 20,
+    "undirected_downgraded_to_none": 6,
+    "direction_matches_stated_label": "19/20",
+    "direction_matches_true_label": "10/20",
+    "inconsistent_items": [
+      {
+        "tile": "cxx",
+        "replicate": 2,
+        "pred": "SSA",
+        "class": "upper_confined",
+        "desc": "Saw-tooth like folding of the epithelium is present throughout the upper and middle crypts."
+      }
+    ],
+    "items": [
+      {
+        "tile": "dbe",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "Prominent saw-tooth luminal contours are visible throughout the crypts.",
+        "class": "throughout_implicit_base",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "cve",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "There is prominent saw-tooth folding of the glandular epithelium extending deep into the crypts.",
+        "class": "base_extending",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ddn",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The luminal surfaces of the crypts exhibit saw-tooth like folding patterns.",
+        "class": "no_location",
+        "direction": null,
+        "rubric_relevance_as_described": "none",
+        "direction_matches_pred": null,
+        "direction_matches_truth": null,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ekm",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The glands show characteristic saw-tooth indentations restricted to the upper half of the crypts.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "cmt",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The crypts show characteristic superficial sawtooth serrations.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "apc",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Saw-tooth like indentations are visible along the luminal borders of the crypts.",
+        "class": "no_location",
+        "direction": null,
+        "rubric_relevance_as_described": "none",
+        "direction_matches_pred": null,
+        "direction_matches_truth": null,
+        "criterion_terms": []
+      },
+      {
+        "tile": "bmy",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Prominent sawtooth-like folding of the glandular epithelium is visible throughout the crypts.",
+        "class": "throughout_implicit_base",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "epo",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "Saw-tooth shaped folds are visible in the upper crypts near the surface.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ajp",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "Saw-tooth like folding of the epithelium is visible extending deep into the crypts.",
+        "class": "base_extending",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "dey",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The glandular epithelium shows a characteristic saw-tooth serrated pattern throughout the crypts.",
+        "class": "throughout_implicit_base",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "epj",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts exhibit a characteristic saw-tooth pattern of luminal folding.",
+        "class": "no_location",
+        "direction": null,
+        "rubric_relevance_as_described": "none",
+        "direction_matches_pred": null,
+        "direction_matches_truth": null,
+        "criterion_terms": []
+      },
+      {
+        "tile": "elb",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Saw-tooth like indentations of the luminal surface are visible throughout the crypts.",
+        "class": "throughout_implicit_base",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ekh",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The glands show characteristic saw-tooth serrations primarily in the upper half of the crypts.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "bqc",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The glands show a saw-tooth appearance primarily in the upper portions of the crypts.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ccn",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts show characteristic saw-tooth serrations primarily in the upper half of the mucosa.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "bxx",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "Saw-tooth like indentation of the crypts is present primarily in the upper half of the mucosa.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "cdr",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "Intraluminal folding and sawtooth patterns are evident throughout the deeper parts of the crypts.",
+        "class": "base_extending",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "cxx",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Sawtooth-like folding of the glandular epithelium is visible throughout the crypts.",
+        "class": "throughout_implicit_base",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "abb",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Sawtooth-like indentations are visible along the crypt walls.",
+        "class": "no_location",
+        "direction": null,
+        "rubric_relevance_as_described": "none",
+        "direction_matches_pred": null,
+        "direction_matches_truth": null,
+        "criterion_terms": []
+      },
+      {
+        "tile": "dtq",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Prominent sawtooth-like folding of the glandular epithelium is visible throughout the crypts.",
+        "class": "throughout_implicit_base",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ccn",
+        "replicate": 2,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts show a saw-tooth appearance primarily in the upper half of the mucosa.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ccn",
+        "replicate": 3,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "Saw-tooth patterns are observed primarily in the upper portions of the crypts.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ddn",
+        "replicate": 2,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The glands exhibit characteristic saw-tooth folding of the epithelial lining.",
+        "class": "no_location",
+        "direction": null,
+        "rubric_relevance_as_described": "none",
+        "direction_matches_pred": null,
+        "direction_matches_truth": null,
+        "criterion_terms": []
+      },
+      {
+        "tile": "ddn",
+        "replicate": 3,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "Prominent saw-tooth folding of the glandular epithelium is observed throughout these cells.",
+        "class": "no_location",
+        "direction": null,
+        "rubric_relevance_as_described": "none",
+        "direction_matches_pred": null,
+        "direction_matches_truth": null,
+        "criterion_terms": []
+      },
+      {
+        "tile": "cxx",
+        "replicate": 2,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Saw-tooth like folding of the epithelium is present throughout the upper and middle crypts.",
+        "class": "upper_confined",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": false,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "cxx",
+        "replicate": 3,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "Saw-tooth folding of the luminal surface extends deep into the crypts.",
+        "class": "base_extending",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": []
+      }
+    ]
+  },
+  "crypt/gland architecture": {
+    "n_items": 26,
+    "class_counts": {
+      "basal_distortion": 16,
+      "orderly_narrow_bases": 10
+    },
+    "directional": 26,
+    "undirected_downgraded_to_none": 0,
+    "direction_matches_stated_label": "26/26",
+    "direction_matches_true_label": "14/26",
+    "inconsistent_items": [],
+    "items": [
+      {
+        "tile": "dbe",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The crypts show horizontal growth and basal dilatation characteristic of a sessile serrated lesion.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation",
+          "horizontal growth"
+        ]
+      },
+      {
+        "tile": "cve",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The crypts show basal dilation and a distorted, boot-shaped architecture.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation",
+          "boot-shaped"
+        ]
+      },
+      {
+        "tile": "ddn",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The glands show a dilated, boot-shaped or distorted appearance, particularly along the base.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "boot-shaped"
+        ]
+      },
+      {
+        "tile": "ekm",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The crypts maintain a relatively straight vertical orientation and reach the muscularis mucosae.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": []
+      },
+      {
+        "tile": "cmt",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The crypts remain straight and parallel without the basal dilation seen in SSA.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "apc",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts show basal dilation and architectural distortion typical of serrated lesions.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "bmy",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts exhibit basal dilation and distorted architecture characteristic of sessile serrated lesions.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "epo",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts are straight and do not show basal dilation or distortion.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "ajp",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The crypts show a dilated and distorted architecture with basal expansion.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "dey",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "Dilated, distorted crypts with basal expansion are visible.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "epj",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts remain relatively straight and parallel with no basal dilation.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "elb",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts show basal dilation and expanded, distorted shapes characteristic of a sessile serrated lesion.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "ekh",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The crypts maintain a relatively straight base without the basal dilation typically seen in SSA.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "bqc",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "SSA",
+        "desc": "The crypts are relatively straight and do not show the basal dilation or horizontal growth seen in SSA.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation",
+          "horizontal growth"
+        ]
+      },
+      {
+        "tile": "ccn",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts are straight and parallel, lacking the basal dilation often seen in SSA.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "bxx",
+        "replicate": 1,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts maintain a relatively straight, parallel orientation at the base without significant basal dilation.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "cdr",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The crypts exhibit basal dilation and an irregular, boot-shaped or L-shaped configuration.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation",
+          "boot-shaped",
+          "L-shaped"
+        ]
+      },
+      {
+        "tile": "cxx",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts show basal dilation and irregular, distorted architecture characteristic of serrated lesions.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "abb",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts show basal dilation and a boot-shaped configuration.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation",
+          "boot-shaped"
+        ]
+      },
+      {
+        "tile": "dtq",
+        "replicate": 1,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts show basal dilation and a boot-shaped configuration characteristic of sessile serrated lesions.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation",
+          "boot-shaped"
+        ]
+      },
+      {
+        "tile": "ccn",
+        "replicate": 2,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts are relatively straight and parallel, lacking the basal dilation or distortion characteristic of SSA.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "ccn",
+        "replicate": 3,
+        "pred": "HP",
+        "true": "HP",
+        "desc": "The crypts maintain a relatively straight base without the basal dilation typical of SSA.",
+        "class": "orderly_narrow_bases",
+        "direction": "HP",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "ddn",
+        "replicate": 2,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The crypts show basal dilation and a flattened, broadened base.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation"
+        ]
+      },
+      {
+        "tile": "ddn",
+        "replicate": 3,
+        "pred": "SSA",
+        "true": "HP",
+        "desc": "The crypts show basal dilation and an irregular, boot-shaped growth pattern.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": false,
+        "criterion_terms": [
+          "basal dilation",
+          "boot-shaped"
+        ]
+      },
+      {
+        "tile": "cxx",
+        "replicate": 2,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts show basal dilatation and a characteristic boot-shaped or L-shaped morphology.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation",
+          "boot-shaped",
+          "L-shaped"
+        ]
+      },
+      {
+        "tile": "cxx",
+        "replicate": 3,
+        "pred": "SSA",
+        "true": "SSA",
+        "desc": "The crypts show basal dilation and a boot-shaped configuration.",
+        "class": "basal_distortion",
+        "direction": "SSA",
+        "rubric_relevance_as_described": "primary",
+        "direction_matches_pred": true,
+        "direction_matches_truth": true,
+        "criterion_terms": [
+          "basal dilation",
+          "boot-shaped"
+        ]
+      }
+    ],
+    "criterion_term_usage": {
+      "basal dilation": 24,
+      "horizontal growth": 2,
+      "boot-shaped": 8,
+      "L-shaped": 2
+    }
+  }
+}
