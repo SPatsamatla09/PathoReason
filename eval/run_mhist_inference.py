@@ -327,10 +327,44 @@ def run(args: argparse.Namespace) -> None:
 
     dataset = MHISTDataset(partition="test")
 
-    total = len(dataset)
+    selected_indices = list(range(len(dataset)))
+
+    if args.subset_manifest is not None:
+        manifest_path = Path(args.subset_manifest)
+        manifest = json.loads(manifest_path.read_text())
+        requested_images = list(manifest["images"])
+
+        if len(requested_images) != len(set(requested_images)):
+            raise ValueError("subset manifest contains duplicate image IDs")
+
+        wanted = set(requested_images)
+        index_by_name = {}
+
+        for i in range(len(dataset)):
+            sample_i = dataset[i]
+            name = sample_i["image_name"]
+            if name in wanted:
+                index_by_name[name] = i
+
+        missing = [x for x in requested_images if x not in index_by_name]
+        if missing:
+            raise ValueError(
+                f"subset manifest contains {len(missing)} images not found "
+                f"in MHIST test partition: {missing[:10]}"
+            )
+
+        # Preserve frozen manifest order.
+        selected_indices = [index_by_name[x] for x in requested_images]
+
+        print(
+            f"Subset manifest: {manifest_path} "
+            f"({len(selected_indices)} images)"
+        )
 
     if args.limit is not None:
-        total = min(total, args.limit)
+        selected_indices = selected_indices[:args.limit]
+
+    total = len(selected_indices)
 
     print(f"MHIST test samples selected: {total}")
 
@@ -381,7 +415,7 @@ def run(args: argparse.Namespace) -> None:
 
     for index in range(total):
 
-        sample = dataset[index]
+        sample = dataset[selected_indices[index]]
 
         clean_image = sample["image"]
 
@@ -630,6 +664,13 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=None,
         help="Only process the first N test images.",
+    )
+
+    parser.add_argument(
+        "--subset-manifest",
+        type=str,
+        default=None,
+        help="JSON manifest containing an 'images' list to evaluate.",
     )
 
     parser.add_argument(

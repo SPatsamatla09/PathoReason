@@ -9,7 +9,7 @@ from typing import Any, Sequence
 from PIL import Image
 
 
-VALID_LABELS = frozenset({"HP", "SSA"})
+VALID_LABELS = frozenset({"HP", "SSA", "normal", "tumor"})
 
 
 @dataclass(frozen=True, slots=True)
