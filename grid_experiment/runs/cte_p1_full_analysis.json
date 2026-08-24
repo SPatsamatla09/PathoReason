@@ -1,0 +1,83 @@
+{
+  "n_records": 983,
+  "n_scored": 977,
+  "errors": 0,
+  "parse_failures": 0,
+  "accuracy": {
+    "correct": 522,
+    "n": 977,
+    "point": 0.5343,
+    "exact_95ci": [
+      0.5024,
+      0.5659
+    ],
+    "two_sided_p_vs_chance": 0.034674,
+    "balanced_accuracy": 0.5086,
+    "confusion_true_pred": {
+      "HP->HP": 374,
+      "HP->SSA": 243,
+      "SSA->HP": 212,
+      "SSA->SSA": 148
+    },
+    "predicted_ssa_rate": 0.4002,
+    "mean_confidence": 0.806,
+    "by_band": {
+      "borderline": "85/164 (51.8%)",
+      "strong": "256/490 (52.2%)",
+      "unanimous": "181/323 (56.0%)"
+    },
+    "by_ssa_votes": {
+      "0": "130/186",
+      "1": "138/208",
+      "2": "58/124",
+      "3": "48/99",
+      "4": "37/65",
+      "5": "25/62",
+      "6": "35/96",
+      "7": "51/137"
+    }
+  },
+  "citations": {
+    "total_unique_cell_citations": 7626,
+    "invalid_cells": 0,
+    "mean_cells_per_response": 7.81,
+    "cell_frequency": {
+      "A1": 413,
+      "A2": 549,
+      "A3": 455,
+      "A4": 288,
+      "B1": 439,
+      "B2": 719,
+      "B3": 718,
+      "B4": 429,
+      "C1": 373,
+      "C2": 738,
+      "C3": 698,
+      "C4": 390,
+      "D1": 279,
+      "D2": 485,
+      "D3": 402,
+      "D4": 251
+    },
+    "cell_frequency_pct_of_responses": {
+      "A1": 42.3,
+      "A2": 56.2,
+      "A3": 46.6,
+      "A4": 29.5,
+      "B1": 44.9,
+      "B2": 73.6,
+      "B3": 73.5,
+      "B4": 43.9,
+      "C1": 38.2,
+      "C2": 75.5,
+      "C3": 71.4,
+      "C4": 39.9,
+      "D1": 28.6,
+      "D2": 49.6,
+      "D3": 41.1,
+      "D4": 25.7
+    },
+    "empty_cell_citations": 27,
+    "empty_citation_rate": 0.0035
+  }
+}

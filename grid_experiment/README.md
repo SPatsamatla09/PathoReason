@@ -379,6 +379,26 @@ verdict identical. ABSENT: gemma and gpt-4o each citing a feature in a cell
 that is <2% tissue. Note the figure embeds six MHIST tiles as publication
 illustration; the dataset itself remains uncommitted.
 
+## Full test set (977 tiles, gemma cte_p1)
+
+`run_experiment.py --full-test --tag _full` runs every test-partition tile,
+rendering grids in memory (pixel-identical to the on-disk renders, verified).
+983 records (977 tiles + the standard repeat triple), zero errors, zero parse
+failures, across three hourly quota walls.
+
+**Accuracy 522/977 = 53.4%, exact 95% CI [50.2%, 56.6%]** (p=0.035 vs coin
+flip) -- and diagnostically empty: balanced accuracy 50.9%, SSA called on
+39.4% of true-HP vs 41.1% of true-SSA tiles, and the always-HP baseline scores
+63.2%, ten points higher. Accuracy is near-flat across annotator agreement
+(unanimous 56.0%, strong 52.2%, borderline 51.8%) and **below chance on
+unanimous-SSA tiles** (37.2% on 7/7-vote tiles). Mean confidence 0.806.
+
+Citations at scale replicate the pilot: 7,626 cell citations with **zero**
+invalid names, 7.81 cells/response, empty-cell rate 0.35%, and citation
+frequency correlating with cell centrality at r=+0.92 vs tissue availability
+at r=+0.50 (centre cells cited in 71-76% of responses, corners 26-42%).
+(`runs/cte_p1_full.jsonl`, `runs/cte_p1_full_analysis.json`)
+
 ## Reproducing
 
 ```bash

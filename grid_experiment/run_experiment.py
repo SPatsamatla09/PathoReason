@@ -54,6 +54,59 @@ def b64_png(path):
         return base64.b64encode(fh.read()).decode()
 
 
+def b64_gridded_tile(tile):
+    """Base64 PNG of the gridded tile; renders in memory when no file exists.
+
+    The 20 selected tiles keep using their on-disk renders; the full test
+    sweep draws the identical overlay on the fly instead of writing ~1000
+    PNGs nothing else reads.
+    """
+    if tile.get("gridded"):
+        return b64_png(os.path.join(ROOT, tile["gridded"]))
+    import io
+
+    from PIL import Image
+
+    from grid import draw_grid
+
+    img = draw_grid(Image.open(os.path.join(ROOT, "..", "images", tile["image"])))
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode()
+
+
+def band(votes):
+    if votes in (0, 7):
+        return "unanimous"
+    if votes in (3, 4):
+        return "borderline"
+    return "strong"
+
+
+def load_full_test():
+    """All 977 test-partition tiles, shaped like selection_manifest entries."""
+    import csv
+
+    tiles = []
+    for row in csv.DictReader(open(os.path.join(ROOT, "coverage_index.csv"))):
+        if row["partition"] != "test":
+            continue
+        cov = json.load(open(os.path.join(ROOT, "coverage", row["image"].replace(".png", ".json"))))
+        tiles.append(
+            {
+                "image": row["image"],
+                "gridded": None,
+                "label": row["label"],
+                "ssa_votes_out_of_7": int(row["ssa_votes"]),
+                "agreement_band": band(int(row["ssa_votes"])),
+                "n_empty_cells": int(row["n_empty_cells"]),
+                "empty_cells": cov["empty_cells"],
+            }
+        )
+    tiles.sort(key=lambda t: t["image"])
+    return tiles
+
+
 def top_level_key_order(raw):
     """Key order as it appears in the raw string, not as parsed.
 
@@ -230,6 +283,10 @@ def call(session, prompt_text, img_b64, api_key, temperature=TEMPERATURE):
             }, None
         if r.status_code in (429, 500, 502, 503, 504):
             wait = BACKOFF_BASE_S * (2 ** (attempt - 1)) + random.uniform(0, 3)
+            # hourly-quota wall: without a retry-after header, late attempts
+            # must outwait the window, not exhaust retries inside it
+            if r.status_code == 429 and attempt >= 3:
+                wait = max(wait, 900.0)
             ra = r.headers.get("retry-after")
             if ra:
                 try:
@@ -255,6 +312,9 @@ def main():
                          "(replaces the default 20+repeat-triple plan)")
     ap.add_argument("--tag", default="",
                     help="suffix for the output file, e.g. _stability")
+    ap.add_argument("--full-test", action="store_true",
+                    help="run every test-partition tile from coverage_index.csv "
+                         "(grids rendered in memory; 1 replicate per tile)")
     args = ap.parse_args()
 
     api_key = os.environ.get("CEREBRAS_API_KEY")
@@ -263,8 +323,11 @@ def main():
 
     spec = yaml.safe_load(open(SPEC))
     prompt_text = open(os.path.join(RENDERED, f"{args.prompt}.txt")).read()
-    manifest = json.load(open(MANIFEST))
-    tiles = manifest["tiles"]
+    if args.full_test:
+        tiles = load_full_test()
+    else:
+        manifest = json.load(open(MANIFEST))
+        tiles = manifest["tiles"]
     if args.tiles:
         want = {n.strip() for n in args.tiles.split(",")}
         tiles = [t for t in tiles if t["image"] in want]
@@ -312,7 +375,7 @@ def main():
 
         print(f"[{n}] {tile['image']} rep{rep}", file=sys.stderr, flush=True)
         raw, meta, err = call(
-            session, prompt_text, b64_png(os.path.join(ROOT, tile["gridded"])), api_key,
+            session, prompt_text, b64_gridded_tile(tile), api_key,
             temperature=args.temperature,
         )
 
