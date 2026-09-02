@@ -1,0 +1,95 @@
+{
+  "image": "MHIST_edf.png",
+  "source": "../images/MHIST_edf.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "A1",
+    "A2",
+    "A3",
+    "B2",
+    "B3",
+    "C3",
+    "D3",
+    "D4"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 1.03,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 28.49,
+    "usable": true
+  },
+  "tile_tissue_px": 32947,
+  "tissue_px_per_cell": {
+    "A1": 2879,
+    "A2": 3126,
+    "A3": 1859,
+    "A4": 345,
+    "B1": 1463,
+    "B2": 3134,
+    "B3": 3033,
+    "B4": 2978,
+    "C1": 45,
+    "C2": 2195,
+    "C3": 2619,
+    "C4": 3037,
+    "D1": 0,
+    "D2": 442,
+    "D3": 2667,
+    "D4": 3125
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "A2",
+        "B2",
+        "D4"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 28.49
+    },
+    "random": {
+      "cells": [
+        "A1",
+        "B4",
+        "D1"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 17.78
+    },
+    "tissue_matched": {
+      "cells": [
+        "B3",
+        "B4",
+        "C4"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 337,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 27.46
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_edf/cited__mean.png",
+    "masked/abl100_k3/MHIST_edf/cited__blur.png",
+    "masked/abl100_k3/MHIST_edf/cited__black.png",
+    "masked/abl100_k3/MHIST_edf/random__mean.png",
+    "masked/abl100_k3/MHIST_edf/random__blur.png",
+    "masked/abl100_k3/MHIST_edf/random__black.png",
+    "masked/abl100_k3/MHIST_edf/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_edf/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_edf/tissue_matched__black.png"
+  ]
+}

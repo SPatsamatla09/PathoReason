@@ -55,3 +55,7 @@ grid_experiment/biological/nuclei/*.png
 grid_experiment/rating/images/
 grid_experiment/KEY_*.csv
 grid_experiment/rating/KEY_*.csv
+
+# personal correspondence + 30-tile review PDF; calibration sheet has tile pixels
+grid_experiment/outreach/
+grid_experiment/rating/calibration_sheet.*

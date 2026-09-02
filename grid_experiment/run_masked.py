@@ -63,7 +63,17 @@ def baseline_by_image():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None)
+    global MASKED, BASELINE_RUN, OUT
+    ap.add_argument("--masked-dir", default=None)
+    ap.add_argument("--baseline-run", default=None)
+    ap.add_argument("--out", default=None)
     args = ap.parse_args()
+    if args.masked_dir:
+        MASKED = os.path.join(ROOT, args.masked_dir)
+    if args.baseline_run:
+        BASELINE_RUN = os.path.join(ROOT, args.baseline_run)
+    if args.out:
+        OUT = os.path.join(ROOT, args.out)
 
     api_key = os.environ.get("CEREBRAS_API_KEY")
     if not api_key:

@@ -161,7 +161,10 @@ def pick_subset(cited, k, tissue):
 def build(image_name, cited, rng, regrid=True, out_root=OUT, subset=None):
     src = os.path.join(CLEAN, image_name)
     if not os.path.exists(src):
-        raise FileNotFoundError(f"{src} -- mask the clean tile; run select_and_render.py first")
+        # clean/ holds only the 20 selected tiles; originals are byte-identical
+        src = os.path.join(ROOT, "..", "images", image_name)
+    if not os.path.exists(src):
+        raise FileNotFoundError(f"{image_name} not in clean/ or ../images/")
     rgb = load_rgb(src)
     tmask = tissue_mask(rgb)
     tissue = tissue_per_cell(rgb)

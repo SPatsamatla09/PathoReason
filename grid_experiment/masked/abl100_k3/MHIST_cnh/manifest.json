@@ -1,0 +1,95 @@
+{
+  "image": "MHIST_cnh.png",
+  "source": "../images/MHIST_cnh.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "B2",
+    "B3",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "D1",
+    "D2"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 3.01,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 36.07,
+    "usable": true
+  },
+  "tile_tissue_px": 24714,
+  "tissue_px_per_cell": {
+    "A1": 0,
+    "A2": 0,
+    "A3": 0,
+    "A4": 0,
+    "B1": 159,
+    "B2": 1213,
+    "B3": 1043,
+    "B4": 871,
+    "C1": 1854,
+    "C2": 2853,
+    "C3": 2827,
+    "C4": 2973,
+    "D1": 3088,
+    "D2": 2774,
+    "D3": 2490,
+    "D4": 2569
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "C2",
+        "C4",
+        "D1"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 36.07
+    },
+    "random": {
+      "cells": [
+        "B2",
+        "B4",
+        "D2"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 19.66
+    },
+    "tissue_matched": {
+      "cells": [
+        "C3",
+        "D2",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 744,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 33.06
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_cnh/cited__mean.png",
+    "masked/abl100_k3/MHIST_cnh/cited__blur.png",
+    "masked/abl100_k3/MHIST_cnh/cited__black.png",
+    "masked/abl100_k3/MHIST_cnh/random__mean.png",
+    "masked/abl100_k3/MHIST_cnh/random__blur.png",
+    "masked/abl100_k3/MHIST_cnh/random__black.png",
+    "masked/abl100_k3/MHIST_cnh/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_cnh/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_cnh/tissue_matched__black.png"
+  ]
+}

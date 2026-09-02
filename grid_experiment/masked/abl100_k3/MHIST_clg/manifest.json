@@ -1,0 +1,95 @@
+{
+  "image": "MHIST_clg.png",
+  "source": "../images/MHIST_clg.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "A2",
+    "A3",
+    "B2",
+    "B3",
+    "B4",
+    "C2",
+    "C3",
+    "C4"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.54,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 31.45,
+    "usable": true
+  },
+  "tile_tissue_px": 28844,
+  "tissue_px_per_cell": {
+    "A1": 165,
+    "A2": 2150,
+    "A3": 2951,
+    "A4": 1823,
+    "B1": 285,
+    "B2": 2062,
+    "B3": 3132,
+    "B4": 2922,
+    "C1": 5,
+    "C2": 1304,
+    "C3": 2989,
+    "C4": 2937,
+    "D1": 1,
+    "D2": 632,
+    "D3": 3057,
+    "D4": 2429
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "A3",
+        "B3",
+        "C3"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 31.45
+    },
+    "random": {
+      "cells": [
+        "A1",
+        "D2",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 11.18
+    },
+    "tissue_matched": {
+      "cells": [
+        "B4",
+        "C4",
+        "D3"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 156,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 30.91
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_clg/cited__mean.png",
+    "masked/abl100_k3/MHIST_clg/cited__blur.png",
+    "masked/abl100_k3/MHIST_clg/cited__black.png",
+    "masked/abl100_k3/MHIST_clg/random__mean.png",
+    "masked/abl100_k3/MHIST_clg/random__blur.png",
+    "masked/abl100_k3/MHIST_clg/random__black.png",
+    "masked/abl100_k3/MHIST_clg/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_clg/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_clg/tissue_matched__black.png"
+  ]
+}

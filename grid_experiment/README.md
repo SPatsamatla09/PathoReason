@@ -399,6 +399,60 @@ frequency correlating with cell centrality at r=+0.92 vs tissue availability
 at r=+0.50 (centre cells cited in 71-76% of responses, corners 26-42%).
 (`runs/cte_p1_full.jsonl`, `runs/cte_p1_full_analysis.json`)
 
+## Design-matched 100-tile masking sweep, and why its p=0.04 does not stand
+
+`masked/abl100_k3/`, `runs/masking_abl100_k3.jsonl` (600 calls, zero errors):
+100 tiles stratified like the original 20 (50/50 label, agreement bands,
+60 tiles with >=2 empty cells). Pair-level contrast 58 cited-only vs 37
+control-only (p=0.040) — the opposite sign of the pilot (7 vs 11) and the
+proportional sweep (40 vs 54).
+
+An adversarial verification (nine agents: blind recomputation, stratum audits,
+heterogeneity, three refuters) rejected the faithful reading 3/3 at high
+confidence — see `runs/masking_abl100_verification.md`. The short version:
+the three occlusions of a tile are pseudo-replicates, and at the tile level
+every sweep is null (4/6, 23/29, 34/22 tiles, p=0.14 for the design-matched
+sweep); the cited arm's flip rate is identical to sweep B's (28% vs 27%) and
+the reversal comes entirely from a control arm that flipped less on worse-
+matched, corner-placed controls; the effect lives in one stratum (baseline-HP
+tiles the model got wrong) while unanimous tiles, baseline-SSA tiles, blur
+occlusion, and the 15 shared tiles all show the prior sign; pooled across
+sweeps 99 vs 94 (p=0.77); and p=0.040 is the smallest of 12 sign tests and
+fails Holm at any family size. Masking the model's own evidence flips its
+label about as often (26%) as re-sampling the untouched image (24%).
+
+`analyze_masking.py` now reports a tile-level contrast; cite that one.
+
+## Ordering ablation at n=100 (co_p1 / cte_p1 / etc_p1, abl100 tile set)
+
+Same 100 stratified tiles as the design-matched masking sweep. cte from
+`runs/cte_p1_full.jsonl`; co and etc from the pilot files for the 18 shared
+tiles and `runs/{co,etc}_p1_abl100.jsonl` for the other 82 (164 calls, zero
+errors; every etc response emitted evidence before label).
+
+| condition | accuracy | SSA-call rate | confidence |
+|---|---|---|---|
+| classify-only (co) | 59/100 | 55% | 0.83 |
+| classify-then-explain (cte) | 57/100 | 39% | 0.80 |
+| explain-then-classify (etc) | 56/100 | **80%** | 0.84 |
+
+**The ordering effect is one of the strongest results in the study: 41 tiles
+flip cte=HP -> etc=SSA and zero flip the other way** (exact McNemar p ~ 1e-12),
+uniform across true label (21/0 on HP tiles, 20/0 on SSA), every agreement
+band (unanimous 8/0, strong 17/0, borderline 16/0), and empty-cell richness.
+Temperature-1.0 resampling noise is ~24% pairwise and symmetric; a 41-0
+asymmetry cannot come from noise. Explaining first does not sharpen the
+decision, it *replaces* it with a different prior. Accuracy is untouched:
+21 tiles go correct->wrong and 20 wrong->correct (p=1.0).
+
+A second, smaller effect: relative to classify-only, adding an explanation
+*after* the label pulls calls toward HP (17 SSA->HP vs 1, p=0.0001). So the
+three prompt structures yield three different label distributions (55% /
+39% / 80% SSA) at the same ~57% accuracy — the label is a function of the
+prompt's shape, and the explanation is the mechanism that moves it, in
+whichever direction its position dictates. (`runs/ordering_abl100_analysis.json`,
+`analyze_ordering100.py`)
+
 ## Reproducing
 
 ```bash

@@ -1,0 +1,95 @@
+{
+  "image": "MHIST_cpt.png",
+  "source": "../images/MHIST_cpt.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "A2",
+    "A3",
+    "B2",
+    "B3",
+    "C2",
+    "C3",
+    "D2",
+    "D3"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.01,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 23.94,
+    "usable": true
+  },
+  "tile_tissue_px": 33917,
+  "tissue_px_per_cell": {
+    "A1": 879,
+    "A2": 1997,
+    "A3": 2439,
+    "A4": 2705,
+    "B1": 1219,
+    "B2": 2561,
+    "B3": 2454,
+    "B4": 2767,
+    "C1": 1103,
+    "C2": 2254,
+    "C3": 2262,
+    "C4": 2909,
+    "D1": 5,
+    "D2": 2260,
+    "D3": 3104,
+    "D4": 2999
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "B2",
+        "B3",
+        "D3"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 23.94
+    },
+    "random": {
+      "cells": [
+        "B1",
+        "C3",
+        "D2"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 16.93
+    },
+    "tissue_matched": {
+      "cells": [
+        "A3",
+        "B4",
+        "C4"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 4,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 23.93
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_cpt/cited__mean.png",
+    "masked/abl100_k3/MHIST_cpt/cited__blur.png",
+    "masked/abl100_k3/MHIST_cpt/cited__black.png",
+    "masked/abl100_k3/MHIST_cpt/random__mean.png",
+    "masked/abl100_k3/MHIST_cpt/random__blur.png",
+    "masked/abl100_k3/MHIST_cpt/random__black.png",
+    "masked/abl100_k3/MHIST_cpt/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_cpt/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_cpt/tissue_matched__black.png"
+  ]
+}

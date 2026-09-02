@@ -1,0 +1,165 @@
+{
+  "n_tiles": 100,
+  "conditions": {
+    "co_p1": {
+      "n": 100,
+      "accuracy": "59/100",
+      "acc_pct": 59.0,
+      "exact_95ci": [
+        0.4871,
+        0.6874
+      ],
+      "ssa_calls": 55,
+      "ssa_rate": 0.55,
+      "mean_confidence": 0.827
+    },
+    "cte_p1": {
+      "n": 100,
+      "accuracy": "57/100",
+      "acc_pct": 57.0,
+      "exact_95ci": [
+        0.4671,
+        0.6686
+      ],
+      "ssa_calls": 39,
+      "ssa_rate": 0.39,
+      "mean_confidence": 0.804
+    },
+    "etc_p1": {
+      "n": 100,
+      "accuracy": "56/100",
+      "acc_pct": 56.0,
+      "exact_95ci": [
+        0.4572,
+        0.6592
+      ],
+      "ssa_calls": 80,
+      "ssa_rate": 0.8,
+      "mean_confidence": 0.843
+    }
+  },
+  "pairs": {
+    "cte_vs_etc (ordering effect)": {
+      "n_shared": 100,
+      "cte_p1=HP->etc_p1=SSA": 41,
+      "cte_p1=SSA->etc_p1=HP": 0,
+      "agreement": 0.59,
+      "mcnemar_p": 0.0,
+      "flipped_tiles_HP_to_SSA": [
+        "abb",
+        "aek",
+        "aju",
+        "aqh",
+        "ash",
+        "aut",
+        "aux",
+        "bhn",
+        "bkj",
+        "ble",
+        "blj",
+        "bqc",
+        "bqv",
+        "bsd",
+        "bvc",
+        "bvz",
+        "cfq",
+        "chl",
+        "ckn",
+        "clg",
+        "con",
+        "cpm",
+        "cvb",
+        "cyb",
+        "cyj",
+        "cze",
+        "dax",
+        "ddf",
+        "dic",
+        "dio",
+        "djh",
+        "dln",
+        "dpi",
+        "dvl",
+        "dwn",
+        "edf",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo",
+        "equ"
+      ],
+      "flipped_tiles_SSA_to_HP": []
+    },
+    "co_vs_cte (does explaining change the label)": {
+      "n_shared": 100,
+      "co_p1=HP->cte_p1=SSA": 1,
+      "co_p1=SSA->cte_p1=HP": 17,
+      "agreement": 0.82,
+      "mcnemar_p": 0.0001,
+      "flipped_tiles_HP_to_SSA": [
+        "ase"
+      ],
+      "flipped_tiles_SSA_to_HP": [
+        "aek",
+        "ash",
+        "aux",
+        "blj",
+        "bqc",
+        "cfq",
+        "clg",
+        "cmt",
+        "con",
+        "cqp",
+        "cvb",
+        "cyb",
+        "dax",
+        "dln",
+        "dvl",
+        "edf",
+        "erd"
+      ]
+    },
+    "co_vs_etc": {
+      "n_shared": 100,
+      "co_p1=HP->etc_p1=SSA": 28,
+      "co_p1=SSA->etc_p1=HP": 3,
+      "agreement": 0.69,
+      "mcnemar_p": 0.0,
+      "flipped_tiles_HP_to_SSA": [
+        "abb",
+        "aju",
+        "aqh",
+        "ase",
+        "aut",
+        "bhn",
+        "bkj",
+        "ble",
+        "bqv",
+        "bsd",
+        "bvc",
+        "bvz",
+        "chl",
+        "ckn",
+        "cpm",
+        "cyj",
+        "cze",
+        "ddf",
+        "dic",
+        "dio",
+        "djh",
+        "dpi",
+        "dwn",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo",
+        "equ"
+      ],
+      "flipped_tiles_SSA_to_HP": [
+        "cmt",
+        "cqp",
+        "erd"
+      ]
+    }
+  }
+}

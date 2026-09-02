@@ -1,0 +1,94 @@
+{
+  "image": "MHIST_cre.png",
+  "source": "../images/MHIST_cre.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "B2",
+    "B3",
+    "C1",
+    "C2",
+    "C4",
+    "D1",
+    "D2"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.22,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 24.07,
+    "usable": true
+  },
+  "tile_tissue_px": 38980,
+  "tissue_px_per_cell": {
+    "A1": 310,
+    "A2": 600,
+    "A3": 1069,
+    "A4": 1044,
+    "B1": 2721,
+    "B2": 2974,
+    "B3": 3129,
+    "B4": 3063,
+    "C1": 3122,
+    "C2": 3131,
+    "C3": 3009,
+    "C4": 3122,
+    "D1": 3110,
+    "D2": 3060,
+    "D3": 2949,
+    "D4": 2567
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "B3",
+        "C1",
+        "C2"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 24.07
+    },
+    "random": {
+      "cells": [
+        "A2",
+        "B2",
+        "D2"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 17.02
+    },
+    "tissue_matched": {
+      "cells": [
+        "B4",
+        "C4",
+        "D1"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 87,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 23.85
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/cte_p1_full_k3/MHIST_cre/cited__mean.png",
+    "masked/cte_p1_full_k3/MHIST_cre/cited__blur.png",
+    "masked/cte_p1_full_k3/MHIST_cre/cited__black.png",
+    "masked/cte_p1_full_k3/MHIST_cre/random__mean.png",
+    "masked/cte_p1_full_k3/MHIST_cre/random__blur.png",
+    "masked/cte_p1_full_k3/MHIST_cre/random__black.png",
+    "masked/cte_p1_full_k3/MHIST_cre/tissue_matched__mean.png",
+    "masked/cte_p1_full_k3/MHIST_cre/tissue_matched__blur.png",
+    "masked/cte_p1_full_k3/MHIST_cre/tissue_matched__black.png"
+  ]
+}

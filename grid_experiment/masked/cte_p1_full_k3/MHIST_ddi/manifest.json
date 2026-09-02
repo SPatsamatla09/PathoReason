@@ -1,0 +1,92 @@
+{
+  "image": "MHIST_ddi.png",
+  "source": "../images/MHIST_ddi.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "C1",
+    "C2",
+    "C3",
+    "D1",
+    "D2"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.72,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 29.2,
+    "usable": true
+  },
+  "tile_tissue_px": 31420,
+  "tissue_px_per_cell": {
+    "A1": 1729,
+    "A2": 152,
+    "A3": 1,
+    "A4": 1,
+    "B1": 2700,
+    "B2": 2003,
+    "B3": 576,
+    "B4": 679,
+    "C1": 3136,
+    "C2": 3044,
+    "C3": 2862,
+    "C4": 3050,
+    "D1": 2996,
+    "D2": 2982,
+    "D3": 2916,
+    "D4": 2593
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "C1",
+        "C2",
+        "D1"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 29.2
+    },
+    "random": {
+      "cells": [
+        "A3",
+        "B1",
+        "D3"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 17.88
+    },
+    "tissue_matched": {
+      "cells": [
+        "C4",
+        "D2",
+        "D3"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 228,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 28.48
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/cte_p1_full_k3/MHIST_ddi/cited__mean.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/cited__blur.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/cited__black.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/random__mean.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/random__blur.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/random__black.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/tissue_matched__mean.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/tissue_matched__blur.png",
+    "masked/cte_p1_full_k3/MHIST_ddi/tissue_matched__black.png"
+  ]
+}

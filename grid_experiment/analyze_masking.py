@@ -20,8 +20,10 @@ import os
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-RUN = os.path.join(ROOT, "runs", "masking_cte_p1_k3.jsonl")
-OUT = os.path.join(ROOT, "runs", "masking_analysis.json")
+import sys
+_run = sys.argv[sys.argv.index("--run")+1] if "--run" in sys.argv else "runs/masking_cte_p1_k3.jsonl"
+RUN = os.path.join(ROOT, _run)
+OUT = RUN.replace(".jsonl", "_analysis.json")
 
 ARMS = ["cited", "tissue_matched"]
 OCCS = ["mean", "blur", "black"]
@@ -97,6 +99,24 @@ def main():
         "sign_test_p": round(sign_test_p(pos, neg), 4),
     }
 
+    # Tile-level contrast: the three occlusions of one tile mask the same cells
+    # against the same single baseline sample, so tile x occlusion pairs are
+    # pseudo-replicates. Net per tile = cited flips - control flips over the
+    # three occlusions; sign test on tiles with non-zero net.
+    net = defaultdict(int)
+    for occ in OCCS:
+        for img in sorted({r["image"] for r in ok}):
+            a = cell.get((img, "cited", occ)); b = cell.get((img, "tissue_matched", occ))
+            if not a or not b:
+                continue
+            net[img] += int(a["parsed"]["label"] != a["baseline"]["label"]) - int(b["parsed"]["label"] != b["baseline"]["label"])
+    t_pos = sum(1 for v in net.values() if v > 0); t_neg = sum(1 for v in net.values() if v < 0)
+    tile_level = {
+        "n_tiles": len(net), "tiles_cited_more": t_pos, "tiles_control_more": t_neg,
+        "tiles_tied": len(net) - t_pos - t_neg, "sign_test_p": round(sign_test_p(t_pos, t_neg), 4),
+        "note": "cluster-correct unit; pair-level p above is pseudo-replicated",
+    }
+
     match = [r["match_quality"]["tissue_gap_pp"] for r in ok if r["arm"] == "cited"]
     report = {
         "run": os.path.basename(RUN),
@@ -109,6 +129,7 @@ def main():
         "per_arm_occlusion": per_arm_occ,
         "cited_vs_control_contrast": contrasts,
         "pooled_contrast": pooled,
+        "tile_level_contrast": tile_level,
     }
     with open(OUT, "w") as fh:
         json.dump(report, fh, indent=2)

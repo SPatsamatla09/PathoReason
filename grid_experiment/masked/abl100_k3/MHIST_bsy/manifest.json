@@ -1,0 +1,95 @@
+{
+  "image": "MHIST_bsy.png",
+  "source": "../images/MHIST_bsy.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "B2",
+    "B3",
+    "B4",
+    "C1",
+    "C2",
+    "C3",
+    "D1",
+    "D2"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.38,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 30.19,
+    "usable": true
+  },
+  "tile_tissue_px": 30926,
+  "tissue_px_per_cell": {
+    "A1": 0,
+    "A2": 0,
+    "A3": 7,
+    "A4": 31,
+    "B1": 462,
+    "B2": 1580,
+    "B3": 2225,
+    "B4": 2119,
+    "C1": 3100,
+    "C2": 3125,
+    "C3": 3113,
+    "C4": 3133,
+    "D1": 3008,
+    "D2": 2948,
+    "D3": 2996,
+    "D4": 3079
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 30.19
+    },
+    "random": {
+      "cells": [
+        "A4",
+        "B2",
+        "C4"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 15.34
+    },
+    "tissue_matched": {
+      "cells": [
+        "C4",
+        "D1",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 118,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 29.81
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_bsy/cited__mean.png",
+    "masked/abl100_k3/MHIST_bsy/cited__blur.png",
+    "masked/abl100_k3/MHIST_bsy/cited__black.png",
+    "masked/abl100_k3/MHIST_bsy/random__mean.png",
+    "masked/abl100_k3/MHIST_bsy/random__blur.png",
+    "masked/abl100_k3/MHIST_bsy/random__black.png",
+    "masked/abl100_k3/MHIST_bsy/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_bsy/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_bsy/tissue_matched__black.png"
+  ]
+}

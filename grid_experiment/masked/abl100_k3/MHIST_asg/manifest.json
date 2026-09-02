@@ -1,0 +1,96 @@
+{
+  "image": "MHIST_asg.png",
+  "source": "../images/MHIST_asg.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "B1",
+    "B2",
+    "B3",
+    "C1",
+    "C2",
+    "C3",
+    "D1",
+    "D2",
+    "D3"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.01,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 30.65,
+    "usable": true
+  },
+  "tile_tissue_px": 30689,
+  "tissue_px_per_cell": {
+    "A1": 105,
+    "A2": 3,
+    "A3": 0,
+    "A4": 2,
+    "B1": 2525,
+    "B2": 2229,
+    "B3": 1152,
+    "B4": 141,
+    "C1": 3133,
+    "C2": 3134,
+    "C3": 3135,
+    "C4": 2589,
+    "D1": 3136,
+    "D2": 3136,
+    "D3": 3134,
+    "D4": 3135
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "C3",
+        "D1",
+        "D2"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 30.65
+    },
+    "random": {
+      "cells": [
+        "A3",
+        "A4",
+        "C1"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 10.22
+    },
+    "tissue_matched": {
+      "cells": [
+        "C2",
+        "D3",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 4,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 30.64
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_asg/cited__mean.png",
+    "masked/abl100_k3/MHIST_asg/cited__blur.png",
+    "masked/abl100_k3/MHIST_asg/cited__black.png",
+    "masked/abl100_k3/MHIST_asg/random__mean.png",
+    "masked/abl100_k3/MHIST_asg/random__blur.png",
+    "masked/abl100_k3/MHIST_asg/random__black.png",
+    "masked/abl100_k3/MHIST_asg/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_asg/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_asg/tissue_matched__black.png"
+  ]
+}

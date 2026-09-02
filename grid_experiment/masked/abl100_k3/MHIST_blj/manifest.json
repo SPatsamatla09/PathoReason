@@ -1,0 +1,94 @@
+{
+  "image": "MHIST_blj.png",
+  "source": "../images/MHIST_blj.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "A1",
+    "A2",
+    "A3",
+    "B1",
+    "B2",
+    "C1",
+    "C2"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 2.17,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 27.58,
+    "usable": true
+  },
+  "tile_tissue_px": 31544,
+  "tissue_px_per_cell": {
+    "A1": 1662,
+    "A2": 1187,
+    "A3": 1655,
+    "A4": 2455,
+    "B1": 2680,
+    "B2": 2768,
+    "B3": 2799,
+    "B4": 2382,
+    "C1": 2920,
+    "C2": 3012,
+    "C3": 2125,
+    "C4": 529,
+    "D1": 2483,
+    "D2": 2537,
+    "D3": 350,
+    "D4": 0
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 27.58
+    },
+    "random": {
+      "cells": [
+        "A3",
+        "C3",
+        "D3"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 13.09
+    },
+    "tissue_matched": {
+      "cells": [
+        "B1",
+        "B3",
+        "D2"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 684,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 25.41
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_blj/cited__mean.png",
+    "masked/abl100_k3/MHIST_blj/cited__blur.png",
+    "masked/abl100_k3/MHIST_blj/cited__black.png",
+    "masked/abl100_k3/MHIST_blj/random__mean.png",
+    "masked/abl100_k3/MHIST_blj/random__blur.png",
+    "masked/abl100_k3/MHIST_blj/random__black.png",
+    "masked/abl100_k3/MHIST_blj/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_blj/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_blj/tissue_matched__black.png"
+  ]
+}

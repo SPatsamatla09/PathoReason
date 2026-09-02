@@ -1,0 +1,92 @@
+{
+  "image": "MHIST_ase.png",
+  "source": "../images/MHIST_ase.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "D2"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.99,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 34.64,
+    "usable": true
+  },
+  "tile_tissue_px": 27040,
+  "tissue_px_per_cell": {
+    "A1": 0,
+    "A2": 0,
+    "A3": 0,
+    "A4": 59,
+    "B1": 99,
+    "B2": 242,
+    "B3": 924,
+    "B4": 2535,
+    "C1": 3115,
+    "C2": 2964,
+    "C3": 3124,
+    "C4": 3000,
+    "D1": 3135,
+    "D2": 3128,
+    "D3": 2244,
+    "D4": 2471
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "C1",
+        "C3",
+        "D2"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 34.64
+    },
+    "random": {
+      "cells": [
+        "A3",
+        "B3",
+        "C2"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 14.38
+    },
+    "tissue_matched": {
+      "cells": [
+        "C2",
+        "C4",
+        "D1"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 268,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 33.65
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/abl100_k3/MHIST_ase/cited__mean.png",
+    "masked/abl100_k3/MHIST_ase/cited__blur.png",
+    "masked/abl100_k3/MHIST_ase/cited__black.png",
+    "masked/abl100_k3/MHIST_ase/random__mean.png",
+    "masked/abl100_k3/MHIST_ase/random__blur.png",
+    "masked/abl100_k3/MHIST_ase/random__black.png",
+    "masked/abl100_k3/MHIST_ase/tissue_matched__mean.png",
+    "masked/abl100_k3/MHIST_ase/tissue_matched__blur.png",
+    "masked/abl100_k3/MHIST_ase/tissue_matched__black.png"
+  ]
+}
