@@ -1,0 +1,6 @@
+image,n_repetitions,label_stable,mean_pairwise_citation_jaccard,citation_jaccard_below_0_50,any_instability
+MHIST_ccn.png,5,False,0.9111,False,True
+MHIST_cxx.png,5,True,0.7778,False,False
+MHIST_ddn.png,5,True,0.4794,True,True
+MHIST_ekm.png,5,False,0.9069,False,True
+MHIST_epj.png,5,False,0.4861,True,True

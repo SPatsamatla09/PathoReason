@@ -1,0 +1,3 @@
+rating_id,model_group,feature,description,stated_label
+r032,Gemma,stroma,There is an abundance of lamina propria and stroma between the distorted glandular structures.,SSA
+r081,Gemma,inflammatory infiltrate,There is a moderate amount of lymphoplasmacytic cells within the lamina propria.,HP

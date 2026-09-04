@@ -1,0 +1,9 @@
+category,unit,denominator,conservative_count,flagged_by_at_least_one_rater,status
+Visually unsupported in cited cells,rated evidence item,100,0.0,42.0,not reliably resolved because presence kappa is approximately zero
+Hallucinated feature,rated evidence item,100,,,not separately measured; requires confirming absence from the entire tile
+"Correct feature, wrong cited region",rated evidence item,100,,,not separately measured; form assessed cited cells but not whole-tile presence
+"Correct cited region, diagnostically irrelevant",rated evidence item,100,2.0,,"confirmed only when both raters marked present, irrelevant, and neutral"
+Evidence contradicts stated label,rated evidence item,100,0.0,20.0,two-rater conservative and one-rater screening counts
+Label unstable across repeated samples,source image,5,3.0,,model output changed label across five repetitions
+Citation localization unstable (mean Jaccard < 0.50),source image,5,2.0,,descriptive threshold applied to five repetitions
+Any sampled-output instability,source image,5,4.0,,label instability or citation Jaccard below 0.50

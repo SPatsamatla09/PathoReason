@@ -1,0 +1,8 @@
+{
+  "n_items": 100,
+  "n_unique_rating_ids": 100,
+  "n_unique_source_images": 19,
+  "all_required_ratings_complete": true,
+  "private_key_copied_to_output": false,
+  "raw_ratings_copied_to_output": false
+}
