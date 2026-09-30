@@ -1,0 +1,114 @@
+{
+  "unit": "tile",
+  "skipped_unfinished_extensions": [],
+  "sources": {
+    "B": "runs/masking_cte_p1_full_k3.jsonl",
+    "C": "runs/masking_abl100_k3.jsonl"
+  },
+  "integrity": {
+    "B": {
+      "records": 600,
+      "errors": 0,
+      "invalid_label": 0,
+      "incomplete_tiles": [],
+      "mixed_host_tiles": [],
+      "complete_tiles": 100
+    },
+    "C": {
+      "records": 600,
+      "errors": 0,
+      "invalid_label": 0,
+      "incomplete_tiles": [],
+      "mixed_host_tiles": [],
+      "complete_tiles": 100
+    }
+  },
+  "duplicates_identical_records_counted_once": 15,
+  "duplicate_conflicts_different_records": [],
+  "primary_pooled_unique_tiles": {
+    "n_tiles": 185,
+    "tiles_cited_more": 54,
+    "tiles_control_more": 47,
+    "tiles_tied": 84,
+    "sign_test_p": 0.5507,
+    "mean_net_per_tile": 0.0486,
+    "mean_net_bootstrap_95ci": [
+      -0.1405,
+      0.2324
+    ],
+    "pair_level_cited_only": 92,
+    "pair_level_control_only": 83,
+    "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+  },
+  "per_sweep_as_run": {
+    "B": {
+      "n_tiles": 100,
+      "tiles_cited_more": 23,
+      "tiles_control_more": 29,
+      "tiles_tied": 48,
+      "sign_test_p": 0.4885,
+      "mean_net_per_tile": -0.14,
+      "mean_net_bootstrap_95ci": [
+        -0.39,
+        0.1
+      ],
+      "pair_level_cited_only": 40,
+      "pair_level_control_only": 54,
+      "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+    },
+    "C": {
+      "n_tiles": 100,
+      "tiles_cited_more": 34,
+      "tiles_control_more": 22,
+      "tiles_tied": 44,
+      "sign_test_p": 0.1409,
+      "mean_net_per_tile": 0.21,
+      "mean_net_bootstrap_95ci": [
+        -0.04,
+        0.46
+      ],
+      "pair_level_cited_only": 58,
+      "pair_level_control_only": 37,
+      "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+    }
+  },
+  "per_host_unique_tiles": {
+    "legacy-cerebras__gemma-4-31b": {
+      "n_tiles": 185,
+      "tiles_cited_more": 54,
+      "tiles_control_more": 47,
+      "tiles_tied": 84,
+      "sign_test_p": 0.5507,
+      "mean_net_per_tile": 0.0486,
+      "mean_net_bootstrap_95ci": [
+        -0.1405,
+        0.2324
+      ],
+      "pair_level_cited_only": 92,
+      "pair_level_control_only": 83,
+      "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+    }
+  },
+  "min_detectable_effect_80pct_power": {
+    "n_nontied": 101,
+    "min_cited_share": 0.64,
+    "as_odds": "1.78:1 cited:control among non-tied tiles"
+  },
+  "sensitivity_plus_pilot_tiles_not_otherwise_present": {
+    "added_tiles": 2,
+    "n_tiles": 187,
+    "tiles_cited_more": 54,
+    "tiles_control_more": 49,
+    "tiles_tied": 84,
+    "sign_test_p": 0.6937,
+    "mean_net_per_tile": 0.0374,
+    "mean_net_bootstrap_95ci": [
+      -0.1497,
+      0.2246
+    ],
+    "pair_level_cited_only": 92,
+    "pair_level_control_only": 85,
+    "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+  },
+  "scope": "legacy only: sweeps B + C, Cerebras gemma-4-31b (model since archived)"
+}

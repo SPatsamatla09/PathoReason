@@ -1,0 +1,995 @@
+{
+  "host": "openrouter__google-gemma-4-31b-it__friendli",
+  "K_replicates": 3,
+  "n_tiles_planned": 100,
+  "n_tiles_analysed": 100,
+  "dropped_incomplete_tiles": [],
+  "gate_warnings": [],
+  "providers": {
+    "('https://openrouter.ai/api/v1', 'google/gemma-4-31b-it', 'Friendli')": 2400
+  },
+  "counts": {
+    "co": {
+      "records": 300,
+      "valid": 300
+    },
+    "cte": {
+      "records": 300,
+      "valid": 300
+    },
+    "etc": {
+      "records": 300,
+      "valid": 300
+    },
+    "ins_filler": {
+      "records": 300,
+      "valid": 300
+    },
+    "ins_checklist": {
+      "records": 300,
+      "valid": 300
+    },
+    "ins_copied": {
+      "records": 300,
+      "valid": 300
+    },
+    "describe_first": {
+      "records": 300,
+      "valid": 300
+    },
+    "ins_self": {
+      "records": 300,
+      "valid": 300
+    }
+  },
+  "conditions": {
+    "co": {
+      "n_calls": 300,
+      "accuracy": 0.6533,
+      "ssa_rate": 0.5
+    },
+    "cte": {
+      "n_calls": 300,
+      "accuracy": 0.6133,
+      "ssa_rate": 0.3333
+    },
+    "etc": {
+      "n_calls": 300,
+      "accuracy": 0.6,
+      "ssa_rate": 0.6733
+    },
+    "ins_filler": {
+      "n_calls": 300,
+      "accuracy": 0.63,
+      "ssa_rate": 0.51
+    },
+    "ins_checklist": {
+      "n_calls": 300,
+      "accuracy": 0.63,
+      "ssa_rate": 0.63
+    },
+    "ins_copied": {
+      "n_calls": 300,
+      "accuracy": 0.5,
+      "ssa_rate": 0.56
+    },
+    "describe_first": {
+      "n_calls": 300,
+      "accuracy": 0.5467,
+      "ssa_rate": 0.6067
+    },
+    "ins_self": {
+      "n_calls": 300,
+      "accuracy": 0.57,
+      "ssa_rate": 0.81
+    }
+  },
+  "legacy_cerebras_reference": {
+    "co_vs_etc": {
+      "n_shared": 100,
+      "HP_to_SSA": 28,
+      "SSA_to_HP": 3,
+      "flip_rate": 0.31,
+      "mcnemar_p": 4.649162292480469e-06,
+      "flipped_HP_to_SSA": [
+        "abb",
+        "aju",
+        "aqh",
+        "ase",
+        "aut",
+        "bhn",
+        "bkj",
+        "ble",
+        "bqv",
+        "bsd",
+        "bvc",
+        "bvz",
+        "chl",
+        "ckn",
+        "cpm",
+        "cyj",
+        "cze",
+        "ddf",
+        "dic",
+        "dio",
+        "djh",
+        "dpi",
+        "dwn",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo",
+        "equ"
+      ],
+      "flipped_SSA_to_HP": [
+        "cmt",
+        "cqp",
+        "erd"
+      ]
+    },
+    "cte_vs_etc": {
+      "n_shared": 100,
+      "HP_to_SSA": 41,
+      "SSA_to_HP": 0,
+      "flip_rate": 0.41,
+      "mcnemar_p": 9.094947017729282e-13,
+      "flipped_HP_to_SSA": [
+        "abb",
+        "aek",
+        "aju",
+        "aqh",
+        "ash",
+        "aut",
+        "aux",
+        "bhn",
+        "bkj",
+        "ble",
+        "blj",
+        "bqc",
+        "bqv",
+        "bsd",
+        "bvc",
+        "bvz",
+        "cfq",
+        "chl",
+        "ckn",
+        "clg",
+        "con",
+        "cpm",
+        "cvb",
+        "cyb",
+        "cyj",
+        "cze",
+        "dax",
+        "ddf",
+        "dic",
+        "dio",
+        "djh",
+        "dln",
+        "dpi",
+        "dvl",
+        "dwn",
+        "edf",
+        "ekh",
+        "ekm",
+        "epj",
+        "epo",
+        "equ"
+      ],
+      "flipped_SSA_to_HP": []
+    },
+    "note": "Cerebras gemma-4-31b (now archived), all planned tiles; reference only, never compared statistically"
+  },
+  "reproduction": {
+    "co_vs_etc_rep1": {
+      "n_shared": 100,
+      "HP_to_SSA": 23,
+      "SSA_to_HP": 9,
+      "flip_rate": 0.32,
+      "mcnemar_p": 0.020061607006937265,
+      "flipped_HP_to_SSA": [
+        "aek",
+        "aju",
+        "ant",
+        "asa",
+        "ash",
+        "aut",
+        "aux",
+        "bea",
+        "bgk",
+        "bvc",
+        "bzm",
+        "cfq",
+        "ckn",
+        "cmt",
+        "coh",
+        "cze",
+        "dax",
+        "ddf",
+        "dzq",
+        "ekm",
+        "elj",
+        "epj",
+        "equ"
+      ],
+      "flipped_SSA_to_HP": [
+        "apc",
+        "bmy",
+        "bvz",
+        "cek",
+        "cqp",
+        "cuu",
+        "cvw",
+        "dfn",
+        "erd"
+      ]
+    },
+    "cte_vs_etc_rep1": {
+      "n_shared": 100,
+      "HP_to_SSA": 36,
+      "SSA_to_HP": 1,
+      "flip_rate": 0.37,
+      "mcnemar_p": 5.529727786779404e-10,
+      "flipped_HP_to_SSA": [
+        "aek",
+        "ajp",
+        "aju",
+        "ant",
+        "aqh",
+        "asa",
+        "ash",
+        "aut",
+        "aux",
+        "bea",
+        "ble",
+        "bqc",
+        "bvc",
+        "byb",
+        "bzm",
+        "cgp",
+        "cki",
+        "ckn",
+        "cmt",
+        "cnh",
+        "coh",
+        "cvb",
+        "cze",
+        "dax",
+        "dbe",
+        "ddf",
+        "ddn",
+        "dey",
+        "djh",
+        "dtq",
+        "dwn",
+        "dzq",
+        "edf",
+        "ekm",
+        "epj",
+        "equ"
+      ],
+      "flipped_SSA_to_HP": [
+        "bmy"
+      ]
+    },
+    "co_vs_cte_rep1": {
+      "n_shared": 100,
+      "HP_to_SSA": 3,
+      "SSA_to_HP": 24,
+      "flip_rate": 0.27,
+      "mcnemar_p": 4.9233436584472656e-05,
+      "flipped_HP_to_SSA": [
+        "bgk",
+        "cfq",
+        "elj"
+      ],
+      "flipped_SSA_to_HP": [
+        "ajp",
+        "apc",
+        "aqh",
+        "ble",
+        "bqc",
+        "bvz",
+        "byb",
+        "cek",
+        "cgp",
+        "cki",
+        "cnh",
+        "cqp",
+        "cuu",
+        "cvb",
+        "cvw",
+        "dbe",
+        "ddn",
+        "dey",
+        "dfn",
+        "djh",
+        "dtq",
+        "dwn",
+        "edf",
+        "erd"
+      ]
+    },
+    "co_vs_etc_delta": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.1733,
+      "ci95": [
+        0.09,
+        0.2567
+      ],
+      "ci90": [
+        0.1033,
+        0.2433
+      ],
+      "signflip_p": 0.0002999850007499625
+    },
+    "gate": "PASS"
+  },
+  "noise_floor": {
+    "co_rep1_vs_rep2": {
+      "n_shared": 100,
+      "HP_to_SSA": 5,
+      "SSA_to_HP": 11,
+      "flip_rate": 0.16,
+      "mcnemar_p": 0.210113525390625,
+      "flipped_HP_to_SSA": [
+        "aqj",
+        "bgk",
+        "bzm",
+        "dax",
+        "efr"
+      ],
+      "flipped_SSA_to_HP": [
+        "abb",
+        "byb",
+        "cgp",
+        "cki",
+        "clg",
+        "cqp",
+        "dbe",
+        "ddn",
+        "dfn",
+        "dwn",
+        "erd"
+      ]
+    },
+    "co_rep1_vs_rep3": {
+      "n_shared": 100,
+      "HP_to_SSA": 12,
+      "SSA_to_HP": 6,
+      "flip_rate": 0.18,
+      "mcnemar_p": 0.237884521484375,
+      "flipped_HP_to_SSA": [
+        "asa",
+        "ase",
+        "aut",
+        "bgk",
+        "bsd",
+        "bzm",
+        "cfq",
+        "cmt",
+        "dax",
+        "dzq",
+        "efr",
+        "ekm"
+      ],
+      "flipped_SSA_to_HP": [
+        "apc",
+        "bvz",
+        "byb",
+        "cnh",
+        "cqp",
+        "dey"
+      ]
+    },
+    "co_tiles_label_unstable_across_reps": 28
+  },
+  "primary_vs_classify_only": {
+    "ins_filler": {
+      "rep1_vs_classify_only": {
+        "n_shared": 100,
+        "HP_to_SSA": 9,
+        "SSA_to_HP": 8,
+        "flip_rate": 0.17,
+        "mcnemar_p": 1.0,
+        "flipped_HP_to_SSA": [
+          "asa",
+          "ash",
+          "aut",
+          "bgk",
+          "bvc",
+          "bzm",
+          "cfq",
+          "ddf",
+          "efr"
+        ],
+        "flipped_SSA_to_HP": [
+          "aqh",
+          "bvz",
+          "cek",
+          "cnh",
+          "cqp",
+          "cuu",
+          "dfn",
+          "dwn"
+        ]
+      },
+      "estimand": {
+        "n_tiles": 100,
+        "delta_ssa_rate": 0.01,
+        "ci95": [
+          -0.05,
+          0.07
+        ],
+        "ci90": [
+          -0.04,
+          0.06
+        ],
+        "signflip_p": 0.8264586770661467
+      },
+      "holm_p": 0.826459,
+      "classification": "equivalent to classify-only (within +/-10 pts)"
+    },
+    "ins_checklist": {
+      "rep1_vs_classify_only": {
+        "n_shared": 100,
+        "HP_to_SSA": 18,
+        "SSA_to_HP": 4,
+        "flip_rate": 0.22,
+        "mcnemar_p": 0.004343509674072266,
+        "flipped_HP_to_SSA": [
+          "asa",
+          "ash",
+          "aut",
+          "bea",
+          "bgk",
+          "bjd",
+          "bvc",
+          "bxx",
+          "bzm",
+          "ckn",
+          "cmt",
+          "cyb",
+          "dzq",
+          "efr",
+          "ekm",
+          "elj",
+          "epj",
+          "epo"
+        ],
+        "flipped_SSA_to_HP": [
+          "bvz",
+          "cuu",
+          "ddn",
+          "erd"
+        ]
+      },
+      "estimand": {
+        "n_tiles": 100,
+        "delta_ssa_rate": 0.13,
+        "ci95": [
+          0.0667,
+          0.1933
+        ],
+        "ci90": [
+          0.0767,
+          0.1833
+        ],
+        "signflip_p": 9.99950002499875e-05
+      },
+      "holm_p": 0.0004,
+      "classification": "shift toward SSA"
+    },
+    "ins_copied": {
+      "rep1_vs_classify_only": {
+        "n_shared": 100,
+        "HP_to_SSA": 28,
+        "SSA_to_HP": 22,
+        "flip_rate": 0.5,
+        "mcnemar_p": 0.47988766169832786,
+        "flipped_HP_to_SSA": [
+          "afn",
+          "aju",
+          "aqj",
+          "asa",
+          "ase",
+          "asg",
+          "bjd",
+          "bqv",
+          "bsy",
+          "bxx",
+          "bzm",
+          "cco",
+          "cfq",
+          "chl",
+          "ckn",
+          "cmt",
+          "cng",
+          "cpm",
+          "cyb",
+          "cze",
+          "dic",
+          "dpi",
+          "dtj",
+          "dvl",
+          "efr",
+          "ekm",
+          "elj",
+          "epo"
+        ],
+        "flipped_SSA_to_HP": [
+          "aag",
+          "apc",
+          "aqh",
+          "ave",
+          "ble",
+          "blj",
+          "byq",
+          "cek",
+          "cgp",
+          "con",
+          "cpd",
+          "cvb",
+          "cvw",
+          "cxx",
+          "dad",
+          "dbe",
+          "dij",
+          "dio",
+          "dln",
+          "ebl",
+          "edf",
+          "erd"
+        ]
+      },
+      "estimand": {
+        "n_tiles": 100,
+        "delta_ssa_rate": 0.06,
+        "ci95": [
+          -0.0733,
+          0.19
+        ],
+        "ci90": [
+          -0.05,
+          0.17
+        ],
+        "signflip_p": 0.4016299185040748
+      },
+      "holm_p": 0.80326,
+      "classification": "inconclusive"
+    },
+    "describe_first": {
+      "rep1_vs_classify_only": {
+        "n_shared": 100,
+        "HP_to_SSA": 21,
+        "SSA_to_HP": 10,
+        "flip_rate": 0.31,
+        "mcnemar_p": 0.07075554598122835,
+        "flipped_HP_to_SSA": [
+          "aek",
+          "afn",
+          "asa",
+          "aut",
+          "aux",
+          "bea",
+          "bgk",
+          "bsy",
+          "bxx",
+          "bzm",
+          "cfq",
+          "cmt",
+          "cyj",
+          "dax",
+          "ddf",
+          "dic",
+          "dzq",
+          "efr",
+          "epj",
+          "epo",
+          "equ"
+        ],
+        "flipped_SSA_to_HP": [
+          "abb",
+          "bmy",
+          "byb",
+          "cnh",
+          "cuu",
+          "cvw",
+          "ddn",
+          "dio",
+          "djh",
+          "edf"
+        ]
+      },
+      "estimand": {
+        "n_tiles": 100,
+        "delta_ssa_rate": 0.1067,
+        "ci95": [
+          0.0467,
+          0.17
+        ],
+        "ci90": [
+          0.0567,
+          0.16
+        ],
+        "signflip_p": 0.0010999450027498626
+      },
+      "holm_p": 0.0033,
+      "classification": "shift toward SSA"
+    }
+  },
+  "secondary": {
+    "ins_self_vs_classify_only": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.31,
+      "ci95": [
+        0.2133,
+        0.4033
+      ],
+      "ci90": [
+        0.23,
+        0.39
+      ],
+      "signflip_p": 4.999750012499375e-05
+    },
+    "ins_self_minus_ins_copied": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.25,
+      "ci95": [
+        0.12,
+        0.38
+      ],
+      "ci90": [
+        0.14,
+        0.36
+      ],
+      "signflip_p": 0.0007499625018749063
+    },
+    "etc_minus_ins_self": {
+      "n_tiles": 100,
+      "delta_ssa_rate": -0.1367,
+      "ci95": [
+        -0.21,
+        -0.0633
+      ],
+      "ci90": [
+        -0.2,
+        -0.0733
+      ],
+      "signflip_p": 0.0005499725013749313
+    },
+    "etc_minus_ins_filler": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.1633,
+      "ci95": [
+        0.0933,
+        0.2333
+      ],
+      "ci90": [
+        0.1033,
+        0.2233
+      ],
+      "signflip_p": 4.999750012499375e-05
+    },
+    "etc_minus_ins_checklist": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.0433,
+      "ci95": [
+        -0.03,
+        0.1167
+      ],
+      "ci90": [
+        -0.02,
+        0.1033
+      ],
+      "signflip_p": 0.28528573571321436
+    },
+    "etc_minus_ins_copied": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.1133,
+      "ci95": [
+        -0.0167,
+        0.2467
+      ],
+      "ci90": [
+        0.0033,
+        0.22
+      ],
+      "signflip_p": 0.10919454027298635
+    },
+    "etc_minus_describe_first": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.0667,
+      "ci95": [
+        -0.01,
+        0.1433
+      ],
+      "ci90": [
+        0.0033,
+        0.1333
+      ],
+      "signflip_p": 0.11214439278036098
+    },
+    "direction_matched_HP_text": {
+      "ins_self_shift": {
+        "n_tiles": 20,
+        "delta_ssa_rate": -0.15,
+        "ci95": [
+          -0.3333,
+          0.0333
+        ],
+        "ci90": [
+          -0.3,
+          0.0
+        ],
+        "signflip_p": 0.1774911254437278
+      },
+      "ins_copied_shift": {
+        "n_tiles": 50,
+        "delta_ssa_rate": -0.38,
+        "ci95": [
+          -0.5467,
+          -0.2133
+        ],
+        "ci90": [
+          -0.52,
+          -0.24
+        ],
+        "signflip_p": 0.000199990000499975
+      },
+      "difference_self_minus_copied": 0.23,
+      "note": "unpaired (different tiles); descriptive"
+    },
+    "direction_matched_SSA_text": {
+      "ins_self_shift": {
+        "n_tiles": 80,
+        "delta_ssa_rate": 0.425,
+        "ci95": [
+          0.3333,
+          0.5167
+        ],
+        "ci90": [
+          0.35,
+          0.5042
+        ],
+        "signflip_p": 4.999750012499375e-05
+      },
+      "ins_copied_shift": {
+        "n_tiles": 50,
+        "delta_ssa_rate": 0.5,
+        "ci95": [
+          0.3867,
+          0.6133
+        ],
+        "ci90": [
+          0.4067,
+          0.5933
+        ],
+        "signflip_p": 4.999750012499375e-05
+      },
+      "difference_self_minus_copied": -0.075,
+      "note": "unpaired (different tiles); descriptive"
+    },
+    "ins_self_without_lexical_SSA_texts": {
+      "n_tiles": 85,
+      "delta_ssa_rate": 0.3686,
+      "ci95": [
+        0.2706,
+        0.4627
+      ],
+      "ci90": [
+        0.2863,
+        0.4471
+      ],
+      "signflip_p": 4.999750012499375e-05
+    },
+    "ins_self_n_lexical_SSA_texts": 15,
+    "ins_copied_by_donor_cells_on_recipient_background": {
+      "cells_hit_background": {
+        "n_tiles": 50,
+        "delta_ssa_rate": 0.1867,
+        "ci95": [
+          -0.0133,
+          0.3733
+        ],
+        "ci90": [
+          0.02,
+          0.3467
+        ],
+        "signflip_p": 0.08054597270136493
+      },
+      "cells_on_tissue": {
+        "n_tiles": 50,
+        "delta_ssa_rate": -0.0667,
+        "ci95": [
+          -0.24,
+          0.1067
+        ],
+        "ci90": [
+          -0.2133,
+          0.08
+        ],
+        "signflip_p": 0.5013749312534374
+      },
+      "note": "descriptive"
+    }
+  },
+  "secondary_note": "All secondary contrasts are descriptive. etc minus each control differs in instruction wording and output format as well as content. ins_self_minus_ins_copied is NOT a tile-specificity test: ins_self texts are 80% SSA-direction vs 50/50 for donors, 15 name SSA lexically, and both were generated on Cerebras; read the direction-matched and lexical-split rows instead.",
+  "exploratory_donor_direction": {
+    "statistic": "HP-text minus SSA-text mean recipient SSA-shift (stratum-adjusted); Welch t over donor texts",
+    "difference": -0.8868,
+    "welch_t": -7.662,
+    "text_level_permutation_p": 0.0001999600079984003,
+    "texts": {
+      "HP": 9,
+      "SSA": 50
+    },
+    "note": "exploratory and underpowered: 9 HP texts"
+  },
+  "exploratory_checklist_order": {
+    "statistic": "SSA-shift hp_first minus ssa_first",
+    "value": 0.0418,
+    "permutation_p": 0.5100979804039192
+  },
+  "manipulation_checks": {
+    "ins_self": {
+      "order_fail": 0,
+      "failed_manipulation_total": 0,
+      "of": 300,
+      "median_copy_similarity": 1.0,
+      "preamble_words_median": 52
+    },
+    "ins_checklist": {
+      "order_fail": 0,
+      "failed_manipulation_total": 0,
+      "of": 300,
+      "median_copy_similarity": 1.0,
+      "preamble_words_median": 54
+    },
+    "etc": {
+      "order_fail": 0,
+      "failed_manipulation_total": 0,
+      "of": 300
+    },
+    "ins_filler": {
+      "order_fail": 0,
+      "failed_manipulation_total": 0,
+      "of": 300,
+      "median_copy_similarity": 1.0,
+      "preamble_words_median": 52
+    },
+    "describe_first": {
+      "order_fail": 0,
+      "failed_manipulation_total": 130,
+      "of": 300,
+      "with_diagnostic_terms": 46,
+      "with_criterion_paraphrases": 125,
+      "most_common_terms": [
+        [
+          "jagged",
+          66
+        ],
+        [
+          "\\btooth",
+          57
+        ],
+        [
+          "saw-tooth",
+          38
+        ],
+        [
+          "\\bbranch",
+          27
+        ],
+        [
+          "zig-?zag",
+          12
+        ],
+        [
+          "sawtooth",
+          7
+        ],
+        [
+          "\\bwiden",
+          4
+        ],
+        [
+          "toothed",
+          1
+        ],
+        [
+          "gland",
+          1
+        ]
+      ],
+      "preamble_words_median": 39
+    },
+    "ins_copied": {
+      "order_fail": 0,
+      "failed_manipulation_total": 0,
+      "of": 300,
+      "median_copy_similarity": 1.0,
+      "preamble_words_median": 51
+    }
+  },
+  "sensitivity_failed_manipulations_dropped": {
+    "ins_filler": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.01,
+      "ci95": [
+        -0.05,
+        0.07
+      ],
+      "ci90": [
+        -0.04,
+        0.06
+      ],
+      "signflip_p": 0.8336583170841458
+    },
+    "ins_checklist": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.13,
+      "ci95": [
+        0.0667,
+        0.1933
+      ],
+      "ci90": [
+        0.0767,
+        0.1833
+      ],
+      "signflip_p": 0.00024998750062496874
+    },
+    "ins_copied": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.06,
+      "ci95": [
+        -0.07,
+        0.19
+      ],
+      "ci90": [
+        -0.05,
+        0.1733
+      ],
+      "signflip_p": 0.40687965601719916
+    },
+    "describe_first": {
+      "n_tiles": 90,
+      "delta_ssa_rate": 0.0481,
+      "ci95": [
+        -0.0241,
+        0.1185
+      ],
+      "ci90": [
+        -0.0111,
+        0.1093
+      ],
+      "signflip_p": 0.21493925303734812
+    },
+    "ins_self": {
+      "n_tiles": 100,
+      "delta_ssa_rate": 0.31,
+      "ci95": [
+        0.2167,
+        0.4033
+      ],
+      "ci90": [
+        0.23,
+        0.39
+      ],
+      "signflip_p": 4.999750012499375e-05
+    }
+  },
+  "sensitivity_etc_order_ok_only": {
+    "n_tiles": 100,
+    "delta_ssa_rate": 0.1733,
+    "ci95": [
+      0.09,
+      0.26
+    ],
+    "ci90": [
+      0.1033,
+      0.2433
+    ],
+    "signflip_p": 9.99950002499875e-05
+  }
+}

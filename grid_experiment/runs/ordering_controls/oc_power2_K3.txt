@@ -1,0 +1,7 @@
+K=3 trueD=0.000 R=400 equivalent to classify-only=0.963 inconclusive=0.028 shift toward HP=0.003 shift toward SSA=0.007
+K=3 trueD=0.030 R=400 equivalent to classify-only=0.825 inconclusive=0.100 shift toward SSA=0.075
+K=3 trueD=0.050 R=400 equivalent to classify-only=0.547 inconclusive=0.270 shift toward SSA=0.182
+K=3 trueD=0.075 R=400 equivalent to classify-only=0.193 inconclusive=0.285 shift toward SSA=0.522
+K=3 trueD=0.100 R=400 equivalent to classify-only=0.025 inconclusive=0.160 shift toward SSA=0.815
+K=3 trueD=0.125 R=400 inconclusive=0.072 shift toward SSA=0.927
+K=3 trueD=0.150 R=400 inconclusive=0.010 shift toward SSA=0.990

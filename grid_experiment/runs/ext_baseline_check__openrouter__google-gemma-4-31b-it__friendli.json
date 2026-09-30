@@ -1,0 +1,32 @@
+{
+  "host": "openrouter__google-gemma-4-31b-it__friendli",
+  "n_planned": 340,
+  "n_valid": 340,
+  "missing": [],
+  "missing_given_up": [],
+  "missing_unfinished": [],
+  "providers": [
+    "Friendli"
+  ],
+  "agreement_with_cerebras": 0.7912,
+  "n_shared": 340,
+  "ssa_rate_new": 0.3441,
+  "ssa_rate_cerebras": 0.4118,
+  "cerebras_HP_to_new_SSA": 24,
+  "cerebras_SSA_to_new_HP": 47,
+  "mcnemar_p": 0.008554538502693427,
+  "accuracy_new": 0.55,
+  "accuracy_cerebras": 0.4941,
+  "citations_new": {
+    "mean_cells_per_response": 7.67,
+    "empty_cell_citation_rate": 0.0042,
+    "responses_with_no_cells": 0,
+    "tiles_with_no_cells": []
+  },
+  "citations_cerebras": {
+    "mean_cells_per_response": 7.82,
+    "empty_cell_citation_rate": 0.003,
+    "responses_with_no_cells": 0,
+    "tiles_with_no_cells": []
+  }
+}

@@ -270,6 +270,13 @@ def main():
     )
     ap.add_argument("--no-regrid", action="store_true")
     ap.add_argument("--out", default=OUT)
+    ap.add_argument(
+        "--per-tile-seed",
+        action="store_true",
+        help="seed control sampling per tile (SEED:image) so masks do not depend on "
+        "run-file order or resume history. Off by default so the original sweeps "
+        "regenerate byte-identically.",
+    )
     args = ap.parse_args()
 
     rng = random.Random(SEED)
@@ -283,6 +290,8 @@ def main():
             r = json.loads(line)
             if r.get("replicate") != args.replicate:
                 continue
+            if r.get("error") or (r.get("parsed") or {}).get("label") not in ("HP", "SSA"):
+                continue  # only a valid response defines the citations
             cells = cited_cells(r)
             if cells:
                 jobs.append((r["image"], cells))
@@ -297,7 +306,7 @@ def main():
         m = build(
             name,
             cells,
-            rng,
+            random.Random(f"{SEED}:{name}") if args.per_tile_seed else rng,
             regrid=not args.no_regrid,
             out_root=os.path.join(ROOT, args.out),
             subset=args.subset,

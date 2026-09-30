@@ -28,9 +28,44 @@ RENDERED = os.path.join(ROOT, "prompts", "rendered")
 MANIFEST = os.path.join(ROOT, "selection_manifest.json")
 RUNS = os.path.join(ROOT, "runs")
 
-BASE_URL = "https://api.cerebras.ai/v1"
-MODEL = "gemma-4-31b"
+# Endpoint, model, key variable and pacing are environment-overridable so the
+# same pipeline can target another host serving the same weights (e.g. when a
+# provider archives a model). Defaults reproduce the original Cerebras setup.
+BASE_URL = os.environ.get("PATHO_BASE_URL", "https://api.cerebras.ai/v1").rstrip("/")
+MODEL = os.environ.get("PATHO_MODEL", "gemma-4-31b")
+KEY_ENV = os.environ.get("PATHO_KEY_ENV", "CEREBRAS_API_KEY")
+MAX_TOKENS_PARAM = os.environ.get("PATHO_MAX_TOKENS_PARAM", "max_completion_tokens")
+# On a router (OpenRouter) the same model id can be served by several upstream
+# providers with different quantization; comparisons are only within-host if the
+# upstream is pinned. PATHO_PROVIDER pins it with fallbacks disabled, and the
+# provider that actually served each call is logged in meta.provider.
+PROVIDER = os.environ.get("PATHO_PROVIDER") or None
 MAX_TOKENS = 1500
+FATAL_STATUSES = (401, 402, 403, 404)
+# A call whose response is received but unusable (unparseable JSON, label not HP/SSA)
+# is recorded as an error and retried, at most MAX_TRIES times per (tile, replicate);
+# after that it is "given up" and reported, so one bad tile cannot block a run forever.
+MAX_TRIES = 3
+
+
+def counts_as_try(err):
+    return str(err or "").startswith(("parse_failed", "invalid_label"))
+
+
+def mark_invalid(rec):
+    """Stamp a received-but-unusable response as an error so resume and completeness agree."""
+    if not rec.get("error") and (rec.get("parsed") or {}).get("label") not in ("HP", "SSA"):
+        rec["error"] = ("parse_failed" if not rec.get("parsed")
+                        else f"invalid_label {rec['parsed'].get('label')!r}")
+    return rec
+
+
+def host_tag():
+    """Filesystem-safe id of the serving endpoint + model (+ pinned provider)."""
+    host = re.sub(r"^https?://", "", BASE_URL).split("/")[0]
+    host = host.replace("api.", "").split(".")[0]
+    tag = f"{host}__{MODEL}" + (f"__{PROVIDER}" if PROVIDER else "")
+    return re.sub(r"[^A-Za-z0-9._-]+", "-", tag)
 
 # Temperature is non-zero deliberately: question 3 asks whether cited cells are
 # stable across repeated runs, which is only a meaningful question above greedy
@@ -39,7 +74,7 @@ TEMPERATURE = 1.0
 
 # Free tier is 5 requests/min. 13s between request starts leaves headroom for
 # clock skew against the server's window.
-MIN_INTERVAL_S = 13.0
+MIN_INTERVAL_S = float(os.environ.get("PATHO_MIN_INTERVAL_S", "13.0"))
 MAX_ATTEMPTS = 6
 BACKOFF_BASE_S = 20.0
 
@@ -244,8 +279,9 @@ def call(session, prompt_text, img_b64, api_key, temperature=TEMPERATURE):
     """One chat completion with backoff. Returns (raw_text, meta, error)."""
     body = {
         "model": MODEL,
-        "max_completion_tokens": MAX_TOKENS,
+        MAX_TOKENS_PARAM: MAX_TOKENS,
         "temperature": temperature,
+        **({"provider": {"order": [PROVIDER], "allow_fallbacks": False}} if PROVIDER else {}),
         "messages": [
             {
                 "role": "user",
@@ -273,14 +309,34 @@ def call(session, prompt_text, img_b64, api_key, temperature=TEMPERATURE):
             {"attempt": attempt, "status": r.status_code, "elapsed_s": round(time.time() - t0, 2)}
         )
         if r.status_code == 200:
-            d = r.json()
-            raw = d["choices"][0]["message"].get("content") or ""
+            try:
+                d = r.json()
+                raw = d["choices"][0]["message"].get("content") or ""
+            except (ValueError, KeyError, IndexError, TypeError):
+                # some routers return an error object with HTTP 200
+                attempts[-1]["error_body"] = r.text[:300]
+                try:
+                    code = int((r.json().get("error") or {}).get("code"))
+                except (ValueError, TypeError, AttributeError):
+                    code = None
+                if code in FATAL_STATUSES:
+                    sys.exit(f"FATAL error code {code} in HTTP-200 body from {BASE_URL}: {r.text[:300]}")
+                if sum(1 for a in attempts if "error_body" in a) >= 3:
+                    return None, {"attempts": attempts}, "error_body_200"
+                time.sleep(BACKOFF_BASE_S * (2 ** (attempt - 1)) + random.uniform(0, 3))
+                continue
             return raw, {
                 "usage": d.get("usage"),
                 "finish_reason": d["choices"][0].get("finish_reason"),
                 "model": d.get("model"),
+                "provider": d.get("provider"),
+                "system_fingerprint": d.get("system_fingerprint"),
                 "attempts": attempts,
             }, None
+        if r.status_code in FATAL_STATUSES:
+            # auth, billing, or model gone: every further call would fail the same
+            # way, so stop instead of writing one error record per tile
+            sys.exit(f"FATAL HTTP {r.status_code} from {BASE_URL} ({MODEL}): {r.text[:300]}")
         if r.status_code in (429, 500, 502, 503, 504):
             wait = BACKOFF_BASE_S * (2 ** (attempt - 1)) + random.uniform(0, 3)
             # hourly-quota wall: without a retry-after header, late attempts
@@ -317,9 +373,9 @@ def main():
                          "(grids rendered in memory; 1 replicate per tile)")
     args = ap.parse_args()
 
-    api_key = os.environ.get("CEREBRAS_API_KEY")
+    api_key = os.environ.get(KEY_ENV)
     if not api_key:
-        sys.exit("CEREBRAS_API_KEY is not set")
+        sys.exit(f"{KEY_ENV} is not set")
 
     spec = yaml.safe_load(open(SPEC))
     prompt_text = open(os.path.join(RENDERED, f"{args.prompt}.txt")).read()
@@ -350,22 +406,31 @@ def main():
 
     os.makedirs(RUNS, exist_ok=True)
     out_path = os.path.join(RUNS, f"{args.prompt}{args.tag}.jsonl")
-    done = set()
-    if os.path.exists(out_path):
-        with open(out_path) as fh:
-            for line in fh:
+    def scan():
+        done, tries = set(), {}
+        if os.path.exists(out_path):
+            for line in open(out_path):
                 try:
                     r = json.loads(line)
-                    done.add((r["image"], r["replicate"]))
+                    key = (r["image"], r["replicate"])
                 except (json.JSONDecodeError, KeyError):
-                    pass
-        print(f"resuming: {len(done)} calls already recorded")
+                    continue
+                # same predicate as the completeness check: a valid label, no error
+                if not r.get("error") and (r.get("parsed") or {}).get("label") in ("HP", "SSA"):
+                    done.add(key)
+                elif counts_as_try(r.get("error")):
+                    tries[key] = tries.get(key, 0) + 1
+        return done, tries
+
+    done, tries = scan()
+    if done or tries:
+        print(f"resuming: {len(done)} valid calls recorded, {sum(1 for v in tries.values() if v >= MAX_TRIES)} given up")
 
     session = requests.Session()
     last = 0.0
     n = 0
     for tile, rep in jobs:
-        if (tile["image"], rep) in done:
+        if (tile["image"], rep) in done or tries.get((tile["image"], rep), 0) >= MAX_TRIES:
             continue
         n += 1
         gap = MIN_INTERVAL_S - (time.time() - last)
@@ -382,6 +447,7 @@ def main():
         rec = {
             "prompt_id": args.prompt,
             "model": MODEL,
+            "base_url": BASE_URL,
             "temperature": args.temperature,
             "image": tile["image"],
             "replicate": rep,
@@ -408,11 +474,21 @@ def main():
                 except json.JSONDecodeError as e:
                     rec["parsed"] = None
                     rec["violations"] = [f"json decode failed: {e}"]
+            mark_invalid(rec)
 
         with open(out_path, "a") as fh:
             fh.write(json.dumps(rec) + "\n")
 
     print(f"done: {n} new calls -> {out_path}")
+    ok, tries = scan()
+    missing = [(t["image"], rep) for t, rep in jobs if (t["image"], rep) not in ok]
+    gave_up = [k for k in missing if tries.get(k, 0) >= MAX_TRIES]
+    unfinished = [k for k in missing if k not in set(gave_up)]
+    if gave_up:
+        print(f"GAVE UP on {len(gave_up)} calls after {MAX_TRIES} unusable responses each: {gave_up[:10]}")
+    if unfinished:
+        print(f"INCOMPLETE: {len(unfinished)} planned calls not yet done: {unfinished[:10]}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

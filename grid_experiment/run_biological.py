@@ -20,6 +20,8 @@ import requests
 import yaml
 
 from run_experiment import (
+    BASE_URL,
+    KEY_ENV,
     MODEL,
     TEMPERATURE,
     b64_png,
@@ -37,7 +39,7 @@ BASELINE_RUN = os.path.join(ROOT, "runs", "cte_p1.jsonl")
 
 SOURCES = ["epithelium", "stroma", "nuclei"]
 ARMS = ["struct", "control"]
-MIN_INTERVAL_S = 13.0
+MIN_INTERVAL_S = float(os.environ.get("PATHO_MIN_INTERVAL_S", "13.0"))
 
 
 def baseline_by_image():
@@ -57,9 +59,9 @@ def main():
     ap.add_argument("--limit", type=int, default=None)
     args = ap.parse_args()
 
-    api_key = os.environ.get("CEREBRAS_API_KEY")
+    api_key = os.environ.get(KEY_ENV)
     if not api_key:
-        sys.exit("CEREBRAS_API_KEY is not set")
+        sys.exit(f"{KEY_ENV} is not set")
 
     spec = yaml.safe_load(open(os.path.join(ROOT, "prompts", "pathoreason.yaml")))
     prompt_text = open(os.path.join(ROOT, "prompts", "rendered", f"{PROMPT_ID}.txt")).read()
@@ -106,6 +108,7 @@ def main():
         rec = {
             "prompt_id": PROMPT_ID,
             "model": MODEL,
+            "base_url": BASE_URL,
             "temperature": TEMPERATURE,
             "image": man["image"],
             "tile_dir": t,

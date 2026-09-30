@@ -1,0 +1,1534 @@
+{
+ "seed": 20260929,
+ "base": "prompts/rendered/co_p1.txt",
+ "tiles": [
+  "MHIST_aag.png",
+  "MHIST_abb.png",
+  "MHIST_aek.png",
+  "MHIST_afn.png",
+  "MHIST_ajp.png",
+  "MHIST_aju.png",
+  "MHIST_ant.png",
+  "MHIST_apc.png",
+  "MHIST_aqh.png",
+  "MHIST_aqj.png",
+  "MHIST_asa.png",
+  "MHIST_ase.png",
+  "MHIST_asg.png",
+  "MHIST_ash.png",
+  "MHIST_aut.png",
+  "MHIST_aux.png",
+  "MHIST_ave.png",
+  "MHIST_bal.png",
+  "MHIST_bea.png",
+  "MHIST_bgk.png",
+  "MHIST_bhn.png",
+  "MHIST_bjd.png",
+  "MHIST_bkj.png",
+  "MHIST_ble.png",
+  "MHIST_blj.png",
+  "MHIST_bmy.png",
+  "MHIST_bpk.png",
+  "MHIST_bqc.png",
+  "MHIST_bqv.png",
+  "MHIST_bsd.png",
+  "MHIST_bsy.png",
+  "MHIST_bvc.png",
+  "MHIST_bvp.png",
+  "MHIST_bvz.png",
+  "MHIST_bxx.png",
+  "MHIST_byb.png",
+  "MHIST_byq.png",
+  "MHIST_bzm.png",
+  "MHIST_cau.png",
+  "MHIST_cco.png",
+  "MHIST_cdr.png",
+  "MHIST_cek.png",
+  "MHIST_cfq.png",
+  "MHIST_cgp.png",
+  "MHIST_chl.png",
+  "MHIST_cki.png",
+  "MHIST_ckn.png",
+  "MHIST_clg.png",
+  "MHIST_cmt.png",
+  "MHIST_cng.png",
+  "MHIST_cnh.png",
+  "MHIST_coh.png",
+  "MHIST_con.png",
+  "MHIST_cpd.png",
+  "MHIST_cpm.png",
+  "MHIST_cpr.png",
+  "MHIST_cpt.png",
+  "MHIST_cpz.png",
+  "MHIST_cqp.png",
+  "MHIST_cuu.png",
+  "MHIST_cvb.png",
+  "MHIST_cve.png",
+  "MHIST_cvw.png",
+  "MHIST_cxx.png",
+  "MHIST_cyb.png",
+  "MHIST_cyj.png",
+  "MHIST_cze.png",
+  "MHIST_dad.png",
+  "MHIST_dax.png",
+  "MHIST_dbe.png",
+  "MHIST_ddf.png",
+  "MHIST_ddn.png",
+  "MHIST_dey.png",
+  "MHIST_dfn.png",
+  "MHIST_dic.png",
+  "MHIST_dij.png",
+  "MHIST_dio.png",
+  "MHIST_djh.png",
+  "MHIST_dln.png",
+  "MHIST_doi.png",
+  "MHIST_dov.png",
+  "MHIST_dpi.png",
+  "MHIST_dtj.png",
+  "MHIST_dtq.png",
+  "MHIST_dvl.png",
+  "MHIST_dwn.png",
+  "MHIST_dws.png",
+  "MHIST_dzq.png",
+  "MHIST_eak.png",
+  "MHIST_ebl.png",
+  "MHIST_edf.png",
+  "MHIST_efr.png",
+  "MHIST_ekh.png",
+  "MHIST_ekm.png",
+  "MHIST_elj.png",
+  "MHIST_emr.png",
+  "MHIST_epj.png",
+  "MHIST_epo.png",
+  "MHIST_equ.png",
+  "MHIST_erd.png"
+ ],
+ "inserted_words": {
+  "etc_median_reference": 52,
+  "ins_filler": 52,
+  "ins_checklist": 54,
+  "ins_copied_median": 51,
+  "ins_self_median": 52
+ },
+ "sha256": {
+  "ins_filler": "df65dd700c227fd4",
+  "ins_checklist_hp_first": "bcdc5d40188e4b4e",
+  "ins_checklist_ssa_first": "94700f54f5790e31",
+  "describe_first": "20d988239dbd6a3e"
+ },
+ "donor_balance": {
+  "HP": 50,
+  "SSA": 50
+ },
+ "donor_reuse_max": 6,
+ "n_distinct_donor_texts": {
+  "HP": 9,
+  "SSA": 50
+ },
+ "checklist_variants": {
+  "MHIST_cve.png": "hp_first",
+  "MHIST_ddn.png": "ssa_first",
+  "MHIST_aqj.png": "hp_first",
+  "MHIST_ase.png": "ssa_first",
+  "MHIST_blj.png": "hp_first",
+  "MHIST_aju.png": "ssa_first",
+  "MHIST_efr.png": "hp_first",
+  "MHIST_dln.png": "ssa_first",
+  "MHIST_cvb.png": "hp_first",
+  "MHIST_aux.png": "ssa_first",
+  "MHIST_aut.png": "hp_first",
+  "MHIST_dbe.png": "ssa_first",
+  "MHIST_cyj.png": "hp_first",
+  "MHIST_cfq.png": "ssa_first",
+  "MHIST_chl.png": "hp_first",
+  "MHIST_ant.png": "ssa_first",
+  "MHIST_asa.png": "hp_first",
+  "MHIST_dvl.png": "ssa_first",
+  "MHIST_elj.png": "hp_first",
+  "MHIST_cyb.png": "ssa_first",
+  "MHIST_dpi.png": "hp_first",
+  "MHIST_equ.png": "ssa_first",
+  "MHIST_dij.png": "hp_first",
+  "MHIST_doi.png": "ssa_first",
+  "MHIST_dov.png": "hp_first",
+  "MHIST_cvw.png": "ssa_first",
+  "MHIST_epo.png": "hp_first",
+  "MHIST_epj.png": "ssa_first",
+  "MHIST_ddf.png": "hp_first",
+  "MHIST_dey.png": "ssa_first",
+  "MHIST_asg.png": "hp_first",
+  "MHIST_ajp.png": "ssa_first",
+  "MHIST_dwn.png": "hp_first",
+  "MHIST_aek.png": "ssa_first",
+  "MHIST_aag.png": "hp_first",
+  "MHIST_bea.png": "ssa_first",
+  "MHIST_cki.png": "hp_first",
+  "MHIST_afn.png": "ssa_first",
+  "MHIST_eak.png": "hp_first",
+  "MHIST_emr.png": "ssa_first",
+  "MHIST_dic.png": "hp_first",
+  "MHIST_cdr.png": "ssa_first",
+  "MHIST_cco.png": "hp_first",
+  "MHIST_bxx.png": "ssa_first",
+  "MHIST_bsd.png": "hp_first",
+  "MHIST_cng.png": "ssa_first",
+  "MHIST_coh.png": "hp_first",
+  "MHIST_dzq.png": "ssa_first",
+  "MHIST_dtj.png": "hp_first",
+  "MHIST_bvc.png": "ssa_first",
+  "MHIST_bzm.png": "hp_first",
+  "MHIST_byq.png": "ssa_first",
+  "MHIST_clg.png": "hp_first",
+  "MHIST_cpm.png": "ssa_first",
+  "MHIST_ekm.png": "hp_first",
+  "MHIST_dad.png": "ssa_first",
+  "MHIST_ave.png": "hp_first",
+  "MHIST_cpr.png": "ssa_first",
+  "MHIST_cmt.png": "hp_first",
+  "MHIST_bhn.png": "ssa_first",
+  "MHIST_bqv.png": "hp_first",
+  "MHIST_cpz.png": "ssa_first",
+  "MHIST_apc.png": "hp_first",
+  "MHIST_cnh.png": "ssa_first",
+  "MHIST_bmy.png": "hp_first",
+  "MHIST_cek.png": "ssa_first",
+  "MHIST_cpt.png": "hp_first",
+  "MHIST_erd.png": "ssa_first",
+  "MHIST_con.png": "hp_first",
+  "MHIST_aqh.png": "ssa_first",
+  "MHIST_ekh.png": "hp_first",
+  "MHIST_bjd.png": "ssa_first",
+  "MHIST_bal.png": "hp_first",
+  "MHIST_cau.png": "ssa_first",
+  "MHIST_byb.png": "hp_first",
+  "MHIST_dfn.png": "ssa_first",
+  "MHIST_bgk.png": "hp_first",
+  "MHIST_dio.png": "ssa_first",
+  "MHIST_ash.png": "hp_first",
+  "MHIST_djh.png": "ssa_first",
+  "MHIST_bpk.png": "hp_first",
+  "MHIST_bkj.png": "ssa_first",
+  "MHIST_bvz.png": "hp_first",
+  "MHIST_edf.png": "ssa_first",
+  "MHIST_bqc.png": "hp_first",
+  "MHIST_ble.png": "ssa_first",
+  "MHIST_bvp.png": "hp_first",
+  "MHIST_cze.png": "ssa_first",
+  "MHIST_ckn.png": "hp_first",
+  "MHIST_bsy.png": "ssa_first",
+  "MHIST_cqp.png": "hp_first",
+  "MHIST_cuu.png": "ssa_first",
+  "MHIST_ebl.png": "hp_first",
+  "MHIST_cxx.png": "ssa_first",
+  "MHIST_abb.png": "hp_first",
+  "MHIST_dax.png": "ssa_first",
+  "MHIST_cpd.png": "hp_first",
+  "MHIST_dtq.png": "ssa_first",
+  "MHIST_cgp.png": "hp_first",
+  "MHIST_dws.png": "ssa_first"
+ },
+ "ins_self": {
+  "MHIST_aag.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_abb.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aek.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 62,
+   "names_ssa_lexically": false
+  },
+  "MHIST_afn.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ajp.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aju.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 51,
+   "names_ssa_lexically": true
+  },
+  "MHIST_ant.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_apc.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 53,
+   "names_ssa_lexically": true
+  },
+  "MHIST_aqh.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aqj.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 59,
+   "names_ssa_lexically": true
+  },
+  "MHIST_asa.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 80,
+   "names_ssa_lexically": true
+  },
+  "MHIST_ase.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 54,
+   "names_ssa_lexically": true
+  },
+  "MHIST_asg.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 80,
+   "names_ssa_lexically": true
+  },
+  "MHIST_ash.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 54,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aut.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 44,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aux.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ave.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bal.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 70,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bea.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 56,
+   "names_ssa_lexically": true
+  },
+  "MHIST_bgk.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 63,
+   "names_ssa_lexically": true
+  },
+  "MHIST_bhn.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bjd.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bkj.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 58,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ble.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_blj.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bmy.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bpk.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bqc.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 44,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bqv.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bsd.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bsy.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 72,
+   "names_ssa_lexically": true
+  },
+  "MHIST_bvc.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bvp.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 43,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bvz.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bxx.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_byb.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_byq.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 48,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bzm.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cau.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cco.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 57,
+   "names_ssa_lexically": true
+  },
+  "MHIST_cdr.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 53,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cek.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 44,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cfq.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cgp.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 61,
+   "names_ssa_lexically": false
+  },
+  "MHIST_chl.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 69,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cki.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 43,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ckn.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_clg.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cmt.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cng.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cnh.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_coh.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_con.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpd.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpm.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 61,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpr.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 59,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpt.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 39,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpz.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cqp.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 52,
+   "names_ssa_lexically": true
+  },
+  "MHIST_cuu.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 42,
+   "names_ssa_lexically": true
+  },
+  "MHIST_cvb.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 38,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cve.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cvw.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cxx.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cyb.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cyj.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 68,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cze.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 67,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dad.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 48,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dax.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dbe.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ddf.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ddn.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 53,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dey.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 53,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dfn.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dic.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dij.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dio.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_djh.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dln.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 33,
+   "names_ssa_lexically": false
+  },
+  "MHIST_doi.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 32,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dov.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dpi.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dtj.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 68,
+   "names_ssa_lexically": true
+  },
+  "MHIST_dtq.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 42,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dvl.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 57,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dwn.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 73,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dws.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 41,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dzq.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 54,
+   "names_ssa_lexically": false
+  },
+  "MHIST_eak.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 45,
+   "names_ssa_lexically": true
+  },
+  "MHIST_ebl.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 54,
+   "names_ssa_lexically": false
+  },
+  "MHIST_edf.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_efr.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ekh.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 48,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ekm.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_elj.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 57,
+   "names_ssa_lexically": false
+  },
+  "MHIST_emr.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 56,
+   "names_ssa_lexically": false
+  },
+  "MHIST_epj.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 59,
+   "names_ssa_lexically": false
+  },
+  "MHIST_epo.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_equ.png": {
+   "own_etc_label": "SSA",
+   "inserted_words": 37,
+   "names_ssa_lexically": false
+  },
+  "MHIST_erd.png": {
+   "own_etc_label": "HP",
+   "inserted_words": 57,
+   "names_ssa_lexically": true
+  }
+ },
+ "donors": {
+  "MHIST_dln.png": {
+   "donor_image": "MHIST_bjd.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2): The crypts are relatively straight and evenly spaced, typical of a hyperplastic polyp; serration (C1 C2 C3): Saw-tooth appearance is localized primarily to the upper portions of the crypts; inflammatory infiltrate (B3 C3 C4): Moderate lymphocytic infiltration is present in the lamina propria.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cfq.png": {
+   "donor_image": "MHIST_dzq.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 B2 B3 C2 C3): The crypts exhibit a saw-tooth appearance with luminal indentations; crypt/gland architecture (A2 B1 B2 C1 C2 D1 D2): The crypts show basal dilatation and a distorted, non-linear growth pattern; stroma (A1 B4 C4 D4): The intervening stroma between the glands is present and contains scattered inflammatory cells.",
+   "inserted_words": 54,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cyj.png": {
+   "donor_image": "MHIST_cvw.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A1 A2 B3 B4 C3 C4): The crypts show a characteristic sawtooth pattern and are relatively straight and parallel; serration (A2 A3 B3 C2): Prominent serration is visible in the epithelial lining of the glands; surface epithelium (A2 A3 B3): The surface epithelium exhibits a serrated appearance.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_chl.png": {
+   "donor_image": "MHIST_cze.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (C2 C3 D1 D3): The crypts exhibit a saw-tooth or serrated appearance of the epithelial lining; crypt/gland architecture (C2 C3 D1 D2): The crypts are widely spaced and show basal dilation; inflammatory infiltrate (B4 C4 D2 D4): There is a dense collection of lymphocytes and plasma cells in the lamina propria; surface epithelium (A4 B4 C3): The surface epithelium consists of columnar cells with basal nuclei.",
+   "inserted_words": 67,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aut.png": {
+   "donor_image": "MHIST_afn.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2 D3): The crypts are straight and vertically oriented with a saw-tooth appearance; serration (B1 C1 C2 D1 D2 D3): Tooth-like folding of the glandular epithelium is visible throughout the crypts; surface epithelium (B1 B2 C3): The mucosal surface is visible with small focal serrations.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ddn.png": {
+   "donor_image": "MHIST_chl.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (C1 C2 D2 D3 D4): The glands show an irregular, branching and dilated architecture characteristic of a serrated lesion; serration (D2 D3 D4): The lining of the crypts displays a saw-tooth or serrated appearance; inflammatory infiltrate (B2 B3 C2 C3 D1): There is a dense collection of lymphocytes and plasma cells in the lamina propria; stroma (A1 A2 A3): Fibrovascular stroma is visible between the glandular structures.",
+   "inserted_words": 69,
+   "names_ssa_lexically": false
+  },
+  "MHIST_blj.png": {
+   "donor_image": "MHIST_dov.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show a saw-tooth appearance but remain relatively straight and parallel near the base; serration (A2 A3 B2 B3 C2 C3 D2 D3): Prominent saw-tooth folding is visible throughout the upper and middle portions of the glands; inflammatory infiltrate (A2 A3 B3 C3): There is a mild to moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aqj.png": {
+   "donor_image": "MHIST_bmy.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A3 A4 B3 B4): The crypts show a characteristic saw-tooth folding pattern along the walls; crypt/gland architecture (B3 B4 C3 C4): The glands are dilated and exhibit basal dilation and architectural distortion; stroma (A1 B1 C2): The intervening connective tissue appears loose and pale.",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aju.png": {
+   "donor_image": "MHIST_bal.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 D2 D3): The crypts show a saw-tooth or serrated appearance throughout the upper and middle portions; crypt/gland architecture (B2 C2 D2): The crypts are expanded and show irregular, distorted shapes; inflammatory infiltrate (A2 A3 B1 D3): There is a noticeable presence of lymphocytic and plasmacytic cells within the lamina propria; surface epithelium (A3 B3 C3): The epithelium on the surface is intact and exhibits mild serration.",
+   "inserted_words": 70,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ase.png": {
+   "donor_image": "MHIST_bzm.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (C1 C2 C3 C4 D1 D2 D3 D4): The crypts show irregular, dilated bases and a characteristic boot-shaped or L-shaped appearance; serration (B3 B4 C3 C4): there is serrated folding of the epithelial lining throughout the crypts; surface epithelium (B3 B4): The surface epithelium shows smooth, regular contours.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dbe.png": {
+   "donor_image": "MHIST_bxx.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2 D1 D2): The crypts show a characteristic saw-tooth appearance with regular spacing; serration (B1 B2 C1 C2 D1 D2): Prominent serrated folds are visible throughout the upper and middle portions of the crypts; surface epithelium (A2 B2 B3 C3 C4 D4): The surface epithelium is intact and follows the undulating contour of the tissue.",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cve.png": {
+   "donor_image": "MHIST_cpr.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A2 A3 A4 B2 B3 B4 C2 C3 C4 D3 D4): The crypts exhibit a prominent saw-tooth appearance throughout the thickness of the mucosa; crypt/gland architecture (B3 B4 C3 C4 D3 D4): The glands show basal dilation and horizontal growth patterns characteristic of a serrated lesion; surface epithelium (A2 B2 C2): The surface shows a jagged, serrated contour.",
+   "inserted_words": 59,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aux.png": {
+   "donor_image": "MHIST_cng.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A1 A2 B1 B2): The crypts show a saw-tooth appearance, primarily in the upper half of the mucosa; crypt/gland architecture (C1 C2 D1 D2): The crypts maintain a relatively straight, parallel vertical orientation toward the base; surface epithelium (A1 A2 A3): The surface shows a regular columnar epithelial lining.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_efr.png": {
+   "donor_image": "MHIST_ddf.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 B2 B3 C2 C3): The crypts exhibit a sawtooth-like pattern of folding; crypt/gland architecture (B2 B3 C2 D2 D3): The crypts show basal dilation and irregular branching; inflammatory infiltrate (A1 D2 D4): There are clusters of small blue lymphocytes in the lamina propria.",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cvb.png": {
+   "donor_image": "MHIST_cmt.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B1 B2 C1 C2): The crypts exhibit a sawtooth-like proliferative profile with superficial serration; crypt/gland architecture (B1 B2 C1 C2 D2): The crypts are straight and parallel, primarily showing superficial serration without significant basal dilation; surface epithelium (A2 B3 C3 C4): The surface epithelium is intact and follows the contours of the mucosal fold.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_doi.png": {
+   "donor_image": "MHIST_elj.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A4 B3 B4 C2 C3 C4 D1 D2 D3): Prominent sawtooth-like folding of the glandular epithelium is visible across multiple cells; crypt/gland architecture (C2 C3 C4 D1 D2 D3 D4): The glands show basal dilation and an elongated, distorted architecture characteristic of serrated lesions; surface epithelium (A4 B3 B4): The surface lining shows consistent saw-tooth serration.",
+   "inserted_words": 57,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dij.png": {
+   "donor_image": "MHIST_coh.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 A4): The surface epithelium shows sawtooth-like indentations; crypt/gland architecture (B1 B2 B3 B4): The crypts are straight and parallel with serrations limited to the upper half; inflammatory infiltrate (A2 A3 C2 C3): There is a dense lymphoplasmacytic infiltrate in the lamina propria.",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cyb.png": {
+   "donor_image": "MHIST_bqv.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A1 A2 B2 B3): Tooth-like projections and folding of the crypt epithelium are visible; crypt/gland architecture (A2 A3 B3 C3 C4): The crypts show basal dilation and an irregular, expanded architecture; inflammatory infiltrate (A1 B1 C3 D3 D4): There is a moderate amount of mononuclear cells within the stroma.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dov.png": {
+   "donor_image": "MHIST_bjd.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2): The crypts are relatively straight and evenly spaced, typical of a hyperplastic polyp; serration (C1 C2 C3): Saw-tooth appearance is localized primarily to the upper portions of the crypts; inflammatory infiltrate (B3 C3 C4): Moderate lymphocytic infiltration is present in the lamina propria.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dvl.png": {
+   "donor_image": "MHIST_cve.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show basal dilation and a characteristic 'boot-shaped' or L-shaped appearance; serration (B3 B4 C3 C4 D2 D3): Saw-tooth like folding of the glandular epithelium is present throughout the depth of the crypts; surface epithelium (A2 A3 A4): The surface epithelium shows mild serration and is relatively attenuated.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cvw.png": {
+   "donor_image": "MHIST_afn.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2 D3): The crypts are straight and vertically oriented with a saw-tooth appearance; serration (B1 C1 C2 D1 D2 D3): Tooth-like folding of the glandular epithelium is visible throughout the crypts; surface epithelium (B1 B2 C3): The mucosal surface is visible with small focal serrations.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_asg.png": {
+   "donor_image": "MHIST_dbe.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2 D2 D3): The crypts show a distorted, branching, and dilated architecture; serration (B2 C2 C3): The glands exhibit sawtooth-like serrations extending deep into the crypts; inflammatory infiltrate (B1 C1 C2 D1 D4): There is a moderate amount of mononuclear inflammatory cells in the stroma.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aek.png": {
+   "donor_image": "MHIST_cvw.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A1 A2 B3 B4 C3 C4): The crypts show a characteristic sawtooth pattern and are relatively straight and parallel; serration (A2 A3 B3 C2): Prominent serration is visible in the epithelial lining of the glands; surface epithelium (A2 A3 B3): The surface epithelium exhibits a serrated appearance.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_epo.png": {
+   "donor_image": "MHIST_bvz.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2 D1 D2): The crypts show basal dilation and a boot-shaped or L-shaped configuration; serration (B1 B2 C3 D4): Sawtooth-like folding of the glandular epithelium is present throughout the crypts; surface epithelium (A1 B3 C3 C4): The epithelial lining at the surface shows mild serration.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ddf.png": {
+   "donor_image": "MHIST_dov.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show a saw-tooth appearance but remain relatively straight and parallel near the base; serration (A2 A3 B2 B3 C2 C3 D2 D3): Prominent saw-tooth folding is visible throughout the upper and middle portions of the glands; inflammatory infiltrate (A2 A3 B3 C3): There is a mild to moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_asa.png": {
+   "donor_image": "MHIST_dax.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (C3 C4 D3 D4): The crypts exhibit a saw-tooth or serrated contour extending deep into the mucosa; crypt/gland architecture (C3 C4 D3 D4): There is evidence of crypt branching and basal dilation characteristic of a serrated lesion; inflammatory infiltrate (A1 B1 B2): Chronic inflammatory cells are present within the lamina propria.",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dpi.png": {
+   "donor_image": "MHIST_bal.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 D2 D3): The crypts show a saw-tooth or serrated appearance throughout the upper and middle portions; crypt/gland architecture (B2 C2 D2): The crypts are expanded and show irregular, distorted shapes; inflammatory infiltrate (A2 A3 B1 D3): There is a noticeable presence of lymphocytic and plasmacytic cells within the lamina propria; surface epithelium (A3 B3 C3): The epithelium on the surface is intact and exhibits mild serration.",
+   "inserted_words": 70,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ajp.png": {
+   "donor_image": "MHIST_dwn.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A2 B2 C3 D1 D2): The crypts show a characteristic saw-tooth or serrated appearance, with some horizontal expansion at the base; serration (A1 A2 B2 C4 D1): Prominent luminal folding and saw-tooth patterns are visible within the glands; inflammatory infiltrate (B1 C1 C2 D3 D4): There is a significant presence of lymphoplasmacytic cells within the stroma; surface epithelium (A3 A4): The surface shows a regular columnar lining with some focal serration.",
+   "inserted_words": 73,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aag.png": {
+   "donor_image": "MHIST_bxx.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2 D1 D2): The crypts show a characteristic saw-tooth appearance with regular spacing; serration (B1 B2 C1 C2 D1 D2): Prominent serrated folds are visible throughout the upper and middle portions of the crypts; surface epithelium (A2 B2 B3 C3 C4 D4): The surface epithelium is intact and follows the undulating contour of the tissue.",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dey.png": {
+   "donor_image": "MHIST_ajp.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B3 B4 C2 C3 C4 D2 D3 D4): The glands show dilated, distorted, and boot-shaped architecture with basal dilation; serration (B3 B4 C2 C3 C4 D2 D3 D4): Saw-tooth like folds are present throughout the crypts and surface; stroma (C3 C4 D2 D3 D4): The lamina propria is expanded between the distorted crypts.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ant.png": {
+   "donor_image": "MHIST_cng.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A1 A2 B1 B2): The crypts show a saw-tooth appearance, primarily in the upper half of the mucosa; crypt/gland architecture (C1 C2 D1 D2): The crypts maintain a relatively straight, parallel vertical orientation toward the base; surface epithelium (A1 A2 A3): The surface shows a regular columnar epithelial lining.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_elj.png": {
+   "donor_image": "MHIST_dey.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (C2 C3 D1 D2 D3): The crypts show basal dilation and a boot-shaped or L-shaped morphology; serration (C2 C3 C4 D2 D3 D4): Saw-tooth like folding of the epithelium is visible extending deep into the crypts; inflammatory infiltrate (C3 C4 D3 D4): Chronic inflammatory cells are present within the lamina propria.",
+   "inserted_words": 53,
+   "names_ssa_lexically": false
+  },
+  "MHIST_equ.png": {
+   "donor_image": "MHIST_cmt.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B1 B2 C1 C2): The crypts exhibit a sawtooth-like proliferative profile with superficial serration; crypt/gland architecture (B1 B2 C1 C2 D2): The crypts are straight and parallel, primarily showing superficial serration without significant basal dilation; surface epithelium (A2 B3 C3 C4): The surface epithelium is intact and follows the contours of the mucosal fold.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dwn.png": {
+   "donor_image": "MHIST_cpm.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A3 A4 B3 B4 C3 C4 D3 D4): The crypts show a characteristic saw-tooth appearance with alternating narrow and wide luminal spaces; crypt/gland architecture (A3 A4 B3 B4 C3 C4 D3 D4): The glands exhibit distorted, dilated, and somewhat boot-shaped bases; surface epithelium (A3 A4 B3 B4 C3 C4 D3 D4): The surface lining reflects the underlying serrated crypt structure.",
+   "inserted_words": 61,
+   "names_ssa_lexically": false
+  },
+  "MHIST_epj.png": {
+   "donor_image": "MHIST_coh.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 A4): The surface epithelium shows sawtooth-like indentations; crypt/gland architecture (B1 B2 B3 B4): The crypts are straight and parallel with serrations limited to the upper half; inflammatory infiltrate (A2 A3 C2 C3): There is a dense lymphoplasmacytic infiltrate in the lamina propria.",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cng.png": {
+   "donor_image": "MHIST_bvc.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (B2 B3 C2 C3): The crypts show a characteristic saw-tooth or serrated luminal contour; crypt/gland architecture (B2 B3 C2 C3 D2 D3): The crypts are elongated and exhibit basal dilation and distortion; inflammatory infiltrate (A1 A2 B1 C1): There is a moderate presence of chronic inflammatory cells within the stroma.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_coh.png": {
+   "donor_image": "MHIST_bjd.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2): The crypts are relatively straight and evenly spaced, typical of a hyperplastic polyp; serration (C1 C2 C3): Saw-tooth appearance is localized primarily to the upper portions of the crypts; inflammatory infiltrate (B3 C3 C4): Moderate lymphocytic infiltration is present in the lamina propria.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cdr.png": {
+   "donor_image": "MHIST_ant.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A2 B3 C3 C4): The crypts show a dilated and distorted architecture with some basal expansion; serration (A2 C2 C4 D2): Saw-tooth like indentations are visible along the epithelial lining of the crypts; inflammatory infiltrate (A3 B1 B2 D3): There is a moderate amount of lymphocytic infiltration in the stroma between the glands.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dzq.png": {
+   "donor_image": "MHIST_afn.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2 D3): The crypts are straight and vertically oriented with a saw-tooth appearance; serration (B1 C1 C2 D1 D2 D3): Tooth-like folding of the glandular epithelium is visible throughout the crypts; surface epithelium (B1 B2 C3): The mucosal surface is visible with small focal serrations.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_afn.png": {
+   "donor_image": "MHIST_clg.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A2 A3 B3 B4 C3 C4 D3 D4): The crypts exhibit a saw-tooth appearance, particularly prominent in the upper and middle portions; crypt/gland architecture (A2 A3 B3 B4 C3 C4 D3 D4): The crypts show dilation and architectural distortion, including some basal widening; inflammatory infiltrate (B2 B3 C2 C3): There is a moderate amount of lymphocytic infiltrate within the stroma surrounding the crypts.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bvc.png": {
+   "donor_image": "MHIST_cvw.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A1 A2 B3 B4 C3 C4): The crypts show a characteristic sawtooth pattern and are relatively straight and parallel; serration (A2 A3 B3 C2): Prominent serration is visible in the epithelial lining of the glands; surface epithelium (A2 A3 B3): The surface epithelium exhibits a serrated appearance.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_emr.png": {
+   "donor_image": "MHIST_aqh.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show a jagged, saw-tooth appearance with lateral growth and some basal dilation; serration (B2 B3 C2 C3): There is prominent serration extending deep into the crypts; inflammatory infiltrate (B3 C2 C3): There is a mild inflammatory infiltrate present within the stroma.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bea.png": {
+   "donor_image": "MHIST_dov.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show a saw-tooth appearance but remain relatively straight and parallel near the base; serration (A2 A3 B2 B3 C2 C3 D2 D3): Prominent saw-tooth folding is visible throughout the upper and middle portions of the glands; inflammatory infiltrate (A2 A3 B3 C3): There is a mild to moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cki.png": {
+   "donor_image": "MHIST_ddn.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A2 B2 C2 D2): The crypts show dilated, irregular, and horizontally oriented bases characteristic of a serrated lesion; serration (A1 A4 B3 C3 D4): Tooth-like folding of the epithelium is evident throughout the glandular structures; inflammatory infiltrate (A1 B1 C1): There is a moderate amount of lymphocytic infiltration in the stroma.",
+   "inserted_words": 53,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dtj.png": {
+   "donor_image": "MHIST_bal.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 D2 D3): The crypts show a saw-tooth or serrated appearance throughout the upper and middle portions; crypt/gland architecture (B2 C2 D2): The crypts are expanded and show irregular, distorted shapes; inflammatory infiltrate (A2 A3 B1 D3): There is a noticeable presence of lymphocytic and plasmacytic cells within the lamina propria; surface epithelium (A3 B3 C3): The epithelium on the surface is intact and exhibits mild serration.",
+   "inserted_words": 70,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cco.png": {
+   "donor_image": "MHIST_ash.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A2 A3 B2 B3 C2 C3): The crypts show a saw-tooth pattern of folding throughout the upper and middle sections; crypt/gland architecture (B3 C3 D3): The crypts are dilated and exhibit basal branching and horizontal growth; inflammatory infiltrate (A2 B2 C2): There is a dense population of inflammatory cells within the lamina propria.",
+   "inserted_words": 54,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bsd.png": {
+   "donor_image": "MHIST_bxx.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2 D1 D2): The crypts show a characteristic saw-tooth appearance with regular spacing; serration (B1 B2 C1 C2 D1 D2): Prominent serrated folds are visible throughout the upper and middle portions of the crypts; surface epithelium (A2 B2 B3 C3 C4 D4): The surface epithelium is intact and follows the undulating contour of the tissue.",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bxx.png": {
+   "donor_image": "MHIST_dij.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B3 B4 C2 C3 C4 D2 D3 D4): The crypts show basal dilation and distorted, boot-shaped architecture; serration (B3 B4 C3 C4 D3 D4): Intraluminal folding of the epithelium creates a serrated appearance; surface epithelium (A4 B2): The surface shows a thickened layer of epithelium.",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_eak.png": {
+   "donor_image": "MHIST_cng.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A1 A2 B1 B2): The crypts show a saw-tooth appearance, primarily in the upper half of the mucosa; crypt/gland architecture (C1 C2 D1 D2): The crypts maintain a relatively straight, parallel vertical orientation toward the base; surface epithelium (A1 A2 A3): The surface shows a regular columnar epithelial lining.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dic.png": {
+   "donor_image": "MHIST_byb.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 B2 C2 C3): The crypts show a boot-shaped or dilated basal morphology with lateral growth; serration (B2 B3 C3 C4): The epithelial lining of the glands exhibits prominent saw-tooth projections throughout the crypt depth; surface epithelium (A3 A4 B4): The surface layer shows an irregular, serrated appearance.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cek.png": {
+   "donor_image": "MHIST_cmt.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B1 B2 C1 C2): The crypts exhibit a sawtooth-like proliferative profile with superficial serration; crypt/gland architecture (B1 B2 C1 C2 D2): The crypts are straight and parallel, primarily showing superficial serration without significant basal dilation; surface epithelium (A2 B3 C3 C4): The surface epithelium is intact and follows the contours of the mucosal fold.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpt.png": {
+   "donor_image": "MHIST_dfn.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (A2 B2 B3 C3): The crypts show basal dilation and expanded, distorted architecture; serration (A2 B2 B3 C3 D4): Sawtooth-like indentations are present throughout the crypt epithelium; inflammatory infiltrate (A1 B1 C2): There is a mild to moderate infiltration of inflammatory cells in the stroma.",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_apc.png": {
+   "donor_image": "MHIST_coh.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 A4): The surface epithelium shows sawtooth-like indentations; crypt/gland architecture (B1 B2 B3 B4): The crypts are straight and parallel with serrations limited to the upper half; inflammatory infiltrate (A2 A3 C2 C3): There is a dense lymphoplasmacytic infiltrate in the lamina propria.",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_clg.png": {
+   "donor_image": "MHIST_ekh.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (A2 A3 B2 B3 C2 C3): Crypts show a saw-tooth appearance with some basal dilatation; serration (A3 B3 C3): Prominent serrated architecture is visible throughout the crypts; inflammatory infiltrate (A3 B3 D2 D3): There is a dense collection of mononuclear inflammatory cells in the lamina propria.",
+   "inserted_words": 48,
+   "names_ssa_lexically": false
+  },
+  "MHIST_con.png": {
+   "donor_image": "MHIST_bjd.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2): The crypts are relatively straight and evenly spaced, typical of a hyperplastic polyp; serration (C1 C2 C3): Saw-tooth appearance is localized primarily to the upper portions of the crypts; inflammatory infiltrate (B3 C3 C4): Moderate lymphocytic infiltration is present in the lamina propria.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpr.png": {
+   "donor_image": "MHIST_cau.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B2 B3 C3 D3): The crypts show horizontal growth and basal dilation, characteristic of a serrated lesion; serration (B2 B3 C2 C3): The lumina of the glands exhibit a saw-tooth or serrated appearance; stroma (A2 B2 C1 D1): Fibromuscular stroma separates the distorted crypts.",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bhn.png": {
+   "donor_image": "MHIST_afn.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2 D3): The crypts are straight and vertically oriented with a saw-tooth appearance; serration (B1 C1 C2 D1 D2 D3): Tooth-like folding of the glandular epithelium is visible throughout the crypts; surface epithelium (B1 B2 C3): The mucosal surface is visible with small focal serrations.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cnh.png": {
+   "donor_image": "MHIST_con.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B1 B3 B4 C1 C3 C4 D1 D3 D4): The crypts show a characteristic saw-tooth or serrated appearance of the epithelium; crypt/gland architecture (B2 C2 D2): The crypts are dilated and distorted, with some showing basal expansion and horizontal growth; surface epithelium (A1 A2 A3 A4): The surface epithelium is relatively thin and unremarkable.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_byq.png": {
+   "donor_image": "MHIST_cvw.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A1 A2 B3 B4 C3 C4): The crypts show a characteristic sawtooth pattern and are relatively straight and parallel; serration (A2 A3 B3 C2): Prominent serration is visible in the epithelial lining of the glands; surface epithelium (A2 A3 B3): The surface epithelium exhibits a serrated appearance.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpz.png": {
+   "donor_image": "MHIST_blj.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2): The crypts show a boot-shaped or dilated basal appearance; serration (A1 A2 A3 B1 B2 B3 C2 C3): Saw-tooth like indentations are visible along the epithelial lining of the crypts; surface epithelium (A1 A2 A3 A4): The superficial layer shows characteristic serrated patterns.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_erd.png": {
+   "donor_image": "MHIST_dov.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show a saw-tooth appearance but remain relatively straight and parallel near the base; serration (A2 A3 B2 B3 C2 C3 D2 D3): Prominent saw-tooth folding is visible throughout the upper and middle portions of the glands; inflammatory infiltrate (A2 A3 B3 C3): There is a mild to moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bmy.png": {
+   "donor_image": "MHIST_bhn.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A1 A2 A3 B1 B2 B3 B4 C1 C2 C3 C4 D2 D3 D4): Widespread saw-tooth configuration of the crypts and surface epithelium; crypt/gland architecture (B2 B3 C2 C3 D2 D3): Dilated, irregularly shaped crypts with basal expansion; inflammatory infiltrate (B1 B4 C1): Presence of lymphocytic cells within the lamina propria.",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bqv.png": {
+   "donor_image": "MHIST_bal.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 D2 D3): The crypts show a saw-tooth or serrated appearance throughout the upper and middle portions; crypt/gland architecture (B2 C2 D2): The crypts are expanded and show irregular, distorted shapes; inflammatory infiltrate (A2 A3 B1 D3): There is a noticeable presence of lymphocytic and plasmacytic cells within the lamina propria; surface epithelium (A3 B3 C3): The epithelium on the surface is intact and exhibits mild serration.",
+   "inserted_words": 70,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ekm.png": {
+   "donor_image": "MHIST_bpk.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 C4 D3 D4): The glandular structures exhibit a characteristic saw-tooth or serrated appearance; crypt/gland architecture (B2 C2 C3 D3): The crypts show basal dilation and architectural distortion; surface epithelium (A2 A3 B1): The superficial layers show mucosal lining with mild serrated changes.",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  },
+  "MHIST_aqh.png": {
+   "donor_image": "MHIST_bxx.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2 D1 D2): The crypts show a characteristic saw-tooth appearance with regular spacing; serration (B1 B2 C1 C2 D1 D2): Prominent serrated folds are visible throughout the upper and middle portions of the crypts; surface epithelium (A2 B2 B3 C3 C4 D4): The surface epithelium is intact and follows the undulating contour of the tissue.",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpm.png": {
+   "donor_image": "MHIST_edf.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show basal dilation and a distorted, boot-shaped morphology; serration (A1 A3 B4 C4): Tooth-like saw-tooth projections are visible along the epithelial lining of the glands; inflammatory infiltrate (A2 B2 D4): There is a moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ave.png": {
+   "donor_image": "MHIST_cng.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A1 A2 B1 B2): The crypts show a saw-tooth appearance, primarily in the upper half of the mucosa; crypt/gland architecture (C1 C2 D1 D2): The crypts maintain a relatively straight, parallel vertical orientation toward the base; surface epithelium (A1 A2 A3): The surface shows a regular columnar epithelial lining.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cmt.png": {
+   "donor_image": "MHIST_cdr.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A1 A2 B1 B2 C1 C2 D1 D2): The crypts exhibit an expanded, boot-shaped or dilated morphology with basal dilation; serration (B2 B3 C2 C3): There is a jagged, saw-tooth pattern of the glandular epithelium; stroma (A1 A2 A3 D1 D4): The intervening stroma is present and contains scattered inflammatory cells.",
+   "inserted_words": 53,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dad.png": {
+   "donor_image": "MHIST_cmt.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B1 B2 C1 C2): The crypts exhibit a sawtooth-like proliferative profile with superficial serration; crypt/gland architecture (B1 B2 C1 C2 D2): The crypts are straight and parallel, primarily showing superficial serration without significant basal dilation; surface epithelium (A2 B3 C3 C4): The surface epithelium is intact and follows the contours of the mucosal fold.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bzm.png": {
+   "donor_image": "MHIST_emr.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A4 B1 B4 C1 C4 D1 D3 D4): The crypts show significant basal dilation and distorted, boot-shaped architectures; serration (A4 B4 C4 D4): Intracryptal serrated folding is evident throughout the deep portions of the glands; stroma (A1 A2 A3 B2 B3 C2 C3 D2): The glands are separated by expanded areas of fibrous stroma.",
+   "inserted_words": 56,
+   "names_ssa_lexically": false
+  },
+  "MHIST_edf.png": {
+   "donor_image": "MHIST_coh.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 A4): The surface epithelium shows sawtooth-like indentations; crypt/gland architecture (B1 B2 B3 B4): The crypts are straight and parallel with serrations limited to the upper half; inflammatory infiltrate (A2 A3 C2 C3): There is a dense lymphoplasmacytic infiltrate in the lamina propria.",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bvz.png": {
+   "donor_image": "MHIST_cyj.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (C1 C2 C3 C4 D1 D2 D3 D4): Saw-tooth appearance of the crypts is visible throughout the bottom half of the tile; crypt/gland architecture (C2 C3 D2 D3): The crypts show basal dilation and a distorted architectural pattern; surface epithelium (B3 B4 C1 C2 C3 C4): The surface lining shows characteristic folding and serration; inflammatory infiltrate (C1 D1): Moderate lymphocytic infiltration is present in the lamina propria.",
+   "inserted_words": 68,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dio.png": {
+   "donor_image": "MHIST_bjd.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2): The crypts are relatively straight and evenly spaced, typical of a hyperplastic polyp; serration (C1 C2 C3): Saw-tooth appearance is localized primarily to the upper portions of the crypts; inflammatory infiltrate (B3 C3 C4): Moderate lymphocytic infiltration is present in the lamina propria.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_byb.png": {
+   "donor_image": "MHIST_cpd.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A2 A3 B2 B3 C2 C3): The glands exhibit characteristic saw-tooth internal contours; crypt/gland architecture (B2 B3 C2 C3 D2 D3): The crypts show basal dilation and horizontal growth patterns; surface epithelium (A4 B4 C4): The surface layer consists of a single layer of columnar cells.",
+   "inserted_words": 47,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bal.png": {
+   "donor_image": "MHIST_afn.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2 D3): The crypts are straight and vertically oriented with a saw-tooth appearance; serration (B1 C1 C2 D1 D2 D3): Tooth-like folding of the glandular epithelium is visible throughout the crypts; surface epithelium (B1 B2 C3): The mucosal surface is visible with small focal serrations.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dfn.png": {
+   "donor_image": "MHIST_aek.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A2 A3 B2 B3 C3 C4): The crypts show basal dilation and a distorted architecture with some horizontal growth; serration (A2 A3 B2 B3 C3 C4): The glands exhibit a characteristic saw-tooth or serrated appearance throughout the depth of the crypts; inflammatory infiltrate (A1 B1 B2 C2 C3): There is a moderate amount of chronic inflammatory cells within the stroma.",
+   "inserted_words": 62,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bkj.png": {
+   "donor_image": "MHIST_cvw.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A1 A2 B3 B4 C3 C4): The crypts show a characteristic sawtooth pattern and are relatively straight and parallel; serration (A2 A3 B3 C2): Prominent serration is visible in the epithelial lining of the glands; surface epithelium (A2 A3 B3): The surface epithelium exhibits a serrated appearance.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bjd.png": {
+   "donor_image": "MHIST_cvb.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A1 A2 B1 B2 C2 C3): The glands exhibit a saw-tooth or serrated luminal contour throughout the upper and middle sections; crypt/gland architecture (C1 C2 D1 D2): The crypts show basal dilation and distorted, horizontally oriented architecture.",
+   "inserted_words": 38,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ekh.png": {
+   "donor_image": "MHIST_dov.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show a saw-tooth appearance but remain relatively straight and parallel near the base; serration (A2 A3 B2 B3 C2 C3 D2 D3): Prominent saw-tooth folding is visible throughout the upper and middle portions of the glands; inflammatory infiltrate (A2 A3 B3 C3): There is a mild to moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bpk.png": {
+   "donor_image": "MHIST_dad.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 D2): The crypts show a characteristic saw-tooth or serrated luminal contour; crypt/gland architecture (B2 C2 D2): The crypts exhibit basal dilation and distortion of the normal architecture; surface epithelium (A1 A4 B4 C3 C4): The overlying surface epithelium is present and appears largely intact.",
+   "inserted_words": 48,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bqc.png": {
+   "donor_image": "MHIST_bal.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 D2 D3): The crypts show a saw-tooth or serrated appearance throughout the upper and middle portions; crypt/gland architecture (B2 C2 D2): The crypts are expanded and show irregular, distorted shapes; inflammatory infiltrate (A2 A3 B1 D3): There is a noticeable presence of lymphocytic and plasmacytic cells within the lamina propria; surface epithelium (A3 B3 C3): The epithelium on the surface is intact and exhibits mild serration.",
+   "inserted_words": 70,
+   "names_ssa_lexically": false
+  },
+  "MHIST_djh.png": {
+   "donor_image": "MHIST_dvl.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A1 A2 B1 B2 C1 C2 C3): The crypts exhibit a characteristic saw-tooth or jagged pattern; crypt/gland architecture (C2 C3 C4 D3 D4): The crypts show basal dilation and a horizontal growth pattern; surface epithelium (A1 A2 A3 B3 B4): The surface layer is present but does not show the characteristic 'star-shaped' lumens of hyperplastic polyps.",
+   "inserted_words": 57,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ash.png": {
+   "donor_image": "MHIST_bxx.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 B2 C1 C2 D1 D2): The crypts show a characteristic saw-tooth appearance with regular spacing; serration (B1 B2 C1 C2 D1 D2): Prominent serrated folds are visible throughout the upper and middle portions of the crypts; surface epithelium (A2 B2 B3 C3 C4 D4): The surface epithelium is intact and follows the undulating contour of the tissue.",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cau.png": {
+   "donor_image": "MHIST_ble.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 B2 C2 C3 D2 D3): The crypts show basal dilation and distorted, boot-shaped architectures; serration (A1 A2 B1 B2 C4 D4): Saw-tooth folding of the epithelial lining is present throughout the crypts; inflammatory infiltrate (A2 B3 C1): There is a moderate chronic inflammatory cell infiltrate in the stroma.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bgk.png": {
+   "donor_image": "MHIST_cng.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A1 A2 B1 B2): The crypts show a saw-tooth appearance, primarily in the upper half of the mucosa; crypt/gland architecture (C1 C2 D1 D2): The crypts maintain a relatively straight, parallel vertical orientation toward the base; surface epithelium (A1 A2 A3): The surface shows a regular columnar epithelial lining.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bvp.png": {
+   "donor_image": "MHIST_bsd.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A3 A4 B3 B4 C3 C4 D3 D4): The crypts show a characteristic sawtooth or serrated morphology extending deep into the mucosa; serration (A3 A4 B3 B4 C3 C4 D3 D4): Prominent serrated folding of the glandular epithelium is present throughout the crypts; surface epithelium (A3 B3 C3 D3): The edges of the tissue show a mucosal surface with regular epithelial lining.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cgp.png": {
+   "donor_image": "MHIST_cmt.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B1 B2 C1 C2): The crypts exhibit a sawtooth-like proliferative profile with superficial serration; crypt/gland architecture (B1 B2 C1 C2 D2): The crypts are straight and parallel, primarily showing superficial serration without significant basal dilation; surface epithelium (A2 B3 C3 C4): The surface epithelium is intact and follows the contours of the mucosal fold.",
+   "inserted_words": 55,
+   "names_ssa_lexically": false
+  },
+  "MHIST_abb.png": {
+   "donor_image": "MHIST_byq.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A2 A3 B2 C2): The glands show saw-tooth architectural patterns and luminal folding; crypt/gland architecture (A2 B2 C1 C2 D1): Crypts are dilated and distorted, extending deeper into the mucosa; inflammatory infiltrate (A1 B1 B3): Dense clusters of lymphocytes and plasma cells are present in the stroma.",
+   "inserted_words": 48,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dax.png": {
+   "donor_image": "MHIST_coh.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 A4): The surface epithelium shows sawtooth-like indentations; crypt/gland architecture (B1 B2 B3 B4): The crypts are straight and parallel with serrations limited to the upper half; inflammatory infiltrate (A2 A3 C2 C3): There is a dense lymphoplasmacytic infiltrate in the lamina propria.",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dtq.png": {
+   "donor_image": "MHIST_cxx.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3 D3 D4): The crypts show basal dilation and architectural distortion typical of a serrated lesion; serration (B2 B3 C3 C4 D3 D4): Saw-tooth folding is evident along the crypt linings; inflammatory infiltrate (A2 A3 B3): There is a dense infiltration of inflammatory cells within the stroma.",
+   "inserted_words": 52,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cpd.png": {
+   "donor_image": "MHIST_bjd.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2): The crypts are relatively straight and evenly spaced, typical of a hyperplastic polyp; serration (C1 C2 C3): Saw-tooth appearance is localized primarily to the upper portions of the crypts; inflammatory infiltrate (B3 C3 C4): Moderate lymphocytic infiltration is present in the lamina propria.",
+   "inserted_words": 50,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cqp.png": {
+   "donor_image": "MHIST_cyb.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B3 B4 C2 C3 C4 D1 D2 D3 D4): The glands show a sawtooth appearance and an expanded, slightly distorted architecture; serration (B3 B4 C2 C3 C4 D2 D3): Prominent luminal serrations are visible throughout the depths of the crypts; inflammatory infiltrate (B2 C2 D1 D2): There is a moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ble.png": {
+   "donor_image": "MHIST_afn.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B1 C1 C2 D1 D2 D3): The crypts are straight and vertically oriented with a saw-tooth appearance; serration (B1 C1 C2 D1 D2 D3): Tooth-like folding of the glandular epithelium is visible throughout the crypts; surface epithelium (B1 B2 C3): The mucosal surface is visible with small focal serrations.",
+   "inserted_words": 51,
+   "names_ssa_lexically": false
+  },
+  "MHIST_bsy.png": {
+   "donor_image": "MHIST_cgp.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (A1 A2 A3 A4 B2 B3 B4 C3 C4 D3 D4): The crypts exhibit a saw-tooth appearance with prominent luminal folding; crypt/gland architecture (A1 A2 A3 A4 B3 B4 C3 C4 D3 D4): The glands are distorted with horizontal growth and basal dilation; surface epithelium (B1 B2 C2): The lining epithelium is visible at the edge of the tissue fragment.",
+   "inserted_words": 61,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cxx.png": {
+   "donor_image": "MHIST_cvw.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (A1 A2 B3 B4 C3 C4): The crypts show a characteristic sawtooth pattern and are relatively straight and parallel; serration (A2 A3 B3 C2): Prominent serration is visible in the epithelial lining of the glands; surface epithelium (A2 A3 B3): The surface epithelium exhibits a serrated appearance.",
+   "inserted_words": 49,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cuu.png": {
+   "donor_image": "MHIST_cfq.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 B2 C3 C4): Sawtooth-like indentations of the glandular lumen are present; crypt/gland architecture (B2 C2 D2 D3): The glands show basal dilation and distorted architecture; inflammatory infiltrate (A1 B1 C1 D1): There is a dense collection of mononuclear inflammatory cells in the stroma.",
+   "inserted_words": 45,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ebl.png": {
+   "donor_image": "MHIST_dov.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "HP",
+   "inserted_text": "crypt/gland architecture (B2 B3 C2 C3): The crypts show a saw-tooth appearance but remain relatively straight and parallel near the base; serration (A2 A3 B2 B3 C2 C3 D2 D3): Prominent saw-tooth folding is visible throughout the upper and middle portions of the glands; inflammatory infiltrate (A2 A3 B3 C3): There is a mild to moderate amount of mononuclear inflammatory cells within the stroma.",
+   "inserted_words": 64,
+   "names_ssa_lexically": false
+  },
+  "MHIST_cze.png": {
+   "donor_image": "MHIST_cnh.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "SSA",
+   "inserted_text": "crypt/gland architecture (C1 C2 C3 C4 D1 D2 D3 D4): The crypts show basal dilation and a boot-shaped or L-shaped architecture; serration (B2 B3 B4 C1 C2 C3 C4): Sawtooth-like indentations are present throughout the upper and mid-portions of the crypts; surface epithelium (B1 B2 B3 B4): The surface shows a continuous layer of columnar epithelium with some serrated contours.",
+   "inserted_words": 60,
+   "names_ssa_lexically": false
+  },
+  "MHIST_dws.png": {
+   "donor_image": "MHIST_bal.png",
+   "donor_etc_label": "HP",
+   "donor_true_label": "SSA",
+   "inserted_text": "serration (B2 B3 C2 D2 D3): The crypts show a saw-tooth or serrated appearance throughout the upper and middle portions; crypt/gland architecture (B2 C2 D2): The crypts are expanded and show irregular, distorted shapes; inflammatory infiltrate (A2 A3 B1 D3): There is a noticeable presence of lymphocytic and plasmacytic cells within the lamina propria; surface epithelium (A3 B3 C3): The epithelium on the surface is intact and exhibits mild serration.",
+   "inserted_words": 70,
+   "names_ssa_lexically": false
+  },
+  "MHIST_ckn.png": {
+   "donor_image": "MHIST_efr.png",
+   "donor_etc_label": "SSA",
+   "donor_true_label": "HP",
+   "inserted_text": "serration (A2 A3 B2 B3 C2 C3): The crypts exhibit a saw-tooth pattern with luminal folding; crypt/gland architecture (A4 B4 C4 D4): The crypts are dilated and show basal expansion and horizontal growth; surface epithelium (A1 B1 C1): The surface epithelium shows focal irregularities and shedding.",
+   "inserted_words": 46,
+   "names_ssa_lexically": false
+  }
+ }
+}
