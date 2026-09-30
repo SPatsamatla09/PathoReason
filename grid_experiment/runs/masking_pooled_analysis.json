@@ -3,7 +3,8 @@
   "skipped_unfinished_extensions": [],
   "sources": {
     "B": "runs/masking_cte_p1_full_k3.jsonl",
-    "C": "runs/masking_abl100_k3.jsonl"
+    "C": "runs/masking_abl100_k3.jsonl",
+    "ext:openrouter__google-gemma-4-31b-it__friendli": "runs/masking_ext__openrouter__google-gemma-4-31b-it__friendli_k3.jsonl"
   },
   "integrity": {
     "B": {
@@ -21,23 +22,31 @@
       "incomplete_tiles": [],
       "mixed_host_tiles": [],
       "complete_tiles": 100
+    },
+    "ext:openrouter__google-gemma-4-31b-it__friendli": {
+      "records": 1914,
+      "errors": 0,
+      "invalid_label": 0,
+      "incomplete_tiles": [],
+      "mixed_host_tiles": [],
+      "complete_tiles": 319
     }
   },
   "duplicates_identical_records_counted_once": 15,
   "duplicate_conflicts_different_records": [],
   "primary_pooled_unique_tiles": {
-    "n_tiles": 185,
-    "tiles_cited_more": 54,
-    "tiles_control_more": 47,
-    "tiles_tied": 84,
-    "sign_test_p": 0.5507,
-    "mean_net_per_tile": 0.0486,
+    "n_tiles": 504,
+    "tiles_cited_more": 156,
+    "tiles_control_more": 96,
+    "tiles_tied": 252,
+    "sign_test_p": 0.0002,
+    "mean_net_per_tile": 0.2163,
     "mean_net_bootstrap_95ci": [
-      -0.1405,
-      0.2324
+      0.1091,
+      0.3234
     ],
-    "pair_level_cited_only": 92,
-    "pair_level_control_only": 83,
+    "pair_level_cited_only": 284,
+    "pair_level_control_only": 175,
     "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
   },
   "per_sweep_as_run": {
@@ -64,11 +73,26 @@
       "sign_test_p": 0.1409,
       "mean_net_per_tile": 0.21,
       "mean_net_bootstrap_95ci": [
-        -0.04,
+        -0.05,
         0.46
       ],
       "pair_level_cited_only": 58,
       "pair_level_control_only": 37,
+      "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+    },
+    "ext:openrouter__google-gemma-4-31b-it__friendli": {
+      "n_tiles": 319,
+      "tiles_cited_more": 102,
+      "tiles_control_more": 49,
+      "tiles_tied": 168,
+      "sign_test_p": 0.0,
+      "mean_net_per_tile": 0.3135,
+      "mean_net_bootstrap_95ci": [
+        0.1818,
+        0.4451
+      ],
+      "pair_level_cited_only": 192,
+      "pair_level_control_only": 92,
       "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
     }
   },
@@ -87,28 +111,52 @@
       "pair_level_cited_only": 92,
       "pair_level_control_only": 83,
       "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+    },
+    "https://openrouter.ai/api/v1 | google/gemma-4-31b-it | provider=Friendli": {
+      "n_tiles": 319,
+      "tiles_cited_more": 102,
+      "tiles_control_more": 49,
+      "tiles_tied": 168,
+      "sign_test_p": 0.0,
+      "mean_net_per_tile": 0.3135,
+      "mean_net_bootstrap_95ci": [
+        0.185,
+        0.4451
+      ],
+      "pair_level_cited_only": 192,
+      "pair_level_control_only": 92,
+      "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
     }
   },
+  "between_host_heterogeneity": {
+    "test": "Fisher exact on host x (cited-more, control-more) tiles",
+    "hosts": [
+      "https://openrouter.ai/api/v1 | google/gemma-4-31b-it | provider=Friendli",
+      "legacy-cerebras__gemma-4-31b"
+    ],
+    "p": 0.0254,
+    "reading": "pooled estimate mixes two deployments that DISAGREE (p < .05); report per host"
+  },
   "min_detectable_effect_80pct_power": {
-    "n_nontied": 101,
-    "min_cited_share": 0.64,
-    "as_odds": "1.78:1 cited:control among non-tied tiles"
+    "n_nontied": 252,
+    "min_cited_share": 0.592,
+    "as_odds": "1.45:1 cited:control among non-tied tiles"
   },
   "sensitivity_plus_pilot_tiles_not_otherwise_present": {
     "added_tiles": 2,
-    "n_tiles": 187,
-    "tiles_cited_more": 54,
-    "tiles_control_more": 49,
-    "tiles_tied": 84,
-    "sign_test_p": 0.6937,
-    "mean_net_per_tile": 0.0374,
+    "n_tiles": 506,
+    "tiles_cited_more": 156,
+    "tiles_control_more": 98,
+    "tiles_tied": 252,
+    "sign_test_p": 0.0003,
+    "mean_net_per_tile": 0.2115,
     "mean_net_bootstrap_95ci": [
-      -0.1497,
-      0.2246
+      0.1047,
+      0.3182
     ],
-    "pair_level_cited_only": 92,
-    "pair_level_control_only": 85,
+    "pair_level_cited_only": 284,
+    "pair_level_control_only": 177,
     "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
   },
-  "scope": "B + C + no finished extensions"
+  "scope": "B + C + ext:openrouter__google-gemma-4-31b-it__friendli"
 }
