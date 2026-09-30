@@ -187,6 +187,33 @@ The rule, fixed in advance: if the SSA rate falls well below 90% and AUROC excee
 about 0.65 without the grid and vocabulary, then the pilot measured the prompt, not the
 models.
 
+## 3b. Prompt diagnostic (follow-up to the pilot)
+
+Pre-registered, about $0.61, verified. Full write-up: `runs/prompt_diagnostic/RESULTS.md`.
+
+**The grid and the feature vocabulary are not needed for the SSA default.** With a
+clean tile and a one-line "HP or SSA?" prompt, the SSA rate was:
+
+- GPT-4.1: 100%
+- Qwen3-VL-235B: 100%
+- gemma-4-31b: 98%
+- Gemini 2.5 Flash: 89%
+
+Relabelling the classes as neutral letters, with the order reversed, left GPT-4.1 at
+97% and Qwen at 100%.
+
+**No model reached the bar in any of the 14 model × prompt cells** (best 61/100).
+GPT-4.1's log-probability AUROC was 0.60–0.61, with CIs reaching about 0.5.
+
+**Not excluded:** a prior attached to the "sessile serrated" wording, which all prompts
+share, or to answer position.
+
+**Exploratory:**
+
+- Removing only the grid moved GPT-4.1 from 98% to 73% SSA. That is mostly a threshold
+  shift, and still 58/100.
+- GPT-4.1 and Qwen cited grid cells on 100/100 clean, gridless tiles.
+
 ## 4. Multiplicity
 
 The project has now run about 27 tile-level cited-vs-control masking tests.

@@ -24,6 +24,11 @@ Qwen3-VL-235B clears 63.2%, and gemma doesn't either. GPT-4.1 and Qwen answer SS
 almost every tile. The full second-VLM pipeline is **not** run; see
 `runs/NEW_VLM_COST_ESTIMATE.md`.
 
+**Prompt diagnostic.** Pre-registered; see `runs/prompt_diagnostic/RESULTS.md`.
+
+- Neither our grid nor our feature vocabulary causes the SSA default.
+- No model is competent under any of the 14 prompt × model combinations.
+
 **Pathologist (item 7): contacts identified, nothing sent.** See
 `outreach/RATER_CONTACTS.md` (local only).
 

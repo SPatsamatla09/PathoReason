@@ -1,0 +1,297 @@
+{
+  "arms": {
+    "openai/gpt-4.1": {
+      "grid_cte (pilot)": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 39,
+        "accuracy": 0.39,
+        "wilson95": [
+          0.3002,
+          0.488
+        ],
+        "balanced_accuracy": 0.5159,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0317,
+        "ssa_call_rate": 0.98,
+        "label_vs_truth_fisher_p": 0.529,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.2913
+      },
+      "clean_alias": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 40,
+        "accuracy": 0.4,
+        "wilson95": [
+          0.3094,
+          0.498
+        ],
+        "balanced_accuracy": 0.5238,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0476,
+        "ssa_call_rate": 0.97,
+        "label_vs_truth_fisher_p": 0.294,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0656,
+        "logprob_auroc": 0.6118,
+        "logprob_auroc_ci95": [
+          0.4967,
+          0.7207
+        ],
+        "n_logprob": 100,
+        "logprob_p_ssa_median": 1.0
+      },
+      "clean_cte": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 58,
+        "accuracy": 0.58,
+        "wilson95": [
+          0.4821,
+          0.672
+        ],
+        "balanced_accuracy": 0.6499,
+        "sensitivity_SSA": 0.9189,
+        "specificity_HP": 0.381,
+        "ssa_call_rate": 0.73,
+        "label_vs_truth_fisher_p": 0.000986,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.288
+      },
+      "clean_min": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0646,
+        "logprob_auroc": 0.6017,
+        "logprob_auroc_ci95": [
+          0.4876,
+          0.7118
+        ],
+        "n_logprob": 100,
+        "logprob_p_ssa_median": 1.0
+      },
+      "grid_min": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0646,
+        "logprob_auroc": 0.6115,
+        "logprob_auroc_ci95": [
+          0.4996,
+          0.72
+        ],
+        "n_logprob": 100,
+        "logprob_p_ssa_median": 1.0
+      }
+    },
+    "qwen/qwen3-vl-235b-a22b-instruct": {
+      "grid_cte (pilot)": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.039
+      },
+      "clean_alias": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0038
+      },
+      "clean_cte": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0388
+      },
+      "clean_min": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0038
+      },
+      "grid_min": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0038
+      }
+    },
+    "google/gemini-2.5-flash": {
+      "grid_cte (pilot)": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 57,
+        "accuracy": 0.57,
+        "wilson95": [
+          0.4722,
+          0.6627
+        ],
+        "balanced_accuracy": 0.5918,
+        "sensitivity_SSA": 0.6757,
+        "specificity_HP": 0.5079,
+        "ssa_call_rate": 0.56,
+        "label_vs_truth_fisher_p": 0.0959,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.1087
+      },
+      "clean_min": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 44,
+        "accuracy": 0.44,
+        "wilson95": [
+          0.3467,
+          0.5377
+        ],
+        "balanced_accuracy": 0.5444,
+        "sensitivity_SSA": 0.9459,
+        "specificity_HP": 0.1429,
+        "ssa_call_rate": 0.89,
+        "label_vs_truth_fisher_p": 0.205,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0097
+      }
+    },
+    "google/gemma-4-31b-it": {
+      "grid_cte (pilot)": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 61,
+        "accuracy": 0.61,
+        "wilson95": [
+          0.512,
+          0.6998
+        ],
+        "balanced_accuracy": 0.5678,
+        "sensitivity_SSA": 0.4054,
+        "specificity_HP": 0.7302,
+        "ssa_call_rate": 0.32,
+        "label_vs_truth_fisher_p": 0.187,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0193
+      },
+      "clean_min": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 39,
+        "accuracy": 0.39,
+        "wilson95": [
+          0.3002,
+          0.488
+        ],
+        "balanced_accuracy": 0.5159,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0317,
+        "ssa_call_rate": 0.98,
+        "label_vs_truth_fisher_p": 0.529,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0047
+      }
+    }
+  },
+  "decisions": {
+    "openai/gpt-4.1": {
+      "rule1_prompt_grid_induced_default": false,
+      "rule2_competent_arms": [],
+      "rule3_label_name_shift_pts": -3.0,
+      "rule3_label_names_shift_answer": false
+    },
+    "qwen/qwen3-vl-235b-a22b-instruct": {
+      "rule1_prompt_grid_induced_default": false,
+      "rule2_competent_arms": [],
+      "rule3_label_name_shift_pts": 0.0,
+      "rule3_label_names_shift_answer": false
+    },
+    "google/gemini-2.5-flash": {
+      "rule1_prompt_grid_induced_default": false,
+      "rule2_competent_arms": [],
+      "rule3_label_name_shift_pts": null,
+      "rule3_label_names_shift_answer": "not applicable (no alias arm)"
+    },
+    "google/gemma-4-31b-it": {
+      "rule1_prompt_grid_induced_default": false,
+      "rule2_competent_arms": [],
+      "rule3_label_name_shift_pts": null,
+      "rule3_label_names_shift_answer": "not applicable (no alias arm)"
+    }
+  }
+}
