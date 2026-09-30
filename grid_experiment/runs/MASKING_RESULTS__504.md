@@ -9,6 +9,12 @@
 > "Not ruled out: a genuine deployment difference" item and the "decisive next test"
 > section below.
 
+> **Superseded in part (2026-09-30, later the same day).** The "significant on one
+> tile set only" conclusion is withdrawn. A pre-registered replication on the remaining
+> 427 never-masked test tiles gave 130 vs 79, p = 5 × 10⁻⁴, matching the extension
+> (Fisher p = 0.32). The legacy nulls are best read as underpowered plus chance. See
+> `runs/masking_ext2/RESULTS.md`.
+
 ## Setup
 
 | | |

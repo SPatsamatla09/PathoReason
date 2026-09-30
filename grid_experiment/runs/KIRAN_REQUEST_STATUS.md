@@ -31,6 +31,17 @@ almost every tile. The full second-VLM pipeline is **not** run; see
 - Two further controls exclude the answer letter and position.
 - Qwen's SSA default needs no image at all.
 
+**Masking now covers the full test set (item 4).** The remaining 450 tiles are done
+(427 usable), so every one of the 977 test tiles has been masked or tried.
+
+- **Pre-registered replication on fresh tiles: 130 vs 79, p = 5 × 10⁻⁴.** It matches
+  the extension.
+- The earlier "one tile set only" conclusion is withdrawn.
+- The legacy Cerebras nulls are best read as underpowered.
+- The effect is modest (about 7 extra flips per 100 masks) and has no diagnostic
+  meaning.
+- Details: `runs/masking_ext2/RESULTS.md`.
+
 **Pathologist (item 7): contacts identified, nothing sent.** See
 `outreach/RATER_CONTACTS.md` (local only).
 
@@ -57,7 +68,7 @@ and overclaims to avoid are in `runs/MASKING_RESULTS__504.md`.
 | # | request | status | file to pull into the write-up |
 |---|---|---|---|
 | 1 | four new ordering conditions, n ≥ 100, flips vs classify-only | **done** 2026-09-29 on OpenRouter/Friendli; verified by independent recomputation | **`runs/ordering_controls/RESULTS__friendli.md`** (write-up-ready); full output `analysis__openrouter__google-gemma-4-31b-it__friendli.json` |
-| 2 | masking sweep to 400–500 tiles, pooled tile-level p | **done** 2026-09-30: 504 unique tiles; adversarially verified. **Hosts disagree, so results are reported per host, with no pooled p** (see note) | **`runs/MASKING_RESULTS__504.md`** (write-up-ready); `runs/masking_pooled_analysis.json` |
+| 2 | masking sweep to 400–500 tiles, pooled tile-level p | **done, full test set** 2026-09-30 (977 tiles masked or tried; see `runs/masking_ext2/RESULTS.md`). Earlier: 504 unique tiles; adversarially verified. **Hosts disagree, so results are reported per host, with no pooled p** (see note) | **`runs/MASKING_RESULTS__504.md`** (write-up-ready); `runs/masking_pooled_analysis.json` |
 | 3 | two-item pathologist rating instrument | **done** | `outreach/` (the rating instrument; local only) |
 | 4 | no second VLM, no tissue-type-matched controls | respected through round 2; **superseded 2026-09-30** by the user's direction (type-matched controls and a competence pilot done; full second-VLM pipeline not run) | `runs/ROUND3_RESULTS.md` |
 

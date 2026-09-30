@@ -16,6 +16,12 @@ Sources:
 
 Cost of this round: about $1.33 of OpenRouter credit ($2.85 left).
 
+> **Superseded in part (2026-09-30, later the same day).** The "significant on one
+> tile set only" conclusion is withdrawn. A pre-registered replication on the remaining
+> 427 never-masked test tiles gave 130 vs 79, p = 5 × 10⁻⁴, matching the extension
+> (Fisher p = 0.32). The legacy nulls are best read as underpowered plus chance. See
+> `runs/masking_ext2/RESULTS.md`.
+
 ## 1. Why the masking effect appeared on one host and not the other
 
 **Short answer: the serving host does not explain it.** With tiles and masks held

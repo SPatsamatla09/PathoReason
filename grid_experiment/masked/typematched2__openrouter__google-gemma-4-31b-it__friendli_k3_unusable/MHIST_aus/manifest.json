@@ -1,0 +1,39 @@
+{
+  "image": "MHIST_aus.png",
+  "source": "../images/MHIST_aus.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "cited_cells_full": [
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "C2",
+    "C3",
+    "D3"
+  ],
+  "subset_used": 3,
+  "tolerance_pp": 5.0,
+  "cited": {
+    "cells": [
+      "B3",
+      "B4",
+      "C3"
+    ],
+    "pct_tissue": 29.53,
+    "pct_epithelium": 34.32
+  },
+  "area_matched_control_for_reference": {
+    "cells": [
+      "C1",
+      "C4",
+      "D1"
+    ],
+    "pct_tissue": 28.69,
+    "pct_epithelium": 23.27,
+    "epithelium_gap_pp": -11.05,
+    "cells_in_full_citation": 0
+  },
+  "usable": false,
+  "reason": "no disjoint 3-cell set within 5.0pp on both tissue and epithelium"
+}

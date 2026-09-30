@@ -1,0 +1,38 @@
+{
+  "image": "MHIST_ane.png",
+  "source": "../images/MHIST_ane.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "cited_cells_full": [
+    "A2",
+    "A3",
+    "B2",
+    "B3",
+    "C2",
+    "C3"
+  ],
+  "subset_used": 3,
+  "tolerance_pp": 5.0,
+  "cited": {
+    "cells": [
+      "A3",
+      "B3",
+      "C3"
+    ],
+    "pct_tissue": 29.35,
+    "pct_epithelium": 43.74
+  },
+  "area_matched_control_for_reference": {
+    "cells": [
+      "C2",
+      "C4",
+      "D3"
+    ],
+    "pct_tissue": 28.14,
+    "pct_epithelium": 23.05,
+    "epithelium_gap_pp": -20.7,
+    "cells_in_full_citation": 1
+  },
+  "usable": false,
+  "reason": "no disjoint 3-cell set within 5.0pp on both tissue and epithelium"
+}

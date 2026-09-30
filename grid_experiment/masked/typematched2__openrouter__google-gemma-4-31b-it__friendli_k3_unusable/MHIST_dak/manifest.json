@@ -1,0 +1,39 @@
+{
+  "image": "MHIST_dak.png",
+  "source": "../images/MHIST_dak.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "cited_cells_full": [
+    "C2",
+    "C3",
+    "C4",
+    "D1",
+    "D2",
+    "D3",
+    "D4"
+  ],
+  "subset_used": 3,
+  "tolerance_pp": 5.0,
+  "cited": {
+    "cells": [
+      "C4",
+      "D2",
+      "D4"
+    ],
+    "pct_tissue": 45.31,
+    "pct_epithelium": 63.81
+  },
+  "area_matched_control_for_reference": {
+    "cells": [
+      "C3",
+      "D1",
+      "D3"
+    ],
+    "pct_tissue": 42.03,
+    "pct_epithelium": 31.25,
+    "epithelium_gap_pp": -32.56,
+    "cells_in_full_citation": 3
+  },
+  "usable": false,
+  "reason": "no disjoint 3-cell set within 5.0pp on both tissue and epithelium"
+}

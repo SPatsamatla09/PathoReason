@@ -1,0 +1,95 @@
+{
+  "1_primary_ext2_cited_vs_area_matched": {
+    "n_tiles": 427,
+    "cited_more": 130,
+    "control_more": 79,
+    "tied": 218,
+    "sign_test_p": 0.000513,
+    "cited_flip_rate": 0.2857,
+    "control_flip_rate": 0.2178,
+    "reading": "REPLICATES (cited > control, p < .05)",
+    "power_at_ext_share_0.675": 0.999
+  },
+  "2_heterogeneity_ext_vs_ext2_fisher_p": 0.317,
+  "3_secondary_cited_vs_type_matched": {
+    "n_tiles": 354,
+    "cited_more": 104,
+    "control_more": 58,
+    "tied": 192,
+    "sign_test_p": 0.000375,
+    "cited_flip_rate": 0.291,
+    "control_flip_rate": 0.2062
+  },
+  "4_full_set_table": {
+    "legacy_185_cerebras": {
+      "n_tiles": 185,
+      "cited_more": 54,
+      "control_more": 47,
+      "tied": 84,
+      "sign_test_p": 0.551,
+      "cited_flip_rate": 0.2505,
+      "control_flip_rate": 0.2342
+    },
+    "legacy_185_friendli_cerebras_masks": {
+      "n_tiles": 185,
+      "cited_more": 45,
+      "control_more": 53,
+      "tied": 87,
+      "sign_test_p": 0.48,
+      "cited_flip_rate": 0.2342,
+      "control_flip_rate": 0.2649
+    },
+    "legacy_184_friendli_own_citations": {
+      "n_tiles": 184,
+      "cited_more": 55,
+      "control_more": 41,
+      "tied": 88,
+      "sign_test_p": 0.184,
+      "cited_flip_rate": 0.2917,
+      "control_flip_rate": 0.2337
+    },
+    "extension_319_friendli": {
+      "n_tiles": 319,
+      "cited_more": 102,
+      "control_more": 49,
+      "tied": 168,
+      "sign_test_p": 1.93e-05,
+      "cited_flip_rate": 0.3229,
+      "control_flip_rate": 0.2184
+    },
+    "ext2_friendli": {
+      "n_tiles": 427,
+      "cited_more": 130,
+      "control_more": 79,
+      "tied": 218,
+      "sign_test_p": 0.000513,
+      "cited_flip_rate": 0.2857,
+      "control_flip_rate": 0.2178
+    }
+  },
+  "4b_friendli_own_citation_pool": {
+    "tile_sets": "extension 319 + legacy 184 (own citations) + ext2",
+    "n_tiles": 930,
+    "cited_more": 287,
+    "control_more": 169,
+    "tied": 474,
+    "sign_test_p": 3.61e-08,
+    "heterogeneity_chi2_df2": 2.738,
+    "heterogeneity_p": 0.254,
+    "note": "report only together with the heterogeneity across tile sets"
+  },
+  "5_coverage": {
+    "test_tiles": 977,
+    "with_a_usable_friendli_own_citation_masking_result": 930
+  },
+  "integrity": {
+    "masked_providers": [
+      "Friendli"
+    ],
+    "baseline_providers": [
+      "Friendli"
+    ],
+    "area_records": 2562,
+    "type_records": 1062
+  }
+}

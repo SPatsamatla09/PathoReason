@@ -1,0 +1,97 @@
+{
+  "image": "MHIST_byl.png",
+  "source": "../images/MHIST_byl.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "seed": 20260806,
+  "cited_cells_full": [
+    "A1",
+    "A2",
+    "A3",
+    "A4",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "C3",
+    "C4"
+  ],
+  "subset_used": 3,
+  "match_quality": {
+    "tissue_gap_pp": 0.25,
+    "control_overlap_cells": 0,
+    "cited_pct_of_tissue": 22.17,
+    "usable": true
+  },
+  "tile_tissue_px": 42371,
+  "tissue_px_per_cell": {
+    "A1": 2957,
+    "A2": 3044,
+    "A3": 3123,
+    "A4": 2897,
+    "B1": 1669,
+    "B2": 2767,
+    "B3": 3113,
+    "B4": 2979,
+    "C1": 540,
+    "C2": 2788,
+    "C3": 3134,
+    "C4": 3136,
+    "D1": 1151,
+    "D2": 2967,
+    "D3": 2975,
+    "D4": 3131
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "A3",
+        "C3",
+        "C4"
+      ],
+      "overlap_with_cited": 3,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 22.17
+    },
+    "random": {
+      "cells": [
+        "A2",
+        "B3",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 21.92
+    },
+    "tissue_matched": {
+      "cells": [
+        "A2",
+        "B3",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "tissue_px_gap_vs_cited": 105,
+      "n_cells": 3,
+      "pct_of_tile_masked": 18.75,
+      "pct_of_tissue_masked": 21.92
+    }
+  },
+  "methods": [
+    "black",
+    "blur",
+    "mean"
+  ],
+  "files": [
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/cited__mean.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/cited__blur.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/cited__black.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/random__mean.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/random__blur.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/random__black.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/tissue_matched__mean.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/tissue_matched__blur.png",
+    "masked/ext2__openrouter__google-gemma-4-31b-it__friendli_k3/MHIST_byl/tissue_matched__black.png"
+  ]
+}

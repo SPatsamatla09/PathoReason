@@ -1,0 +1,87 @@
+{
+  "image": "MHIST_amm.png",
+  "source": "../images/MHIST_amm.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "cited_cells_full": [
+    "A3",
+    "A4",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "C1",
+    "C2",
+    "D1",
+    "D2"
+  ],
+  "subset_used": 3,
+  "tolerance_pp": 5.0,
+  "cited": {
+    "cells": [
+      "B1",
+      "C1",
+      "C2"
+    ],
+    "pct_tissue": 20.96,
+    "pct_epithelium": 14.96
+  },
+  "area_matched_control_for_reference": {
+    "cells": [
+      "A1",
+      "A2",
+      "B2"
+    ],
+    "pct_tissue": 20.94,
+    "pct_epithelium": 21.71,
+    "epithelium_gap_pp": 6.75,
+    "cells_in_full_citation": 1
+  },
+  "usable": true,
+  "type_matched": {
+    "cells": [
+      "A2",
+      "D3",
+      "D4"
+    ],
+    "pct_tissue": 20.06,
+    "pct_epithelium": 12.54,
+    "tissue_gap_pp": -0.9,
+    "epithelium_gap_pp": -2.42,
+    "cells_in_full_citation": 0
+  },
+  "cellsets": {
+    "cited": {
+      "cells": [
+        "B1",
+        "C1",
+        "C2"
+      ],
+      "overlap_with_cited": 3,
+      "pct_of_tissue_masked": 20.96
+    },
+    "type_matched": {
+      "cells": [
+        "A2",
+        "D3",
+        "D4"
+      ],
+      "overlap_with_cited": 0,
+      "pct_of_tissue_masked": 20.06
+    }
+  },
+  "match_quality": {
+    "usable": true,
+    "tissue_gap_pp": -0.9,
+    "epithelium_gap_pp": -2.42,
+    "control_overlap_cells": 0
+  },
+  "files": [
+    "cited__mean.png",
+    "cited__blur.png",
+    "cited__black.png",
+    "type_matched__mean.png",
+    "type_matched__blur.png",
+    "type_matched__black.png"
+  ]
+}

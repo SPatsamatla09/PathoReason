@@ -1,0 +1,38 @@
+{
+  "image": "MHIST_afc.png",
+  "source": "../images/MHIST_afc.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "cited_cells_full": [
+    "A2",
+    "A3",
+    "B2",
+    "B3",
+    "C2",
+    "C3"
+  ],
+  "subset_used": 3,
+  "tolerance_pp": 5.0,
+  "cited": {
+    "cells": [
+      "B2",
+      "C2",
+      "C3"
+    ],
+    "pct_tissue": 34.0,
+    "pct_epithelium": 28.17
+  },
+  "area_matched_control_for_reference": {
+    "cells": [
+      "B3",
+      "D3",
+      "D4"
+    ],
+    "pct_tissue": 31.21,
+    "pct_epithelium": 39.83,
+    "epithelium_gap_pp": 11.66,
+    "cells_in_full_citation": 1
+  },
+  "usable": false,
+  "reason": "no disjoint 3-cell set within 5.0pp on both tissue and epithelium"
+}
