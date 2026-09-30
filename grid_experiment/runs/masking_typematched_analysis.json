@@ -1,0 +1,51 @@
+{
+  "n_usable_tiles": 262,
+  "n_unusable_tiles": 57,
+  "cited_vs_type_matched": {
+    "n_tiles": 262,
+    "cited_more": 99,
+    "control_more": 37,
+    "tied": 126,
+    "sign_test_p": 1.03e-07,
+    "cited_flip_rate": 0.3524,
+    "control_flip_rate": 0.2176
+  },
+  "cited_vs_area_matched_same_tiles_original_run": {
+    "n_tiles": 262,
+    "cited_more": 82,
+    "control_more": 40,
+    "tied": 140,
+    "sign_test_p": 0.00018,
+    "cited_flip_rate": 0.3257,
+    "control_flip_rate": 0.2188
+  },
+  "cited_arm_test_retest_label_agreement": "645/786 (0.821)",
+  "type_matched_fully_uncited_controls": {
+    "n_tiles": 169,
+    "cited_more": 62,
+    "control_more": 23,
+    "tied": 84,
+    "sign_test_p": 2.77e-05,
+    "cited_flip_rate": 0.3787,
+    "control_flip_rate": 0.2446
+  },
+  "type_matched_controls_with_cited_cells": {
+    "n_tiles": 93,
+    "cited_more": 37,
+    "control_more": 14,
+    "tied": 42,
+    "sign_test_p": 0.00177,
+    "cited_flip_rate": 0.3047,
+    "control_flip_rate": 0.1685
+  },
+  "area_matched_epithelium_gap_pp": {
+    "median": -2.61,
+    "control_less_epithelial": 204,
+    "abs_gap_over_5pp": 170,
+    "n": 319
+  },
+  "type_matched_epithelium_gap_pp": {
+    "median": -0.295,
+    "max_abs": 4.93
+  }
+}

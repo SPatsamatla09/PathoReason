@@ -1,0 +1,42 @@
+{
+  "image": "MHIST_aod.png",
+  "source": "../images/MHIST_aod.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "cited_cells_full": [
+    "B3",
+    "B4",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "D1",
+    "D2",
+    "D3",
+    "D4"
+  ],
+  "subset_used": 3,
+  "tolerance_pp": 5.0,
+  "cited": {
+    "cells": [
+      "C4",
+      "D1",
+      "D4"
+    ],
+    "pct_tissue": 29.68,
+    "pct_epithelium": 43.81
+  },
+  "area_matched_control_for_reference": {
+    "cells": [
+      "C2",
+      "C3",
+      "D3"
+    ],
+    "pct_tissue": 28.38,
+    "pct_epithelium": 20.28,
+    "epithelium_gap_pp": -23.53,
+    "cells_in_full_citation": 3
+  },
+  "usable": false,
+  "reason": "no disjoint 3-cell set within 5.0pp on both tissue and epithelium"
+}

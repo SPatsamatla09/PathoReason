@@ -8,6 +8,32 @@ now pinned to the Friendli upstream.
 
 The "blocker" section below is kept for the record.
 
+**Round 3 (2026-09-30), on the user's direction, following Kiran's full feedback.**
+See `runs/ROUND3_RESULTS.md`.
+
+**Host investigation: the host does not explain the masking difference.** On the same
+tiles and masks the two hosts agree (Friendli 45 vs 53, p = 0.48; Cerebras 54 vs 47).
+The deployments do compute different next-token distributions on identical inputs.
+Decoding settings, prompt formatting and parsing do not explain that.
+
+**Tissue-type-matched controls (Kiran item 6): done on the 262 feasible extension
+tiles.** The effect survives: 99 vs 37, p = 1.0 × 10⁻⁷.
+
+**Competence pilot (Kiran items 1 and 5).** None of Gemini 2.5 Flash, GPT-4.1 or
+Qwen3-VL-235B clears 63.2%, and gemma doesn't either. GPT-4.1 and Qwen answer SSA on
+almost every tile. The full second-VLM pipeline is **not** run; see
+`runs/NEW_VLM_COST_ESTIMATE.md`.
+
+**Pathologist (item 7): contacts identified, nothing sent.** See
+`outreach/RATER_CONTACTS.md` (local only).
+
+**Paper: v2 draft leads with the order effect** (`paper/pathoreason_revised_v2.md`,
+local only).
+
+**Constraint 4 is superseded** for the type-matched controls and the pilot, by the
+user's direction on 2026-09-30.
+
+
 **Request 2 in one paragraph.** Per host, the tile-level sign test gives:
 
 - **Friendli (319 new tiles):** 102 cited-more vs 49 control-more, p = 1.9 × 10⁻⁵.
@@ -26,7 +52,7 @@ and overclaims to avoid are in `runs/MASKING_RESULTS__504.md`.
 | 1 | four new ordering conditions, n ≥ 100, flips vs classify-only | **done** 2026-09-29 on OpenRouter/Friendli; verified by independent recomputation | **`runs/ordering_controls/RESULTS__friendli.md`** (write-up-ready); full output `analysis__openrouter__google-gemma-4-31b-it__friendli.json` |
 | 2 | masking sweep to 400–500 tiles, pooled tile-level p | **done** 2026-09-30: 504 unique tiles; adversarially verified. **Hosts disagree, so results are reported per host, with no pooled p** (see note) | **`runs/MASKING_RESULTS__504.md`** (write-up-ready); `runs/masking_pooled_analysis.json` |
 | 3 | two-item pathologist rating instrument | **done** | `outreach/` (the rating instrument; local only) |
-| 4 | no second VLM, no tissue-type-matched controls | respected | — |
+| 4 | no second VLM, no tissue-type-matched controls | respected through round 2; **superseded 2026-09-30** by the user's direction (type-matched controls and a competence pilot done; full second-VLM pipeline not run) | `runs/ROUND3_RESULTS.md` |
 
 ## The blocker for 1 and 2
 

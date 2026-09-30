@@ -1,0 +1,38 @@
+{
+  "image": "MHIST_coy.png",
+  "source": "../images/MHIST_coy.png",
+  "regridded": true,
+  "blur_sigma": 12.0,
+  "cited_cells_full": [
+    "A2",
+    "A3",
+    "B2",
+    "B3",
+    "C2",
+    "C3"
+  ],
+  "subset_used": 3,
+  "tolerance_pp": 5.0,
+  "cited": {
+    "cells": [
+      "A2",
+      "A3",
+      "B2"
+    ],
+    "pct_tissue": 39.69,
+    "pct_epithelium": 30.19
+  },
+  "area_matched_control_for_reference": {
+    "cells": [
+      "A1",
+      "B1",
+      "C1"
+    ],
+    "pct_tissue": 41.19,
+    "pct_epithelium": 51.52,
+    "epithelium_gap_pp": 21.33,
+    "cells_in_full_citation": 0
+  },
+  "usable": false,
+  "reason": "no disjoint 3-cell set within 5.0pp on both tissue and epithelium"
+}

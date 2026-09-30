@@ -1,0 +1,234 @@
+{
+  "A_request_response_path": {
+    "cerebras": {
+      "prompt_tokens": {
+        "825": 340
+      },
+      "completion_tokens_median": 206.0,
+      "finish_reason": {
+        "stop": 340
+      },
+      "key_order": {
+        "label,confidence,evidence": 340
+      },
+      "code_fence": 336,
+      "n": 340,
+      "confidence": {
+        "0.8": 302,
+        "0.85": 29,
+        "0.9": 8,
+        "0.75": 1
+      }
+    },
+    "friendli_default": {
+      "prompt_tokens": {
+        "825": 340
+      },
+      "completion_tokens_median": 205.0,
+      "finish_reason": {
+        "stop": 340
+      },
+      "key_order": {
+        "label,confidence,evidence": 340
+      },
+      "code_fence": 256,
+      "n": 340,
+      "confidence": {
+        "0.8": 316,
+        "0.9": 15,
+        "0.85": 9
+      }
+    },
+    "code_fence_mcnemar": {
+      "cerebras_only": 82,
+      "friendli_only": 2,
+      "both": 254,
+      "p": 3.69e-22
+    },
+    "label_agreement": "269/340",
+    "request_body_fields": "same runner code on both hosts: one user message (image_url data-URL PNG + the same prompt text), max_completion_tokens, temperature 1.0; no system role, response_format, penalties or logit bias; top_p/top_k/min_p/seed never sent, so each host applied its own defaults. Differences: model id (Cerebras 'gemma-4-31b' vs OpenRouter 'google/gemma-4-31b-it') and OpenRouter's provider-routing object. Request bodies are not stored in the records; prompt tokens (825) match on every call."
+  },
+  "B_sampling_probe": {
+    "friendli_top_p0.95_top_k64": {
+      "name": "Friendli, top_p 0.95 / top_k 64",
+      "n_valid": 200,
+      "code_fence": 148,
+      "code_fence_rate": 0.74,
+      "code_fence_rate_ci95": [
+        0.6751,
+        0.7959
+      ],
+      "rep1_vs_rep2_disagreement": "17/100",
+      "rep1_vs_rep2_rate": 0.17,
+      "ssa_rate": 0.375,
+      "completion_tokens_median": 204.0,
+      "prompt_tokens": {
+        "825": 200
+      },
+      "agreement_with_cerebras_rep1": "79/100"
+    },
+    "friendli_default": {
+      "name": "Friendli, host defaults (ordering cte run)",
+      "n_valid": 300,
+      "code_fence": 205,
+      "code_fence_rate": 0.6833,
+      "code_fence_rate_ci95": [
+        0.6287,
+        0.7334
+      ],
+      "rep1_vs_rep2_disagreement": "13/100",
+      "rep1_vs_rep2_rate": 0.13,
+      "ssa_rate": 0.3333,
+      "completion_tokens_median": 205.0,
+      "prompt_tokens": {
+        "825": 300
+      },
+      "agreement_with_cerebras_rep1": "76/100"
+    },
+    "cerebras_rep1": {
+      "name": "Cerebras cte_p1_full replicate 1",
+      "n_valid": 100,
+      "code_fence": 99,
+      "code_fence_rate": 0.99,
+      "code_fence_rate_ci95": [
+        0.9455,
+        0.9982
+      ],
+      "rep1_vs_rep2_disagreement": null,
+      "rep1_vs_rep2_rate": null,
+      "ssa_rate": 0.39,
+      "completion_tokens_median": 206.5,
+      "prompt_tokens": {
+        "825": 100
+      }
+    },
+    "friendli_temperature0.5": {
+      "name": "Friendli, temperature 0.5, host-default top_p/top_k",
+      "n_valid": 200,
+      "code_fence": 155,
+      "code_fence_rate": 0.775,
+      "code_fence_rate_ci95": [
+        0.7123,
+        0.8274
+      ],
+      "rep1_vs_rep2_disagreement": "12/100",
+      "rep1_vs_rep2_rate": 0.12,
+      "ssa_rate": 0.31,
+      "completion_tokens_median": 206.0,
+      "prompt_tokens": {
+        "825": 200
+      },
+      "agreement_with_cerebras_rep1": "74/100"
+    },
+    "friendli_temperature0": {
+      "name": "Friendli, temperature 0 (greedy)",
+      "n_valid": 100,
+      "code_fence": 75,
+      "code_fence_rate": 0.75,
+      "code_fence_rate_ci95": [
+        0.657,
+        0.8245
+      ],
+      "rep1_vs_rep2_disagreement": null,
+      "rep1_vs_rep2_rate": null,
+      "ssa_rate": 0.32,
+      "completion_tokens_median": 206.0,
+      "prompt_tokens": {
+        "825": 100
+      },
+      "agreement_with_cerebras_rep1": "73/100"
+    },
+    "fence_rate_probe_vs_default_fisher_p": 0.193
+  },
+  "C_crossover": {
+    "friendli_on_legacy185_with_cerebras_masks": {
+      "control_arm": "tissue_matched",
+      "n_tiles": 185,
+      "cited_more": 45,
+      "control_more": 53,
+      "tied": 87,
+      "sign_test_p": 0.48,
+      "cited_flip_rate": 0.2342,
+      "control_flip_rate": 0.2649
+    },
+    "cerebras_on_same_185_tiles": {
+      "n_tiles": 185,
+      "tiles_cited_more": 54,
+      "tiles_control_more": 47,
+      "tiles_tied": 84,
+      "sign_test_p": 0.551,
+      "mean_net_per_tile": 0.0486,
+      "mean_net_bootstrap_95ci": [
+        -0.1405,
+        0.2324
+      ],
+      "pair_level_cited_only": 92,
+      "pair_level_control_only": 83,
+      "pair_level_note": "pseudo-replicated (3 occlusions per tile share cells and baseline); reference only"
+    },
+    "friendli_extension_319": {
+      "n_tiles": 319,
+      "tiles_cited_more": 102,
+      "tiles_control_more": 49,
+      "tiles_tied": 168,
+      "sign_test_p": 1.93e-05
+    },
+    "friendli_baseline_agreement_with_cerebras_on_185": "143/185",
+    "vs_cerebras_same_tiles_fisher_p": 0.322,
+    "vs_friendli_extension_fisher_p": 0.000941,
+    "sweep_B_tiles": {
+      "control_arm": "tissue_matched",
+      "n_tiles": 100,
+      "cited_more": 20,
+      "control_more": 35,
+      "tied": 45,
+      "sign_test_p": 0.0581,
+      "cited_flip_rate": 0.2167,
+      "control_flip_rate": 0.2967
+    },
+    "sweep_C_unique_tiles": {
+      "control_arm": "tissue_matched",
+      "n_tiles": 85,
+      "cited_more": 25,
+      "control_more": 18,
+      "tied": 42,
+      "sign_test_p": 0.36,
+      "cited_flip_rate": 0.2549,
+      "control_flip_rate": 0.2275
+    }
+  },
+  "D_own_citation_crossover": {
+    "friendli_own_citations_on_legacy_tiles": {
+      "control_arm": "tissue_matched",
+      "n_tiles": 184,
+      "cited_more": 55,
+      "control_more": 41,
+      "tied": 88,
+      "sign_test_p": 0.184,
+      "cited_flip_rate": 0.2917,
+      "control_flip_rate": 0.2337
+    },
+    "vs_crossover_with_cerebras_masks_fisher_p": 0.117,
+    "vs_friendli_extension_fisher_p": 0.106,
+    "sweep_B_tiles": {
+      "control_arm": "tissue_matched",
+      "n_tiles": 100,
+      "cited_more": 33,
+      "control_more": 27,
+      "tied": 40,
+      "sign_test_p": 0.519,
+      "cited_flip_rate": 0.2833,
+      "control_flip_rate": 0.26
+    },
+    "sweep_C_unique_tiles": {
+      "control_arm": "tissue_matched",
+      "n_tiles": 84,
+      "cited_more": 22,
+      "control_more": 14,
+      "tied": 48,
+      "sign_test_p": 0.243,
+      "cited_flip_rate": 0.3016,
+      "control_flip_rate": 0.2024
+    }
+  }
+}

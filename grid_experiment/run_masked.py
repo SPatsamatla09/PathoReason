@@ -34,7 +34,7 @@ from run_experiment import (
     call,
     extract_json,
     top_level_key_order,
-    validate,
+    validate, SAMPLING,
 )
 
 import requests
@@ -47,7 +47,7 @@ PROMPT_ID = "cte_p1"
 BASELINE_RUN = os.path.join(RUNS, "cte_p1.jsonl")
 OUT = os.path.join(RUNS, "masking_cte_p1_k3.jsonl")
 
-ARMS = ["cited", "tissue_matched"]
+ARMS = [a for a in os.environ.get("PATHO_MASK_ARMS", "cited,tissue_matched").split(",") if a]
 OCCLUSIONS = ["mean", "blur", "black"]
 MIN_INTERVAL_S = float(os.environ.get("PATHO_MIN_INTERVAL_S", "13.0"))
 
@@ -153,6 +153,7 @@ def main():
             "model": MODEL,
             "base_url": BASE_URL,
             "temperature": TEMPERATURE,
+            "sampling": SAMPLING or "host default",
             "image": man["image"],
             "tile_dir": t,
             "arm": arm,
@@ -161,7 +162,7 @@ def main():
             "subset_n": man["subset_used"],
             "cited_cells_full": man["cited_cells_full"],
             "cited_tissue_pct": cs["cited"]["pct_of_tissue_masked"],
-            "control_tissue_pct": cs["tissue_matched"]["pct_of_tissue_masked"],
+            "control_tissue_pct": cs[next(a for a in ARMS if a != "cited")]["pct_of_tissue_masked"],
             "control_overlap_with_cited": cs[arm]["overlap_with_cited"],
             "match_quality": man["match_quality"],
             "baseline": base.get(man["image"]),

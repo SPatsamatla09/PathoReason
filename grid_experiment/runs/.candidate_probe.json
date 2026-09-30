@@ -1,0 +1,134 @@
+[
+ {
+  "model": "openai/gpt-4.1",
+  "pin": "openai",
+  "extra": {},
+  "provider": "OpenAI",
+  "usage": {
+   "prompt_tokens": 794,
+   "completion_tokens": 120,
+   "total_tokens": 914,
+   "cost": 0.002548,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0,
+    "video_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.002548,
+    "upstream_inference_prompt_cost": 0.001588,
+    "upstream_inference_completions_cost": 0.00096
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "image_tokens": 0,
+    "audio_tokens": 0
+   }
+  },
+  "json_ok": true,
+  "label": "SSA",
+  "seconds": 2.9
+ },
+ {
+  "model": "anthropic/claude-sonnet-5.5",
+  "pin": "azure/global",
+  "extra": {},
+  "provider": "Azure",
+  "usage": {
+   "prompt_tokens": 824,
+   "completion_tokens": 340,
+   "total_tokens": 1164,
+   "cost": 0.005048,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0,
+    "video_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.005048,
+    "upstream_inference_prompt_cost": 0.001648,
+    "upstream_inference_completions_cost": 0.0034
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "image_tokens": 0,
+    "audio_tokens": 0
+   }
+  },
+  "json_ok": true,
+  "label": "HP",
+  "seconds": 3.2
+ },
+ {
+  "model": "google/gemini-2.5-flash",
+  "pin": "google-ai-studio",
+  "extra": {
+   "reasoning": {
+    "max_tokens": 0
+   }
+  },
+  "provider": "Google AI Studio",
+  "usage": {
+   "prompt_tokens": 813,
+   "completion_tokens": 234,
+   "total_tokens": 1047,
+   "cost": 0.0008289,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0,
+    "video_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.0008289,
+    "upstream_inference_prompt_cost": 0.0002439,
+    "upstream_inference_completions_cost": 0.000585
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "image_tokens": 0,
+    "audio_tokens": 0
+   }
+  },
+  "json_ok": true,
+  "label": "HP",
+  "seconds": 1.8
+ },
+ {
+  "model": "qwen/qwen3-vl-235b-a22b-instruct",
+  "pin": "alibaba",
+  "extra": {},
+  "provider": "Alibaba",
+  "usage": {
+   "prompt_tokens": 616,
+   "completion_tokens": 210,
+   "total_tokens": 826,
+   "cost": 0.00037856,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 0,
+    "cache_write_tokens": 0,
+    "audio_tokens": 0,
+    "video_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.00037856,
+    "upstream_inference_prompt_cost": 0.00016016,
+    "upstream_inference_completions_cost": 0.0002184
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "image_tokens": 0,
+    "audio_tokens": 0
+   }
+  },
+  "json_ok": true,
+  "label": "SSA",
+  "seconds": 4.4
+ }
+]

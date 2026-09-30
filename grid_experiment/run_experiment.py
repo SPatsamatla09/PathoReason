@@ -12,6 +12,7 @@ so a crash or rate-limit stall does not lose completed work.
 
 import argparse
 import base64
+import hashlib
 import json
 import os
 import random
@@ -40,6 +41,17 @@ MAX_TOKENS_PARAM = os.environ.get("PATHO_MAX_TOKENS_PARAM", "max_completion_toke
 # upstream is pinned. PATHO_PROVIDER pins it with fallbacks disabled, and the
 # provider that actually served each call is logged in meta.provider.
 PROVIDER = os.environ.get("PATHO_PROVIDER") or None
+# Optional sampling overrides. Unset means the HOST's default applies (earlier runs
+# never set these, so Cerebras and Friendli each used their own defaults). When set
+# they are sent on every call, recorded in every record, and folded into host_tag so
+# outputs under different sampling never share a file.
+SAMPLING = {k: cast(os.environ[e]) for k, e, cast in (("top_p", "PATHO_TOP_P", float),
+                                                    ("top_k", "PATHO_TOP_K", int),
+                                                    ("min_p", "PATHO_MIN_P", float))
+            if os.environ.get(e)}
+# Optional extra request fields as JSON, e.g. '{"reasoning": {"max_tokens": 0}}' to turn
+# thinking off for Gemini 2.5 Flash. Sent on every call, recorded, and folded into host_tag.
+EXTRA_BODY = json.loads(os.environ["PATHO_EXTRA_BODY"]) if os.environ.get("PATHO_EXTRA_BODY") else {}
 MAX_TOKENS = 1500
 FATAL_STATUSES = (401, 402, 403, 404)
 # A call whose response is received but unusable (unparseable JSON, label not HP/SSA)
@@ -65,6 +77,10 @@ def host_tag():
     host = re.sub(r"^https?://", "", BASE_URL).split("/")[0]
     host = host.replace("api.", "").split(".")[0]
     tag = f"{host}__{MODEL}" + (f"__{PROVIDER}" if PROVIDER else "")
+    if SAMPLING:
+        tag += "__" + "-".join(f"{k.replace('_', '')}{v}" for k, v in sorted(SAMPLING.items()))
+    if EXTRA_BODY:
+        tag += "__x" + hashlib.sha256(json.dumps(EXTRA_BODY, sort_keys=True).encode()).hexdigest()[:6]
     return re.sub(r"[^A-Za-z0-9._-]+", "-", tag)
 
 # Temperature is non-zero deliberately: question 3 asks whether cited cells are
@@ -281,6 +297,8 @@ def call(session, prompt_text, img_b64, api_key, temperature=TEMPERATURE):
         "model": MODEL,
         MAX_TOKENS_PARAM: MAX_TOKENS,
         "temperature": temperature,
+        **SAMPLING,
+        **EXTRA_BODY,
         **({"provider": {"order": [PROVIDER], "allow_fallbacks": False}} if PROVIDER else {}),
         "messages": [
             {
@@ -449,6 +467,8 @@ def main():
             "model": MODEL,
             "base_url": BASE_URL,
             "temperature": args.temperature,
+            "sampling": SAMPLING or "host default",
+            "extra_body": EXTRA_BODY or None,
             "image": tile["image"],
             "replicate": rep,
             "label_true": tile["label"],

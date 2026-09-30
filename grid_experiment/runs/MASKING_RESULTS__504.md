@@ -1,5 +1,14 @@
 # Grid-masking extension: results
 
+> **Update 2026-09-30 (round 3, verified).** The host explanation below has been
+> tested and refuted. On the same 185 legacy tiles with the same masks, Friendli gives
+> 45 vs 53 (p = 0.48), agreeing with Cerebras's 54 vs 47 (Fisher p = 0.32). The
+> difference reflects the tile set and whose citations defined the masks, not the
+> deployment. The Friendli extension effect also survives tissue-type-matched controls
+> (99 vs 37, p = 1.0 × 10⁻⁷). See `runs/ROUND3_RESULTS.md`, which supersedes the
+> "Not ruled out: a genuine deployment difference" item and the "decisive next test"
+> section below.
+
 ## Setup
 
 | | |

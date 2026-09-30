@@ -1,0 +1,82 @@
+{
+  "openrouter__google-gemini-2.5-flash__google-ai-studio__x4955da": {
+    "n_valid": 100,
+    "missing": 0,
+    "unusable_responses": 0,
+    "accuracy": 0.57,
+    "correct": 57,
+    "wilson95": [
+      0.4722,
+      0.6627
+    ],
+    "p_one_sided_vs_0.632": 0.917,
+    "balanced_accuracy": 0.5918,
+    "sensitivity_SSA": 0.6757,
+    "specificity_HP": 0.5079,
+    "ssa_call_rate": 0.56,
+    "always_HP_on_these_tiles": 0.63,
+    "reasoning_tokens_total": 0,
+    "billed_cost_usd": 0.1087,
+    "verdict": "not shown competent"
+  },
+  "openrouter__google-gemma-4-31b-it__friendli": {
+    "n_valid": 100,
+    "missing": 0,
+    "unusable_responses": 0,
+    "accuracy": 0.61,
+    "correct": 61,
+    "wilson95": [
+      0.512,
+      0.6998
+    ],
+    "p_one_sided_vs_0.632": 0.714,
+    "balanced_accuracy": 0.5678,
+    "sensitivity_SSA": 0.4054,
+    "specificity_HP": 0.7302,
+    "ssa_call_rate": 0.32,
+    "always_HP_on_these_tiles": 0.63,
+    "reasoning_tokens_total": 0,
+    "billed_cost_usd": 0.0193,
+    "verdict": "not shown competent"
+  },
+  "openrouter__openai-gpt-4.1__openai": {
+    "n_valid": 100,
+    "missing": 0,
+    "unusable_responses": 0,
+    "accuracy": 0.39,
+    "correct": 39,
+    "wilson95": [
+      0.3002,
+      0.488
+    ],
+    "p_one_sided_vs_0.632": 1.0,
+    "balanced_accuracy": 0.5159,
+    "sensitivity_SSA": 1.0,
+    "specificity_HP": 0.0317,
+    "ssa_call_rate": 0.98,
+    "always_HP_on_these_tiles": 0.63,
+    "reasoning_tokens_total": 0,
+    "billed_cost_usd": 0.2913,
+    "verdict": "not shown competent"
+  },
+  "openrouter__qwen-qwen3-vl-235b-a22b-instruct__alibaba": {
+    "n_valid": 100,
+    "missing": 0,
+    "unusable_responses": 0,
+    "accuracy": 0.37,
+    "correct": 37,
+    "wilson95": [
+      0.2818,
+      0.4678
+    ],
+    "p_one_sided_vs_0.632": 1.0,
+    "balanced_accuracy": 0.5,
+    "sensitivity_SSA": 1.0,
+    "specificity_HP": 0.0,
+    "ssa_call_rate": 1.0,
+    "always_HP_on_these_tiles": 0.63,
+    "reasoning_tokens_total": 0,
+    "billed_cost_usd": 0.039,
+    "verdict": "not shown competent"
+  }
+}
