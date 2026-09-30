@@ -580,34 +580,34 @@
       "control_flip_only": 26,
       "both_flip": 44,
       "neither": 188,
-      "sign_test_p": 0.0002
+      "sign_test_p": 0.000224
     },
     "blur": {
       "cited_flip_only": 63,
       "control_flip_only": 34,
       "both_flip": 36,
       "neither": 186,
-      "sign_test_p": 0.0042
+      "sign_test_p": 0.00423
     },
     "black": {
       "cited_flip_only": 68,
       "control_flip_only": 32,
       "both_flip": 37,
       "neither": 182,
-      "sign_test_p": 0.0004
+      "sign_test_p": 0.000409
     }
   },
   "pooled_contrast": {
     "cited_flip_only": 192,
     "control_flip_only": 92,
-    "sign_test_p": 0.0
+    "sign_test_p": 2.94e-09
   },
   "tile_level_contrast": {
     "n_tiles": 319,
     "tiles_cited_more": 102,
     "tiles_control_more": 49,
     "tiles_tied": 168,
-    "sign_test_p": 0.0,
+    "sign_test_p": 1.93e-05,
     "note": "cluster-correct unit; pair-level p above is pseudo-replicated"
   }
 }

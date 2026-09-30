@@ -39,7 +39,7 @@
     "tiles_cited_more": 156,
     "tiles_control_more": 96,
     "tiles_tied": 252,
-    "sign_test_p": 0.0002,
+    "sign_test_p": 0.000189,
     "mean_net_per_tile": 0.2163,
     "mean_net_bootstrap_95ci": [
       0.1091,
@@ -55,7 +55,7 @@
       "tiles_cited_more": 23,
       "tiles_control_more": 29,
       "tiles_tied": 48,
-      "sign_test_p": 0.4885,
+      "sign_test_p": 0.488,
       "mean_net_per_tile": -0.14,
       "mean_net_bootstrap_95ci": [
         -0.39,
@@ -70,7 +70,7 @@
       "tiles_cited_more": 34,
       "tiles_control_more": 22,
       "tiles_tied": 44,
-      "sign_test_p": 0.1409,
+      "sign_test_p": 0.141,
       "mean_net_per_tile": 0.21,
       "mean_net_bootstrap_95ci": [
         -0.05,
@@ -85,7 +85,7 @@
       "tiles_cited_more": 102,
       "tiles_control_more": 49,
       "tiles_tied": 168,
-      "sign_test_p": 0.0,
+      "sign_test_p": 1.93e-05,
       "mean_net_per_tile": 0.3135,
       "mean_net_bootstrap_95ci": [
         0.1818,
@@ -102,7 +102,7 @@
       "tiles_cited_more": 54,
       "tiles_control_more": 47,
       "tiles_tied": 84,
-      "sign_test_p": 0.5507,
+      "sign_test_p": 0.551,
       "mean_net_per_tile": 0.0486,
       "mean_net_bootstrap_95ci": [
         -0.1405,
@@ -117,7 +117,7 @@
       "tiles_cited_more": 102,
       "tiles_control_more": 49,
       "tiles_tied": 168,
-      "sign_test_p": 0.0,
+      "sign_test_p": 1.93e-05,
       "mean_net_per_tile": 0.3135,
       "mean_net_bootstrap_95ci": [
         0.185,
@@ -148,7 +148,7 @@
     "tiles_cited_more": 156,
     "tiles_control_more": 98,
     "tiles_tied": 252,
-    "sign_test_p": 0.0003,
+    "sign_test_p": 0.00033,
     "mean_net_per_tile": 0.2115,
     "mean_net_bootstrap_95ci": [
       0.1047,

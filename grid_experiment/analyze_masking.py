@@ -85,7 +85,7 @@ def main():
             "control_flip_only": neg,
             "both_flip": both,
             "neither": neither,
-            "sign_test_p": round(sign_test_p(pos, neg), 4),
+            "sign_test_p": float(f"{sign_test_p(pos, neg):.3g}"),
         }
 
     # pooled across occlusions: per (image, occ) pair as the unit
@@ -96,7 +96,7 @@ def main():
     pooled = {
         "cited_flip_only": pos,
         "control_flip_only": neg,
-        "sign_test_p": round(sign_test_p(pos, neg), 4),
+        "sign_test_p": float(f"{sign_test_p(pos, neg):.3g}"),
     }
 
     # Tile-level contrast: the three occlusions of one tile mask the same cells
@@ -113,7 +113,7 @@ def main():
     t_pos = sum(1 for v in net.values() if v > 0); t_neg = sum(1 for v in net.values() if v < 0)
     tile_level = {
         "n_tiles": len(net), "tiles_cited_more": t_pos, "tiles_control_more": t_neg,
-        "tiles_tied": len(net) - t_pos - t_neg, "sign_test_p": round(sign_test_p(t_pos, t_neg), 4),
+        "tiles_tied": len(net) - t_pos - t_neg, "sign_test_p": float(f"{sign_test_p(t_pos, t_neg):.3g}"),
         "note": "cluster-correct unit; pair-level p above is pseudo-replicated",
     }
 

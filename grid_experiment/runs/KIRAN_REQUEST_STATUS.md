@@ -1,17 +1,30 @@
-# Kiran's four requests: status as of 2026-09-29, 22:10
+# Kiran's four requests: status as of 2026-09-29, updated 2026-09-30 12:50
 
 **Update.** An OpenRouter key was added, and the same weights (`google/gemma-4-31b-it`) are
 now pinned to the Friendli upstream.
 
 - **Request 1:** complete.
-- **Request 2:** running.
+- **Request 2:** complete.
 
 The "blocker" section below is kept for the record.
+
+**Request 2 in one paragraph.** Per host, the tile-level sign test gives:
+
+- **Friendli (319 new tiles):** 102 cited-more vs 49 control-more, p = 1.9 × 10⁻⁵.
+- **Cerebras (185 tiles):** 54 vs 47, p = 0.55.
+
+The two disagree (Fisher p = 0.025). By the rule set before the run, the pooled
+504-tile p (0.0002) is **not reported**. The disagreement is partly a sweep effect:
+Cerebras sweep C resembles Friendli, while sweep B is the outlier. So the effect is
+robust on one deployment and **not replicated at the model level**. The paper's
+"citations are causally inert" framing must be withdrawn. Details, suggested wording
+and overclaims to avoid are in `runs/MASKING_RESULTS__504.md`.
+
 
 | # | request | status | file to pull into the write-up |
 |---|---|---|---|
 | 1 | four new ordering conditions, n ≥ 100, flips vs classify-only | **done** 2026-09-29 on OpenRouter/Friendli; verified by independent recomputation | **`runs/ordering_controls/RESULTS__friendli.md`** (write-up-ready); full output `analysis__openrouter__google-gemma-4-31b-it__friendli.json` |
-| 2 | masking sweep to 400–500 tiles, pooled tile-level p | **running** on OpenRouter/Friendli (started 21:55) | now: `runs/masking_pooled_legacy_analysis.json`; after the run: `runs/masking_pooled_analysis.json` |
+| 2 | masking sweep to 400–500 tiles, pooled tile-level p | **done** 2026-09-30: 504 unique tiles; adversarially verified. **Hosts disagree, so results are reported per host, with no pooled p** (see note) | **`runs/MASKING_RESULTS__504.md`** (write-up-ready); `runs/masking_pooled_analysis.json` |
 | 3 | two-item pathologist rating instrument | **done** | `outreach/` (the rating instrument; local only) |
 | 4 | no second VLM, no tissue-type-matched controls | respected | — |
 

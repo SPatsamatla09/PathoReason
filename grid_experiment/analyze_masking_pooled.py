@@ -113,7 +113,7 @@ def summarize(units, rng):
     boots.sort()
     return {
         "n_tiles": len(units), "tiles_cited_more": pos, "tiles_control_more": neg,
-        "tiles_tied": len(units) - pos - neg, "sign_test_p": round(sign_p(pos, neg), 4),
+        "tiles_tied": len(units) - pos - neg, "sign_test_p": float(f"{sign_p(pos, neg):.3g}"),
         "mean_net_per_tile": round(sum(nets) / max(len(nets), 1), 4),
         "mean_net_bootstrap_95ci": [round(boots[250], 4), round(boots[9749], 4)],
         "pair_level_cited_only": pair_c, "pair_level_control_only": pair_t,
