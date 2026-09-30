@@ -76,3 +76,36 @@ in the ALIAS arm), relative to "H" (or "B").
 
 With 5 arms × 2 models plus 2 extra model-arm cells, and several measures, everything
 beyond these three rules is descriptive.
+
+## Addendum: two controls, written 2026-09-30 before any call in these arms
+
+These close the loopholes left by the first run: the answer position and letter, and
+whether the SSA preference needs the image at all.
+
+**Arms:**
+
+- **clean + alias_rev.** ALIAS with the classes reversed:
+
+  > This is a 224x224 pixel H&E-stained image of a colorectal polyp. It belongs to one
+  > of two classes. Class A: hyperplastic polyp. Class B: sessile serrated
+  > adenoma/lesion. Answer with exactly one letter: A or B.
+
+  A maps to HP and B to SSA, so SSA is now option B, listed second.
+- **noimage + min.** The MIN prompt with no image at all: text only, one call per pilot
+  tile ID (the calls are identical), to sample the prior.
+
+**Models:** GPT-4.1 (OpenAI, with log-probabilities) and Qwen3-VL-235B (Alibaba), 100
+calls each per arm.
+
+**Rules:**
+
+4. **Letter or position vs content.** Compare the SSA rate in alias_rev with alias
+   (A = SSA):
+   - a drop of ≥ 20 points means the letter or position drives the answer;
+   - staying ≥ 90% SSA in both means the preference follows the SSA content,
+     whatever the letter or position.
+5. **Image-independent prior.** In noimage + min:
+   - SSA rate ≥ 90% means the SSA default exists without any image;
+   - for GPT-4.1, also compare the median log-probability P(SSA) with the clean + min
+     arm. A no-image median at least as high means the image adds no SSA evidence
+     beyond the prior.

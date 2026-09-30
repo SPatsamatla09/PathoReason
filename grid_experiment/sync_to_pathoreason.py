@@ -22,7 +22,7 @@ import subprocess
 import sys
 
 SRC = os.path.dirname(os.path.abspath(__file__))
-SKIP_DIRS = {"outreach", "paper", "__pycache__", "clean", "gridded", "images", "logs", ".git"}
+SKIP_DIRS = {"outreach", "paper", "__pycache__", "clean", "gridded", "images", "logs", ".git", "superseded"}
 SKIP_PAT = ["* 2.*", "* 2", "*.icloud", ".env", ".DS_Store", "*.png", "*.jpg", "*.jpeg", "*.tif", "*.tiff",
             "*.pdf", "*.zip", "*.pyc"]
 # listed in a local-only file (outreach/ is never pushed) so this public script names nothing

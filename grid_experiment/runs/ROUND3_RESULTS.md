@@ -205,8 +205,15 @@ Relabelling the classes as neutral letters, with the order reversed, left GPT-4.
 **No model reached the bar in any of the 14 model × prompt cells** (best 61/100).
 GPT-4.1's log-probability AUROC was 0.60–0.61, with CIs reaching about 0.5.
 
-**Not excluded:** a prior attached to the "sessile serrated" wording, which all prompts
-share, or to answer position.
+**Controls (added later, also pre-registered):**
+
+- Reversing the letters and order leaves the SSA rate at 97–100%, so the letter and
+  position are not the driver.
+- With no image at all, Qwen still answers SSA 100/100, so its default needs no image.
+- GPT-4.1 mostly refuses without an image, but its answer tokens still favour SSA; the
+  image makes that stronger, not correct.
+
+**Not excluded:** the shared "sessile serrated" wording.
 
 **Exploratory:**
 

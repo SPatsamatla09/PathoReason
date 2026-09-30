@@ -73,7 +73,9 @@ def summarize(recs):
         out["logprob_auroc"] = round(auc, 4)
         out["logprob_auroc_ci95"] = [round(boots[int(0.025 * len(boots))], 4), round(boots[int(0.975 * len(boots)) - 1], 4)]
         out["n_logprob"] = len(lp)
-        out["logprob_p_ssa_median"] = round(sorted(sc)[len(sc) // 2], 4)
+        med = sorted(sc)[len(sc) // 2]
+        out["logprob_p_ssa_median"] = med
+        out["logprob_median_log10_p_hp"] = round(math.log10(max(1 - med, 1e-300)), 2)
     return out
 
 
@@ -89,8 +91,13 @@ def main():
                 recs.append({"label": lab if lab in ("HP", "SSA") else None, "label_true": r["label_true"],
                              "usage": (r.get("meta") or {}).get("usage")})
             res.setdefault(model, {})["grid_cte (pilot)"] = summarize(recs)
+    import diag_run
     for f in sorted(glob.glob(os.path.join(D, "*.jsonl"))):
         recs = [json.loads(l) for l in open(f)]
+        for r in recs:  # re-parse every record with the strict bare-answer parser
+            r["label"] = diag_run.parse(r["prompt_kind"], r.get("raw_response"))
+            if r.get("p_ssa_logprob") is not None and r.get("p_ssa_rule") != "exact-token v2":
+                r["p_ssa_rule"] = "prefix v1 (first diagnostic run)"
         if recs:
             res.setdefault(recs[0]["model"], {})[recs[0]["arm"]] = summarize(recs)
     decisions = {}
@@ -109,6 +116,36 @@ def main():
             "rule3_label_names_shift_answer": (bool(abs(al["ssa_call_rate"] - cm["ssa_call_rate"]) >= 0.20)
                                                if al and al.get("n_usable") else "not applicable (no alias arm)"),
         }
+    # ---- addendum rules 4 and 5 (PLAN.md addendum)
+    for model, arms in res.items():
+        al, ar, cm, ni = arms.get("clean_alias"), arms.get("clean_alias_rev"), arms.get("clean_min"), arms.get("noimage_min")
+        dec = decisions.setdefault(model, {})
+        if al and ar and al.get("n_usable") and ar.get("n_usable"):
+            drop = al["ssa_call_rate"] - ar["ssa_call_rate"]
+            dec["rule4_ssa_rate_alias_vs_alias_rev"] = [al["ssa_call_rate"], ar["ssa_call_rate"]]
+            dec["rule4_reading"] = ("letter/position drives the answer" if drop >= 0.20 else
+                                    "preference follows SSA content regardless of letter/position"
+                                    if al["ssa_call_rate"] >= 0.90 and ar["ssa_call_rate"] >= 0.90 else "neither criterion met")
+        if ni and ni.get("n_records"):
+            dec["rule5_noimage_usable_answers"] = f"{ni.get('n_usable', 0)}/{ni['n_records']}"
+            dec["rule5_noimage_ssa_rate"] = ni.get("ssa_call_rate")
+            dec["rule5_as_written"] = ("SSA default exists without any image" if ni.get("n_usable") and ni["ssa_call_rate"] >= 0.90
+                                       else "no image-independent SSA default")
+            dec["rule5_reading"] = ("SSA default exists without any image" if ni.get("n_usable") and ni["ssa_call_rate"] >= 0.90
+                                    and ni["n_usable"] >= 50 else
+                                    "not assessable from labels (mostly refusals)" if (ni.get("n_usable") or 0) < 50 else
+                                    "no image-independent SSA default")
+            if "logprob_p_ssa_median" in ni and cm and "logprob_p_ssa_median" in cm:
+                dec["rule5_logprob_median_p_ssa_noimage_vs_clean_min"] = [ni["logprob_p_ssa_median"], cm["logprob_p_ssa_median"]]
+                dec["rule5_logprob_reading"] = (
+                    "image adds no SSA evidence beyond the prior" if ni["logprob_p_ssa_median"] >= cm["logprob_p_ssa_median"]
+                    else "not triggered: with the image the answer-token preference is MORE SSA than without")
+                dec["rule5_logprob_caveat"] = ("clean_min scored with the prefix rule v1 (as registered), noimage with the "
+                                               "exact-token rule v2; the two rules agreed to 1e-16 on alias_rev")
+            if "rule5_reading" in dec and dec["rule5_reading"] != dec.get("rule5_as_written"):
+                dec["rule5_deviation"] = ("the >= 50 usable-answer threshold is NOT in PLAN.md; added after seeing 96/100 refusals. "
+                                          "As written the rule reads '" + dec["rule5_as_written"] + "' on "
+                                          + dec["rule5_noimage_usable_answers"] + " answers.")
     json.dump({"arms": res, "decisions": decisions}, open(os.path.join(D, "RESULTS.json"), "w"), indent=2)
     print(f"{'model':34s} {'arm':18s} {'n':>3} {'acc':>6} {'wilson95':>16} {'bal':>6} {'SSA%':>5} {'fisherp':>8} {'AUROC [CI]':>22} {'$':>6}")
     for model, arms in res.items():

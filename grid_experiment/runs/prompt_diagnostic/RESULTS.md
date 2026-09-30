@@ -7,8 +7,8 @@
 | date | 2026-09-30 |
 | plan | written before any call (`PLAN.md`) |
 | verification | every number recomputed independently; parser, providers, tiles and images audited |
-| calls | 1,000: 0 errors, 0 unusable answers, every call served by its pinned provider |
-| cost | about $0.61 |
+| calls | 1,000 in the main run, plus 400 in the two controls (addendum below): 0 errors, every call served by its pinned provider |
+| cost | about $0.61 main run, about $0.1 controls |
 
 ## Results
 
@@ -55,8 +55,8 @@ needed to produce the SSA default. No model met the bar under any tested prompt.
 
 - that the default is a model property independent of prompt wording. Every prompt
   still names SSA "sessile *serrated* adenoma/lesion" and gives no criteria.
-- that answer position doesn't matter. The alias arm moved SSA to option A, listed
-  first, which does not counterbalance position.
+- ~~that answer position doesn't matter~~. **Resolved by the addendum controls below:**
+  letter and position are excluded as the driver.
 
 **The SSA rate depends strongly on the prompt:**
 
@@ -114,14 +114,76 @@ every arm, and its provider returns no log-probabilities.
 **About models in general:**
 
 - "no VLM can separate HP from SSA"
-- "Qwen has an SSA prior"
+- "Qwen has an SSA prior" in general. The addendum supports it only under the one-line
+  prompt, which still names SSA "sessile serrated".
 
-## Cheapest remaining controls (not run)
+## Addendum: the two controls (pre-registered, run 2026-09-30)
 
-About $0.07 each:
+Rules 4 and 5 were written into `PLAN.md` before these arms ran. The results were
+verified by independent recomputation.
 
-- a counterbalanced alias arm with A = HP
-- a no-image, text-only control for GPT-4.1 with log-probabilities
+| arm | GPT-4.1 | Qwen3-VL-235B |
+|---|---|---|
+| clean + alias (A = SSA, listed first) | 97% SSA | 100% SSA |
+| **clean + alias_rev (A = HP, B = SSA listed second)** | **98% SSA** | **100% SSA** |
+| **no image + min** | **96/100 refusals**; the 4 answers were all SSA | **100/100 SSA** |
+
+**Rule 4: letter and position are excluded as the driver.** Swapping which letter and
+which position SSA occupies changes nothing. Without a content preference the two arms
+would sum to about 100% SSA; they sum to 195% (GPT-4.1) and 200% (Qwen). The "SSA"
+acronym is also excluded, because the alias prompts spell out both classes and never
+contain it.
+
+**Rule 5: does the SSA preference need an image?**
+
+- **Qwen: no.** It answers SSA on 100/100 with no image at all (Wilson lower bound
+  0.96). Its default exists without an image, under this wording. Its answers are
+  identical with and without an image, so no image influence is visible. Its provider
+  gives no log-probabilities.
+- **GPT-4.1, labels.** As the rule is written, 4/4 answers were SSA, which reads
+  "default exists", but that rests on only 4 of 100 calls. I report it as not
+  assessable from labels.
+  - **Deviation:** the ≥ 50-answer threshold behind that call is not in `PLAN.md`; it
+    was added after seeing 96 refusals.
+  - GPT-4.1 refused mostly because the prompt still says an image is attached.
+- **GPT-4.1, log-probabilities.** Among answer tokens it prefers SSA even with no image
+  (median P(SSA | answer token) 0.99998). With the image the preference is about 2.5
+  orders of magnitude *more* SSA-leaning. So the rule's "image adds no SSA evidence"
+  reading is not triggered.
+  - **Caveat:** that comparison mixes the registered prefix scoring (clean + min) with
+    exact-token scoring (no image). The two agreed to 10⁻¹⁶ where both could be
+    computed.
+- **GPT-4.1, image and ranking (exploratory).** Per-tile scores are consistent across
+  the clean prompts (Spearman 0.81–0.89), but the ranking does not track the truth
+  (AUROC 0.57–0.61). The no-image AUROC is 0.51 [0.40, 0.63], a null that validates the
+  scoring.
+
+**Two fixes made during this run, both recorded:**
+
+- The first GPT-4.1 attempt at these arms scored refusals such as "Sorry…" as SSA,
+  because of the prefix rule. It was stopped and moved to `superseded/`, which no
+  analysis or sync reads. The arms were re-run with exact-token scoring, and the raw
+  top-10 tokens were saved.
+- A loose parser labelled 32 no-image refusals as "HP". The stored labels are corrected
+  to the strict bare-answer parse, with the old value kept as `label_lenient_v1`.
+
+**What the controls license.** The SSA default is not produced by:
+
+- the grid
+- the feature vocabulary
+- the answer letter
+- the answer position
+- the "SSA" acronym
+
+For Qwen it needs no image at all. For GPT-4.1 the image makes it stronger, not
+correct.
+
+**Still untested:**
+
+- every prompt names SSA "sessile **serrated** adenoma/lesion" and gives no criteria
+- letter prompts without an image
+- Gemini and gemma on the controls
+- more than one sample per cell
 
 ## Scope
 

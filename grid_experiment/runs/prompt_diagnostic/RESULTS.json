@@ -40,7 +40,33 @@
           0.7207
         ],
         "n_logprob": 100,
-        "logprob_p_ssa_median": 1.0
+        "logprob_p_ssa_median": 0.9999998802069212,
+        "logprob_median_log10_p_hp": -6.92
+      },
+      "clean_alias_rev": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.4944,
+        "sensitivity_SSA": 0.973,
+        "specificity_HP": 0.0159,
+        "ssa_call_rate": 0.98,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0656,
+        "logprob_auroc": 0.5682,
+        "logprob_auroc_ci95": [
+          0.452,
+          0.6809
+        ],
+        "n_logprob": 100,
+        "logprob_p_ssa_median": 0.9999999416175239,
+        "logprob_median_log10_p_hp": -7.23
       },
       "clean_cte": {
         "n_records": 100,
@@ -81,7 +107,8 @@
           0.7118
         ],
         "n_logprob": 100,
-        "logprob_p_ssa_median": 1.0
+        "logprob_p_ssa_median": 0.9999999338439756,
+        "logprob_median_log10_p_hp": -7.18
       },
       "grid_min": {
         "n_records": 100,
@@ -105,7 +132,33 @@
           0.72
         ],
         "n_logprob": 100,
-        "logprob_p_ssa_median": 1.0
+        "logprob_p_ssa_median": 0.9999999999852163,
+        "logprob_median_log10_p_hp": -10.83
+      },
+      "noimage_min": {
+        "n_records": 100,
+        "n_usable": 4,
+        "correct": 2,
+        "accuracy": 0.5,
+        "wilson95": [
+          0.15,
+          0.85
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0224,
+        "logprob_auroc": 0.5135,
+        "logprob_auroc_ci95": [
+          0.396,
+          0.6288
+        ],
+        "n_logprob": 100,
+        "logprob_p_ssa_median": 0.999976812625109,
+        "logprob_median_log10_p_hp": -4.63
       }
     },
     "qwen/qwen3-vl-235b-a22b-instruct": {
@@ -127,6 +180,23 @@
         "cost_usd": 0.039
       },
       "clean_alias": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0038
+      },
+      "clean_alias_rev": {
         "n_records": 100,
         "n_usable": 100,
         "correct": 37,
@@ -193,6 +263,23 @@
         "label_vs_truth_fisher_p": 1.0,
         "competent_by_pilot_bar": false,
         "cost_usd": 0.0038
+      },
+      "noimage_min": {
+        "n_records": 100,
+        "n_usable": 100,
+        "correct": 37,
+        "accuracy": 0.37,
+        "wilson95": [
+          0.2818,
+          0.4678
+        ],
+        "balanced_accuracy": 0.5,
+        "sensitivity_SSA": 1.0,
+        "specificity_HP": 0.0,
+        "ssa_call_rate": 1.0,
+        "label_vs_truth_fisher_p": 1.0,
+        "competent_by_pilot_bar": false,
+        "cost_usd": 0.0021
       }
     },
     "google/gemini-2.5-flash": {
@@ -273,13 +360,38 @@
       "rule1_prompt_grid_induced_default": false,
       "rule2_competent_arms": [],
       "rule3_label_name_shift_pts": -3.0,
-      "rule3_label_names_shift_answer": false
+      "rule3_label_names_shift_answer": false,
+      "rule4_ssa_rate_alias_vs_alias_rev": [
+        0.97,
+        0.98
+      ],
+      "rule4_reading": "preference follows SSA content regardless of letter/position",
+      "rule5_noimage_usable_answers": "4/100",
+      "rule5_noimage_ssa_rate": 1.0,
+      "rule5_as_written": "SSA default exists without any image",
+      "rule5_reading": "not assessable from labels (mostly refusals)",
+      "rule5_logprob_median_p_ssa_noimage_vs_clean_min": [
+        0.999976812625109,
+        0.9999999338439756
+      ],
+      "rule5_logprob_reading": "not triggered: with the image the answer-token preference is MORE SSA than without",
+      "rule5_logprob_caveat": "clean_min scored with the prefix rule v1 (as registered), noimage with the exact-token rule v2; the two rules agreed to 1e-16 on alias_rev",
+      "rule5_deviation": "the >= 50 usable-answer threshold is NOT in PLAN.md; added after seeing 96/100 refusals. As written the rule reads 'SSA default exists without any image' on 4/100 answers."
     },
     "qwen/qwen3-vl-235b-a22b-instruct": {
       "rule1_prompt_grid_induced_default": false,
       "rule2_competent_arms": [],
       "rule3_label_name_shift_pts": 0.0,
-      "rule3_label_names_shift_answer": false
+      "rule3_label_names_shift_answer": false,
+      "rule4_ssa_rate_alias_vs_alias_rev": [
+        1.0,
+        1.0
+      ],
+      "rule4_reading": "preference follows SSA content regardless of letter/position",
+      "rule5_noimage_usable_answers": "100/100",
+      "rule5_noimage_ssa_rate": 1.0,
+      "rule5_as_written": "SSA default exists without any image",
+      "rule5_reading": "SSA default exists without any image"
     },
     "google/gemini-2.5-flash": {
       "rule1_prompt_grid_induced_default": false,

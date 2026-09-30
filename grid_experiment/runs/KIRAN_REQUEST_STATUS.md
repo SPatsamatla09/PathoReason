@@ -28,6 +28,8 @@ almost every tile. The full second-VLM pipeline is **not** run; see
 
 - Neither our grid nor our feature vocabulary causes the SSA default.
 - No model is competent under any of the 14 prompt × model combinations.
+- Two further controls exclude the answer letter and position.
+- Qwen's SSA default needs no image at all.
 
 **Pathologist (item 7): contacts identified, nothing sent.** See
 `outreach/RATER_CONTACTS.md` (local only).
