@@ -76,6 +76,10 @@ def main():
     ap.add_argument("--masked-dir", default=None)
     ap.add_argument("--baseline-run", default=None)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--shard", default=None,
+                    help="i/n: run only tiles whose sorted index %% n == i. Shards are disjoint by tile, "
+                         "so n concurrent processes can share one --out file (records are appended "
+                         "with a single atomic write each)")
     args = ap.parse_args()
     if args.masked_dir:
         MASKED = os.path.join(ROOT, args.masked_dir)
@@ -96,6 +100,9 @@ def main():
     tiles = [t for t in entries if os.path.isfile(os.path.join(MASKED, t, "manifest.json"))]
     if len(tiles) != len(entries):
         print(f"skipping {len(entries) - len(tiles)} non-tile entries in {MASKED}")
+    if args.shard:
+        i, k = (int(x) for x in args.shard.split("/"))
+        tiles = [t for j, t in enumerate(tiles) if j % k == i]
     jobs = []
     for t in tiles:
         man = json.load(open(os.path.join(MASKED, t, "manifest.json")))
@@ -177,8 +184,12 @@ def main():
                     rec["violations"] = [f"json decode failed: {e}"]
             mark_invalid(rec)
 
-        with open(OUT, "a") as fh:
-            fh.write(json.dumps(rec) + "\n")
+        # one os.write on an O_APPEND descriptor: concurrent shard processes never interleave lines
+        fd = os.open(OUT, os.O_WRONLY | os.O_APPEND | os.O_CREAT, 0o644)
+        try:
+            os.write(fd, (json.dumps(rec) + "\n").encode())
+        finally:
+            os.close(fd)
 
     print(f"done: {n} new calls -> {OUT}")
     ok, tries = scan()
