@@ -1,0 +1,84 @@
+[
+  {
+    "config": "neutral_cte",
+    "model": "google/gemma-4-31b-it",
+    "provider": "friendli",
+    "control": "none",
+    "screen": {
+      "n": 100,
+      "correct": 47,
+      "accuracy": 0.47,
+      "accuracy_wilson95": [
+        0.3751,
+        0.5671
+      ],
+      "balanced_accuracy": 0.5626,
+      "balanced_boot95": [
+        0.4948,
+        0.6293
+      ],
+      "recall_HP": 0.2063,
+      "recall_SSA": 0.9189,
+      "parse_rate": 1.0,
+      "ssa_call_rate": 0.84,
+      "cost_usd": 0.0193,
+      "providers": [
+        "Friendli"
+      ],
+      "counterbalance_halves_descriptive": {
+        "class_A_is_HP": {
+          "n": 48,
+          "accuracy": 0.5417,
+          "balanced_accuracy": 0.6
+        },
+        "class_A_is_SSA": {
+          "n": 52,
+          "accuracy": 0.4038,
+          "balanced_accuracy": 0.5303
+        }
+      }
+    },
+    "screen_advances": false
+  },
+  {
+    "config": "neutral_cte",
+    "model": "qwen/qwen3-vl-235b-a22b-instruct",
+    "provider": "alibaba",
+    "control": "none",
+    "screen": {
+      "n": 100,
+      "correct": 37,
+      "accuracy": 0.37,
+      "accuracy_wilson95": [
+        0.2818,
+        0.4678
+      ],
+      "balanced_accuracy": 0.5,
+      "balanced_boot95": [
+        0.5,
+        0.5
+      ],
+      "recall_HP": 0.0,
+      "recall_SSA": 1.0,
+      "parse_rate": 1.0,
+      "ssa_call_rate": 1.0,
+      "cost_usd": 0.0357,
+      "providers": [
+        "Alibaba"
+      ],
+      "counterbalance_halves_descriptive": {
+        "class_A_is_HP": {
+          "n": 48,
+          "accuracy": 0.375,
+          "balanced_accuracy": 0.5
+        },
+        "class_A_is_SSA": {
+          "n": 52,
+          "accuracy": 0.3654,
+          "balanced_accuracy": 0.5
+        }
+      }
+    },
+    "screen_advances": false
+  }
+]

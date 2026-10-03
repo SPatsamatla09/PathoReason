@@ -1,0 +1,26 @@
+[
+ {
+  "image": "MHIST_dpv.png",
+  "label": "HP"
+ },
+ {
+  "image": "MHIST_ctz.png",
+  "label": "HP"
+ },
+ {
+  "image": "MHIST_eqa.png",
+  "label": "SSA"
+ },
+ {
+  "image": "MHIST_aul.png",
+  "label": "HP"
+ },
+ {
+  "image": "MHIST_dqq.png",
+  "label": "SSA"
+ },
+ {
+  "image": "MHIST_bxb.png",
+  "label": "SSA"
+ }
+]
