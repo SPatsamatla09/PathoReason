@@ -1,5 +1,110 @@
 [
   {
+    "config": "names_crit_fs",
+    "model": "google/gemma-4-31b-it",
+    "provider": "friendli",
+    "control": "none",
+    "screen": {
+      "n": 100,
+      "correct": 60,
+      "accuracy": 0.6,
+      "accuracy_wilson95": [
+        0.502,
+        0.6906
+      ],
+      "balanced_accuracy": 0.5989,
+      "balanced_boot95": [
+        0.499,
+        0.6967
+      ],
+      "recall_HP": 0.6032,
+      "recall_SSA": 0.5946,
+      "parse_rate": 1.0,
+      "ssa_call_rate": 0.47,
+      "cost_usd": 0.0424,
+      "providers": [
+        "Friendli"
+      ]
+    },
+    "screen_advances": false
+  },
+  {
+    "config": "neutral_crit_fs",
+    "model": "google/gemma-4-31b-it",
+    "provider": "friendli",
+    "control": "none",
+    "screen": {
+      "n": 100,
+      "correct": 65,
+      "accuracy": 0.65,
+      "accuracy_wilson95": [
+        0.5525,
+        0.7364
+      ],
+      "balanced_accuracy": 0.6943,
+      "balanced_boot95": [
+        0.6104,
+        0.7733
+      ],
+      "recall_HP": 0.5238,
+      "recall_SSA": 0.8649,
+      "parse_rate": 1.0,
+      "ssa_call_rate": 0.62,
+      "cost_usd": 0.0419,
+      "providers": [
+        "Friendli"
+      ],
+      "counterbalance_halves_descriptive": {
+        "class_A_is_HP": {
+          "n": 48,
+          "accuracy": 0.6042,
+          "balanced_accuracy": 0.65
+        },
+        "class_A_is_SSA": {
+          "n": 52,
+          "accuracy": 0.6923,
+          "balanced_accuracy": 0.7352
+        }
+      }
+    },
+    "screen_advances": true,
+    "dev": {
+      "n": 300,
+      "correct": 172,
+      "accuracy": 0.5733,
+      "accuracy_wilson95": [
+        0.5168,
+        0.628
+      ],
+      "balanced_accuracy": 0.6261,
+      "balanced_boot95": [
+        0.5752,
+        0.6746
+      ],
+      "recall_HP": 0.4233,
+      "recall_SSA": 0.8288,
+      "parse_rate": 1.0,
+      "ssa_call_rate": 0.67,
+      "cost_usd": 0.1258,
+      "providers": [
+        "Friendli"
+      ],
+      "counterbalance_halves_descriptive": {
+        "class_A_is_HP": {
+          "n": 151,
+          "accuracy": 0.5629,
+          "balanced_accuracy": 0.6179
+        },
+        "class_A_is_SSA": {
+          "n": 149,
+          "accuracy": 0.5839,
+          "balanced_accuracy": 0.6337
+        }
+      }
+    },
+    "dev_pass": false
+  },
+  {
     "config": "neutral_cte",
     "model": "google/gemma-4-31b-it",
     "provider": "friendli",
