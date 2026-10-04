@@ -218,3 +218,63 @@ scored. They check label-free properties only:
 - Its nearest official result is colorectal tissue typing on 224-px patches, which is
   flagged out-of-distribution and is poor zero-shot.
 - The model is a research starting point, not for clinical use.
+
+### Amendment 1 to the step-3 addendum (2026-10-04, after the first 3 smoke calls, before any dev call)
+
+**What the smoke test showed.** These were training-pool tiles, checked on label-free
+properties only. With `cte_p1`, 2 of the first 3 calls opened an unprompted thinking
+trace of about 1,300 tokens. Each exhausted the 1,500-token limit before the JSON
+answer was complete, and took about 4 minutes.
+
+**Change: thinking is switched off.** Every call bans the token that opens a trace
+(`<unused94>`, id 100) through `logit_bias`. The reasons:
+
+- Google's image-classification evaluations ran with thinking off.
+- Hidden reasoning before the label would void the classify-then-explain and ordering
+  design.
+- With thinking on, a call takes about 4 minutes, which makes even the dev set
+  impractical on this machine.
+
+**A thinking-on variant is not run.** That is recorded as untested. It is not a tested
+negative.
+
+**The earlier smoke file** is moved to `smoke/superseded_thinking_on/`.
+
+### Amendment 2 to the step-3 addendum (2026-10-04, still before any dev call)
+
+These changes come from the third pre-flight reviewer (runtime research). All calls so
+far used training-pool tiles only.
+
+**Prompt format: now token-identical to Google's own preprocessing.**
+
+- The chat endpoint drops the blank lines that HF's `Gemma3Processor` puts around each
+  image.
+- Local calls now use the raw `/completion` endpoint, with a prompt built to match:
+  text parts stripped and concatenated, each image wrapped in blank lines, no system
+  prompt.
+- It was checked against the official processor for single-image, few-shot and text-only
+  layouts. The token ids are identical (822 tokens for `cte_p1` with one image).
+
+**Server flags added:** `--swa-full --cache-ram 0 -fit off`.
+
+- `--swa-full` gives prefix reuse for the few-shot examples.
+- `--cache-ram 0` switches off the host-RAM prompt cache.
+- `-fit off` prevents any silent CPU fallback.
+
+The full line: `llama-server -ngl 99 -c 8192 -np 1 --jinja --special --swa-full
+--cache-ram 0 -fit off`.
+
+**Prompt caching** is left on. Reusing a cached few-shot prefix can change logits at
+float level, and that is accepted and recorded.
+
+**The Metal patch** was reviewed and tested independently, and found sound. Its
+read-back returns matching data. The crash is known upstream: issue #16266, open PR
+#29814.
+
+**Dissent recorded.** The runtime reviewer advised against suppressing thinking if the
+goal were to reproduce the model's default behaviour. Amendment 1 stands, for the
+reasons given there. The competence result therefore describes MedGemma 1.5 4B with
+thinking off.
+
+**Smoke files from the chat-endpoint format** are moved to
+`smoke/superseded_chat_endpoint/`.

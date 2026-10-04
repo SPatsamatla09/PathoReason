@@ -221,6 +221,14 @@ def main():
     path = os.path.join(out_dir, tag + ".jsonl")
     done = {json.loads(l)["image"] for l in open(path)} if os.path.exists(path) else set()
     session, spent, t0, n_new = requests.Session(), 0.0, time.time(), 0
+    think_id, marker, root = None, None, BASE_URL.rsplit("/v1", 1)[0]
+    if LOCAL:
+        marker = session.get(root + "/props", timeout=60).json()["media_marker"]
+        tk = session.post(BASE_URL.rsplit("/v1", 1)[0] + "/tokenize",
+                          json={"content": "<unused94>", "parse_special": True, "add_special": False}, timeout=60).json()["tokens"]
+        if len(tk) != 1:
+            sys.exit(f"STOP: <unused94> did not tokenize to one token: {tk}")
+        think_id = tk[0]
     for img in tiles:
         if img in done:
             continue
@@ -251,14 +259,24 @@ def main():
         seed = None
         if LOCAL:
             seed = int(hashlib.sha256(f"{SEED}:{args.config}:{args.control}:{args.tier}:{img}".encode()).hexdigest()[:8], 16) % (2 ** 31)
-            body.update({**sampling, "seed": seed})
+            # thinking off: ban the token that opens a trace (PLAN addendum, amendment 1)
+            body.update({**sampling, "seed": seed, "logit_bias": [[think_id, False]]})
         else:
             body["provider"] = {"order": [args.provider], "allow_fallbacks": False}
         n_images = sum(1 for c in content if c["type"] == "image_url")
+        if LOCAL:
+            # Raw /completion with a prompt that is token-identical to HF's Gemma3Processor (verified):
+            # text parts stripped and concatenated, each image wrapped in blank lines, no system prompt.
+            ps = "<start_of_turn>user\n" + "".join(
+                c["text"].strip() if c["type"] == "text" else "\n\n" + marker + "\n\n" for c in content
+            ) + "<end_of_turn>\n<start_of_turn>model\n"
+            imgs = [c["image_url"]["url"].split(",", 1)[1] for c in content if c["type"] == "image_url"]
+            body = {"prompt": {"prompt_string": ps, "multimodal_data": imgs} if imgs else ps, "n_predict": 1500,
+                    **sampling, "seed": seed, "logit_bias": [[think_id, False]], **extra}
         d, attempts = None, []
         for attempt in range(1, 3 if LOCAL else 7):
             try:
-                r = session.post(f"{BASE_URL}/chat/completions",
+                r = session.post(f"{root}/completion" if LOCAL else f"{BASE_URL}/chat/completions",
                                  headers={"Authorization": f"Bearer {key}"}, json=body, timeout=900 if LOCAL else 180)
             except requests.RequestException as e:
                 attempts.append({"attempt": attempt, "error": type(e).__name__})
@@ -267,9 +285,18 @@ def main():
             attempts.append({"attempt": attempt, "status": r.status_code})
             if r.status_code in (401, 402, 403, 404):
                 sys.exit(f"FATAL {r.status_code}: {r.text[:200]}")
+            if r.status_code == 200 and LOCAL and "content" in r.json():
+                j = r.json()   # normalise the /completion response to the chat-completions shape used below
+                d = {"choices": [{"message": {"content": j["content"]},
+                                  "finish_reason": {"eos": "stop", "limit": "length"}.get(j.get("stop_type"), j.get("stop_type"))}],
+                     "usage": {"prompt_tokens": j.get("tokens_evaluated"), "completion_tokens": j.get("tokens_predicted")},
+                     "timings": j.get("timings"), "model": j.get("model"), "truncated": j.get("truncated")}
+                break
             if r.status_code == 200 and "choices" in r.json():
                 d = r.json()
                 break
+            if LOCAL:
+                sys.exit(f"STOP: local server returned HTTP {r.status_code}: {r.text[:300]}; nothing written")
             time.sleep(min(120, 10 * 2 ** (attempt - 1)))
         if d is None:
             # infrastructure failure: never scored, never recorded as an answer (PLAN addendum)
@@ -296,6 +323,8 @@ def main():
                "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest()[:16],
                "temperature": sampling["temperature"] if LOCAL else 1.0, "sampling": sampling, "sampling_tag": sampling_tag,
                "seed": seed, "n_images": n_images, "thinking_trace": had_trace, "n_valid_cited_cells": len(cells),
+               "thinking_suppressed_token_id": think_id,
+               "endpoint": "/completion (HF-identical prompt)" if LOCAL else "/chat/completions",
                "system_fingerprint": (d or {}).get("system_fingerprint"),
                "raw_response": text, "label": label, "parsed_ok": obj is not None,
                "n_evidence": len(obj.get("evidence") or []) if isinstance(obj, dict) else None,
