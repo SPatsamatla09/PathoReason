@@ -197,6 +197,9 @@ def main():
         tiles = tiles[: args.limit]
     ab = ab_assignment()
     ex = fewshot_examples() if args.config.endswith("_fs") else []
+    if LOCAL and ex and args.config.startswith("neutral"):
+        # run order only: group tiles by A/B layout so the server can reuse the cached example prefix
+        tiles = sorted(tiles, key=lambda t: (ab[t], t))
     mismatch = {}
     if args.control == "mismatch":
         base_set = splits["dev"] if args.tiles in ("screen", "dev_rest", "dev") else tiles

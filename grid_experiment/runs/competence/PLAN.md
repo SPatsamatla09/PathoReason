@@ -278,3 +278,130 @@ thinking off.
 
 **Smoke files from the chat-endpoint format** are moved to
 `smoke/superseded_chat_endpoint/`.
+
+## Addendum: step 4, LoRA fine-tune on private cloud GPU (written 2026-10-04, before any step-4 training or evaluation)
+
+**Why cloud.** PyTorch has no GPU on this Mac, so step 4 cannot run locally. On
+2026-10-04 the user approved Kaggle or Colab under strict privacy rules:
+
+- a private Kaggle dataset and a private notebook on the user's account only, or the
+  user's private Drive on a private Colab runtime
+- never public, and never link-shared
+
+No dev or test tile is used for training or for model selection.
+
+**Step order is unchanged.** Step-4 training may run while step 3 is still screening,
+to save time. But the step-4 dev evaluation is run only if step 3 ends with no passing
+configuration. If step 3 passes, step 3 is the winner whatever step 4 would have scored.
+
+### Model and data, fixed now
+
+- **Base model:** `google/medgemma-1.5-4b-it`, revision `91850547…` (official weights,
+  transformers, GPU).
+- **Training set:** `fewshot_pool`, i.e. the train split minus dev (1,875 tiles).
+  - A validation slice of 15% is held out from the pool, stratified by label ×
+    agreement band, with seed 20261004.
+  - Checkpoint and epoch selection use that validation slice only.
+- **Input:** the pipeline's gridded tile plus the pipeline's `cte_p1` prompt, in the
+  official chat format (image first, no system prompt).
+- **Target, label-only.** The assistant text is `{\n  "label": "<HP|SSA>"`. Loss is
+  taken on those target tokens only. No explanation text is ever supervised.
+- **Class imbalance:** handled by a class-weighted loss, with inverse-frequency weights.
+
+### Hyperparameters, one setting, no search on dev
+
+- LoRA rank 16, alpha 16, dropout 0.05, on the language model's linear layers.
+- The vision tower is frozen.
+- Learning rate 2e-4 with a cosine schedule and 5% warm-up.
+- Effective batch size 8.
+- Up to 4 epochs.
+- The checkpoint with the best validation balanced accuracy is kept. The label is read
+  from the HP-vs-SSA logits at the label position.
+- 4-bit loading may be used if memory requires it. Whether it was is recorded.
+- Seed 20261004.
+
+### Dev evaluation, one run per decoding tier
+
+Same bars, same parser.
+
+- **What is run:** the selected checkpoint generates the full `cte_p1` answer on all
+  300 dev tiles.
+- **Decoding:**
+  - Tier 1: temperature 1.0, top_k 64, top_p 0.95, thinking token banned, up to 1,500
+    new tokens.
+  - Tier 2 (temperature 0): only if tier 1 fails.
+- **Pass:**
+  - accuracy ≥ 72% and balanced accuracy ≥ 65%;
+  - **format:** at least 90% of dev answers parse with a valid label and at least one
+    valid cited grid cell, because the masking parser needs citations;
+  - both image controls not above chance: no image, and mismatched image, by the rule
+    in the step-3 addendum.
+- **Reporting:** the 100-tile screen subset is reported, but with a fast GPU the whole
+  dev set is run in one pass.
+
+**At most one step-4 configuration goes to the test set.** That happens only after a
+pre-registration is committed.
+
+### Privacy and licence
+
+- Kaggle datasets and notebooks are created private.
+- The MedGemma weights are not redistributed. They are either uploaded to the user's own
+  private dataset, or downloaded inside the private notebook with the user's token held
+  as a Kaggle secret.
+- Any LoRA adapter stays private (HAI-DEF terms).
+- No claim of diagnostic validity is made.
+
+
+### Amendment 1 to the step-4 addendum (2026-10-04, before any step-4 training or dev evaluation)
+
+These points come from the adversarial review of the cloud fine-tune code. No bar is
+lowered and no metric is changed.
+
+**A. What the dev result can and cannot show**
+
+- **Slides.** Dev was carved from the train partition tile by tile, and `annotations.csv` has no slide id. Pool
+  tiles used for fine-tuning may therefore come from the same slides as dev tiles, and a step-4 dev result can be
+  optimistic. The dev result is a gate only. The confirmatory test run is the evidence. (Checked on
+  2026-10-04: no two of the 3,152 tiles in pool, dev and test have identical pixels.)
+- **Format bar, where it is applied.** `comp_analyze.py` applies the accuracy bars only. The format bar (at least
+  90% of all 300 dev answers with a valid label and at least one valid cited grid cell) is computed by
+  `kaggle_ft/import_results.py` and written to `runs/competence/step4_gate__<config>__<model>__<tier>.json`. A
+  step-4 configuration passes dev only if `comp_analyze.py` says PASS, that file says `"format_ok": true`, and
+  both image controls are OK.
+- **Label-free check before dev.** Before any dev job, the final adapter generates the full `cte_p1` answer for
+  the 20 smoke tiles of the step-3 addendum (training-pool tiles; no label is used). Every answer must end with a
+  normal stop and at least 90% must have a valid label and a valid grid cell. If not, the dev evaluation is not
+  run with that adapter.
+- **One adapter on dev.** Only the final adapter of the completed protocol run (the epoch chosen on the
+  validation slice after all four epochs) is evaluated on dev. Epoch checkpoints and the best-so-far adapter of
+  an unfinished run are refused by the code, and every dev import is logged in
+  `runs/competence/step4_imports.ndjson`.
+- **Step order.** Dev job files are built only once step 3 has ended with no passing configuration
+  (`build_dev_jobs.py --step3-closed`).
+
+**B. Choices the addendum did not fix, fixed now**
+
+| | |
+|---|---|
+| gradient clipping | max norm 0.3 (Google's notebook) |
+| optimiser | AdamW, betas 0.9 / 0.999, eps 1e-8, weight decay 0 |
+| loss | mean cross-entropy over the target tokens of an example, times its class weight, averaged over the 8 examples of an optimiser step |
+| LoRA targets | the 7 linear layers of each of the 34 language-model blocks (238 modules); `lm_head` is not adapted |
+| ties | equal validation balanced accuracy: the earlier epoch |
+| 4-bit scope | only where memory requires it: the language model's linear layers. The SigLIP vision tower, the projector, the embeddings and `lm_head` are not quantised. Checked on the loaded model and recorded |
+| validation read-out | argmax of the HP / SSA logits at the label position (as in the addendum). The expected accuracy under tier-1 sampling is also logged, for information only; it is not used for selection |
+
+**C. The supervised target, amended before any training**
+
+The assistant text is `{\n  "label": "<HP|SSA>`: 8 tokens, ending at the label token.
+
+- The closing quote is no longer part of the target. In a full answer the label is
+  followed by the single token `",`, not by a bare quote.
+- Loss is taken on those 8 target tokens only.
+- The label is still read from the HP-vs-SSA logits at the label position.
+
+**GPU and precision.** Kaggle's free GPU is the T4, which has no native bf16. The
+language-model linear layers are therefore loaded in 4-bit (nf4), with float32
+arithmetic, for training and for every later evaluation. The vision tower and the
+projector stay unquantised. This is recorded as a forced change: the competence result
+then describes that 4-bit model plus its adapter.

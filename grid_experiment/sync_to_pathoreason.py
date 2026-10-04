@@ -22,9 +22,11 @@ import subprocess
 import sys
 
 SRC = os.path.dirname(os.path.abspath(__file__))
-SKIP_DIRS = {"outreach", "paper", "__pycache__", "clean", "gridded", "images", "logs", ".git", "superseded"}
+SKIP_DIRS = {"outreach", "paper", "__pycache__", "clean", "gridded", "images", "logs", ".git", "superseded",
+             "local_only", "kaggle_local_only", "_test_tmp", "_local_test_tmp", "jobs", "smoke"}
 SKIP_PAT = ["* 2.*", "* 2", "*.icloud", ".env", ".DS_Store", "*.png", "*.jpg", "*.jpeg", "*.tif", "*.tiff",
-            "*.pdf", "*.zip", "*.pyc", "*.pt"]
+            "*.pdf", "*.zip", "*.pyc", "*.pt", "*.safetensors", "*.bin", "*.gguf", "*.whl",
+            "*.sidecar.jsonl", "*.meta.json", "*.ndjson", "kaggle.json"]
 # listed in a local-only file (outreach/ is never pushed) so this public script names nothing
 _hb = os.path.join(SRC, "outreach", "HOLD_BACK.txt")
 HOLD_BACK = {l.strip() for l in open(_hb) if l.strip() and not l.startswith("#")} if os.path.exists(_hb) else set()

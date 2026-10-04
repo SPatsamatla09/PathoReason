@@ -1,0 +1,22 @@
+# Nothing in this folder but code and documentation belongs in a repository.
+# Job files, label sidecars, test folders, adapters, weights and wheels live under ~/mhist_local/ by default;
+# these patterns are the second line of defence if one of them is ever written or copied here.
+jobs/
+local_only/
+kaggle_local_only/
+_test_tmp/
+_local_test_tmp/
+__pycache__/
+*.sidecar.jsonl
+*.meta.json
+DO_NOT_UPLOAD.txt
+*.safetensors
+*.bin
+*.pt
+*.gguf
+*.whl
+*.zip
+*.png
+dataset-metadata.json
+kernel-metadata.json
+registry.json

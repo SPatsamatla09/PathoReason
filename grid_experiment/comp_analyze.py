@@ -89,6 +89,12 @@ def main():
             row["dev"] = summarize(dev)
             if control == "none":
                 row["dev_pass"] = row["dev"]["accuracy"] >= 0.72 and row["dev"]["balanced_accuracy"] >= 0.65
+                if prov.startswith("kaggle"):
+                    # step-4 addendum: >= 90% of dev answers with a valid label AND >= 1 valid cited grid cell
+                    fmt = sum(r["label"] in ("HP", "SSA") and (r.get("n_valid_cited_cells") or 0) >= 1 for r in dev) / len(dev)
+                    row["format_rate"] = round(fmt, 4)
+                    row["format_ok"] = fmt >= 0.90
+                    row["dev_pass"] = row["dev_pass"] and row["format_ok"]
             else:
                 # one-sided (clarified in the PLAN addendum before any control call): not above chance
                 lo, hi = row["dev"]["balanced_boot95"]

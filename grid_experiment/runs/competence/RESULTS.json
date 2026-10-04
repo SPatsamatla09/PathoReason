@@ -1,5 +1,71 @@
 [
   {
+    "config": "co_p1",
+    "model": "medgemma-1.5-4b-it-Q8_0",
+    "provider": "local [tier1-t1]",
+    "control": "none",
+    "screen": {
+      "n": 100,
+      "correct": 62,
+      "accuracy": 0.62,
+      "accuracy_wilson95": [
+        0.5221,
+        0.709
+      ],
+      "balanced_accuracy": 0.5199,
+      "balanced_boot95": [
+        0.4554,
+        0.5886
+      ],
+      "recall_HP": 0.9048,
+      "recall_SSA": 0.1351,
+      "parse_rate": 1.0,
+      "ssa_call_rate": 0.11,
+      "cost_usd": 0,
+      "thinking_trace_rate": 0.0,
+      "finish_length": 4,
+      "cited_ge1": 0.0,
+      "cited_ge3": 0.0,
+      "providers": [
+        "local"
+      ]
+    },
+    "screen_advances": false
+  },
+  {
+    "config": "cte_p1",
+    "model": "medgemma-1.5-4b-it-Q8_0",
+    "provider": "local [tier1-t1]",
+    "control": "none",
+    "screen": {
+      "n": 48,
+      "correct": 33,
+      "accuracy": 0.6875,
+      "accuracy_wilson95": [
+        0.5467,
+        0.8005
+      ],
+      "balanced_accuracy": 0.4583,
+      "balanced_boot95": [
+        0.4091,
+        0.5
+      ],
+      "recall_HP": 0.9167,
+      "recall_SSA": 0.0,
+      "parse_rate": 0.9375,
+      "ssa_call_rate": 0.0,
+      "cost_usd": 0,
+      "thinking_trace_rate": 0.0208,
+      "finish_length": 4,
+      "cited_ge1": 0.9375,
+      "cited_ge3": 0.9375,
+      "providers": [
+        "local"
+      ]
+    },
+    "screen_advances": false
+  },
+  {
     "config": "names_crit_fs",
     "model": "google/gemma-4-31b-it",
     "provider": "friendli",

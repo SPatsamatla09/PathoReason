@@ -1,5 +1,7 @@
 | config | model | provider | control | set | n | acc | acc 95% CI | bal acc | recall HP | recall SSA | parse | SSA calls | cost | decision |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| co_p1 | medgemma-1.5-4b-it-Q8_0 | local [tier1-t1] | none | screen | 100 | 0.620 | 0.522–0.709 | 0.520 | 0.90 | 0.14 | 1.00 | 0.11 | $0.000 | stops |
+| cte_p1 | medgemma-1.5-4b-it-Q8_0 | local [tier1-t1] | none | screen | 48 | 0.688 | 0.547–0.800 | 0.458 | 0.92 | 0.00 | 0.94 | 0.00 | $0.000 | stops |
 | names_crit_fs | google/gemma-4-31b-it | friendli | none | screen | 100 | 0.600 | 0.502–0.691 | 0.599 | 0.60 | 0.59 | 1.00 | 0.47 | $0.042 | stops |
 | names_crit_fs | qwen/qwen3-vl-235b-a22b-instruct | alibaba | none | screen | 100 | 0.400 | 0.309–0.498 | 0.524 | 0.05 | 1.00 | 1.00 | 0.97 | $0.048 | stops |
 | neutral_crit_fs | google/gemma-4-31b-it | friendli | none | screen | 100 | 0.650 | 0.552–0.736 | 0.694 | 0.52 | 0.86 | 1.00 | 0.62 | $0.042 | advances |
