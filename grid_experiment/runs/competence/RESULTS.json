@@ -22,6 +22,10 @@
       "parse_rate": 1.0,
       "ssa_call_rate": 0.47,
       "cost_usd": 0.0424,
+      "thinking_trace_rate": null,
+      "finish_length": 0,
+      "cited_ge1": null,
+      "cited_ge3": null,
       "providers": [
         "Friendli"
       ]
@@ -51,6 +55,10 @@
       "parse_rate": 1.0,
       "ssa_call_rate": 0.97,
       "cost_usd": 0.0481,
+      "thinking_trace_rate": null,
+      "finish_length": 0,
+      "cited_ge1": null,
+      "cited_ge3": null,
       "providers": [
         "Alibaba"
       ]
@@ -80,6 +88,10 @@
       "parse_rate": 1.0,
       "ssa_call_rate": 0.62,
       "cost_usd": 0.0419,
+      "thinking_trace_rate": null,
+      "finish_length": 0,
+      "cited_ge1": null,
+      "cited_ge3": null,
       "providers": [
         "Friendli"
       ],
@@ -115,6 +127,10 @@
       "parse_rate": 1.0,
       "ssa_call_rate": 0.67,
       "cost_usd": 0.1258,
+      "thinking_trace_rate": null,
+      "finish_length": 0,
+      "cited_ge1": null,
+      "cited_ge3": null,
       "providers": [
         "Friendli"
       ],
@@ -156,6 +172,10 @@
       "parse_rate": 1.0,
       "ssa_call_rate": 0.97,
       "cost_usd": 0.0472,
+      "thinking_trace_rate": null,
+      "finish_length": 0,
+      "cited_ge1": null,
+      "cited_ge3": null,
       "providers": [
         "Alibaba"
       ],
@@ -197,6 +217,10 @@
       "parse_rate": 1.0,
       "ssa_call_rate": 0.84,
       "cost_usd": 0.0193,
+      "thinking_trace_rate": null,
+      "finish_length": 0,
+      "cited_ge1": null,
+      "cited_ge3": null,
       "providers": [
         "Friendli"
       ],
@@ -238,6 +262,10 @@
       "parse_rate": 1.0,
       "ssa_call_rate": 1.0,
       "cost_usd": 0.0357,
+      "thinking_trace_rate": null,
+      "finish_length": 0,
+      "cited_ge1": null,
+      "cited_ge3": null,
       "providers": [
         "Alibaba"
       ],

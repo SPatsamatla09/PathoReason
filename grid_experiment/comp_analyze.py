@@ -49,6 +49,13 @@ def summarize(recs):
            "parse_rate": round(len(usable) / n, 4) if n else None,
            "ssa_call_rate": round(sum(r["label"] == "SSA" for r in usable) / max(len(usable), 1), 4),
            "cost_usd": round(sum(r.get("cost_usd") or 0 for r in recs), 4),
+           "thinking_trace_rate": (round(sum(bool(r.get("thinking_trace")) for r in recs) / n, 4)
+                                   if any("thinking_trace" in r for r in recs) else None),
+           "finish_length": sum(r.get("finish_reason") == "length" for r in recs),
+           "cited_ge1": (round(sum((r.get("n_valid_cited_cells") or 0) >= 1 for r in recs) / n, 4)
+                         if any("n_valid_cited_cells" in r for r in recs) else None),
+           "cited_ge3": (round(sum((r.get("n_valid_cited_cells") or 0) >= 3 for r in recs) / n, 4)
+                         if any("n_valid_cited_cells" in r for r in recs) else None),
            "providers": sorted({str(r.get("provider_served")) for r in recs})}
     halves = {}
     for a in ("HP", "SSA"):
@@ -68,7 +75,8 @@ def main():
         if not recs:
             continue
         r0 = recs[0]
-        key = (r0["config"], r0["model"], r0["provider_pinned"], r0["control"])
+        key = (r0["config"], r0["model"], r0["provider_pinned"] + (f" [{r0['sampling_tag']}]" if r0.get("sampling_tag") else ""),
+               r0["control"])
         groups.setdefault(key, {})[r0["tiles"]] = recs
     res = []
     for (config, model, prov, control), parts in sorted(groups.items()):
@@ -82,8 +90,9 @@ def main():
             if control == "none":
                 row["dev_pass"] = row["dev"]["accuracy"] >= 0.72 and row["dev"]["balanced_accuracy"] >= 0.65
             else:
+                # one-sided (clarified in the PLAN addendum before any control call): not above chance
                 lo, hi = row["dev"]["balanced_boot95"]
-                row["control_ok_falls_to_chance"] = lo <= 0.5 <= hi and row["dev"]["balanced_accuracy"] <= 0.58
+                row["control_ok_falls_to_chance"] = lo <= 0.5 and row["dev"]["balanced_accuracy"] <= 0.58
         if "test" in parts:
             t = summarize(parts["test"])
             row["test"] = t

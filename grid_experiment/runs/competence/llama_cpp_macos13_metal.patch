@@ -1,0 +1,39 @@
+diff --git a/ggml/src/ggml-metal/ggml-metal-context.m b/ggml/src/ggml-metal/ggml-metal-context.m
+index e906466..143e11f 100644
+--- a/ggml/src/ggml-metal/ggml-metal-context.m
++++ b/ggml/src/ggml-metal/ggml-metal-context.m
+@@ -377,8 +377,6 @@ void ggml_metal_get_tensor_async(ggml_metal_t ctx, const struct ggml_tensor * te
+                                                          options:MTLResourceStorageModeShared
+                                                      deallocator:nil];
+ 
+-        GGML_ASSERT(buf_dst);
+-
+         struct ggml_metal_buffer_id bid_src = ggml_metal_get_buffer_id(tensor);
+         if (bid_src.metal == nil) {
+             GGML_ABORT("%s: failed to find buffer for tensor '%s'\n", __func__, tensor->name);
+@@ -386,6 +384,25 @@ void ggml_metal_get_tensor_async(ggml_metal_t ctx, const struct ggml_tensor * te
+ 
+         bid_src.offs += offset;
+ 
++        // LOCAL PATCH (mhist, 2026-10-04): on macOS 13 newBufferWithBytesNoCopy returns nil when `data`
++        // is not page-aligned. Fall back to a synchronous read-back through a temporary shared buffer:
++        // blit into it, wait (the queue is serial, so all earlier GPU work has finished), then memcpy.
++        if (buf_dst == nil) {
++            id<MTLBuffer> buf_tmp = [device newBufferWithLength:size options:MTLResourceStorageModeShared];
++            GGML_ASSERT(buf_tmp);
++            id<MTLCommandQueue> queue_s = ggml_metal_device_get_queue(ctx->dev);
++            id<MTLCommandBuffer> cmd_s = [queue_s commandBuffer];
++            id<MTLBlitCommandEncoder> enc_s = [cmd_s blitCommandEncoder];
++            [enc_s copyFromBuffer:bid_src.metal sourceOffset:bid_src.offs toBuffer:buf_tmp destinationOffset:0 size:size];
++            [enc_s endEncoding];
++            [cmd_s commit];
++            [cmd_s waitUntilCompleted];
++            GGML_ASSERT([cmd_s status] == MTLCommandBufferStatusCompleted);
++            memcpy(data, [buf_tmp contents], size);
++            [buf_tmp release];
++            return;
++        }
++
+         // queue the copy operation into the queue of the Metal context
+         // this will be queued at the end, after any currently ongoing GPU operations
+         id<MTLCommandQueue> queue = ggml_metal_device_get_queue(ctx->dev);

@@ -2,8 +2,11 @@
 only the class block, label tokens and optional few-shot examples change.
 
     python3 comp_run.py --model google/gemma-4-31b-it --provider friendli --config neutral_cte --tiles screen [--limit 5]
-    configs:  neutral_cte | names_crit_fs | neutral_crit_fs        tiles: screen | dev_rest | dev | test
+    configs:  co_p1 | cte_p1 | neutral_cte | names_crit_fs | neutral_crit_fs     tiles: screen | dev_rest | dev | test
     controls: --control none | noimage | mismatch
+
+Local model (llama-server, OpenAI-compatible): set COMP_BASE_URL=http://127.0.0.1:8089/v1 and pass --provider local.
+No provider-routing field is sent, no API key is needed and nothing leaves this machine.
 
 Resumable; one record per tile. Spend is logged per call (OpenRouter usage.cost). Keys come from the environment only.
 """
@@ -27,6 +30,9 @@ import run_experiment as rx
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "runs", "competence")
 SEED = 20261003
+BASE_URL = os.environ.get("COMP_BASE_URL", "https://openrouter.ai/api/v1").rstrip("/")
+LOCAL = BASE_URL.startswith(("http://127.0.0.1", "http://localhost"))
+PIPELINE_PROMPTS = {c: open(os.path.join(ROOT, "prompts", "rendered", f"{c}.txt")).read() for c in ("co_p1", "cte_p1")}
 
 # Criteria (WHO 2019-based), parallel structure, similar length, no disease names.
 CRIT = {
@@ -123,7 +129,29 @@ def b64_grid(name):
     return rx.b64_gridded_tile({"image": name, "gridded": None})
 
 
+THINK_END, SPECIALS = "<unused95>", ("<end_of_turn>", "<eos>", "<unused94>", "<unused95>")
+# sampling tiers for the LOCAL model, fixed in the PLAN addendum before any dev call
+TIERS = {"1": {"temperature": 1.0, "top_k": 64, "top_p": 0.95, "min_p": 0.0, "repeat_penalty": 1.0},
+         "2": {"temperature": 0.0, "top_k": 64, "top_p": 0.95, "min_p": 0.0, "repeat_penalty": 1.0}}
+CELL = re.compile(r"^[A-D][1-4]$")
+
+
+def strip_thinking(text):
+    """MedGemma 1.5 may emit '<unused94>thought ... <unused95>' before its answer (server runs with --special).
+    Returns (answer_text, had_trace). An unclosed trace leaves nothing to parse."""
+    t = text or ""
+    had = "<unused94>" in t or THINK_END in t
+    if THINK_END in t:
+        t = t.rsplit(THINK_END, 1)[1]
+    elif "<unused94>" in t:
+        t = ""
+    for sp in SPECIALS:
+        t = t.replace(sp, "")
+    return t.strip(), had
+
+
 def parse(text, config, a_is):
+    text, _ = strip_thinking(text)
     payload, _ = rx.extract_json((text or "").strip())
     try:
         obj = json.loads(payload) if payload else None
@@ -143,15 +171,28 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True)
     ap.add_argument("--provider", required=True)
-    ap.add_argument("--config", required=True, choices=["neutral_cte", "names_crit_fs", "neutral_crit_fs"])
-    ap.add_argument("--tiles", required=True, choices=["screen", "dev_rest", "dev", "test"])
+    ap.add_argument("--config", required=True,
+                    choices=["co_p1", "cte_p1", "neutral_cte", "names_crit_fs", "neutral_crit_fs"])
+    ap.add_argument("--shard", default=None, help="i/n: only tiles whose index %% n == i (parallel local slots)")
+    ap.add_argument("--tag", default="", help="suffix for the output file, e.g. a runtime/sampling tag")
+    ap.add_argument("--tiles", required=True, choices=["screen", "dev_rest", "dev", "test", "smoke"])
+    ap.add_argument("--tier", default="1", choices=["1", "2"],
+                    help="LOCAL only: 1 = temperature 1.0, 2 = temperature 0 (see PLAN addendum)")
     ap.add_argument("--control", default="none", choices=["none", "noimage", "mismatch"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--extra", default="")
     args = ap.parse_args()
     lab, votes, part = labels()
     splits = json.load(open(os.path.join(OUT, "splits.json")))
-    tiles = (sorted(n for n in lab if part[n] == "test") if args.tiles == "test" else splits[args.tiles])
+    if args.tiles == "smoke":
+        # label-free runtime checks only: 20 fewshot_pool tiles (never dev/test, never the six examples)
+        exs = {e["image"] for e in fewshot_examples()}
+        tiles = random.Random(SEED + 31).sample(sorted(set(splits["fewshot_pool"]) - exs), 20)
+    else:
+        tiles = (sorted(n for n in lab if part[n] == "test") if args.tiles == "test" else splits[args.tiles])
+    if args.shard:
+        i, k = (int(x) for x in args.shard.split("/"))
+        tiles = [t for j, t in enumerate(tiles) if j % k == i]
     if args.limit:
         tiles = tiles[: args.limit]
     ab = ab_assignment()
@@ -166,20 +207,27 @@ def main():
             if all(a != b for a, b in zip(base_set, perm)):
                 break
         mismatch = dict(zip(base_set, perm))
-    key = os.environ["OPENROUTER_API_KEY"]
+    key = "local" if LOCAL else os.environ["OPENROUTER_API_KEY"]
+    if LOCAL != (args.provider == "local"):
+        sys.exit("--provider local must be used with a localhost COMP_BASE_URL, and only with it")
     extra = json.loads(args.extra) if args.extra else {}
-    os.makedirs(OUT, exist_ok=True)
-    tag = re.sub(r"[^A-Za-z0-9._-]+", "-", f"{args.config}__{args.model}__{args.provider}__{args.tiles}__{args.control}")
-    path = os.path.join(OUT, tag + ".jsonl")
+    sampling = TIERS[args.tier] if LOCAL else None
+    sampling_tag = f"tier{args.tier}-t{TIERS[args.tier]['temperature']:g}" if LOCAL else None
+    out_dir = os.path.join(OUT, "smoke") if args.tiles == "smoke" else OUT   # smoke files are never scored
+    os.makedirs(out_dir, exist_ok=True)
+    tag = re.sub(r"[^A-Za-z0-9._-]+", "-",
+                 f"{args.config}__{args.model}__{args.provider}{('-' + sampling_tag) if LOCAL else ''}{args.tag}"
+                 f"__{args.tiles}__{args.control}")
+    path = os.path.join(out_dir, tag + ".jsonl")
     done = {json.loads(l)["image"] for l in open(path)} if os.path.exists(path) else set()
     session, spent, t0, n_new = requests.Session(), 0.0, time.time(), 0
     for img in tiles:
         if img in done:
             continue
         a_is = ab[img]
-        if args.config == "neutral_cte":
-            prompt = prompt_neutral(a_is)
-        elif args.config == "neutral_crit_fs":
+        if args.config in PIPELINE_PROMPTS:
+            prompt = PIPELINE_PROMPTS[args.config]
+        elif args.config in ("neutral_cte", "neutral_crit_fs"):
             prompt = prompt_neutral(a_is)
         else:
             prompt = prompt_names()
@@ -199,13 +247,19 @@ def main():
             content.append({"type": "image_url", "image_url": {"url": "data:image/png;base64," + b64_grid(shown)}})
         content.append({"type": "text", "text": prompt})
         body = {"model": args.model, "temperature": 1.0, "max_tokens": 1500,
-                "provider": {"order": [args.provider], "allow_fallbacks": False},
                 "messages": [{"role": "user", "content": content}], **extra}
+        seed = None
+        if LOCAL:
+            seed = int(hashlib.sha256(f"{SEED}:{args.config}:{args.control}:{args.tier}:{img}".encode()).hexdigest()[:8], 16) % (2 ** 31)
+            body.update({**sampling, "seed": seed})
+        else:
+            body["provider"] = {"order": [args.provider], "allow_fallbacks": False}
+        n_images = sum(1 for c in content if c["type"] == "image_url")
         d, attempts = None, []
-        for attempt in range(1, 7):
+        for attempt in range(1, 3 if LOCAL else 7):
             try:
-                r = session.post("https://openrouter.ai/api/v1/chat/completions",
-                                 headers={"Authorization": f"Bearer {key}"}, json=body, timeout=180)
+                r = session.post(f"{BASE_URL}/chat/completions",
+                                 headers={"Authorization": f"Bearer {key}"}, json=body, timeout=900 if LOCAL else 180)
             except requests.RequestException as e:
                 attempts.append({"attempt": attempt, "error": type(e).__name__})
                 time.sleep(10 * attempt)
@@ -217,17 +271,32 @@ def main():
                 d = r.json()
                 break
             time.sleep(min(120, 10 * 2 ** (attempt - 1)))
-        text = ((d or {}).get("choices", [{}])[0].get("message") or {}).get("content")
+        if d is None:
+            # infrastructure failure: never scored, never recorded as an answer (PLAN addendum)
+            sys.exit(f"STOP: no response for {img} after {len(attempts)} attempts ({attempts}); nothing written. Re-run to resume.")
+        if LOCAL and ((d.get("usage") or {}).get("prompt_tokens") or 0) < 256 * n_images:
+            sys.exit(f"STOP: prompt_tokens {d.get('usage')} < 256 x {n_images} images for {img}: image not ingested")
+        text = (d["choices"][0].get("message") or {}).get("content")
         label, obj = parse(text, args.config, a_is)
+        answer_text, had_trace = strip_thinking(text)
+        cells = sorted({c for e in ((obj or {}).get("evidence") or []) if isinstance(e, dict)
+                        for c in (e.get("grid_cells") or []) if isinstance(c, str) and CELL.match(c.strip().upper())}) \
+            if isinstance(obj, dict) else []
         cost = ((d or {}).get("usage") or {}).get("cost") or 0
         spent += cost
         n_new += 1
         rec = {"config": args.config, "model": args.model, "provider_pinned": args.provider,
-               "provider_served": (d or {}).get("provider"), "tiles": args.tiles, "control": args.control,
+               "provider_served": "local" if LOCAL else (d or {}).get("provider"), "base_url": BASE_URL,
+               "served_model": (d or {}).get("model"), "timings": (d or {}).get("timings"),
+               "finish_reason": ((d or {}).get("choices") or [{}])[0].get("finish_reason"),
+               "tiles": args.tiles, "control": args.control,
                "image": img, "image_shown": None if args.control == "noimage" else mismatch.get(img, img),
                "label_true": lab[img], "ssa_votes": votes[img], "class_a_is": a_is if args.config.startswith("neutral") else None,
                "fewshot": [e["image"] for e in ex] or None,
-               "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest()[:16], "temperature": 1.0,
+               "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest()[:16],
+               "temperature": sampling["temperature"] if LOCAL else 1.0, "sampling": sampling, "sampling_tag": sampling_tag,
+               "seed": seed, "n_images": n_images, "thinking_trace": had_trace, "n_valid_cited_cells": len(cells),
+               "system_fingerprint": (d or {}).get("system_fingerprint"),
                "raw_response": text, "label": label, "parsed_ok": obj is not None,
                "n_evidence": len(obj.get("evidence") or []) if isinstance(obj, dict) else None,
                "usage": (d or {}).get("usage"), "cost_usd": cost, "attempts": attempts,
