@@ -102,25 +102,35 @@ not hold on the full dev set.
 that has not received them. The brief makes that a stop point, so it needs your explicit
 approval.
 
-## Step 6: ResNet-18 baseline (paused, local)
-
-**Ready:** `train_resnet18.py`, a plain-PyTorch ResNet-18 trained from scratch, with no
-downloads.
+## Step 6: ResNet-18 baseline (done, local)
 
 **Design:**
 
-- train on train minus dev
-- choose the epoch by dev AUC
-- 3 seeds
-- evaluate test once per seed
+- ResNet-18 in plain PyTorch, trained **from scratch**, with no downloads
+- train on train minus dev (1,875 tiles)
+- choose the epoch by dev AUC, over 30 epochs
+- 3 seeds, with **one test evaluation per seed**
 
-**Timing:** about 3.2 minutes per epoch on the CPU, so 30 epochs × 3 seeds ≈ **5 hours**.
+Results: `runs/resnet18/RESULTS.json`.
 
-**Paused because** the Mac was at 9–18% battery and discharging. It resumes from the
-last saved epoch once it is on power.
+| seed | chosen epoch | test acc | test AUC | balanced acc | recall HP | recall SSA |
+|---|---|---|---|---|---|---|
+| 0 | 28 | 76.1% | 0.848 | 0.754 | 0.78 | 0.73 |
+| 1 | 24 | 75.4% | 0.849 | 0.757 | 0.75 | 0.77 |
+| 2 | 27 | 76.2% | 0.846 | 0.754 | 0.78 | 0.73 |
+| **mean ± SD** | | **75.9 ± 0.4%** | **0.848 ± 0.002** | **0.755** | 0.77 | 0.74 |
 
-**An ImageNet-pretrained variant would match the usual baselines better.** It needs
-downloading about 45 MB of weights from download.pytorch.org, and that needs your OK.
+**Seed 0 checkpoint incident.** iCloud "Optimize Mac Storage" renamed seed 0's
+checkpoint (`best.pt` became `best 9.pt`), so the script's own test step crashed.
+
+- The surviving file's stored epoch (28) equals the log's best-dev-AUC epoch. Its single
+  test evaluation was run from that file and documented in `seed0/test.json`.
+- Seeds 1 and 2 ran normally.
+- Checkpoints now live outside iCloud.
+
+**This replaces the unsourced ResNet figures.** The earlier 81.8% figure probably came
+from an ImageNet-pretrained model, which was not re-run; that would need about 45 MB of
+weights. ViT-B/16 was not re-run either.
 
 ## Kiran items 1 and 5, updated
 

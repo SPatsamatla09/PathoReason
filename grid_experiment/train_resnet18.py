@@ -25,6 +25,9 @@ from PIL import Image
 ROOT = os.path.dirname(os.path.abspath(__file__))
 IMG = os.path.join(ROOT, "..", "images")
 OUT = os.path.join(ROOT, "runs", "resnet18")
+# Checkpoints live OUTSIDE ~/Documents: iCloud "Optimize Mac Storage" evicted/renamed checkpoints that were
+# rewritten every epoch (seed 0 lost best.pt -> 'best 9.pt'). Logs and test.json stay in runs/.
+CKPT = os.path.expanduser("~/Library/Caches/mhist_resnet18")
 
 
 class Block(nn.Module):
@@ -133,7 +136,9 @@ def main():
     args = ap.parse_args()
     torch.set_num_threads(max(1, os.cpu_count() - 1))
     d = os.path.join(OUT, f"seed{args.seed}")
+    cd = os.path.join(CKPT, f"seed{args.seed}")
     os.makedirs(d, exist_ok=True)
+    os.makedirs(cd, exist_ok=True)
     if os.path.exists(os.path.join(d, "test.json")):
         print("done already:", json.load(open(os.path.join(d, "test.json"))))
         return
@@ -153,7 +158,7 @@ def main():
     w = w / w.sum() * 2
     logp = os.path.join(d, "log.jsonl")
     start, best = 0, {"auc": -1}
-    ck = os.path.join(d, "last.pt")
+    ck = os.path.join(cd, "last.pt")
     if os.path.exists(ck):
         s = torch.load(ck, weights_only=False)
         model.load_state_dict(s["model"]); opt.load_state_dict(s["opt"]); sched.load_state_dict(s["sched"])
@@ -175,11 +180,11 @@ def main():
         print(json.dumps(rec), flush=True)
         if m["auc"] > best["auc"]:
             best = {**m, "epoch": ep}
-            torch.save({"model": model.state_dict(), "mean": mean, "std": std, "epoch": ep}, os.path.join(d, "best.pt"))
+            torch.save({"model": model.state_dict(), "mean": mean, "std": std, "epoch": ep}, os.path.join(cd, "best.pt"))
         torch.save({"model": model.state_dict(), "opt": opt.state_dict(), "sched": sched.state_dict(), "epoch": ep,
                     "best": best, "rng": rng.getstate(), "torch_rng": torch.get_rng_state()}, ck)
     # the one test evaluation for this seed, at the dev-chosen epoch
-    b = torch.load(os.path.join(d, "best.pt"), weights_only=False)
+    b = torch.load(os.path.join(cd, "best.pt"), weights_only=False)
     model.load_state_dict(b["model"])
     xte = load_images(test)
     res = {"seed": args.seed, "chosen_epoch": b["epoch"], "dev_at_chosen_epoch": best,

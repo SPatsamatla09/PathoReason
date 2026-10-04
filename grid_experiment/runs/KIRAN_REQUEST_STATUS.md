@@ -42,6 +42,14 @@ almost every tile. The full second-VLM pipeline is **not** run; see
   meaning.
 - Details: `runs/masking_ext2/RESULTS.md`.
 
+**Competence search (items 1 and 5), 2026-10-03.** See `runs/competence/RESULTS.md`.
+
+- **Steps 1-2 fail.** Neutral labels plus criteria, and criteria plus 6 examples, on
+  gemma and Qwen: the best on the full dev set is 57.3%.
+- **Steps 3-4 are at stop points:** the gated MedGemma, disk, and no GPU.
+- **Sourced ResNet-18 baseline,** trained from scratch: 75.9% ± 0.4% test accuracy, AUC
+  0.848 (3 seeds).
+
 **Pathologist (item 7): contacts identified, nothing sent.** See
 `outreach/RATER_CONTACTS.md` (local only).
 

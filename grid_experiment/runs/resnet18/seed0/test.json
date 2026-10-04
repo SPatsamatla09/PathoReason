@@ -1,0 +1,24 @@
+{
+  "seed": 0,
+  "chosen_epoch": 28,
+  "dev_at_chosen_epoch": {
+    "accuracy": 0.82,
+    "auc": 0.89,
+    "balanced_accuracy": 0.8107,
+    "recall_HP": 0.8466,
+    "recall_SSA": 0.7748,
+    "epoch": 28
+  },
+  "test": {
+    "accuracy": 0.7605,
+    "auc": 0.8477,
+    "balanced_accuracy": 0.7543,
+    "recall_HP": 0.778,
+    "recall_SSA": 0.7306
+  },
+  "n_test": 977,
+  "n_train": 1875,
+  "n_dev": 300,
+  "pretrained": false,
+  "note": "training finished but the script's own test step crashed: iCloud 'Optimize Mac Storage' had renamed best.pt to 'best 9.pt'. That file's stored epoch (28) equals the log's best-dev-AUC epoch, so it is the dev-chosen checkpoint; this is the single test evaluation for seed 0."
+}

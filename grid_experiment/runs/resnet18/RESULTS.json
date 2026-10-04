@@ -1,0 +1,59 @@
+{
+  "model": "ResNet-18 (plain PyTorch, trained from scratch, no pretrained weights)",
+  "train": "MHIST train split minus the 300-tile competence dev set (1,875 tiles)",
+  "epoch_selection": "best dev AUC over 30 epochs",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "test_evaluations_per_seed": 1,
+  "n_test": 977,
+  "summary": {
+    "accuracy": {
+      "mean": 0.7588,
+      "sd": 0.0038,
+      "per_seed": [
+        0.7605,
+        0.7544,
+        0.7615
+      ]
+    },
+    "auc": {
+      "mean": 0.8477,
+      "sd": 0.0017,
+      "per_seed": [
+        0.8477,
+        0.8494,
+        0.846
+      ]
+    },
+    "balanced_accuracy": {
+      "mean": 0.755,
+      "sd": 0.0016,
+      "per_seed": [
+        0.7543,
+        0.7569,
+        0.7539
+      ]
+    },
+    "recall_HP": {
+      "mean": 0.7693,
+      "sd": 0.0193,
+      "per_seed": [
+        0.778,
+        0.7472,
+        0.7828
+      ]
+    },
+    "recall_SSA": {
+      "mean": 0.7408,
+      "sd": 0.0226,
+      "per_seed": [
+        0.7306,
+        0.7667,
+        0.725
+      ]
+    }
+  }
+}

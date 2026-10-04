@@ -1,0 +1,23 @@
+{
+  "seed": 2,
+  "chosen_epoch": 27,
+  "dev_at_chosen_epoch": {
+    "accuracy": 0.8067,
+    "auc": 0.8917,
+    "balanced_accuracy": 0.7945,
+    "recall_HP": 0.8413,
+    "recall_SSA": 0.7477,
+    "epoch": 27
+  },
+  "test": {
+    "accuracy": 0.7615,
+    "auc": 0.846,
+    "balanced_accuracy": 0.7539,
+    "recall_HP": 0.7828,
+    "recall_SSA": 0.725
+  },
+  "n_test": 977,
+  "n_train": 1875,
+  "n_dev": 300,
+  "pretrained": false
+}
