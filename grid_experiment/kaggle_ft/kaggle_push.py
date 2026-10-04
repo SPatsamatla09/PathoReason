@@ -141,12 +141,44 @@ def config_dir():
     return os.environ.get("KAGGLE_CONFIG_DIR") or os.path.join(HOME, ".kaggle")
 
 
+def _account_cache():
+    return os.path.join(HOME, "mhist_local", "kaggle_stage", "account.json")
+
+
+def cached_username():
+    try:
+        with open(_account_cache()) as fh:
+            u = json.load(fh).get("username")
+        return u if isinstance(u, str) and USER_RE.match(u) else None
+    except (OSError, ValueError):
+        return None
+
+
 def read_credentials():
     """Look at the credentials file without ever returning, printing or logging the key."""
     path = os.path.join(config_dir(), "kaggle.json")
     c = {"path": path, "exists": os.path.isfile(path), "mode": None, "mode_ok": False, "username": None,
          "has_key": False, "problems": [], "notes": []}
-    if not c["exists"]:
+    tok_path = os.path.join(config_dir(), "access_token")
+    if not c["exists"] and os.path.isfile(tok_path):
+        # New-style Kaggle API token (settings page -> "Create New Token" gives a KGAT_ string, not kaggle.json).
+        # The CLI reads it from ~/.kaggle/access_token; the username is learned from the CLI by `check` and cached.
+        c.update(path=tok_path, exists=True, kind="access_token")
+        c["mode"] = stat.S_IMODE(os.stat(tok_path).st_mode)
+        c["mode_ok"] = c["mode"] & 0o077 == 0
+        if not c["mode_ok"]:
+            c["problems"].append(f"{tok_path} has permissions {c['mode']:03o}, readable by others; run: chmod 600 {shlex.quote(tok_path)}")
+        try:
+            with open(tok_path) as fh:
+                c["has_key"] = len(fh.read().strip()) >= 16
+        except OSError:
+            c["has_key"] = False
+        if not c["has_key"]:
+            c["problems"].append(f"{tok_path} is empty or too short")
+        c["username"] = cached_username()
+        if not c["username"]:
+            c["notes"].append("username not cached yet: run `kaggle_push.py check` once (it asks the CLI which account the token belongs to)")
+    elif not c["exists"]:
         c["problems"].append(f"{path} does not exist")
     else:
         c["mode"] = stat.S_IMODE(os.stat(path).st_mode)
@@ -168,7 +200,7 @@ def read_credentials():
             if not c["has_key"]:
                 c["problems"].append(f'{path} has no "key" field')
         del data
-    if os.path.isfile(os.path.join(config_dir(), "access_token")):
+    if c.get("kind") != "access_token" and os.path.isfile(os.path.join(config_dir(), "access_token")):
         c["notes"].append("~/.kaggle/access_token also exists: the CLI prefers it over kaggle.json, so `check` "
                           "(without --dry-run) confirms which account it logs in as")
     for v in ("KAGGLE_USERNAME", "KAGGLE_KEY", "KAGGLE_API_TOKEN"):
@@ -239,8 +271,9 @@ class Runner:
         if tuple(args[:2]) not in ALLOWED and tuple(args[:1]) not in ALLOWED:
             die(f"refusing to run `kaggle {' '.join(args[:2])}`: not on this tool's allow-list", EXIT_USAGE)
 
-    def kaggle(self, *args, note="", tee=False):
-        """-> (returncode, output). In a dry run nothing is executed and (None, '') is returned."""
+    def kaggle(self, *args, note="", tee=False, quiet=False):
+        """-> (returncode, output). In a dry run nothing is executed and (None, '') is returned.
+        quiet=True leaves out the command echo (repeated polls)."""
         self._guard(args)
         line = shlex.join([self.bin, *args])
         if self.dry:
@@ -248,7 +281,8 @@ class Runner:
             return None, ""
         if not (os.path.isfile(self.bin) and os.access(self.bin, os.X_OK)):
             die(f"Kaggle CLI not found at {self.bin} (set KAGGLE_BIN or pass --kaggle-bin)")
-        say(f"+ {line}")
+        if not quiet:
+            say(f"+ {line}")
         if not tee:
             p = subprocess.run([self.bin, *args], capture_output=True, text=True)
             return p.returncode, (p.stdout or "") + (p.stderr or "")
@@ -573,27 +607,56 @@ def dataset_metadata(owner, slug, title, subtitle, description):
     return json.dumps(md, indent=2) + "\n"
 
 
-def wait_ready(a, R, ref):
+TERMINAL_BAD_STATUS = ("failed", "deleted")      # what kaggle 2.2.4 prints (DatabundleVersionStatus, lower-cased)
+
+
+def wait_ready(a, R, ref, on_visible=None):
     """Poll until Kaggle has processed the dataset. -> 'ready' | 'error' | 'timeout' | 'dry'. It never exits:
-    the caller checks privacy first and only then acts on a processing error."""
+    the caller checks privacy first and only then acts on a processing error.
+    While Kaggle is still creating a dataset it answers 403 even to the owner. on_visible() is called once, the
+    first time Kaggle answers the status request at all while the dataset is not ready yet: from then on the
+    owner can read its metadata, so privacy is checked at that moment and not only at the end of the wait."""
     if R.dry:
         R.kaggle("datasets", "status", ref, note=f"polled every 15 s (up to {a.wait_min} min) until it prints: ready")
         return "dry"
-    t0, last = time.time(), None
-    while time.time() - t0 < a.wait_min * 60:
-        rc, out = R.kaggle("datasets", "status", ref)
-        last = out.strip().splitlines()[-1] if out.strip() else ""
-        say(f"  status: {last}")
-        if rc == 0 and last.lower() == "ready":
+    t0, last, polls = time.time(), None, 0
+    while True:
+        rc, out = R.kaggle("datasets", "status", ref, quiet=polls > 0)
+        polls += 1
+        prev, last = last, (out.strip().splitlines()[-1] if out.strip() else "")
+        if last != prev:                                                 # a 403 here means: not created yet
+            say(f"  status ({int(time.time() - t0)} s): {last[:160]}")
+        word = last.lower()
+        if rc == 0 and word == "ready":
             return "ready"
-        if rc == 0 and "error" in last.lower():
+        if rc == 0 and (word in TERMINAL_BAD_STATUS or "error" in word):
             return "error"
+        if rc == 0 and on_visible is not None:
+            on_visible()
+            on_visible = None
+        if time.time() - t0 >= a.wait_min * 60:
+            break
         time.sleep(getattr(a, "poll_seconds", 15))
     say(f"  still not ready after {a.wait_min} min (large uploads take a while); check later with: dataset-status --slug {ref.split('/')[1]}")
     return "timeout"
 
 
-def confirm_dataset_private(a, R, ref, tries=8):
+def anon_pending_evidence(ref):
+    """Positive evidence only that a stranger cannot see `ref`: its page without credentials answers 404 AND a
+    made-up slug of the same owner answers 404 too. -> (True | False, text). Any other answer (network error,
+    200, 3xx, 403, 429, 5xx) proves nothing and is False."""
+    control = anon_status(page_url("dataset", f"{ref.split('/')[0]}/{PREFIX}no-such-thing-{int(time.time()) % 100000}"))
+    page = anon_status(page_url("dataset", ref))
+    return (page == 404 and control == 404), f"HTTP {page} (a made-up slug gives {control})"
+
+
+def confirm_dataset_private(a, R, ref, tries=8, pending_ok=False):
+    """-> True when Kaggle reports the dataset private to the owner only. Anything else is a privacy alarm
+    (exit 3), with one exception: pending_ok=True accepts "Kaggle cannot show it to its owner yet" and
+    returns False, PROVIDED there is positive evidence that a stranger cannot see it either (the page without
+    credentials answers 404, exactly like a made-up slug). Kaggle answers 403 to the owner's own token for
+    a dataset it is still creating (seen 2026-10-04: 15 minutes for a 228 MB upload, during which the owner's
+    list did not show it and the anonymous page was 404). PUBLIC / SHARED always alarm."""
     state, detail = "unknown", ""
     for i in range(tries):
         state, detail = dataset_privacy(a, R, ref)
@@ -601,10 +664,17 @@ def confirm_dataset_private(a, R, ref, tries=8):
             break
         time.sleep(getattr(a, "retry_seconds", 10))
     if state == "dry":
-        return
+        return None
     if state == "private":
         say(f"PRIVATE confirmed by Kaggle: {ref} ({detail})")
-        return
+        return True
+    if pending_ok and state in ("unknown", "missing"):
+        hidden, seen = anon_pending_evidence(ref)
+        if hidden:
+            say(f"Kaggle has not finished creating {ref} (its answer to the owner: {state}). The page without credentials "
+                f"answers 404, the same as a made-up slug. Privacy is checked again as soon as Kaggle shows it to its owner.")
+            return False
+        detail = f"{detail}; anonymous view: {seen}"
     alarm_dataset(ref, f"{state}: {detail}")
 
 
@@ -704,41 +774,59 @@ def push_dataset(a, R, folder, slug, title, subtitle, description, dir_mode, kin
 
     say("" if not R.dry else "\nplan:")
     if version_notes is None:                                           # ---- create
-        rc, out = R.kaggle("datasets", "status", ref, note="must FAIL (404): the dataset must not exist yet")
+        rc, out = R.kaggle("datasets", "status", ref, note="must FAIL (403 / 404): the dataset must not exist yet")
         if rc == 0:
             if known.get("fingerprint") == fingerprint:
                 say(f"{ref} already exists and the registry says it holds this exact content: not uploading again.")
-                confirm_dataset_private(a, R, ref)
+                if confirm_dataset_private(a, R, ref):
+                    word = out.strip().splitlines()[-1].lower() if out.strip() else ""
+                    register(private_confirmed=now(), **({"status": "ready"} if word == "ready" else {}))
                 return ref
             die(f"{ref} already exists on Kaggle. To upload new content use: dataset-version --slug {slug} -m '...'")
-        R.write(meta_path, meta, "dataset-metadata.json")
-        if R.dry:
-            say(f"  would record {ref} in {registry_path(a)} with status 'uploading'  (before the upload, so that "
-                "verify-private knows it even if this process dies)")
-        register(kind=kind, folder=folder, status="uploading", upload_started=now(), pending_fingerprint=fingerprint,
-                 private_confirmed=None)
-        rc, out = R.kaggle("datasets", "create", "-p", folder, "-r", dir_mode, *ignore, tee=True,
-                           note="private: no -u/--public (this tool cannot pass it). " +
-                                ("Sub-directories are uploaded as zip archives and unpacked by Kaggle. " if dir_mode == "zip"
-                                 else "Sub-directories are not uploaded. ") + "Re-running resumes an interrupted upload.")
-        ok = "Your private Dataset is being created"
+        resume = (not R.dry and known.get("fingerprint") == fingerprint and known.get("status") in ("uploaded", "processing"))
+        if resume:
+            # Kaggle answers 403 both for "does not exist" and for "still being created". The registry says this exact
+            # content was uploaded completely: do not create it a second time, go back to waiting for it.
+            say(f"{ref}: the registry says this exact content was uploaded at {known.get('last_upload')} and Kaggle has not shown "
+                "it yet. Not uploading again; waiting for Kaggle to finish creating it. (If you deleted it on kaggle.com, "
+                f"remove its entry from {registry_path(a)} first.)")
+            rc, out, ok = None, "", ""
+        else:
+            R.write(meta_path, meta, "dataset-metadata.json")
+            if R.dry:
+                say(f"  would record {ref} in {registry_path(a)} with status 'uploading'  (before the upload, so that "
+                    "verify-private knows it even if this process dies)")
+            register(kind=kind, folder=folder, status="uploading", upload_started=now(), pending_fingerprint=fingerprint,
+                     private_confirmed=None)
+            rc, out = R.kaggle("datasets", "create", "-p", folder, "-r", dir_mode, *ignore, tee=True,
+                               note="private: no -u/--public (this tool cannot pass it). " +
+                                    ("Sub-directories are uploaded as zip archives and unpacked by Kaggle. " if dir_mode == "zip"
+                                     else "Sub-directories are not uploaded. ") + "Re-running resumes an interrupted upload.")
+            ok = "Your private Dataset is being created"
     else:                                                               # ---- new version
-        if not a.force and known.get("fingerprint") == fingerprint:
+        same = not a.force and known.get("fingerprint") == fingerprint
+        if same and (R.dry or known.get("status") not in ("uploaded", "processing")):
             say(f"{ref}: the registry says this exact content is already uploaded: nothing to do (override: --force).")
-            confirm_dataset_private(a, R, ref)
+            if confirm_dataset_private(a, R, ref):
+                register(private_confirmed=now())
             return ref
-        state, detail = dataset_privacy(a, R, ref)
-        if state in ("PUBLIC", "SHARED"):
-            alarm_dataset(ref, detail)
-        if state in ("missing", "unknown"):
-            die(f"cannot read {ref} ({state}: {detail}). If it does not exist yet, use dataset-create.")
-        R.write(meta_path, meta, "dataset-metadata.json")
-        register(kind=kind, folder=folder, status="uploading", upload_started=now(), pending_fingerprint=fingerprint,
-                 private_confirmed=None)
-        rc, out = R.kaggle("datasets", "version", "-p", folder, "-m", version_notes, "-r", dir_mode, *ignore,
-                           *(["-d"] if a.delete_old_versions else []), tee=True,
-                           note="a new version keeps the dataset's visibility; it was just confirmed private")
-        ok = "Dataset version is being created"
+        if same:                                                        # uploaded, but Kaggle had not finished: wait again
+            say(f"{ref}: the registry says this exact content was uploaded at {known.get('last_upload')} and Kaggle had not "
+                "finished processing it. Not uploading again; waiting for it.")
+            rc, out, ok = None, "", ""
+        else:
+            state, detail = dataset_privacy(a, R, ref)
+            if state in ("PUBLIC", "SHARED"):
+                alarm_dataset(ref, detail)
+            if state in ("missing", "unknown"):
+                die(f"cannot read {ref} ({state}: {detail}). If it does not exist yet, use dataset-create.")
+            R.write(meta_path, meta, "dataset-metadata.json")
+            register(kind=kind, folder=folder, status="uploading", upload_started=now(), pending_fingerprint=fingerprint,
+                     private_confirmed=None)
+            rc, out = R.kaggle("datasets", "version", "-p", folder, "-m", version_notes, "-r", dir_mode, *ignore,
+                               *(["-d"] if a.delete_old_versions else []), tee=True,
+                               note="a new version keeps the dataset's visibility; it was just confirmed private")
+            ok = "Dataset version is being created"
     if rc is not None:
         if re.search(r"public dataset", out, re.I):
             register(status="ALARM: the Kaggle CLI printed 'public Dataset'")
@@ -754,12 +842,21 @@ def push_dataset(a, R, folder, slug, title, subtitle, description, dir_mode, kin
         register(kind=kind, folder=folder, status="uploaded", fingerprint=fingerprint, files=len(files), bytes=total,
                  last_upload=now(), private_confirmed=None, version_notes=version_notes)
         say(f"registered in {registry_path(a)}")
-    # Privacy is confirmed twice: as soon as the upload has returned, and again when Kaggle has processed it.
-    # A processing error is reported only after both checks have run.
-    confirm_dataset_private(a, R, ref)
-    register(private_confirmed=now())
-    state = wait_ready(a, R, ref)
-    confirm_dataset_private(a, R, ref)
+    # Privacy is checked when the upload has returned, the first time Kaggle shows the dataset to its owner, and
+    # again when Kaggle has processed it. A processing error is reported only after these checks have run.
+    confirmed = confirm_dataset_private(a, R, ref, pending_ok=True)
+    if confirmed:
+        register(private_confirmed=now())
+
+    def on_visible():
+        confirm_dataset_private(a, R, ref)                               # strict: alarms unless private
+        register(private_confirmed=now())
+    state = wait_ready(a, R, ref, on_visible=None if confirmed else on_visible)
+    if confirm_dataset_private(a, R, ref, pending_ok=(state == "timeout")) is False:
+        register(status="processing")
+        die(f"Kaggle is still creating {ref} after {a.wait_min} min. Its page without credentials answers 404 like a made-up "
+            f"slug, but its privacy is NOT confirmed yet. Upload nothing else and push no notebook until it is: run the same "
+            f"command again (it waits, it does not upload twice), or: python3 kaggle_ft/kaggle_push.py verify-private")
     register(private_confirmed=now(), status={"ready": "ready", "error": "processing_error"}.get(state, "processing"))
     if state == "error":
         die(f"Kaggle reports an error while processing {ref} (it is private: that was checked first). "
@@ -1309,6 +1406,12 @@ def cmd_check(a, R):
     seen = m.group(1) if m else None
     if rc != 0 or seen in (None, "None"):
         die("the Kaggle CLI could not log in with these credentials")
+    if c.get("kind") == "access_token" and c["username"] is None and USER_RE.match(seen or ""):
+        os.makedirs(os.path.dirname(_account_cache()), exist_ok=True)
+        with open(_account_cache(), "w") as fh:
+            json.dump({"username": seen, "source": "kaggle config view (access_token)"}, fh)
+        c["username"] = seen
+        say(f"  cached the account name for later commands: {seen}")
     if seen != c["username"]:
         die(f"the Kaggle CLI logs in as {seen}, but {c['path']} says {c['username']}: remove the other credential "
             "(~/.kaggle/access_token, `kaggle auth` login or KAGGLE_* environment variables) or fix kaggle.json")
@@ -1367,7 +1470,7 @@ def cmd_verify_private(a, R):
                 f"  made-up slug is not ({control_url}) counts as VISIBLE:")
         else:
             control = anon_status(control_url)
-    rows, bad = [], []
+    rows, bad, pending = [], [], []
     for kind in ("dataset", "kernel"):
         for ref in sorted(targets[kind]):
             internet_bad = False
@@ -1387,7 +1490,20 @@ def cmd_verify_private(a, R):
                 continue
             probe, pdetail = ("skipped", "") if a.no_anon_probe else anon_probe(kind, ref, control)
             ok = state == "private" and probe != "VISIBLE" and not internet_bad
-            if state == "missing" and ref not in listed[kind] and probe != "VISIBLE":
+            e = reg["datasets"].get(ref, {}) if kind == "dataset" else {}
+            awaited = (kind == "dataset" and e.get("status") in ("uploading", "uploaded", "processing")
+                       and not e.get("private_confirmed") and ref not in listed[kind])
+            if awaited and state in ("unknown", "missing"):
+                # An upload of this tool that Kaggle has never shown to its owner. It is "still being created" only
+                # on positive evidence (the page without credentials is 404 like a made-up slug); it is never "gone"
+                # and never counted as private.
+                hidden, seen = (False, "anonymous probe skipped") if a.no_anon_probe else anon_pending_evidence(ref)
+                if hidden or (a.no_anon_probe and state == "missing"):
+                    state = "PENDING"
+                    pending.append(ref)
+                    rows.append((kind, ref, state, "Kaggle has not created it yet; NOT confirmed", probe, pdetail, False))
+                    continue
+            elif state == "missing" and ref not in listed[kind] and probe != "VISIBLE":
                 state, ok = "gone", True                                 # Kaggle says it does not exist, and it is not listed
             rows.append((kind, ref, state, detail, probe, pdetail, ok))
             if not ok:
@@ -1401,7 +1517,7 @@ def cmd_verify_private(a, R):
         return
     say("")
     for kind, ref, state, detail, probe, pdetail, ok in rows:
-        say(f"  {'OK  ' if ok else 'FAIL'}  {kind:<8} {ref:<48} {state:<8} {detail:<42} anonymous view: {probe} {pdetail}")
+        say(f"  {'OK  ' if ok else ('WAIT' if state == 'PENDING' else 'FAIL')}  {kind:<8} {ref:<48} {state:<8} {detail:<42} anonymous view: {probe} {pdetail}")
     stamp = now()
     for kind, ref, state, detail, probe, pdetail, ok in rows:
         e = reg["datasets" if kind == "dataset" else "kernels"].get(ref)
@@ -1418,7 +1534,14 @@ def cmd_verify_private(a, R):
                          " verify-private again. If the entry is an upload that failed before Kaggle created anything, and",
                          " kaggle.com shows no such dataset, remove it from registry.json by hand.)",
                          "(internet ON: stop the session on kaggle.com, switch Internet off in the editor's Settings, verify again.)"])
-    say(f"\nall {len(rows)} private" + ("" if a.no_anon_probe else " and not visible without credentials")
+    if pending:
+        die("Kaggle is still creating: " + ", ".join(pending) + ". Their privacy is NOT confirmed yet (this is not an alarm: "
+            "nothing is visible, and Kaggle reported nothing as public). Upload nothing else and push no notebook that uses them; "
+            "run verify-private again in a few minutes. (If an upload failed before Kaggle created anything and kaggle.com "
+            "shows no such dataset, remove its entry from registry.json by hand.)")
+    n_gone = sum(1 for r in rows if r[2] == "gone")
+    say(f"\nall {len(rows) - n_gone} private" + ("" if a.no_anon_probe else " and not visible without credentials")
+        + (f" ({n_gone} more no longer exist on Kaggle)" if n_gone else "")
         + "; no notebook has internet on that was not pushed that way")
 
 
@@ -1458,7 +1581,7 @@ def main(argv=None):
         p.add_argument("--title", default=None, help="dataset title, 6-50 characters; the slug if omitted")
         p.add_argument("--subtitle", default="Private working data, owner only", help="20-80 characters")
         p.add_argument("--description", default=None)
-        p.add_argument("--wait-min", type=float, default=20, help="minutes to wait for Kaggle to finish processing")
+        p.add_argument("--wait-min", type=float, default=45, help="minutes to wait for Kaggle to finish processing")
 
     p = add("dataset-create", cmd_dataset_create, "Create a NEW PRIVATE dataset from a directory (default: the data bundle). "
                                                   "Sub-directories are uploaded as zip archives. Verified private afterwards.")
@@ -1474,7 +1597,7 @@ def main(argv=None):
     p.add_argument("--weights-dir", default=WEIGHTS_DIR)
     p.add_argument("--slug", default=SLUGS["weights"])
     p.add_argument("--verify-weights-hash", action="store_true", help="also sha256 the two large weight files here (reads 8.6 GB)")
-    p.add_argument("--wait-min", type=float, default=60)
+    p.add_argument("--wait-min", type=float, default=180)
     p.set_defaults(force=False, delete_old_versions=False)
 
     p = add("kernel-push", cmd_kernel_push, "Push a Python script as a PRIVATE GPU notebook and start it. Verified private afterwards.")

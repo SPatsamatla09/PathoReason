@@ -79,6 +79,11 @@ last section.
 
    Never paste the key into a chat, a script or a notebook. `kaggle_push.py` reads the username from this
    file and never prints the key.
+
+   The newer settings page gives an *API token* (a single `KGAT_...` string) and no file. That works too:
+   copy it and run `mkdir -p ~/.kaggle && pbpaste > ~/.kaggle/access_token && chmod 600 ~/.kaggle/access_token`.
+   `kaggle_push.py` accepts either file; with a token it asks Kaggle for the username once and keeps only the
+   name in `~/mhist_local/kaggle_stage/account.json`. (This is what the 2026-10-04 run used.)
 2. **Verify your phone number** on the same settings page. Kaggle requires it before a notebook can use a
    GPU.
 3. **Check:**
@@ -335,7 +340,8 @@ python3 kaggle_ft/kaggle_push.py verify-private
 ```
 
 Run it after the last push, and again whenever you have touched anything on kaggle.com. It also fails if a
-notebook has internet on that was not pushed that way.
+notebook has internet on that was not pushed that way. Exit codes: 0 all private; 1 an upload that Kaggle is
+still creating (`PENDING`: not confirmed, run it again in a few minutes); 3 the privacy alarm.
 
 ## Privacy: what is guaranteed, and how it is checked
 
@@ -435,6 +441,19 @@ were seen to answer 200 and made-up ones 404 on 2026-10-04, a private page has n
   the upload for this protocol. Its consent flow could not be read (the page needs a browser).
   [MedGemma get started](https://developers.google.com/health-ai-developer-foundations/medgemma/get-started),
   [KerasHub presets](https://keras.io/keras_hub/presets/).
+- **A new dataset is invisible to its owner while Kaggle creates it** (seen 2026-10-04). After
+  `datasets create` returned "Your private Dataset is being created", `datasets status`, `metadata` and
+  `files` answered **403 to the owner's own token** for 15 minutes (228 MB bundle), the dataset was not in
+  `datasets list --mine`, and its page without credentials was 404. A made-up slug gives the owner the same
+  403. Then status became `ready` and the metadata said `isPrivate: true`. A 45 MB dataset was ready at
+  once. `kaggle_push.py` therefore waits: it treats "the owner cannot read it yet" as *pending* only when
+  the page without credentials answers 404 **and** a made-up slug answers 404 (any other answer is the full
+  alarm), checks privacy the moment Kaggle first answers, and never records a pending dataset as confirmed.
+  If the wait runs out the command ends with exit code 1 and "privacy is NOT confirmed"; run the same
+  command again (it waits, it does not upload twice) or `verify-private`, which reports such a dataset as
+  `PENDING` (exit code 1, not the alarm).
+- **Status words.** `datasets status` prints `ready`, `failed`, `deleted`, or a processing state
+  (`not_yet_persisted`, `blobs_received`, ...). `failed` and `deleted` end the wait as a processing error.
 - **CLI version.** Tested against kaggle 2.2.4 (the newest release on PyPI). The documentation on `main`
   is ahead of it (`--no-run`, warnings for retired accelerators).
 - **How Kaggle starts a script notebook** (plain `python script.py`, or inside a notebook kernel) is not

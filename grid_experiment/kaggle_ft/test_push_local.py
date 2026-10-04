@@ -79,6 +79,31 @@ for _v in ("KAGGLE_USERNAME", "KAGGLE_KEY", "KAGGLE_API_TOKEN", "KAGGLE_PUSH_STA
 import build_bundle as bb      # noqa: E402
 import kaggle_push as kp       # noqa: E402
 
+
+class Anon:
+    """Stand-in for kp.anon_status, installed for the whole module: no test can reach the network.
+    forbid=True (the default): any call is a test error. Otherwise it answers `control` for the made-up slug
+    and `page` for everything else (a list is consumed one answer per call; the last one repeats)."""
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.calls, self.page, self.control, self.forbid = [], None, 404, True
+
+    def __call__(self, url):
+        self.calls.append(url)
+        if self.forbid:
+            raise AssertionError("the anonymous probe would have touched the network: " + url)
+        if "no-such-thing" in url:
+            return self.control
+        if isinstance(self.page, list):
+            return self.page.pop(0) if len(self.page) > 1 else self.page[0]
+        return self.page
+
+
+ANON = Anon()
+kp.anon_status = ANON
+
 STUB_SOURCE = r'''
 import json, os, sys
 path = os.environ["FAKE_KAGGLE_SERVER"]
@@ -105,7 +130,13 @@ def uploaded(folder, mode):
     return names
 
 cmd = tuple(argv[:2])
-if cmd == ("config", "view"):
+pend = st.setdefault("pending", {})
+if cmd in (("datasets", "status"), ("datasets", "metadata")) and pend.get(argv[2], 0) != 0:
+    if pend[argv[2]] > 0:
+        pend[argv[2]] -= 1
+    rc = 1
+    out.append("403 Client Error: Forbidden for url: https://api.kaggle.com/v1/datasets.DatasetApiService/" + cmd[1] + " " + argv[2])
+elif cmd == ("config", "view"):
     out.append("Configuration values from " + os.environ.get("KAGGLE_CONFIG_DIR", "?") + "\n- username: " + owner + "\n- path: None")
 elif argv[:1] == ["quota"]:
     out.append("resource  used   remaining  total\nGPU       1.00h  29.00h     30.00h")
@@ -133,6 +164,10 @@ elif cmd in (("datasets", "create"), ("datasets", "version")):
             "collaborators": old.get("collaborators", ["someone-else"] if knobs.get("create_shared") else []),
             "status": "error" if knobs.get("processing_error") else "ready",
             "files": uploaded(folder, opt("-r", "skip")), "versions": old.get("versions", 0) + 1}
+        if knobs.get("pending_calls"):
+            pend[ref] = knobs["pending_calls"]
+        if knobs.get("status_text"):
+            st["datasets"][ref]["status"] = knobs["status_text"]
         if knobs.get("client_fails_after_create"):
             rc = 1
             out.append("Dataset creation error: connection reset by peer")
@@ -158,7 +193,7 @@ elif cmd == ("datasets", "metadata"):
         out.append("Downloaded metadata to " + os.path.join(dest, "dataset-metadata.json"))
 elif cmd == ("datasets", "list"):
     out.append("ref,title,size,lastUpdated,downloadCount,voteCount,usabilityRating")
-    out += [r + ",t,1,2026-10-04,0,0,0.1" for r in sorted(st["datasets"]) if r not in knobs.get("unlisted", [])]
+    out += [r + ",t,1,2026-10-04,0,0,0.1" for r in sorted(st["datasets"]) if r not in knobs.get("unlisted", []) and not st.get("pending", {}).get(r)]
 elif cmd == ("kernels", "push"):
     folder = opt("-p")
     meta = json.load(open(os.path.join(folder, "kernel-metadata.json")))
@@ -240,6 +275,8 @@ def run(*argv, state_dir=None, dry=False):
     buf = io.StringIO()
     full = [argv[0], *argv[1:], "--kaggle-bin", STUB, "--state-dir", state_dir or os.path.join(TMP, "state"),
             "--retry-seconds", "0", "--poll-seconds", "0"] + (["--dry-run"] if dry else [])
+    if argv[0] in ("dataset-create", "dataset-version", "weights") and "--wait-min" not in argv:
+        full += ["--wait-min", "0.02"]                  # a stand-in dataset that never gets ready must not spin for 45 min
     code = 0
     with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
         try:
@@ -837,6 +874,204 @@ class Secrets(unittest.TestCase):
             self.assertIn("chmod 600", out)
         finally:
             os.chmod(os.path.join(CFG, "kaggle.json"), 0o600)
+
+
+class PendingDataset(unittest.TestCase):
+    """Kaggle answers 403 to the OWNER while it is still creating a dataset (seen 2026-10-04: 15 minutes).
+    That state may be waited out only on positive evidence that nobody else sees it; it is never 'private'."""
+    ref = f"{OWNER}/mhist-priv-jobs"
+
+    def setUp(self):
+        ANON.reset()
+
+    def tearDown(self):
+        ANON.reset()
+
+    def create(self, name, *extra, page=404, control=404, cmd="dataset-create", keep=False, **knobs):
+        sd = os.path.join(TMP, "state_" + name) if keep else fresh_state_dir(name)
+        if not keep:
+            server(**knobs)
+        ANON.calls, ANON.forbid, ANON.page, ANON.control = [], False, page, control
+        code, out = run(cmd, "--kind", "jobs", "--dir", jobs_dir(), *extra, state_dir=sd)
+        return sd, code, out, registry(sd)["datasets"].get(self.ref)
+
+    def test_pending_then_ready_private(self):
+        sd, code, out, entry = self.create("pend_ready", "--wait-min", "0.2", pending_calls=11)
+        self.assertEqual(code, 0, out[-900:])
+        self.assertIn("Kaggle has not finished creating", out)
+        self.assertNotIn("PRIVACY CHECK FAILED", out)
+        self.assertEqual(out.count("PRIVATE confirmed by Kaggle"), 1)                  # only once it is ready
+        self.assertLess(out.index("Kaggle has not finished creating"), out.index("PRIVATE confirmed by Kaggle"))
+        self.assertEqual((entry["status"], bool(entry["private_confirmed"])), ("ready", True))
+        self.assertEqual(len(ANON.calls), 2)                                           # made-up slug + the page, once
+        self.assertEqual(out.count("  status ("), 2, out)                              # the 403 once, then ready
+        self.assertEqual(out.count("datasets status"), 2, out)                         # pre-create check + first poll only
+        self.assertEqual(len(calls("datasets", "create")), 1)
+        ANON.forbid = True
+        self.assertEqual(run("verify-private", "--no-anon-probe", state_dir=sd)[0], 0)
+
+    def test_pending_then_ready_public_or_shared(self):
+        for knob in ("create_public", "create_shared"):
+            sd, code, out, entry = self.create("pend_" + knob, "--wait-min", "0.2", pending_calls=11, **{knob: True})
+            self.assertEqual(code, kp.EXIT_PRIVACY, out[-900:])
+            self.assertIn("PRIVACY CHECK FAILED - ACT NOW", out)
+            self.assertIsNone(entry["private_confirmed"])
+
+    def test_public_is_caught_as_soon_as_the_owner_can_see_it(self):
+        # 403 for a while, then Kaggle shows the dataset as "running" (not ready) and it is PUBLIC:
+        # the alarm must come at that moment, not when the wait has run out
+        sd, code, out, entry = self.create("pend_public_running", "--wait-min", "0.05", pending_calls=9, create_public=True,
+                                           status_text="running")
+        self.assertEqual(code, kp.EXIT_PRIVACY, out[-900:])
+        self.assertIn("PRIVACY CHECK FAILED - ACT NOW", out)
+        self.assertIsNone(entry["private_confirmed"])
+        self.assertLessEqual(len(calls("datasets", "status")), 4)
+
+    def test_private_is_recorded_as_soon_as_the_owner_can_see_it(self):
+        sd, code, out, entry = self.create("pend_private_running", "--wait-min", "0.02", pending_calls=9, status_text="running")
+        self.assertEqual(code, 0, out[-900:])
+        self.assertEqual((entry["status"], bool(entry["private_confirmed"])), ("processing", True))
+        self.assertEqual(out.count("PRIVATE confirmed by Kaggle"), 2)                  # when first visible, and at the end
+
+    def test_pending_until_timeout_is_not_confirmed(self):
+        for wait in ("0", "0.01"):
+            sd, code, out, entry = self.create("pend_timeout", "--wait-min", wait, pending_calls=-1)
+            self.assertEqual(code, kp.EXIT_USAGE, out[-900:])
+            self.assertIn("privacy is NOT confirmed", out)
+            for absent in ("PRIVATE confirmed by Kaggle", "PRIVACY CHECK FAILED", "In a notebook that attaches it", "not visible to anyone"):
+                self.assertNotIn(absent, out)
+            self.assertEqual((entry["status"], entry["private_confirmed"]), ("processing", None))
+            self.assertEqual(len(ANON.calls), 4)                                       # evidence asked for at both checks
+
+    def test_only_404_like_a_made_up_slug_counts_as_hidden(self):
+        # page, made-up slug. Everything except 404 / 404 proves nothing and must be the full alarm.
+        for page, control in ((200, 404), (None, None), (None, 404), (200, 200), (503, 503), (429, 429), (403, 403),
+                              (302, 404), (301, 404), (404, 200), (404, None), (404, 403)):
+            sd, code, out, entry = self.create("pend_evidence", "--wait-min", "0", pending_calls=-1, page=page, control=control)
+            self.assertEqual(code, kp.EXIT_PRIVACY, (page, control, out[-600:]))
+            self.assertIn("PRIVACY CHECK FAILED - ACT NOW", out)
+            self.assertIn(f"anonymous view: HTTP {page} (a made-up slug gives {control})", out)
+            self.assertNotIn("Kaggle has not finished creating", out)
+            self.assertIsNone(entry["private_confirmed"])
+            self.assertEqual(len(calls("datasets", "status")), 1, (page, control))     # the pre-create check: no polling
+
+    def test_hidden_at_upload_but_served_when_the_wait_ends(self):
+        sd, code, out, entry = self.create("pend_timeout_visible", "--wait-min", "0", pending_calls=-1, page=[404, 200])
+        self.assertEqual(code, kp.EXIT_PRIVACY, out[-900:])
+        self.assertIn("anonymous view: HTTP 200", out)
+        self.assertIsNone(entry["private_confirmed"])
+
+    def test_ready_but_unreadable_metadata_is_strict(self):
+        for name, knobs in (("ready_unknown", {}), ("error_unknown", {"processing_error": True})):
+            sd, code, out, entry = self.create(name, metadata_unknown=[self.ref], **knobs)
+            self.assertEqual(code, kp.EXIT_PRIVACY, out[-900:])
+            self.assertIn("Kaggle has not finished creating", out)                     # the first check waited
+            self.assertIn("PRIVACY CHECK FAILED - ACT NOW", out)                       # after 'ready' nothing is waived
+            self.assertIsNone(entry["private_confirmed"])
+            self.assertEqual(len(ANON.calls), 2)                                       # no evidence asked for at the strict check
+
+    def test_failed_processing_is_recognised(self):
+        for word in ("failed", "deleted"):
+            sd, code, out, entry = self.create("status_" + word, "--wait-min", "0.05", status_text=word)
+            self.assertEqual(code, kp.EXIT_USAGE, out[-900:])
+            self.assertIn("error while processing", out)
+            self.assertNotIn("In a notebook that attaches it", out)
+            self.assertEqual(entry["status"], "processing_error")
+            self.assertTrue(entry["private_confirmed"])                                # it IS private; that was checked first
+            self.assertLessEqual(len(calls("datasets", "status")), 2)
+
+    def test_rerun_while_pending_does_not_upload_twice(self):
+        sd, code, out, entry = self.create("pend_rerun", "--wait-min", "0", pending_calls=-1)
+        self.assertEqual(code, kp.EXIT_USAGE)
+        sd, code, out, entry = self.create("pend_rerun", "--wait-min", "0", keep=True)       # still pending
+        self.assertEqual(code, kp.EXIT_USAGE, out[-900:])
+        self.assertIn("Not uploading again", out)
+        self.assertEqual(len(calls("datasets", "create")), 1)
+        self.assertEqual((entry["status"], entry["private_confirmed"]), ("processing", None))
+        set_state(lambda st: st["pending"].clear())                                          # Kaggle has finished
+        sd, code, out, entry = self.create("pend_rerun", keep=True)
+        self.assertEqual(code, 0, out[-900:])
+        self.assertEqual(len(calls("datasets", "create")), 1)
+        self.assertEqual((entry["status"], bool(entry["private_confirmed"])), ("ready", True))
+
+    def test_rerun_of_a_version_while_pending_does_not_upload_twice(self):
+        sd, code, out, entry = self.create("ver_rerun")
+        self.assertEqual(code, 0, out[-600:])
+        set_state(lambda st: st["knobs"].update(pending_calls=-1))
+        v2 = jobs_dir("jobs_v2", {"x.jsonl": json.dumps(job(DEV[9])) + "\n"})
+        args = ("dataset-version", "--kind", "jobs", "--dir", v2, "-m", "v2", "--wait-min", "0")
+        ANON.forbid, ANON.page, ANON.control = False, 404, 404
+        code, out = run(*args, state_dir=sd)
+        self.assertEqual(code, kp.EXIT_USAGE, out[-900:])
+        self.assertIsNone(registry(sd)["datasets"][self.ref]["private_confirmed"])
+        code, out = run(*args, state_dir=sd)
+        self.assertEqual(code, kp.EXIT_USAGE, out[-900:])
+        self.assertNotIn("PRIVACY CHECK FAILED", out)
+        self.assertEqual(len(calls("datasets", "version")), 1)
+        set_state(lambda st: st["pending"].clear())
+        code, out = run(*args, state_dir=sd)
+        self.assertEqual(code, 0, out[-900:])
+        self.assertEqual(len(calls("datasets", "version")), 1)
+        e = registry(sd)["datasets"][self.ref]
+        self.assertEqual((e["status"], bool(e["private_confirmed"])), ("ready", True))
+
+    def test_verify_private_while_pending(self):
+        sd, code, out, entry = self.create("pend_then_verify", "--wait-min", "0", pending_calls=-1)
+        self.assertEqual(code, kp.EXIT_USAGE)
+        self.assertIn("kaggle_push.py verify-private", out)
+        # with positive evidence: "still being created", exit 1, no alarm, never recorded as confirmed
+        ANON.reset()
+        ANON.forbid, ANON.page, ANON.control = False, 404, 404
+        code, out = run("verify-private", state_dir=sd)
+        self.assertEqual(code, kp.EXIT_USAGE, out[-900:])
+        self.assertIn("PENDING", out)
+        self.assertIn("NOT confirmed yet", out)
+        self.assertNotIn("PRIVACY CHECK FAILED", out)
+        self.assertNotIn("all 1 private", out)
+        self.assertIsNone(registry(sd)["datasets"][self.ref]["private_confirmed"])
+        # without that evidence it stays the full alarm: served page, rate limit, or no probe at all
+        for page, control in ((200, 404), (429, 429), (404, 200)):
+            ANON.page, ANON.control = page, control
+            code, out = run("verify-private", state_dir=sd)
+            self.assertEqual(code, kp.EXIT_PRIVACY, (page, control, out[-600:]))
+        ANON.forbid = True
+        code, out = run("verify-private", "--no-anon-probe", state_dir=sd)
+        self.assertEqual(code, kp.EXIT_PRIVACY, out[-600:])
+        self.assertIsNone(registry(sd)["datasets"][self.ref]["private_confirmed"])
+        # Kaggle has finished: private
+        set_state(lambda st: st["pending"].clear())
+        code, out = run("verify-private", "--no-anon-probe", state_dir=sd)
+        self.assertEqual(code, 0, out[-600:])
+        self.assertTrue(registry(sd)["datasets"][self.ref]["private_confirmed"])
+
+    def test_verify_private_never_calls_an_awaited_upload_gone(self):
+        # Kaggle answers 404 ("missing") instead of 403 for an upload it never showed: not "gone", not a pass
+        sd, code, out, entry = self.create("pend_missing", "--wait-min", "0", pending_calls=-1)
+        self.assertEqual(code, kp.EXIT_USAGE)
+        set_state(lambda st: (st["pending"].clear(), st["datasets"].clear()))
+        ANON.forbid = True
+        code, out = run("verify-private", "--no-anon-probe", state_dir=sd)
+        self.assertEqual(code, kp.EXIT_USAGE, out[-900:])
+        self.assertIn("PENDING", out)
+        self.assertNotIn("all 1 private", out)
+        self.assertIsNone(registry(sd)["datasets"][self.ref]["private_confirmed"])
+
+    def test_anon_probe_table(self):
+        ANON.forbid = False
+        got = {}
+        for page, control in ((404, 404), (200, 404), (200, 200), (None, 404)):
+            ANON.page = page
+            got[(page, control)] = kp.anon_probe("dataset", self.ref, control)[0]
+        self.assertEqual(got, {(404, 404): "hidden", (200, 404): "VISIBLE", (200, 200): "inconclusive", (None, 404): "inconclusive"})
+        for page, control, want in ((404, 404, True), (404, 200, False), (403, 403, False), (None, 404, False), (200, 404, False)):
+            ANON.page, ANON.control = page, control
+            self.assertIs(kp.anon_pending_evidence(self.ref)[0], want, (page, control))
+
+    def test_dry_run_still_shows_the_final_privacy_check(self):
+        code, out = run("dataset-create", "--kind", "jobs", "--dir", jobs_dir(), dry=True)
+        self.assertEqual(code, 0, out[-600:])
+        self.assertGreaterEqual(out.count("datasets metadata"), 2)                     # after the upload, and when processed
+        self.assertEqual(ANON.calls, [])
 
 
 if __name__ == "__main__":
