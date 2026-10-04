@@ -452,6 +452,17 @@ were seen to answer 200 and made-up ones 404 on 2026-10-04, a private page has n
   If the wait runs out the command ends with exit code 1 and "privacy is NOT confirmed"; run the same
   command again (it waits, it does not upload twice) or `verify-private`, which reports such a dataset as
   `PENDING` (exit code 1, not the alarm).
+- **Where inputs are mounted** (seen 2026-10-04). Attached datasets are at
+  `/kaggle/input/datasets/<owner>/<slug>/`, not `/kaggle/input/<slug>/`. The header that `kernel-push`
+  inserts therefore resolves every `/kaggle/input/<slug>[/...]` path at run time to the one attached
+  directory of that name (at most 4 levels down; the flat layout still works) and stops the script if there
+  is none or more than one. The image has Python 3.13, torch 2.11.0+cu128 and transformers 5.16.1; the three
+  wheels install offline without changes.
+- **Measured on the T4 (smoke run, 32 tiles):** 5.8 s per training example at micro-batch 2 (4-bit nf4,
+  float32 compute, gradient checkpointing), 10.0 GB of GPU memory, 1.9 s per validation tile, 2.2 s per tile
+  to cache image features. The protocol run (6,376 examples, five validation passes, 1,875 feature
+  extractions) is therefore about 12.5 hours: one session pauses at 11 hours and a second one finishes it.
+  `kaggle_ft/run_train_driver.sh` waits for the run and starts the next session by itself.
 - **Status words.** `datasets status` prints `ready`, `failed`, `deleted`, or a processing state
   (`not_yet_persisted`, `blobs_received`, ...). `failed` and `deleted` end the wait as a processing error.
 - **CLI version.** Tested against kaggle 2.2.4 (the newest release on PyPI). The documentation on `main`

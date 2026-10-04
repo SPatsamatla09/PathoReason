@@ -38,6 +38,7 @@ import io
 import json
 import os
 import shutil
+import subprocess
 import stat
 import sys
 import tempfile
@@ -396,7 +397,7 @@ class DryRuns(unittest.TestCase):
         self.assertEqual(state()["calls"], [], "a dry run started the kaggle binary")
         self.assertFalse(os.path.exists(sd), "a dry run wrote to the state directory")
         code, out = run("kernel-push", "--script", script, "--slug", "mhist-priv-probe", "--args=--verify-only", state_dir=sd, dry=True)
-        self.assertIn("_kp_sys.argv = ['train_lora.py'] + ['--verify-only']", out)       # argv[0] is replaced too
+        self.assertIn("_kp_sys.argv = ['train_lora.py'] + [_kp_real(_kp_a) for _kp_a in ['--verify-only']]", out)       # argv[0] is replaced too
         self.assertIn('"enable_internet": "false"', out)
         self.assertIn('"is_private": "true"', out)
 
@@ -696,7 +697,7 @@ class NotebookPrivacy(unittest.TestCase):
         self.assertTrue(entry["private_confirmed"])
         k = state()["kernels"][f"{OWNER}/mhist-priv-probe"]
         self.assertEqual((k["is_private"], k["enable_internet"]), (True, False))
-        self.assertIn("_kp_sys.argv = ['probe_script.py'] + ['--verify-only']", k["code"])
+        self.assertIn("_kp_sys.argv = ['probe_script.py'] + [_kp_real(_kp_a) for _kp_a in ['--verify-only']]", k["code"])
         self.assertEqual(run("verify-private", "--no-anon-probe", state_dir=sd)[0], 0)
 
     def test_reported_public_after_push(self):
@@ -1072,6 +1073,53 @@ class PendingDataset(unittest.TestCase):
         self.assertEqual(code, 0, out[-600:])
         self.assertGreaterEqual(out.count("datasets metadata"), 2)                     # after the upload, and when processed
         self.assertEqual(ANON.calls, [])
+
+
+class MountLayout(unittest.TestCase):
+    """Kaggle has mounted attached datasets at /kaggle/input/<slug> and, on 2026-10-04, at
+    /kaggle/input/datasets/<owner>/<slug>. The injected header finds the directory at run time."""
+
+    def header_run(self, layout, argv, env=None):
+        base = os.path.join(TMP, "mount_" + str(abs(hash(tuple(layout))) % 10 ** 8), "kaggle", "input")
+        shutil.rmtree(os.path.dirname(os.path.dirname(base)), ignore_errors=True)
+        for sub in layout:
+            os.makedirs(os.path.join(base, sub))
+        saved, kp.KAGGLE_INPUT = kp.KAGGLE_INPUT, base
+        try:
+            out, _ = kp.staged_script('import os, sys\nprint("ARGV=" + "|".join(sys.argv[1:]))\nprint("ENV=" + os.environ.get("X_DIR", ""))\n',
+                                      "t.py", {k: v.replace("{B}", base) for k, v in (env or {}).items()}, [x.replace("{B}", base) for x in argv])
+        finally:
+            kp.KAGGLE_INPUT = saved
+        f = os.path.join(os.path.dirname(base), "t.py")
+        with open(f, "w") as fh:
+            fh.write(out)
+        p = subprocess.run([sys.executable, f], capture_output=True, text=True,
+                           env={k: v for k, v in os.environ.items() if k != "KAGGLE_PUSH_STARTED"})
+        return p.returncode, p.stdout.replace(base, "{B}"), p.stderr.replace(base, "{B}")
+
+    def test_nested_and_flat_layouts(self):
+        argv = ["--model-dir", "{B}/mhist-priv-medgemma15-4b", "--jobs", "{B}/mhist-priv-jobs/a.jsonl",
+                "--adapter-dir", "{B}/mhist-priv-smoke-train/smoke/best_adapter", "--n", "3"]
+        code, out, err = self.header_run(["datasets/me/mhist-priv-medgemma15-4b", "datasets/me/mhist-priv-jobs",
+                                          "notebooks/me/mhist-priv-smoke-train/smoke/best_adapter"], argv, {"X_DIR": "{B}/mhist-priv-jobs"})
+        self.assertEqual(code, 0, err)
+        self.assertIn("ARGV=--model-dir|{B}/datasets/me/mhist-priv-medgemma15-4b|--jobs|{B}/datasets/me/mhist-priv-jobs/a.jsonl|"
+                      "--adapter-dir|{B}/notebooks/me/mhist-priv-smoke-train/smoke/best_adapter|--n|3", out)
+        self.assertIn("ENV={B}/datasets/me/mhist-priv-jobs", out)
+        code, out, err = self.header_run(["mhist-priv-medgemma15-4b", "mhist-priv-jobs", "mhist-priv-smoke-train/smoke/best_adapter"], argv)
+        self.assertEqual(code, 0, err)
+        self.assertIn("ARGV=--model-dir|{B}/mhist-priv-medgemma15-4b|--jobs|{B}/mhist-priv-jobs/a.jsonl|"
+                      "--adapter-dir|{B}/mhist-priv-smoke-train/smoke/best_adapter|--n|3", out)
+
+    def test_missing_or_ambiguous_input_stops_the_script(self):
+        argv = ["--model-dir", "{B}/mhist-priv-medgemma15-4b"]
+        code, out, err = self.header_run(["datasets/me/mhist-priv-bundle"], argv)
+        self.assertNotEqual(code, 0)
+        self.assertIn("0 attached inputs are named 'mhist-priv-medgemma15-4b'", err)
+        code, out, err = self.header_run(["datasets/me/mhist-priv-medgemma15-4b", "datasets/other/mhist-priv-medgemma15-4b"], argv)
+        self.assertNotEqual(code, 0)
+        self.assertIn("2 attached inputs are named", err)
+        self.assertNotIn("ARGV=", out)
 
 
 if __name__ == "__main__":

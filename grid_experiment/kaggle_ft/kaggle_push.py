@@ -1051,28 +1051,54 @@ def staged_script(src_text, src_name, env, argv, pip=None):
     lines = src_text.splitlines(keepends=True)
     if after == 0 and lines and lines[0].startswith("#!"):
         after = 1
+    # Where Kaggle mounts an attached dataset has changed over time: /kaggle/input/<slug>, and (seen 2026-10-04)
+    # /kaggle/input/datasets/<owner>/<slug>. Paths are written as /kaggle/input/<slug>[/...] and _kp_real() maps
+    # each one, on Kaggle, to the single attached directory of that name (at most 4 levels down).
     inj = ["\n", "# ---- injected by kaggle_ft/kaggle_push.py kernel-push; not part of the source file ----\n",
            f"# source: {src_name}  sha256 {sha256_text(src_text)}\n",
            "import os as _kp_os, sys as _kp_sys\n",
            "_kp_top = not _kp_os.environ.get('KAGGLE_PUSH_STARTED')   # False in processes this script starts itself\n",
-           "_kp_os.environ['KAGGLE_PUSH_STARTED'] = '1'\n"]
+           "_kp_os.environ['KAGGLE_PUSH_STARTED'] = '1'\n",
+           "\n\n",
+           "def _kp_real(p, _base=" + repr(KAGGLE_INPUT) + "):\n",
+           "    i = p.find(_base + '/') if isinstance(p, str) else -1\n",
+           "    if i < 0:\n",
+           "        return p\n",
+           "    slug, _, rest = p[i + len(_base) + 1:].partition('/')\n",
+           "    if not slug or _kp_os.path.isdir(_base + '/' + slug):\n",
+           "        return p\n",
+           "    hits = []\n",
+           "    for root, dirs, files in _kp_os.walk(_base):\n",
+           "        if root[len(_base):].count('/') >= 3:\n",
+           "            del dirs[:]\n",
+           "        elif slug in dirs:\n",
+           "            hits.append(root + '/' + slug)\n",
+           "            dirs.remove(slug)\n",
+           "    if len(hits) != 1:\n",
+           "        raise SystemExit('[kaggle_push] %d attached inputs are named %r under %s: %r' % (len(hits), slug, _base, hits))\n",
+           "    return p[:i] + hits[0] + ('/' + rest if rest else '')\n",
+           "\n\n",
+           "if _kp_top:\n",
+           "    try:\n",
+           f"        for _kp_root, _kp_dirs, _kp_files in _kp_os.walk({KAGGLE_INPUT!r}):\n",
+           f"            if _kp_root[len({KAGGLE_INPUT!r}):].count('/') >= 3:\n",
+           "                del _kp_dirs[:]\n",
+           "            print('[kaggle_push] input', _kp_root, sorted(_kp_dirs)[:12], sorted(_kp_files)[:8], flush=True)\n",
+           "    except OSError as _kp_e:\n",
+           "        print('[kaggle_push] cannot list the input directory:', _kp_e, flush=True)\n"]
     if env:
-        inj.append(f"_kp_os.environ.update({dict(sorted(env.items()))!r})\n")
+        inj.append(f"_kp_os.environ.update({{k: _kp_real(v) for k, v in {dict(sorted(env.items()))!r}.items()}})\n")
     if argv is not None:
         inj += ["if _kp_top and (len(_kp_sys.argv) <= 1 or 'ipykernel' in _kp_sys.argv[0] or _kp_sys.argv[1:2] == ['-f']):\n",
-                f"    _kp_sys.argv = [{src_name!r}] + {list(argv)!r}\n",
+                f"    _kp_sys.argv = [{src_name!r}] + [_kp_real(_kp_a) for _kp_a in {list(argv)!r}]\n",
                 "    print('[kaggle_push] arguments', _kp_sys.argv[1:], flush=True)\n"]
-    inj += ["if _kp_top:\n",
-            "    try:\n",
-            f"        for _kp_d in sorted(_kp_os.listdir({KAGGLE_INPUT!r})):\n",
-            f"            print('[kaggle_push] input', _kp_d, sorted(_kp_os.listdir(_kp_os.path.join({KAGGLE_INPUT!r}, _kp_d)))[:12], flush=True)\n",
-            "    except OSError as _kp_e:\n",
-            "        print('[kaggle_push] cannot list the input directory:', _kp_e, flush=True)\n"]
     if pip:
-        inj += ["    import subprocess as _kp_sp\n",
-                f"    _kp_pip = [_kp_sys.executable, '-m', 'pip', 'install', '-q'] + {list(pip)!r}\n",
+        inj += ["if _kp_top:\n",
+                "    import subprocess as _kp_sp\n",
+                f"    _kp_pip = [_kp_sys.executable, '-m', 'pip', 'install', '-q'] + [_kp_real(_kp_a) for _kp_a in {list(pip)!r}]\n",
                 "    print('[kaggle_push] ' + ' '.join(_kp_pip), flush=True)\n",
-                "    _kp_sp.check_call(_kp_pip)\n"]
+                "    _kp_sp.check_call(_kp_pip)\n",
+                "    _kp_sp.call([_kp_sys.executable, '-m', 'pip', 'list', '--format=freeze'])\n"]
     inj += ["# ---- end of injected header ----\n", "\n"]
     out = "".join(lines[:after]) + ("" if not lines[:after] or lines[after - 1].endswith("\n") else "\n") + "".join(inj) + "".join(lines[after:])
     ast.parse(out)
