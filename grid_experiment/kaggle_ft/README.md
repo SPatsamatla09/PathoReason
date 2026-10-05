@@ -463,6 +463,15 @@ were seen to answer 200 and made-up ones 404 on 2026-10-04, a private page has n
   to cache image features. The protocol run (6,376 examples, five validation passes, 1,875 feature
   extractions) is therefore about 12.5 hours: one session pauses at 11 hours and a second one finishes it.
   `kaggle_ft/run_train_driver.sh` waits for the run and starts the next session by itself.
+- **Inference speed and batching, measured on the T4 x2 with the 32-tile smoke adapter (20 pool tiles,
+  no labels, 2026-10-04).** Batch size 1 with eager attention: 6.9 tokens/s per GPU, 82 s per job per GPU
+  (about 88 jobs per session-hour over both GPUs). Batch size 4 with eager attention runs out of GPU memory.
+  `--attn-implementation sdpa --batch-size 4`: all 20 answers identical to batch size 1 token for token
+  (`infer_jobs.py --compare`), 1.43 times faster (1,145 s against 1,634 s of GPU time). Batch size 8 with
+  sdpa fits, gives the same 20 answers, and is no faster on this sample (answers cut off at 1,500 tokens
+  keep a whole batch running). **All evaluation runs of the fine-tuned model therefore use
+  `--attn-implementation sdpa --batch-size 4`**; this was chosen on pool tiles for speed only, before any dev
+  tile was run.
 - **Status words.** `datasets status` prints `ready`, `failed`, `deleted`, or a processing state
   (`not_yet_persisted`, `blobs_received`, ...). `failed` and `deleted` end the wait as a processing error.
 - **CLI version.** Tested against kaggle 2.2.4 (the newest release on PyPI). The documentation on `main`
