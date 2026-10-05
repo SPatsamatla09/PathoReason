@@ -35,9 +35,10 @@ dev answers must parse with a valid label AND cite at least one valid grid cell.
 image control this script computes that share over all 300 tiles, prints `STEP-4 FORMAT GATE ... ok / FAILS`
 and writes runs/competence/step4_gate__<config>__<model-tag>__<sampling-tag>.json. A step-4 configuration
 passes dev only if comp_analyze.py says PASS and this file says "format_ok": true and both controls are OK.
-For smoke files (pool tiles, no labels used) the same share is the label-free check that must pass BEFORE any
-dev job is run: all answers finish with `stop` and at least 90% have a valid label and a valid grid cell;
-otherwise the exit code is 1.
+For smoke files (pool tiles, no labels used) the label-free check must pass BEFORE any dev job is run: at
+least 90% of the answers (18 of 20) must BOTH end with a normal `stop` AND have a valid label and a valid grid
+cell; otherwise the exit code is 1. (PLAN, step-4 Amendment 2, 2026-10-04: the earlier wording required every
+answer to end with `stop`; the user set the check to the brief's 90% bar before the final adapter existed.)
 
 LEDGER. Every dev import is appended to runs/competence/step4_imports.ndjson (adapter hash, run signature,
 tier, control, time). A second, different adapter for the same configuration, tier and control is refused
@@ -283,6 +284,16 @@ def format_rate(recs):
     return sum(r["label"] in ("HP", "SSA") and (r["n_valid_cited_cells"] or 0) >= 1 for r in recs) / len(recs)
 
 
+def smoke_check(recs):
+    """The label-free check before dev (PLAN, step-4 Amendment 2). An answer counts only if it ends with a normal
+    stop AND has a valid label AND at least one valid cited grid cell. -> (n_good, n_needed, ok): ok when at
+    least 90% of the answers count (18 of 20). A cut-off answer never counts, whatever could be read from it."""
+    good = sum(r["finish_reason"] == "stop" and r["label"] in ("HP", "SSA") and (r["n_valid_cited_cells"] or 0) >= 1 for r in recs)
+    need = -(-9 * len(recs) // 10)                      # ceil(0.9 n) in integers: 18 of 20
+    assert FORMAT_BAR == 0.90
+    return good, need, good >= need
+
+
 def health(recs):
     """Label-free summary of a set of records (scoring is comp_analyze.py's job)."""
     n = len(recs)
@@ -413,10 +424,11 @@ def main(argv=None):
         gate = None
         if smoke and r0["control"] == "none":
             stops = sum(r["finish_reason"] == "stop" for r in recs)
-            ok = stops == len(recs) and fmt >= FORMAT_BAR
+            good, need, ok = smoke_check(recs)
             smoke_failed = smoke_failed or not ok
-            print(f"  SMOKE FORMAT CHECK (label-free, pool tiles; all finish stop and >= {FORMAT_BAR:.0%} valid label + grid cell): "
-                  f"stop {stops}/{len(recs)}, format {fmt:.1%} -> " + ("ok" if ok else "FAILS: do NOT run the dev jobs with this adapter"))
+            print(f"  SMOKE FORMAT CHECK (label-free, pool tiles; >= {FORMAT_BAR:.0%} of answers must end with a normal stop AND have a "
+                  f"valid label + grid cell): {good}/{len(recs)} such answers, {need} needed (stop {stops}/{len(recs)}, valid label + "
+                  f"grid cell {fmt:.1%}) -> " + ("ok" if ok else "FAILS: do NOT run the dev jobs with this adapter"))
         elif not smoke and r0["control"] == "none":
             ok = fmt >= FORMAT_BAR
             print(f"  STEP-4 FORMAT GATE (>= {FORMAT_BAR:.0%} of all {len(recs)} dev answers with a valid label and >= 1 valid grid cell): "

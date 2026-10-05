@@ -24,7 +24,8 @@ These points come from the pre-flight review of the Kaggle code. No bar is lower
 - **Label-free check before dev.** Before any dev job, the final adapter generates the full `cte_p1` answer for
   the 20 smoke tiles of the step-3 addendum (training-pool tiles; no label is used). Every answer must end with a
   normal stop and at least 90% must have a valid label and a valid grid cell. If not, the dev evaluation is not
-  run with that adapter.
+  run with that adapter. *(Superseded on 2026-10-04 by Amendment 2 in `runs/competence/PLAN.md`: at least 18 of
+  the 20 answers must both end with a normal stop and have a valid label and a valid grid cell.)*
 - **One adapter on dev.** Only the final adapter of the completed protocol run (the epoch chosen on the
   validation slice after all four epochs) is evaluated on dev. Epoch checkpoints and the best-so-far adapter of
   an unfinished run are refused by the code, and every dev import is logged in

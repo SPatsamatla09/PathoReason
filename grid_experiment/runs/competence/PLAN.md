@@ -405,3 +405,66 @@ language-model linear layers are therefore loaded in 4-bit (nf4), with float32
 arithmetic, for training and for every later evaluation. The vision tower and the
 projector stay unquantised. This is recorded as a forced change: the competence result
 then describes that 4-bit model plus its adapter.
+
+
+### Amendment 2 to the step-4 addendum (2026-10-04, 22:10 EDT, while the protocol training run is in its first epochs; before the final adapter exists)
+
+**A. The label-free check before dev: the brief's 90% bar, not 20 of 20**
+
+Amendment 1 said: before any dev job, the final adapter answers the 20 smoke tiles, and
+"every answer must end with a normal stop and at least 90% must have a valid label and a
+valid grid cell". The "every answer" clause came from the code review. It is stricter
+than the user's brief, whose format bar is a parse rate of at least 90%.
+
+The user decided on 2026-10-04 (before the final adapter existed): *"Run the format check
+at the 90% bar from my original brief: the fine-tuned model passes if at least 18 of 20
+answers parse correctly and end normally. Do not use the stricter 20 of 20 version."*
+
+**Rule from now on.** An answer counts only if it ends with a normal stop **and** has a
+valid label **and** at least one valid cited grid cell. The check passes if at least 18
+of the 20 answers count (90%). A cut-off answer never counts, whatever can be read from
+it. If fewer than 18 count, the dev evaluation is not run with that adapter. Code:
+`kaggle_ft/import_results.py`, `smoke_check()`.
+
+**What was known when this was changed** (disclosed because it bears on the old clause):
+
+- The unmodified model (local Q8_0, `cte_p1`, tier 1) reached the 1,500-token limit in 10
+  of 100 dev-screen answers. That run is already scored and stopped at the screen.
+- The 32-tile smoke adapter (`protocol_run: false`, never scored) reached the limit in 4
+  of the same 20 smoke tiles. Under the new rule it has 16 of 20 and fails, as it did
+  under the old one.
+- No output of the final adapter existed. The protocol run had used about 3 of its
+  roughly 12.5 GPU hours.
+
+**What is not changed.** The dev bars (accuracy at least 72%, balanced accuracy at least
+65%), the dev format bar (at least 90% of all 300 dev answers with a valid label and a
+valid grid cell; an answer cut off before its JSON closes does not parse and counts
+against it and against accuracy), the image-control rule, the test rule, one adapter on
+dev, and the step order. This check is label-free and is not a reported outcome; it only
+decides whether dev is run.
+
+**B. Inference settings for every evaluation run of the fine-tuned model, fixed now**
+
+The addendum did not fix the batch size or the attention implementation. Measured on
+Kaggle's T4 x2 with the smoke adapter on the 20 smoke tiles (no label used):
+
+| setting | result |
+|---|---|
+| batch size 1, eager attention | 20/20 jobs, 82 s per job per GPU |
+| batch size 4, eager attention | out of GPU memory |
+| batch size 4, sdpa attention | the same 20 answers token for token; 1.43 times faster |
+| batch size 8, sdpa attention | the same 20 answers token for token; no faster than batch 4 on this sample |
+
+All runs of the fine-tuned model (format check, dev, controls, test, pipeline) use
+`--attn-implementation sdpa --batch-size 4`, tier-1 sampler `per-job`. Chosen for speed on
+pool tiles before any dev tile was run. Both are written into every output line.
+
+**C. Deviations from the runbook, recorded**
+
+- The protocol training run was started when the smoke training run had passed and the
+  smoke inference run had just been started (the runbook asks for all three smoke runs
+  first). The smoke inference run then completed 20/20 jobs. Nothing was changed in the
+  trainer between the smoke run and the protocol run (same file hash).
+- Kaggle mounts attached datasets at `/kaggle/input/datasets/<owner>/<slug>`. The header
+  that `kaggle_push.py` inserts now resolves input paths at run time. The trainer and the
+  inference script are unchanged.

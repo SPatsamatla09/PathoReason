@@ -277,8 +277,9 @@ python3 kaggle_ft/import_results.py --dry-run --model-tag medgemma-1.5-4b-it-lor
     --results ~/mhist_local/kaggle_out/mhist-priv-format-check/smoke__cte_p1__none__tier1__lora-*.jsonl
 ```
 
-It must print `SMOKE FORMAT CHECK ... -> ok`: every answer ends with a normal stop, and at least 90% have a
-valid label and a valid grid cell. Otherwise the exit code is 1 and the dev jobs are not run with this
+It must print `SMOKE FORMAT CHECK ... -> ok`: at least 18 of the 20 answers both end with a normal stop and
+have a valid label and a valid grid cell (PLAN, step-4 Amendment 2; a cut-off answer never counts). Otherwise
+the exit code is 1 and the dev jobs are not run with this
 adapter (see `PLAN_AMENDMENTS_PROPOSED.md`, section C, for what a retrain would change).
 
 ### 8. Dev jobs (only if step 3 ended with no passing configuration)

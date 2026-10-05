@@ -814,12 +814,29 @@ def t_import_refusals():
     check(exits(ir.main, ["--results", p, *smoke_base]) is None, "smoke import with a debug adapter failed")
     check(os.path.exists(os.path.join(out, "smoke", "cte_p1__other-tag__kaggle-tier1-t1__smoke__none.jsonl")), "smoke file not in smoke/")
     check(len(ir.read_ledger(out)) == n_ledger, "a smoke import was written to the dev ledger")
+    # PLAN step-4 Amendment 2: at least 18 of 20 answers must BOTH end with a normal stop AND have a valid label + grid cell
     no_cell = json.dumps({"label": "SSA", "confidence": 0.5, "evidence": []})
-    for what, change, which in (("one answer cut off at the token limit", {"finish_reason": "length"}, {0}),
-                                ("3 of 20 answers without a grid cell (85%)", {"raw_response": no_cell}, {0, 1, 2})):
-        write_jsonl(p, [dict(r, **change) if n in which else r for n, r in enumerate(smoke)])
-        again = ["--results", p, "--model-tag", "smoke-again", *smoke_base[2:], "--dry-run"]       # a tag with no file yet
-        check(exits(ir.main, again) == 1, f"the smoke format check passed with {what}")
+    no_label = json.dumps({"label": "TA", "confidence": 0.5, "evidence": [{"feature": "x", "grid_cells": ["A1"], "description": "y"}]})
+    cut, cell, lab = {"finish_reason": "length"}, {"raw_response": no_cell}, {"raw_response": no_label}
+    again = ["--results", p, "--model-tag", "smoke-again", *smoke_base[2:], "--dry-run"]           # a tag with no file yet
+    for want, what, changes in (
+            (1, "3 of 20 answers cut off at the token limit (17 good)", {0: cut, 1: cut, 2: cut}),
+            (1, "3 of 20 answers without a grid cell (17 good)", {0: cell, 1: cell, 2: cell}),
+            (1, "3 of 20 answers without a valid label (17 good)", {0: lab, 1: lab, 2: lab}),
+            (1, "1 cut off + 1 without a cell + 1 without a label (17 good)", {0: cut, 1: cell, 2: lab}),
+            (1, "2 cut off + 1 without a cell (17 good, although each rate alone is >= 90%)", {0: cut, 1: cut, 2: cell}),
+            (1, "all 20 cut off although the label and a cell can be read from each", {n: cut for n in range(20)}),
+            (None, "1 answer cut off (19 good)", {0: cut}),
+            (None, "2 answers cut off (18 good)", {0: cut, 1: cut}),
+            (None, "1 cut off + 1 without a cell (18 good)", {0: cut, 1: cell}),
+            (None, "2 faults on the same answer + 1 other (18 good)", {0: dict(cut, **cell), 1: lab}),
+            (None, "20 good answers", {})):
+        write_jsonl(p, [dict(r, **changes[n]) if n in changes else r for n, r in enumerate(smoke)])
+        got = exits(ir.main, again)
+        check(got == want, f"smoke format check with {what}: exit {got}, expected {want}")
+    recs20 = [{"finish_reason": "stop", "label": "HP", "n_valid_cited_cells": 3}] * 18 + [{"finish_reason": "length", "label": "HP", "n_valid_cited_cells": 3}] * 2
+    check(ir.smoke_check(recs20) == (18, 18, True) and ir.smoke_check(recs20[1:]) == (17, 18, False), "smoke_check counts")
+    check([ir.smoke_check([recs20[0]] * n)[1] for n in (10, 19, 20, 21, 100)] == [9, 18, 18, 19, 90], "smoke_check: needed = ceil(0.9 n)")
     write_jsonl(p, smoke)
     check(exits(ir.main, again) is None, "the smoke format check failed on 20 good answers")
     write_jsonl(p, [{**r, "adapter_sha256": other_sha} for r in smoke])

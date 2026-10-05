@@ -311,39 +311,39 @@
     "provider": "local [tier1-t1]",
     "control": "none",
     "screen": {
-      "n": 73,
-      "correct": 37,
-      "accuracy": 0.5068,
+      "n": 86,
+      "correct": 42,
+      "accuracy": 0.4884,
       "accuracy_wilson95": [
-        0.3947,
-        0.6183
+        0.3855,
+        0.5922
       ],
-      "balanced_accuracy": 0.5139,
+      "balanced_accuracy": 0.5015,
       "balanced_boot95": [
-        0.3924,
-        0.6358
+        0.3891,
+        0.6123
       ],
-      "recall_HP": 0.4894,
-      "recall_SSA": 0.5385,
+      "recall_HP": 0.4545,
+      "recall_SSA": 0.5484,
       "parse_rate": 1.0,
-      "ssa_call_rate": 0.5205,
+      "ssa_call_rate": 0.5465,
       "cost_usd": 0,
-      "thinking_trace_rate": 0.0548,
-      "finish_length": 1,
+      "thinking_trace_rate": 0.0465,
+      "finish_length": 3,
       "cited_ge1": 1.0,
-      "cited_ge3": 0.9863,
+      "cited_ge3": 0.9884,
       "providers": [
         "local"
       ],
       "counterbalance_halves_descriptive": {
         "class_A_is_HP": {
-          "n": 35,
-          "accuracy": 0.6571,
-          "balanced_accuracy": 0.5
+          "n": 40,
+          "accuracy": 0.65,
+          "balanced_accuracy": 0.5333
         },
         "class_A_is_SSA": {
-          "n": 38,
-          "accuracy": 0.3684,
+          "n": 46,
+          "accuracy": 0.3478,
           "balanced_accuracy": 0.5
         }
       }

@@ -8,5 +8,5 @@
 | neutral_crit_fs | google/gemma-4-31b-it | friendli | none | dev | 300 | 0.573 | 0.517–0.628 | 0.626 | 0.42 | 0.83 | 1.00 | 0.67 | $0.126 | fail |
 | neutral_crit_fs | qwen/qwen3-vl-235b-a22b-instruct | alibaba | none | screen | 100 | 0.400 | 0.309–0.498 | 0.524 | 0.05 | 1.00 | 1.00 | 0.97 | $0.047 | stops |
 | neutral_cte | google/gemma-4-31b-it | friendli | none | screen | 100 | 0.470 | 0.375–0.567 | 0.563 | 0.21 | 0.92 | 1.00 | 0.84 | $0.019 | stops |
-| neutral_cte | medgemma-1.5-4b-it-Q8_0 | local [tier1-t1] | none | screen | 73 | 0.507 | 0.395–0.618 | 0.514 | 0.49 | 0.54 | 1.00 | 0.52 | $0.000 | stops |
+| neutral_cte | medgemma-1.5-4b-it-Q8_0 | local [tier1-t1] | none | screen | 86 | 0.488 | 0.386–0.592 | 0.501 | 0.45 | 0.55 | 1.00 | 0.55 | $0.000 | stops |
 | neutral_cte | qwen/qwen3-vl-235b-a22b-instruct | alibaba | none | screen | 100 | 0.370 | 0.282–0.468 | 0.500 | 0.00 | 1.00 | 1.00 | 1.00 | $0.036 | stops |
