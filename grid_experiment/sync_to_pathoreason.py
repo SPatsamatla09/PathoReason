@@ -32,7 +32,7 @@ _hb = os.path.join(SRC, "outreach", "HOLD_BACK.txt")
 HOLD_BACK = {l.strip() for l in open(_hb) if l.strip() and not l.startswith("#")} if os.path.exists(_hb) else set()
 OUR_AUTHOR = "FocusFlow Developer"
 SECRET = re.compile(r"sk-or-v1-[A-Za-z0-9]{10,}|csk-[a-z0-9]{20,}|gh[opsu]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{30,}|hf_[A-Za-z0-9]{30,}|KGAT_[A-Za-z0-9_-]{10,}")
-CO_AUTHOR = "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
+CO_AUTHOR = "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
 
 def git(repo, *a, **kw):

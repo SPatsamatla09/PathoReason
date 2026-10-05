@@ -834,6 +834,12 @@ def t_import_refusals():
         write_jsonl(p, [dict(r, **changes[n]) if n in changes else r for n, r in enumerate(smoke)])
         got = exits(ir.main, again)
         check(got == want, f"smoke format check with {what}: exit {got}, expected {want}")
+    write_jsonl(p, [dict(r, **cut) if n < 3 else r for n, r in enumerate(smoke)])        # 17 good, imported for real
+    check(exits(ir.main, ["--results", p, "--model-tag", "smoke-fail-written", *smoke_base[2:]]) == 1,
+          "a failing smoke import without --dry-run did not exit 1")
+    check(os.path.exists(os.path.join(out, "smoke", "cte_p1__smoke-fail-written__kaggle-tier1-t1__smoke__none.jsonl")),
+          "a failing smoke import without --dry-run did not write to smoke/")
+    check(len(ir.read_ledger(out)) == n_ledger, "a failing smoke import reached the dev ledger")
     recs20 = [{"finish_reason": "stop", "label": "HP", "n_valid_cited_cells": 3}] * 18 + [{"finish_reason": "length", "label": "HP", "n_valid_cited_cells": 3}] * 2
     check(ir.smoke_check(recs20) == (18, 18, True) and ir.smoke_check(recs20[1:]) == (17, 18, False), "smoke_check counts")
     check([ir.smoke_check([recs20[0]] * n)[1] for n in (10, 19, 20, 21, 100)] == [9, 18, 18, 19, 90], "smoke_check: needed = ceil(0.9 n)")
