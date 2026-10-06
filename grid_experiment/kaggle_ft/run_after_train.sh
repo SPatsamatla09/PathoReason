@@ -51,5 +51,6 @@ python3 kaggle_ft/kaggle_push.py kernel-output --slug mhist-priv-format-check --
 $PY kaggle_ft/import_results.py --dry-run --model-tag medgemma-1.5-4b-it-lora-r16 \
     --train-summary "$run/step4_lora/train_summary.json" \
     --results "$OUT"/mhist-priv-format-check/smoke__cte_p1__none__tier1__lora-*.jsonl
-echo "=== $(date) format check finished with exit code $? (0 = ok; dev jobs still need step 3 closed and are not started here)"
+rc=$?                                   # read before anything else runs: $(date) would reset $?
+echo "=== $(date) format check finished with exit code $rc (0 = ok; dev jobs still need step 3 closed and are not started here)"
 python3 kaggle_ft/kaggle_push.py verify-private | grep -v '^+ ' | tail -16

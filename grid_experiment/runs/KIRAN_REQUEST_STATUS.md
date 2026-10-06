@@ -42,13 +42,33 @@ almost every tile. The full second-VLM pipeline is **not** run; see
   meaning.
 - Details: `runs/masking_ext2/RESULTS.md`.
 
-**Competence search (items 1 and 5), 2026-10-03.** See `runs/competence/RESULTS.md`.
+**Competence search (items 1 and 5), 2026-10-03** (superseded by the final paragraph below). See `runs/competence/RESULTS.md`.
 
 - **Steps 1-2 fail.** Neutral labels plus criteria, and criteria plus 6 examples, on
   gemma and Qwen: the best on the full dev set is 57.3%.
 - **Steps 3-4 are at stop points:** the gated MedGemma, disk, and no GPU.
 - **Sourced ResNet-18 baseline,** trained from scratch: 75.9% ± 0.4% test accuracy, AUC
   0.848 (3 seeds).
+
+**Competence search, final (items 1 and 5), 2026-10-05: negative result; the search
+stopped as the brief requires.** See `runs/competence/RESULTS.md` and `STEP4_RESULT.json`.
+
+- **Steps 1-2, prompting gemma-4-31b-it and Qwen3-VL-235B (6 configurations):** only gemma
+  with neutral labels + criteria + 6 examples passed the screen (65%); it failed dev at 57.3%
+  (172 of 300), balanced 0.626.
+- **Step 3, MedGemma 1.5 4B (pathology-tuned, local):** 8 configurations, all stop at the
+  screen (best 63%, balanced 0.50). It defaults to HP, or answers "Class A" under neutral
+  labels.
+- **Step 4, LoRA fine-tune of MedGemma (private Kaggle):** trained to completion, but only
+  12 of 20 answers pass the pre-dev label-free format check (normal stop, parseable and
+  cited; 18 needed), so by protocol it never ran on dev. Exploratory: the unmodified model, in
+  its local runtime, passes the same rule on 89 of 100 dev-screen answers (tier 1), so the
+  fine-tune cannot be named as the cause. Exploratory: 0.80 balanced accuracy on its
+  281-tile validation slice (may share slides with dev).
+- **Item 1: not achieved. Item 5: not run.** No VLM configuration was run on the test set.
+- **Sourced ResNet-18 baseline (step 6, done),** trained from scratch: 75.9% ± 0.4% test
+  accuracy, AUC 0.848 (3 seeds). Gemma stays the only
+  VLM in the faithfulness results.
 
 **Pathologist (item 7): contacts identified, nothing sent.** See
 `outreach/RATER_CONTACTS.md` (local only).

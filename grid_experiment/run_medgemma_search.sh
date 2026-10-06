@@ -13,7 +13,7 @@ echo "=== $(date) MedGemma search start"
 
 run() {  # config tiles control tier
   python3 comp_run.py --model "$MODEL" --provider local --config "$1" --tiles "$2" --control "$3" --tier "$4" \
-    > "runs/logs/competence/mg_$1_$2_$3_t$4.log" 2>&1
+    >> "runs/logs/competence/mg_$1_$2_$3_t$4.log" 2>&1
   local rc=$?
   if [ $rc -ne 0 ]; then
     echo "STOP: runner exit $rc for $1 $2 $3 tier $4: $(tail -1 "runs/logs/competence/mg_$1_$2_$3_t$4.log" | cut -c1-200)"
