@@ -1,0 +1,10 @@
+{
+ "file": "adapter_model.safetensors",
+ "bytes": 119280712,
+ "sha256": "13b0dbb0a80767f698bbc2f851db6c583cd00ec5b8b6dbe719a1f9f18f854444",
+ "where": "NOT in this repository. Private Kaggle dataset on the project owner's account (HAI-DEF terms; trained on MHIST under its data-use agreement). Ask the owner for access.",
+ "base_model": "google/medgemma-1.5-4b-it@91850547d9f0b2fdd21aa7c5f4f3d1a8a52c243b",
+ "chosen_epoch": 4,
+ "final": true,
+ "protocol_run": true
+}

@@ -1,0 +1,98 @@
+{
+  "epoch": 4,
+  "validation": {
+    "n": 281,
+    "n_HP": 203,
+    "recall_HP": 0.871921,
+    "n_SSA": 78,
+    "recall_SSA": 0.730769,
+    "balanced_accuracy": 0.801345,
+    "accuracy": 0.83274,
+    "ssa_call_rate": 0.295374,
+    "two_way_nll_class_balanced": 0.67266,
+    "label_mass_mean": 0.998803,
+    "expected_tier1_accuracy": 0.810273,
+    "expected_tier1_balanced_accuracy": 0.766208,
+    "seconds": 533.6
+  },
+  "fingerprint": "5e2ed4243ec07f12ed9101c1c27be15899b81f980c935ceee267e6ba4b8d5adf",
+  "precision": {
+    "mode": "4bit",
+    "used_4bit": true,
+    "reason": "auto: Tesla T4 (capability 7.5) has no native bf16 (Google's notebook requires capability >= 8), so 4-bit nf4 is used",
+    "gpu": {
+      "name": "Tesla T4",
+      "compute_capability": "7.5",
+      "memory_gb": 14.56,
+      "n_gpus_visible": 2,
+      "native_bf16": false,
+      "cuda": "12.8"
+    },
+    "weights_dtype": "4-bit nf4 (double quantisation); unquantised modules float32",
+    "compute_dtype": "float32",
+    "autocast": false,
+    "quantized_scope": "language-model linear layers only; vision_tower, multi_modal_projector, embeddings and lm_head not quantised",
+    "vision_tower": "float32, not quantised",
+    "bitsandbytes_config": {
+      "load_in_4bit": true,
+      "bnb_4bit_use_double_quant": true,
+      "bnb_4bit_quant_type": "nf4",
+      "bnb_4bit_compute_dtype": "float32",
+      "llm_int8_skip_modules": [
+        "vision_tower",
+        "model.vision_tower",
+        "multi_modal_projector",
+        "model.multi_modal_projector",
+        "lm_head",
+        "language_model.lm_head"
+      ]
+    },
+    "n_linear4bit_modules": 476,
+    "embedding_dtype": "float32"
+  },
+  "base_model": {
+    "id": "google/medgemma-1.5-4b-it",
+    "revision": "91850547d9f0b2fdd21aa7c5f4f3d1a8a52c243b"
+  },
+  "target_ids": {
+    "HP": [
+      236782,
+      107,
+      138,
+      236775,
+      2491,
+      1083,
+      623,
+      18835
+    ],
+    "SSA": [
+      236782,
+      107,
+      138,
+      236775,
+      2491,
+      1083,
+      623,
+      145472
+    ]
+  },
+  "scoring": {
+    "mode": "single_token_logits",
+    "scored_ids": {
+      "HP": [
+        18835
+      ],
+      "SSA": [
+        145472
+      ]
+    }
+  },
+  "image_processor_class": "Gemma3ImageProcessor",
+  "protocol_run": true,
+  "final": true,
+  "epochs_planned": 4,
+  "target_variant": "label_end",
+  "chosen_epoch": 4,
+  "epochs_completed": 4,
+  "adapter_model_sha256": "13b0dbb0a80767f698bbc2f851db6c583cd00ec5b8b6dbe719a1f9f18f854444"
+}

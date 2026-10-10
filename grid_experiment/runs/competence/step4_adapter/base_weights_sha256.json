@@ -1,0 +1,10 @@
+{
+  "model-00001-of-00002.safetensors": {
+    "bytes": 4961251752,
+    "sha256": "5e4c75b0ef1fb009caee567ab244f9e354e915fda748d1b76179cc453a39b4b5"
+  },
+  "model-00002-of-00002.safetensors": {
+    "bytes": 3639026128,
+    "sha256": "958e39df78c35ddb812fbcb8b5e7f46e07f1b153c1589f2d3f0b41c3b0748d30"
+  }
+}
