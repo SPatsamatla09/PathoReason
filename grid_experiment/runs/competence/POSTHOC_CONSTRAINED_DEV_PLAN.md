@@ -159,3 +159,12 @@ The first two setup cells passed before dev inference.
 Launch uses the prepared notebook's final cell: cte_p1, tier 1, SDPA,
 batch size 4 per worker, per-job sampler, and --json-constraint cte-v1.
 No evaluation thresholds or stopping rules are changed.
+
+## Image-control input registration
+
+The primary tier-1 dev evaluation passed before either image-control result was observed.
+
+- No-image job SHA-256: `8120157155d01bb725b196f3245dc68d5f1f1436860c659aec3f19ed8c81320d`
+- Mismatched-image job SHA-256: `1bc24a19af5ed2e67541a3b38ed82cf7c45b3b41d757a6b31b2262a44d8caec3`
+
+Both controls will use the same final adapter, pinned base-model weights, CTE-v1 constraint, tier-1 sampler, SDPA attention, batch size 4 per worker, and T4 x2 runtime as the primary dev evaluation. The previously specified control thresholds remain unchanged.
