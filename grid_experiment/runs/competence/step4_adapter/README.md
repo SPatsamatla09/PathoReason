@@ -9,7 +9,7 @@ MedGemma 1.5 4B on MHIST, **except the adapter weights**. Results and the protoc
 
 | file | what it is |
 |---|---|
-| `training_config.json` | the run's own `train_summary.json`: hyperparameters, LoRA settings, 4-bit setup, tokenisation and target token ids, package versions, data hashes, validation per epoch, timing |
+| `train_summary.json`, `training_config.json` | the run's own `train_summary.json` (two identical copies; private path removed): hyperparameters, LoRA settings, 4-bit setup, tokenisation and target token ids, package versions, data hashes, validation per epoch, timing |
 | `adapter_config.json` | the PEFT config of the final adapter (r 16, alpha 16, dropout 0.05, 238 target modules) |
 | `step4_meta.json` | the adapter's metadata: chosen epoch (4), final, protocol run, scoring token ids, adapter hash |
 | `adapter_weights.json` | name, size and sha256 of the weights file, which is **not** in this repository |
@@ -26,7 +26,7 @@ screen, the other 200 dev tiles and the 1,875-tile pool) and `../fewshot_example
 - In `adapter_config.json`, `base_model_name_or_path` was the private Kaggle mount path. It now
   reads `google/medgemma-1.5-4b-it`, and `revision` is set to the revision that was used,
   `91850547d9f0b2fdd21aa7c5f4f3d1a8a52c243b`. Nothing else in the file was changed.
-- In `training_config.json` the same mount path is replaced by that model id and revision.
+- In `train_summary.json` / `training_config.json` the same mount path is replaced by that model id and revision.
 
 ## The weights are private
 

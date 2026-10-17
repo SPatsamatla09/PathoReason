@@ -1,0 +1,451 @@
+{
+ "status": "complete",
+ "protocol": "runs/competence/PLAN.md, 'Addendum: step 4, LoRA fine-tune on private cloud GPU'",
+ "protocol_run": true,
+ "debug_flags": {},
+ "fingerprint": "5e2ed4243ec07f12ed9101c1c27be15899b81f980c935ceee267e6ba4b8d5adf",
+ "chosen_epoch": 4,
+ "chosen_validation": {
+  "n": 281,
+  "n_HP": 203,
+  "recall_HP": 0.871921,
+  "n_SSA": 78,
+  "recall_SSA": 0.730769,
+  "balanced_accuracy": 0.801345,
+  "accuracy": 0.83274,
+  "ssa_call_rate": 0.295374,
+  "two_way_nll_class_balanced": 0.67266,
+  "label_mass_mean": 0.998803,
+  "expected_tier1_accuracy": 0.810273,
+  "expected_tier1_balanced_accuracy": 0.766208,
+  "seconds": 533.6
+ },
+ "selection_rule": "highest validation balanced accuracy (label read from the HP-vs-SSA logits at the label position); ties go to the earlier epoch",
+ "epochs_completed": 4,
+ "epochs_planned": 4,
+ "validation_per_epoch": [
+  {
+   "epoch": 1,
+   "n": 281,
+   "n_HP": 203,
+   "recall_HP": 0.817734,
+   "n_SSA": 78,
+   "recall_SSA": 0.717949,
+   "balanced_accuracy": 0.767841,
+   "accuracy": 0.790036,
+   "ssa_call_rate": 0.330961,
+   "two_way_nll_class_balanced": 0.512843,
+   "label_mass_mean": 0.99638,
+   "expected_tier1_accuracy": 0.691424,
+   "expected_tier1_balanced_accuracy": 0.666908,
+   "seconds": 539.1
+  },
+  {
+   "epoch": 2,
+   "n": 281,
+   "n_HP": 203,
+   "recall_HP": 0.965517,
+   "n_SSA": 78,
+   "recall_SSA": 0.435897,
+   "balanced_accuracy": 0.700707,
+   "accuracy": 0.818505,
+   "ssa_call_rate": 0.145907,
+   "two_way_nll_class_balanced": 0.658891,
+   "label_mass_mean": 0.997311,
+   "expected_tier1_accuracy": 0.761125,
+   "expected_tier1_balanced_accuracy": 0.649647,
+   "seconds": 540.3
+  },
+  {
+   "epoch": 3,
+   "n": 281,
+   "n_HP": 203,
+   "recall_HP": 0.926108,
+   "n_SSA": 78,
+   "recall_SSA": 0.538462,
+   "balanced_accuracy": 0.732285,
+   "accuracy": 0.818505,
+   "ssa_call_rate": 0.202847,
+   "two_way_nll_class_balanced": 0.66827,
+   "label_mass_mean": 0.998493,
+   "expected_tier1_accuracy": 0.797492,
+   "expected_tier1_balanced_accuracy": 0.713793,
+   "seconds": 540.6
+  },
+  {
+   "epoch": 4,
+   "n": 281,
+   "n_HP": 203,
+   "recall_HP": 0.871921,
+   "n_SSA": 78,
+   "recall_SSA": 0.730769,
+   "balanced_accuracy": 0.801345,
+   "accuracy": 0.83274,
+   "ssa_call_rate": 0.295374,
+   "two_way_nll_class_balanced": 0.67266,
+   "label_mass_mean": 0.998803,
+   "expected_tier1_accuracy": 0.810273,
+   "expected_tier1_balanced_accuracy": 0.766208,
+   "seconds": 533.6
+  }
+ ],
+ "train_per_epoch": [
+  {
+   "epoch": 1,
+   "mean_loss_weighted": 0.111948,
+   "mean_loss_unweighted": 0.102828,
+   "n_examples": 1594,
+   "optimizer_steps": 200,
+   "mean_grad_norm_before_clipping": 0.73468,
+   "lr_last_step": 0.00017916727155039368,
+   "seconds": 9624.6
+  },
+  {
+   "epoch": 2,
+   "mean_loss_weighted": 0.067159,
+   "mean_loss_unweighted": 0.064566,
+   "n_examples": 1594,
+   "optimizer_steps": 200,
+   "mean_grad_norm_before_clipping": 0.41754,
+   "lr_last_step": 0.00010866981841636499,
+   "seconds": 9625.9
+  },
+  {
+   "epoch": 3,
+   "mean_loss_weighted": 0.05421,
+   "mean_loss_unweighted": 0.052282,
+   "n_examples": 1594,
+   "optimizer_steps": 200,
+   "mean_grad_norm_before_clipping": 0.52047,
+   "lr_last_step": 3.2576544935097265e-05,
+   "seconds": 9621.6
+  },
+  {
+   "epoch": 4,
+   "mean_loss_weighted": 0.037915,
+   "mean_loss_unweighted": 0.035446,
+   "n_examples": 1594,
+   "optimizer_steps": 200,
+   "mean_grad_norm_before_clipping": 0.62636,
+   "lr_last_step": 8.543620453105306e-10,
+   "seconds": 9533.1
+  }
+ ],
+ "baseline_untrained_epoch0": {
+  "n": 281,
+  "n_HP": 203,
+  "recall_HP": 1.0,
+  "n_SSA": 78,
+  "recall_SSA": 0.0,
+  "balanced_accuracy": 0.5,
+  "accuracy": 0.72242,
+  "ssa_call_rate": 0.0,
+  "two_way_nll_class_balanced": 3.616402,
+  "label_mass_mean": 0.999124,
+  "expected_tier1_accuracy": 0.72242,
+  "expected_tier1_balanced_accuracy": 0.5,
+  "seconds": 537.9
+ },
+ "class_weights": {
+  "HP": 0.6912402428447528,
+  "SSA": 1.8072562358276645
+ },
+ "class_counts_train": {
+  "HP": 1153,
+  "SSA": 441
+ },
+ "class_counts_val": {
+  "HP": 203,
+  "SSA": 78
+ },
+ "split": {
+  "n_pool": 1875,
+  "n_train": 1594,
+  "n_val": 281,
+  "strata": {
+   "HP|borderline": {
+    "n": 179,
+    "n_val": 27,
+    "n_train": 152
+   },
+   "HP|strong": {
+    "n": 697,
+    "n_val": 104,
+    "n_train": 593
+   },
+   "HP|unanimous": {
+    "n": 480,
+    "n_val": 72,
+    "n_train": 408
+   },
+   "SSA|borderline": {
+    "n": 131,
+    "n_val": 20,
+    "n_train": 111
+   },
+   "SSA|strong": {
+    "n": 211,
+    "n_val": 32,
+    "n_train": 179
+   },
+   "SSA|unanimous": {
+    "n": 177,
+    "n_val": 26,
+    "n_train": 151
+   }
+  },
+  "file": "split.json",
+  "pool_verified": true
+ },
+ "precision": {
+  "mode": "4bit",
+  "used_4bit": true,
+  "reason": "auto: Tesla T4 (capability 7.5) has no native bf16 (Google's notebook requires capability >= 8), so 4-bit nf4 is used",
+  "gpu": {
+   "name": "Tesla T4",
+   "compute_capability": "7.5",
+   "memory_gb": 14.56,
+   "n_gpus_visible": 2,
+   "native_bf16": false,
+   "cuda": "12.8"
+  },
+  "weights_dtype": "4-bit nf4 (double quantisation); unquantised modules float32",
+  "compute_dtype": "float32",
+  "autocast": false,
+  "quantized_scope": "language-model linear layers only; vision_tower, multi_modal_projector, embeddings and lm_head not quantised",
+  "vision_tower": "float32, not quantised",
+  "bitsandbytes_config": {
+   "load_in_4bit": true,
+   "bnb_4bit_use_double_quant": true,
+   "bnb_4bit_quant_type": "nf4",
+   "bnb_4bit_compute_dtype": "float32",
+   "llm_int8_skip_modules": [
+    "vision_tower",
+    "model.vision_tower",
+    "multi_modal_projector",
+    "model.multi_modal_projector",
+    "lm_head",
+    "language_model.lm_head"
+   ]
+  },
+  "n_linear4bit_modules": 476,
+  "embedding_dtype": "float32"
+ },
+ "used_4bit": true,
+ "lora": {
+  "r": 16,
+  "alpha": 16,
+  "dropout": 0.05,
+  "bias": "none",
+  "task_type": "CAUSAL_LM",
+  "target": "every nn.Linear of the language model (q_proj, k_proj, v_proj, o_proj, gate_proj, up_proj, down_proj in each block); vision tower, projector and lm_head untouched",
+  "n_target_modules": 238,
+  "trainable_parameters": 29802496,
+  "all_parameters_as_stored": 2725560688,
+  "not_adapted_linear_layers": {
+   "vision_tower": 162,
+   "other": [
+    "lm_head"
+   ]
+  }
+ },
+ "hyperparameters": {
+  "seed": 20261004,
+  "lora_r": 16,
+  "lora_alpha": 16,
+  "lora_dropout": 0.05,
+  "learning_rate": 0.0002,
+  "schedule": "cosine",
+  "warmup_fraction": 0.05,
+  "warmup_steps": 40,
+  "effective_batch": 8,
+  "epochs": 4,
+  "optimizer_steps_per_epoch": 200,
+  "total_optimizer_steps": 800,
+  "max_grad_norm": 0.3,
+  "optimizer": "AdamW",
+  "betas": [
+   0.9,
+   0.999
+  ],
+  "eps": 1e-08,
+  "weight_decay": 0.0,
+  "target_template": "{{\n  \"label\": \"{label}",
+  "target_variant": "label_end",
+  "loss": "per-example mean cross-entropy over the target tokens, times the class weight, averaged over the accumulation group",
+  "gradient_checkpointing": true,
+  "attn_implementation": "eager"
+ },
+ "micro_batch_final": 2,
+ "eval_batch_final": 4,
+ "choices_not_fixed_by_the_addendum": {
+  "max_grad_norm": 0.3,
+  "adamw_betas": [
+   0.9,
+   0.999
+  ],
+  "adamw_eps": 1e-08,
+  "weight_decay": 0.0,
+  "loss": "mean cross-entropy over the target tokens of an example, times its class weight, averaged over the 8 examples of an optimiser step",
+  "lora_targets": "the 7 linear layers of each language-model block; lm_head is not adapted",
+  "ties": "equal validation balanced accuracy -> the earlier epoch",
+  "4bit_scope": "language-model linear layers only; vision_tower, multi_modal_projector, embeddings and lm_head not quantised",
+  "target_variant": "label_end"
+ },
+ "tokenization": {
+  "prompt_tokens": 822,
+  "image_token_id": 262144,
+  "target_text": {
+   "HP": "{\n  \"label\": \"HP",
+   "SSA": "{\n  \"label\": \"SSA"
+  },
+  "target_ids": {
+   "HP": [
+    236782,
+    107,
+    138,
+    236775,
+    2491,
+    1083,
+    623,
+    18835
+   ],
+   "SSA": [
+    236782,
+    107,
+    138,
+    236775,
+    2491,
+    1083,
+    623,
+    145472
+   ]
+  },
+  "target_tokens": {
+   "HP": [
+    "{",
+    "\n",
+    "\u2581\u2581",
+    "\"",
+    "label",
+    "\":",
+    "\u2581\"",
+    "HP"
+   ],
+   "SSA": [
+    "{",
+    "\n",
+    "\u2581\u2581",
+    "\"",
+    "label",
+    "\":",
+    "\u2581\"",
+    "SSA"
+   ]
+  },
+  "scoring_mode": "single_token_logits",
+  "common_prefix_tokens": [
+   "{",
+   "\n",
+   "\u2581\u2581",
+   "\"",
+   "label",
+   "\":",
+   "\u2581\""
+  ],
+  "scored_ids": {
+   "HP": [
+    18835
+   ],
+   "SSA": [
+    145472
+   ]
+  },
+  "scored_tokens": {
+   "HP": [
+    "HP"
+   ],
+   "SSA": [
+    "SSA"
+   ]
+  },
+  "one_step_apply_chat_template_check": "identical",
+  "image_processor_class": "Gemma3ImageProcessor",
+  "tokenizer_class": "GemmaTokenizer"
+ },
+ "image_input": {
+  "probe_tiles": [
+   "MHIST_adi.png",
+   "MHIST_dok.png"
+  ],
+  "max_relative_logit_difference": 0.0,
+  "tolerance": 0.001,
+  "probe_error": null,
+  "mode": "cached image features (frozen vision tower + projector run once per tile)",
+  "n_tiles": 1875,
+  "shape_per_tile": [
+   256,
+   2560
+  ],
+  "dtype": "float32"
+ },
+ "model": {
+  "model_id": "google/medgemma-1.5-4b-it",
+  "revision_expected": "91850547d9f0b2fdd21aa7c5f4f3d1a8a52c243b",
+  "small_files_sha256": {
+   "config.json": "300c724c2c1fcdea39f1e21865cb1b14a605f1e3bb5ef50550faaa48da944fc8",
+   "model.safetensors.index.json": "77f4b67de084c31c7bcd373b039908108eee6c6181607e6d53da730e5f0bc659",
+   "tokenizer.json": "7d4046bf0505a327dd5a0abbb427ecd4fc82f99c2ceaa170bc61ecde12809b0c",
+   "chat_template.jinja": "7de1c58e208eda46e9c7f86397df37ec49883aeece39fb961e0a6b24088dd3c4",
+   "preprocessor_config.json": "5b2f684b616a25f3cd4a700e5e471a07fcaabc5ec07871d2231b7e376e8648ce"
+  },
+  "weight_shards": {
+   "model-00001-of-00002.safetensors": {
+    "bytes": 4961251752,
+    "sha256": "5e4c75b0ef1fb009caee567ab244f9e354e915fda748d1b76179cc453a39b4b5"
+   },
+   "model-00002-of-00002.safetensors": {
+    "bytes": 3639026128,
+    "sha256": "958e39df78c35ddb812fbcb8b5e7f46e07f1b153c1589f2d3f0b41c3b0748d30"
+   }
+  },
+  "matches_frozen_revision_files": true,
+  "path": "google/medgemma-1.5-4b-it@91850547d9f0b2fdd21aa7c5f4f3d1a8a52c243b (private Kaggle copy of the official files)"
+ },
+ "data": {
+  "prompt_sha256": "eb0e4d85b580cebad7c1733b4d5e80bee6b28c322eb48032da169b7a7917654f",
+  "pool_sha256": "20c9cbd5a0e4bb79c30354cf5e2f3dbb5c1dfdc401e4f5dd31680e0bf0c6c402",
+  "manifest_sha256": "e88846aac16bde3f76a2f0a5f681acaae65cb33a4f4387d227c75a9c380e2bf1",
+  "gridded_sha256": "a192afa61f928ee610716200563e44b2c0458df9d4806fc60e30dc2b07519da0",
+  "n_unlisted_files_in_gridded": 300
+ },
+ "package_versions": {
+  "python": "3.13.15",
+  "torch": "2.11.0+cu128",
+  "transformers": "5.16.1",
+  "peft": "0.21.2",
+  "safetensors": "0.8.0",
+  "accelerate": "1.15.0",
+  "bitsandbytes": "0.50.2",
+  "tokenizers": "0.23.1",
+  "numpy": "2.1.3",
+  "PIL": "12.3.0",
+  "sentencepiece": "0.2.2"
+ },
+ "wall_time_seconds": {
+  "wall": 50729.5,
+  "train": 38405.3,
+  "validation": 2691.5,
+  "features": 9263.4,
+  "model_load": 26.2
+ },
+ "sessions": 2,
+ "events": [],
+ "best_adapter": {
+  "dir": "best_adapter",
+  "adapter_model_sha256": "13b0dbb0a80767f698bbc2f851db6c583cd00ec5b8b6dbe719a1f9f18f854444",
+  "final": true
+ },
+ "google_notebook": "github.com/google-health/medgemma notebooks/fine_tune_with_hugging_face.ipynb (conventions adopted and changed are listed in this script's docstring)",
+ "written": "2026-10-05 22:49:56"
+}
