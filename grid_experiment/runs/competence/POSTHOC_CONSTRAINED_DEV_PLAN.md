@@ -145,3 +145,17 @@ fixes, deviations, and limitations regardless of whether the gates pass.
   adapter hash matching the constrained smoke predictions.
 - Official smoke import remains required before dev inference.
 - Exact Kaggle input versions and launch command will be recorded before launch.
+
+## Pre-inference launch clarification
+
+Official smoke dry-run passed: 20/20 qualifying answers, 18 required.
+Kaggle notebook: rohanravulapelli/notebook5eac37b441.
+Internet OFF; GPU T4 x2.
+Dataset version labels were not readily exposed in the notebook interface.
+Input identity is therefore recorded through the registered dev-job and
+bundle-manifest SHA-256 hashes, the fixed runner hash, and the runner's
+model-weight, adapter, and image-byte verification.
+The first two setup cells passed before dev inference.
+Launch uses the prepared notebook's final cell: cte_p1, tier 1, SDPA,
+batch size 4 per worker, per-job sampler, and --json-constraint cte-v1.
+No evaluation thresholds or stopping rules are changed.
