@@ -173,3 +173,12 @@ Both controls will use the same final adapter, pinned base-model weights, CTE-v1
 The tier-1 primary dev evaluation passed with 0.817 accuracy and 0.808 balanced accuracy across 300 tiles. The mismatched-image control passed with 0.490 balanced accuracy. The no-image control failed with 0.570 balanced accuracy, indicating that performance remained above the preregistered control threshold without the target image.
 
 Because tier 1 failed a required control gate, it was not advanced to test evaluation or faithfulness analysis. The preregistered tier-2 fallback will be evaluated next using the unchanged model, prompts, data, controls, and decision thresholds.
+## Tier-2 main input registration
+
+Tier 1 failed the preregistered no-image control gate, activating the sole predeclared Tier-2 fallback.
+
+- Tier-2 main job file: `dev__cte_p1__none__tier2.jsonl`
+- Number of jobs: 300
+- Tier-2 main job SHA-256: `b76f3058c738c790d167a3856948f066a70d7c648acb08f816559edd419220f9`
+
+The Tier-2 run uses the unchanged final adapter, pinned base-model weights, CTE-v1 constraint, fixed `cte_p1` prompt, SDPA attention, batch size 4 per worker, T4 x2 runtime, and the preregistered greedy Tier-2 decoding settings. No Tier-2 predictions were inspected before this registration.
