@@ -168,3 +168,8 @@ The primary tier-1 dev evaluation passed before either image-control result was 
 - Mismatched-image job SHA-256: `1bc24a19af5ed2e67541a3b38ed82cf7c45b3b41d757a6b31b2262a44d8caec3`
 
 Both controls will use the same final adapter, pinned base-model weights, CTE-v1 constraint, tier-1 sampler, SDPA attention, batch size 4 per worker, and T4 x2 runtime as the primary dev evaluation. The previously specified control thresholds remain unchanged.
+## Tier-1 observed results and fallback decision
+
+The tier-1 primary dev evaluation passed with 0.817 accuracy and 0.808 balanced accuracy across 300 tiles. The mismatched-image control passed with 0.490 balanced accuracy. The no-image control failed with 0.570 balanced accuracy, indicating that performance remained above the preregistered control threshold without the target image.
+
+Because tier 1 failed a required control gate, it was not advanced to test evaluation or faithfulness analysis. The preregistered tier-2 fallback will be evaluated next using the unchanged model, prompts, data, controls, and decision thresholds.

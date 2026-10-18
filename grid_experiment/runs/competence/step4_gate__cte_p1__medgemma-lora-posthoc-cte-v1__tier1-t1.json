@@ -1,0 +1,14 @@
+{
+ "config": "cte_p1",
+ "model_tag": "medgemma-lora-posthoc-cte-v1",
+ "sampling_tag": "tier1-t1",
+ "control": "none",
+ "n": 300,
+ "n_valid_label_and_cell": 300,
+ "format_rate": 1.0,
+ "format_bar": 0.9,
+ "format_ok": true,
+ "adapter_sha256": "13b0dbb0a80767f698bbc2f851db6c583cd00ec5b8b6dbe719a1f9f18f854444",
+ "rule": "PLAN step-4 addendum: at least 90% of dev answers parse with a valid label and at least one valid cited grid cell. Step-4 dev pass = comp_analyze dev PASS and format_ok and both image controls OK.",
+ "written": "2026-10-17T15:40:36-0500"
+}
