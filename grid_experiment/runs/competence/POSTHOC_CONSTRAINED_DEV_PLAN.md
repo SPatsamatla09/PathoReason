@@ -182,3 +182,11 @@ Tier 1 failed the preregistered no-image control gate, activating the sole prede
 - Tier-2 main job SHA-256: `b76f3058c738c790d167a3856948f066a70d7c648acb08f816559edd419220f9`
 
 The Tier-2 run uses the unchanged final adapter, pinned base-model weights, CTE-v1 constraint, fixed `cte_p1` prompt, SDPA attention, batch size 4 per worker, T4 x2 runtime, and the preregistered greedy Tier-2 decoding settings. No Tier-2 predictions were inspected before this registration.
+## Tier-2 image-control input registration
+
+The Tier-2 main dev evaluation passed before either Tier-2 control result was observed: accuracy 0.820, balanced accuracy 0.809, valid label plus cited cell 99.7%.
+
+- No-image job SHA-256: e0a604e47d5b052d4e7a40249c39f037cee201dddd97a8262b53872e2e44bc82
+- Mismatch-image job SHA-256: e21838b2630f14404741ca08f1aac95fe6b0273eedd61307965b8ca92e9de00b
+
+Both controls use the same adapter, base model, CTE-v1 constraint, greedy Tier-2 decoding, SDPA attention, and batch size 4 per worker as the Tier-2 main evaluation. Previously specified control thresholds and stopping rules remain unchanged.
